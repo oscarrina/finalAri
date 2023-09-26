@@ -9,7 +9,7 @@
 <body>
 <%@include file="/WEB-INF/views/header.jsp" %>
 <h1>테스트</h1>
-<h1>염한별</h1>
+<h1>염한별(마지막)</h1>
 <h1>김시연</h1>
 <h1>테스트</h1>
 <h1>테스트</h1>
