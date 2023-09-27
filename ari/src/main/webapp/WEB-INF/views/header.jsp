@@ -11,6 +11,7 @@ body{
 	margin: 0px auto;
 }
 .header{
+	width:1200px;
 	height: 150px;
 	position: fixed;
 	top: 0;
