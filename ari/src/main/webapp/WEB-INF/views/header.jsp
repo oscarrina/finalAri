@@ -125,7 +125,7 @@ body{
 </head>
 <div class="navbar navbar-expand-sm bg-light header bg-white">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">
+    <a class="navbar-brand" href="/">
       	<img class="logoImg" alt="아리아리로고이미지" src="/img/logo.png"></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -177,17 +177,14 @@ body{
     <img alt="프로필사진" src="/img/profile.png" class="profileImg">
   </button>
   <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="#">마이페이지</a></li>
+    <li><a class="dropdown-item" href="myPage">마이페이지</a></li>
     <li>
     <c:if test="${empty session.sid }"><a class="dropdown-item" href="/memberLogin">로그인</a></c:if>
-    <c:if test="${!(empty session.sid) }"><a class="dropdown-item" href="/memberLogout">로그아웃</a></c:if>
+    <c:if test="${!empty session.sid }"><a class="dropdown-item" href="/memberLogout">로그아웃</a></c:if>
     </li>
     <li><a class="dropdown-item" href="#">고객센터</a></li>
   </ul>
 </div>
-      <div>
-      <a href="#"></a>
-      </div>
       <button class="btn btn-primary sideBtn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i style="font-size: 40px;" class="bi bi-justify justify"></i></button>
     </div>
   </div>
