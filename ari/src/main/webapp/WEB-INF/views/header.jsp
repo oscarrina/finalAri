@@ -179,8 +179,8 @@ body{
   <ul class="dropdown-menu">
     <li><a class="dropdown-item" href="myPage">마이페이지</a></li>
     <li>
-    <c:if test="${empty session.sid }"><a class="dropdown-item" href="/memberLogin">로그인</a></c:if>
-    <c:if test="${!empty session.sid }"><a class="dropdown-item" href="/memberLogout">로그아웃</a></c:if>
+    <c:if test="${empty sid }"><a class="dropdown-item" href="/memberLogin">로그인</a></c:if>
+    <c:if test="${!empty sid }"><a class="dropdown-item" href="/memberLogout">로그아웃</a></c:if>
     </li>
     <li><a class="dropdown-item" href="#">고객센터</a></li>
   </ul>

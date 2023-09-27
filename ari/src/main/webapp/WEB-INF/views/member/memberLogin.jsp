@@ -61,10 +61,10 @@
   <div class="login-html">
   <img src="img/logo.png" class="mainimg">
   <div class="group">
-  	<input type="text" id="id" class="input" placeholder="아이디" name="userid">
+  	<input type="text" id="id" class="input" placeholder="아이디" name="userid" required="required">
   </div>
   <div class="group">
-  	<input type="password" id="pwd" class="input" data-type="password" placeholder="비밀번호" name="userpwd">
+  	<input type="password" id="pwd" class="input" data-type="password" placeholder="비밀번호" name="userpwd" required="required">
   </div>
   <div class="group">
   	<input id="check" type="checkbox" class="check" name="autologin">
