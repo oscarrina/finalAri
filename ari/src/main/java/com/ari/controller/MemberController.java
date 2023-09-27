@@ -17,7 +17,7 @@ import com.ari.member.service.*;
 import com.ari.password.PasswordModule;
 
 @Controller
-public class MemeberController {
+public class MemberController {
 	
 	@Autowired
 	private MemberService service;
@@ -81,7 +81,7 @@ public class MemeberController {
 				e.printStackTrace();
 			}
 			if(dto.getUserstate().equals("N")) {
-				//mav.addObject("msg",dto.getUsername()+"님 환영합니다!");
+				mav.addObject("msg",dto.getUsername()+"님 환영합니다!");
 				mav.setViewName("member/memberLoginOk");
 				
 				session.setAttribute("sid", userid);
@@ -96,7 +96,7 @@ public class MemeberController {
 		}else if(result==service.NOT_ID ||  result==service.NOT_PWD) {
 			mav.addObject("msg", "아이디 또는 비밀번호가 일치하지 않습니다.");
 			mav.addObject("url", "/memberLogin");
-			mav.setViewName("redirect:/");
+			mav.setViewName("member/memberMsg");
 		}else{
 			mav.addObject("msg", "[ERROR] 고객 센터로 문의 바랍니다.");
 			mav.addObject("url", "/memberLogin");
@@ -135,7 +135,8 @@ public class MemeberController {
 		
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("msg", "로그아웃 되었습니다");
-		mav.addObject("url", "/");
+		mav.addObject("url","/");
+		mav.setViewName("member/memberMsg");
 		return mav;
 	}
 	
