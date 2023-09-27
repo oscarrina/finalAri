@@ -4,7 +4,7 @@
 <html>
 <head>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 <style>
 body{
 	width: 1200px;
@@ -119,7 +119,7 @@ body{
 </head>
 <div class="navbar navbar-expand-sm bg-light header bg-white">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">
+    <a class="navbar-brand" href="/">
       	<img class="logoImg" alt="아리아리로고이미지" src="/img/logo.png"></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -171,7 +171,7 @@ body{
     <img alt="프로필사진" src="/img/profile.png" class="profileImg">
   </button>
   <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="#">마이페이지</a></li>
+    <li><a class="dropdown-item" href="myPage">마이페이지</a></li>
     <li><a class="dropdown-item" href="#">로그아웃</a></li>
     <li><a class="dropdown-item" href="#">고객센터</a></li>
   </ul>

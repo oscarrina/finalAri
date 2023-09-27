@@ -14,6 +14,11 @@
 }
 h4{
 	text-align: center;
+	text-decoration: none;
+	color: black;
+}
+h4:visited{
+	color: black;
 }
 .container{
 	margin-top: 40px;
@@ -21,8 +26,17 @@ h4{
 .mb-5{
 	margin-top: 150px;
 }
+.container a{
+	text-decoration: none;
+	color: black;
+}
 .carousel-item{
 	border: none;
+}
+.w-100{
+	width: 1200px;
+	height: 500px;
+	border-radius: 10px;
 }
 </style>
 </head>
@@ -35,7 +49,7 @@ h4{
                     <img class="w-100" src="/img/img.jpg" alt="Image">
                 </div>
                 <div class="carousel-item">
-                    <img class="w-100" src="/img/logo.png" alt="Image">
+                    <img class="w-100" src="/img/banner1.png" alt="Image">
                 </div>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#header-carousel"
@@ -50,56 +64,42 @@ h4{
             </button>
         </div>
     </div>
-    
+   
     <div class="container">
       <div class="row">
         <div class="col-sm-6 col-md-4 mx-auto">
           <div class="box">
             <div class="img-box">
-              <img src="/img/img.jpg" class="box-img" alt="">
+              <a href="#"><img src="/img/img.jpg" class="box-img" alt=""></a>
             </div>
             <div class="detail-box">
-              <h4>
-                서울
-              </h4>
-              <a href="">
-                <i class="fa fa-arrow-right" aria-hidden="true"></i>
-              </a>
+              <h4><a href="#">서울</a></h4>
             </div>
           </div>
         </div>
         <div class="col-sm-6 col-md-4 mx-auto">
           <div class="box">
             <div class="img-box">
-              <img src="/img/img.jpg" class="box-img" alt="">
+              <a href="#"><img src="/img/img.jpg" class="box-img" alt=""></a>
             </div>
             <div class="detail-box">
-              <h4>
-                제주도
-              </h4>
-              <a href="">
-                <i class="fa fa-arrow-right" aria-hidden="true"></i>
-              </a>
+              <h4><a href="#"> 제주도</a></h4>
             </div>
           </div>
         </div>
         <div class="col-sm-6 col-md-4 mx-auto">
           <div class="box">
             <div class="img-box">
-              <img src="/img/img.jpg" class="box-img" alt="">
+              <a href="#"><img src="/img/img.jpg" class="box-img" alt=""></a>
             </div>
             <div class="detail-box">
-              <h4>
-                부산
-              </h4>
-              <a href="">
-                <i class="fa fa-arrow-right" aria-hidden="true"></i>
-              </a>
+              <h4><a href="#">부산</a></h4>
             </div>
           </div>
         </div>
       </div>
     </div>
+    
 <%@include file="/WEB-INF/views/footer.jsp" %>
 </body>
 </html>
