@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
 <style>
 body{
 	width: 1200px;
@@ -115,11 +116,16 @@ body{
 	border: none;
 	background: none !important;
 }
+.sideA{
+	text-decoration-line:none;
+	color:white;
+}
+
 </style>
 </head>
 <div class="navbar navbar-expand-sm bg-light header bg-white">
   <div class="container-fluid">
-    <a class="navbar-brand" href="/">
+    <a class="navbar-brand" href="#">
       	<img class="logoImg" alt="아리아리로고이미지" src="/img/logo.png"></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -171,15 +177,18 @@ body{
     <img alt="프로필사진" src="/img/profile.png" class="profileImg">
   </button>
   <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="myPage">마이페이지</a></li>
-    <li><a class="dropdown-item" href="#">로그아웃</a></li>
+    <li><a class="dropdown-item" href="#">마이페이지</a></li>
+    <li>
+    <c:if test="${empty session.sid }"><a class="dropdown-item" href="/memberLogin">로그인</a></c:if>
+    <c:if test="${!(empty session.sid) }"><a class="dropdown-item" href="/memberLogout">로그아웃</a></c:if>
+    </li>
     <li><a class="dropdown-item" href="#">고객센터</a></li>
   </ul>
 </div>
       <div>
       <a href="#"></a>
       </div>
-      <button class="btn btn-primary sideBtn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i class="bi bi-justify justify"></i></button>
+      <button class="btn btn-primary sideBtn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i style="font-size: 40px;" class="bi bi-justify justify"></i></button>
     </div>
   </div>
 </div>
@@ -189,17 +198,17 @@ body{
   </div>
   <div class="offcanvas-body">
     <ul class="sideUl">
-    	<li class="sideLi"><a>사이트 소개</a></li>
+    	<li class="sideLi"><a class="sideA">사이트 소개</a></li>
     	<hr class="sidehr">
-    	<li class="sideLi"><a>공지사항</a></li>
+    	<li class="sideLi"><a class="sideA">공지사항</a></li>
     	<hr class="sidehr">
-    	<li class="sideLi"><a href="writeQForm">문의하기</a></li>
+    	<li class="sideLi"><a class="sideA" href="writeQForm">문의하기</a></li>
     	<hr class="sidehr">
-    	<li class="sideLi"><a>지역축제정보</a></li>
+    	<li class="sideLi"><a class="sideA">지역축제정보</a></li>
     	<hr class="sidehr">
-    	<li class="sideLi"><a>지역추천코스</a></li>
+    	<li class="sideLi"><a class="sideA">지역추천코스</a></li>
     	<hr class="sidehr">
-    	<li class="sideLi"><a>일정공유게시판</a></li>
+    	<li class="sideLi"><a class="sideA">일정공유게시판</a></li>
     	<hr class="sidehr">
     </ul>
   </div>
