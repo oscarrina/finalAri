@@ -12,8 +12,9 @@ body{
 }
 .header{
 	height: 150px;
-	position: sticky;
+	position: fixed;
 	top: 0;
+	z-index: 100;
 }
 .searchDiv{
 	border-radius: 30px;
