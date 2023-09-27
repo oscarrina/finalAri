@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -115,6 +116,11 @@ body{
 	border: none;
 	background: none !important;
 }
+.sideA{
+	text-decoration-line:none;
+	color:white;
+}
+
 </style>
 </head>
 <div class="navbar navbar-expand-sm bg-light header bg-white">
@@ -172,14 +178,17 @@ body{
   </button>
   <ul class="dropdown-menu">
     <li><a class="dropdown-item" href="#">마이페이지</a></li>
-    <li><a class="dropdown-item" href="#">로그아웃</a></li>
+    <li>
+    <c:if test="${empty session.sid }"><a class="dropdown-item" href="/memberLogin">로그인</a></c:if>
+    <c:if test="${!(empty session.sid) }"><a class="dropdown-item" href="/memberLogout">로그아웃</a></c:if>
+    </li>
     <li><a class="dropdown-item" href="#">고객센터</a></li>
   </ul>
 </div>
       <div>
       <a href="#"></a>
       </div>
-      <button class="btn btn-primary sideBtn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i class="bi bi-justify justify"></i></button>
+      <button class="btn btn-primary sideBtn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i style="font-size: 40px;" class="bi bi-justify justify"></i></button>
     </div>
   </div>
 </div>
@@ -189,17 +198,17 @@ body{
   </div>
   <div class="offcanvas-body">
     <ul class="sideUl">
-    	<li class="sideLi"><a>사이트 소개</a></li>
+    	<li class="sideLi"><a class="sideA">사이트 소개</a></li>
     	<hr class="sidehr">
-    	<li class="sideLi"><a>공지사항</a></li>
+    	<li class="sideLi"><a class="sideA">공지사항</a></li>
     	<hr class="sidehr">
-    	<li class="sideLi"><a href="writeQForm">문의하기</a></li>
+    	<li class="sideLi"><a class="sideA" href="writeQForm">문의하기</a></li>
     	<hr class="sidehr">
-    	<li class="sideLi"><a>지역축제정보</a></li>
+    	<li class="sideLi"><a class="sideA">지역축제정보</a></li>
     	<hr class="sidehr">
-    	<li class="sideLi"><a>지역추천코스</a></li>
+    	<li class="sideLi"><a class="sideA">지역추천코스</a></li>
     	<hr class="sidehr">
-    	<li class="sideLi"><a>일정공유게시판</a></li>
+    	<li class="sideLi"><a class="sideA">일정공유게시판</a></li>
     	<hr class="sidehr">
     </ul>
   </div>
