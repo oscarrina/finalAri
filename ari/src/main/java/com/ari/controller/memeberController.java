@@ -9,5 +9,10 @@ public class memeberController {
 	public String memberJoinChoice() {
 		return "memberJoin/memberJoinChoice";
 	}
+	
+	@RequestMapping("/memberJoin")
+	public String memberJoin() {
+		return "memberJoin/memberJoin";
+	}
 
 }
