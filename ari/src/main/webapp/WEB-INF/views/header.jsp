@@ -21,7 +21,7 @@ body{
 	border:solid 1px #253BFF;
 	position: relative;
 	margin: 0px auto;
-	width: 900px;
+	width: 700px;
 }
 .searchBox{
 	width: 400px;
@@ -125,9 +125,10 @@ body{
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <div class="searchDiv">
-      <form class="d-flex searchForm" role="search">
+      <form class="d-flex searchForm" role="search" action="searchResult">
       <div class="category">
       	<select name="category" class="categorySelect">
+      	<option selected="selected">전체</option>
       	<option>음식점</option>
       	<option>숙박</option>
       	<option>관광명소</option>
@@ -136,6 +137,7 @@ body{
       </div>
       <div class="region">
       	<select name="region" class="regionSelect">
+      	<option selected="selected">전체</option>
       	<option>서울</option>
       	<option>제주도</option>
       	<option>부산</option>
@@ -190,7 +192,7 @@ body{
     	<hr class="sidehr">
     	<li class="sideLi"><a>공지사항</a></li>
     	<hr class="sidehr">
-    	<li class="sideLi"><a>문의하기</a></li>
+    	<li class="sideLi"><a href="writeQForm">문의하기</a></li>
     	<hr class="sidehr">
     	<li class="sideLi"><a>지역축제정보</a></li>
     	<hr class="sidehr">
