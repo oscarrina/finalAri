@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ari.mapper.MemberMapper">
+	<select id="memberLogin" parameterType="String" resultType="String">
+		select userpwd
+		from userinfo
+		where userid=#{userid}		
+	</select>
+	<select id="getUserInfo" parameterType="String" resultType="com.ari.member.model.MemberDTO">
+		select *
+		from userinfo
+		where userid=#{userid}
+	</select>
+</mapper>

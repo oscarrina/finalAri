@@ -1,5 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
+<c:if test="${!(empty cookie.saveid) }">
+	<c:url var="goAutoLogin" value="/autoLogin">
+		<c:param name="userid">${cookie.saveid.value }</c:param>
+	</c:url>
+	<script>
+		location.href='${goAutoLogin}';
+	</script>
+</c:if> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -47,23 +56,25 @@
 </style>
 </head>
 <body>
+<form name="memberLogin" action="memberLogin" method="post">
 <div class="login-wrap">
   <div class="login-html">
   <img src="img/logo.png" class="mainimg">
   <div class="group">
-  	<input type="text" id="id" class="input" placeholder="아이디">
+  	<input type="text" id="id" class="input" placeholder="아이디" name="userid">
   </div>
   <div class="group">
-  	<input type="password" id="pwd" class="input" data-type="password" placeholder="비밀번호">
+  	<input type="password" id="pwd" class="input" data-type="password" placeholder="비밀번호" name="userpwd">
   </div>
   <div class="group">
-  	<input id="check" type="checkbox" class="check" checked>
-    <label for="check"><span class="icon"></span>아이디 기억하기</label>
+  	<input id="check" type="checkbox" class="check" name="autologin">
+    <label for="check"><span class="icon"></span>자동로그인</label>
   </div>
   <div class="group">
     <input type="submit" class="btn1" value="로그인">
   </div>
   </div>
  </div>
+ </form>
 </body>
 </html>
