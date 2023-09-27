@@ -5,53 +5,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="/css/mypage.css">
 <style>
 #myPlan{
 	color: #253BFF;
-}
-.mypagePlanDiv{
-	margin-top:150px;
-	display: inline-block;
-	width: 75%;
-	height: 100vh;
-	float: right;
-}
-.mypageImg{
-	width: 150px;
-	height: 150px;
-}
-.mypagePlan{
-	margin-top: 50px;
-	position: relative;
-}
-.planInfo{
-	position:absolute;
-	list-style-type: none;
-	left: 130px;
-	top: 0px;
-}
-.myPlanCategory{
-	position: absolute;
-	right: 0px;
-	top: 15px;
-	background: none !important;
-	border: none !important;
-}
-.categoryI{
-	color: black;
-	font-size: 35px;
-}
-.planSi{
-	font-size: 25px;
-	font-weight: bold;
-}
-.planSubject{
-	font-size: 25px;
-	margin-top: 10px;
-}
-.planDay{
-	font-size: 20px;
-	margin-top: 20px;
 }
 </style>
 </head>
@@ -60,6 +17,7 @@
 <%@include file="/WEB-INF/views/mypage/mypageSide.jsp" %>
 <div class="mypagePlanDiv">
 <h3>내 일정</h3>
+<form>
 <div class="mypagePlan">
 <img alt="" src="/img/img.jpg" class="mypageImg">
 <ul class="planInfo">
@@ -76,6 +34,7 @@
     <li><a class="dropdown-item" href="#">일정 삭제</a></li>
   </ul>
 </div>
+</form>
 </div>
 <%@include file="/WEB-INF/views/footer.jsp" %>
 </body>

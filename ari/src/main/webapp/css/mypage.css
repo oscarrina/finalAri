@@ -1,0 +1,68 @@
+@charset "UTF-8";
+.mypagePlanDiv{
+	margin-top:150px;
+	display: inline-block;
+	width: 75%;
+	height: 100vh;
+	float: right;
+}
+.mypageImg{
+	width: 150px;
+	height: 150px;
+}
+.mypagePlan{
+	margin-top: 50px;
+	position: relative;
+}
+.planInfo{
+	position:absolute;
+	list-style-type: none;
+	left: 130px;
+	top: 0px;
+}
+.myPlanCategory{
+	position: absolute;
+	right: 0px;
+	top: 15px;
+	background: none !important;
+	border: none !important;
+}
+.categoryI{
+	color: black;
+	font-size: 35px;
+}
+.planSi{
+	font-size: 25px;
+	font-weight: bold;
+}
+.planSubject{
+	font-size: 25px;
+	margin-top: 10px;
+}
+.planDay{
+	font-size: 20px;
+	margin-top: 20px;
+}
+.mypageReserDiv{
+	margin-top:150px;
+	display: inline-block;
+	width: 75%;
+	height: 100vh;
+	float: right;
+}
+.reserCancelBtn{
+	background-color:#666CDE;
+	width:70px;
+	height:40px;
+	font-size:11px;
+	position: absolute;
+	right: 0px;
+	top: 35px;
+}
+.mypageReviewDiv{
+	margin-top:150px;
+	display: inline-block;
+	width: 75%;
+	height: 100vh;
+	float: right;
+}
