@@ -1,5 +1,7 @@
 package com.ari.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -8,7 +10,10 @@ import org.springframework.web.servlet.ModelAndView;
 public class QnaController {
 
 	@RequestMapping("/writeQForm")
-	public ModelAndView writeQForm() {
+	public ModelAndView writeQForm(HttpSession session) {
+		
+		
+		
 		ModelAndView mav=new ModelAndView();
 		mav.setViewName("qna/writeQForm");
 		return mav;
@@ -16,6 +21,8 @@ public class QnaController {
 	
 	@RequestMapping("/writeQ")
 	public ModelAndView writeQ() {
+		
+		
 		
 		ModelAndView mav=new ModelAndView();
 		mav.setViewName("qna/writeQForm");
