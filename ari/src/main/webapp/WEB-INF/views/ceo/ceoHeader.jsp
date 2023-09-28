@@ -17,7 +17,7 @@
       <li><a href="#">공지사항</a></li>
 	  <li class="admin_login">
 	  	<img id="alogin" alt="프로필이미지" src="/img/alogin.png">
-	  	<a href="/adminLogout" >관리자 로그아웃</a> 
+	  	<a href="/ceoLogout" >사업자 로그아웃</a> 
 	  </li>
     </ul>
   </div>

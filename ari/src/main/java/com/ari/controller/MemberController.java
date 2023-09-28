@@ -81,9 +81,12 @@ public class MemberController {
 				e.printStackTrace();
 			}
 			if(dto.getUserstate().equals("N")) {
-				mav.addObject("msg",dto.getUsername()+"님 환영합니다!");
-				mav.setViewName("member/memberLoginOk");
-				
+				if(dto.getUsertype()==1) {
+					//mav.addObject("msg",dto.getUsername()+"님 환영합니다!");
+					mav.setViewName("member/memberLoginOk");
+				}else {
+					mav.setViewName("ceo/ceoIndex");
+				}
 				session.setAttribute("sid", userid);
 				session.setAttribute("sname", dto.getUsername());
 			}else {
