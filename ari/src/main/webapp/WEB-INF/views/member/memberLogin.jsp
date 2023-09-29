@@ -53,6 +53,19 @@
   width: 330px;
   height: 130px;
 }
+.b{
+  margin-right: 150px;
+  text-decoration: none;
+}
+a:visited{
+  color: black;
+}
+a:link{
+  color: black;
+}
+a:hover{
+  color: black; 
+}
 </style>
 </head>
 <body>
@@ -72,6 +85,10 @@
   </div>
   <div class="group">
     <input type="submit" class="btn1" value="로그인">
+  </div>
+  <div class="group">
+    <a href="idFind" class="b">아이디 찾기</a>
+    <a href="pwdFind1" class="b">비밀번호 찾기</a>
   </div>
   </div>
  </div>
