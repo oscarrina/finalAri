@@ -17,7 +17,7 @@
 
   <!-- 본문 -->
   <div id="page-content-wrapper">
-    <div class="container-fluid" id="content1">
+    <div class="container-fluid content1">
       <h1>간단한 사이드바</h1>
       <p>메뉴가 많아서 한 페이지를 넘으면 세로 스크롤바 생김</p>
       <h1>Content</h1>
