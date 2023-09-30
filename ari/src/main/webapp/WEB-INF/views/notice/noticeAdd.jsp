@@ -9,6 +9,42 @@
 <script src="//code.jquery.com/jquery.min.js"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css" href="/css/adminMainLayout.css">
+<script type="text/javascript" src="../../../js/httpRequest.js"></script>
+<script>
+var check="";
+function checkTop(){
+	check=document.noticeAdd.noticetop.checked;
+	var cate=document.noticeAdd.noticetype.value;
+	var param="cate="+cate;
+	if(check==true){
+		sendRequest('topCheck', param, showResult,'GET');
+	}else{
+		var spanTag=document.all.topmsg;
+		spanTag.innerHTML='<input type="hidden" name="topcheck" value="pass">'
+	}
+}
+function showResult(){
+	if(XHR.readyState==4){
+		if(XHR.status==200){
+			
+			var data=XHR.responseText;
+			var spanTag=document.all.topmsg;
+			
+			var str='';
+			if(data==0){
+				str='<input type="hidden" name="topcheck" value="pass">';
+			}else{
+				str='<p style="color:red;">';
+				str+=data;
+				str+='</p><input type="hidden" name="topcheck" value="fail">';
+			}
+			spanTag.innerHTML=str;
+
+		}
+	}
+}
+
+</script>
 <style>
 .contentwidth{
 	width:600px;
@@ -52,9 +88,9 @@
 		    </div>
 		    <label for="staticEmail" class="col-sm-2 col-form-label">고정여부</label>
 		    <div class="col-sm-10">
-			  <input class="form-check-input" type="checkbox" name="noticetop" id="flexCheckDefault">
+			  <input class="form-check-input" type="checkbox" name="noticetop" id="flexCheckDefault" onclick="checkTop()">
 			  <label class="form-check-label" for="flexCheckDefault">
-			   공지사항 고정
+			   공지사항 고정<span id="topmsg"></span>
 			  </label>
 		    </div>
 		  </div>

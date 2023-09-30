@@ -14,5 +14,15 @@
 			sysdate,
 			#{noticetop})
 	</insert>
+	<select id="checkTopU" parameterType="int" resultType="int">
+		select count(*)
+		from notice
+		where noticetop=1 and (noticetype=#{user} or noticetype=3) 
+	</select>
+	<select id="checkTopA" resultType="int">
+		select count(*)
+		from notice
+		where noticetop=1 
+	</select>
 
 </mapper>  

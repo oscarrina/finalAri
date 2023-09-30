@@ -9,5 +9,7 @@ public interface NoticeService {
 	int admin=3;
 	
 	public int noticeAdd(NoticeDTO dto)throws Exception;
+	public int checkTopU(int cate)throws Exception;
+	public int CheckTopA()throws Exception;
 
 }
