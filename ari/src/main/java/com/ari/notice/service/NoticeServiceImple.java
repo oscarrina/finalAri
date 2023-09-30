@@ -17,5 +17,15 @@ public class NoticeServiceImple implements NoticeService {
 		int result=mapper.noticeAdd(dto);
 		return result;
 	}
+	@Override
+	public int checkTopU(int cate) throws Exception {
+		int count=mapper.checkTopU(cate);
+		return count;
+	}
+	@Override
+	public int CheckTopA() throws Exception {
+		int count=mapper.checkTopA();
+		return count;
+	}
 
 }
