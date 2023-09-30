@@ -46,7 +46,7 @@ table{
 <table width="900px">
 <tr>
 	<td>
-		<select class="form-select" id="exampleSelect1">
+		<select class="form-select" id="exampleSelect1" name="qnaCategory">
 	   		<option value="1" selected="selected">예약/결제</option>
 	   		<option value="2">취소/환불</option>
 	   		<option value="3">이용문의</option>
@@ -65,7 +65,7 @@ table{
 </tr>
 <tr>
 	<td colspan="2">
-	<textarea class="form-control" id="exampleTextarea" rows="8"></textarea>
+	<textarea class="form-control" id="exampleTextarea" rows="8" name="qnaContent"></textarea>
 	</td>
 </tr>
 </table>     
