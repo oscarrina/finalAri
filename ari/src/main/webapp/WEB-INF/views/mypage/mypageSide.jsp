@@ -31,6 +31,7 @@
 <h3><a href="myInfo" id="myInfo">내 정보 관리</a></h3>
 <h3><a href="myLike" id="myLike">좋아요 목록</a></h3>
 <h3><a href="myShare" id="myShare">공유한 일정</a></h3>
+<h3><a href="myQna" id="myQna">내 문의내역</a></h3>
 </div>
 </body>
 </html>
