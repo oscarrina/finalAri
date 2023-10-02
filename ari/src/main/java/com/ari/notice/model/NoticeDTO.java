@@ -32,6 +32,17 @@ public class NoticeDTO {
 		this.noticecontent = noticecontent;
 		this.noticetop = noticetop;
 	}
+
+	public NoticeDTO(int noticeidx, String adminid, int noticetype, String noticetitle, String noticecontent,
+			int noticetop) {
+		super();
+		this.noticeidx = noticeidx;
+		this.adminid = adminid;
+		this.noticetype = noticetype;
+		this.noticetitle = noticetitle;
+		this.noticecontent = noticecontent;
+		this.noticetop = noticetop;
+	}
 	
 	
 

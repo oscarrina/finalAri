@@ -24,5 +24,56 @@
 		from notice
 		where noticetop=1 
 	</select>
-
+	<select id="totalCntU" parameterType="int" resultType="int">
+		select count(*)
+		from notice
+		where noticetype=#{type} or noticetype=3
+	</select>
+	<select id="totalCntA" resultType="int">
+		select count(*)
+		from notice
+	</select>
+	<select id="getAllTop" resultType="com.ari.notice.model.NoticeDTO">
+		select *
+		from notice
+		where noticetop=1
+		order by noticeidx desc
+	</select>
+	<select id="getUserTop" parameterType="int" resultType="com.ari.notice.model.NoticeDTO">
+		select *
+		from notice
+		where noticetop=1 and (noticetype=#{type} or noticetype=3)
+		order by noticeidx desc
+	</select>
+	<select id="noticeAllList" parameterType="Map" resultType="com.ari.notice.model.NoticeDTO">
+		select * from 
+			(select rownum as rnum, a.* from 
+			(select * from notice order by noticetop desc, noticeidx desc) a) b
+		where rnum<![CDATA[>=]]>#{start} and rnum<![CDATA[<=]]>#{end}
+	</select>
+	<select id="noticeUserList" parameterType="Map" resultType="com.ari.notice.model.NoticeDTO">
+		select * from 
+			(select rownum as rnum, a.* from 
+			(select * from notice where noticetop=0 
+				and noticetype=#{type}
+				order by noticeidx desc) a) b
+		where rnum<![CDATA[>=]]>#{start} and rnum<![CDATA[<=]]>#{end}
+	</select>
+	<select id="getUserList" parameterType="Map" resultType="com.ari.notice.model.NoticeDTO">
+		select * from 
+			(select rownum as rnum, a.* from 
+			(select * from notice where noticetop=0 
+				and (noticetype=#{type} or noticetype=3)
+				order by noticeidx desc) a) b
+		where rnum<![CDATA[>=]]>#{start} and rnum<![CDATA[<=]]>#{end}
+	</select>
+	<select id="getNoticeContent" parameterType="int" resultType="com.ari.notice.model.NoticeDTO">
+		select * 
+		from notice
+		where noticeidx=${noticeidx}
+	</select>
+	<delete id="noticeDel" parameterType="int">
+		delete from notice
+		where noticeidx=#{idx}
+	</delete>
 </mapper>  
