@@ -31,7 +31,7 @@ public class MemberController {
 	
 	@RequestMapping("/memberJoin")
 	public String memberJoin() {
-		return "memberJoin/memberJoin";
+		return "member/memberJoin";
 	}
 	
 	@GetMapping("/memberLogin")
@@ -196,4 +196,5 @@ public class MemberController {
 	public String pwdFind3() {
 		return "member/pwdFind3";
 	}
+
 }
