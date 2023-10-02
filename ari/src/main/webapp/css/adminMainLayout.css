@@ -18,8 +18,7 @@
   }
   
   #page-content-wrapper {
-  	
-    width: 100%;
+    width: 80%;
     padding: 20px;
   }
   /* 사이드바 스타일 */
@@ -63,7 +62,7 @@
 	width:130px;
 	height:50px;
 }
-#content1{
+.content1{
 	margin-top:30px;
 }
 .admin_login{

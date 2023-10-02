@@ -1,0 +1,13 @@
+diff a/ari/src/main/java/com/ari/controller/QnaController.java b/ari/src/main/java/com/ari/controller/QnaController.java	(rejected hunks)
+@@ -10,7 +10,10 @@
+ public class QnaController {
+ 
+ 	@RequestMapping("/writeQForm")
+-	public ModelAndView writeQForm() {
++	public ModelAndView writeQForm(HttpSession session) {
++		
++		
++		
+ 		ModelAndView mav=new ModelAndView();
+ 		mav.setViewName("qna/writeQForm");
+ 		return mav;

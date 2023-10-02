@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,7 +31,7 @@ public class MemberController {
 	
 	@RequestMapping("/memberJoin")
 	public String memberJoin() {
-		return "memberJoin/memberJoin";
+		return "member/memberJoin";
 	}
 	
 	@GetMapping("/memberLogin")
@@ -143,9 +144,42 @@ public class MemberController {
 		return mav;
 	}
 	
-	@RequestMapping("/idFind")
-	public String idFind() {
-		return "member/idFind";
+	@GetMapping("/idFind")
+	public ModelAndView idFindForm() {
+		ModelAndView mav=new ModelAndView();
+		mav.setViewName("member/idFind");
+		return mav;
+	}
+	
+	@PostMapping("/idFind")
+	public ModelAndView idFind(@RequestParam(value = "username", required = false) String username,
+				@RequestParam(value = "usertel", required = false) String usertel) {
+		ModelAndView mav=new ModelAndView();
+		
+		if (username == null || usertel == null) {
+	        mav.addObject("msg", "이름 또는 핸드폰번호를 입력하세요.");
+	        mav.setViewName("member/memberMsg");
+	        return mav;
+	    }
+		
+		MemberDTO dto=null;
+		
+		try {
+			dto=service.idFind(username, usertel);
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+		}
+		System.out.println(username);
+		System.out.println(usertel);
+		if (dto != null) {
+	        mav.addObject("dto", dto);
+	        mav.setViewName("member/idFindOk");
+	    } else {
+	        mav.addObject("msg", "일치하는 정보가 없습니다.");
+	        mav.setViewName("member/memberMsg");
+	    }
+		return mav;
 	}
 	
 	@RequestMapping("/pwdFind1")
@@ -162,4 +196,5 @@ public class MemberController {
 	public String pwdFind3() {
 		return "member/pwdFind3";
 	}
+
 }

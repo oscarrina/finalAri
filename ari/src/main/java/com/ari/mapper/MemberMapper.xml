@@ -13,4 +13,9 @@
 		from userinfo
 		where userid=#{userid}
 	</select>
+	<select id="idFind" parameterType="String" resultType="com.ari.member.model.MemberDTO">
+		select userid
+		from userinfo
+		where username=#{username} and usertel=#{usertel}
+	</select>
 </mapper>

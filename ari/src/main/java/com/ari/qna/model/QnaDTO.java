@@ -17,7 +17,7 @@ import lombok.ToString;
 public class QnaDTO {
 
 	private int qnaIdx;
-	private int userIdx;
+	private String userId;
 	private int qnaType;
 	private int qnaCategory;
 	private int qnaOk;
