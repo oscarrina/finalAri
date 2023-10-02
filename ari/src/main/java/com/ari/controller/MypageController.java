@@ -35,4 +35,9 @@ public class MypageController {
 	public String myShare() {
 		return "mypage/myShare";
 	}
+	
+	@GetMapping("/myQna")
+	public String myQna() {
+		return "mypage/myQna";
+	}
 }
