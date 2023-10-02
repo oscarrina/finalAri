@@ -33,5 +33,11 @@ public class MemberServiceImple implements MemberService {
 		MemberDTO dto=mapper.getUserInfo(userid);
 		return dto;
 	}
+	
+	@Override
+	public MemberDTO idFind(String username, String usertel) throws Exception {
+		MemberDTO dto=mapper.idFind(username, usertel);
+		return dto;
+	}
 
 }

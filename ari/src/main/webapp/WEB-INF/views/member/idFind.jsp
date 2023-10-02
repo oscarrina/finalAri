@@ -63,18 +63,20 @@
 <div class="login-wrap">
   <div class="login-html">
   <img src="img/logo.png" class="mainimg">
+  <form action="/idFind" name="idFind" method="post">
   <div class="group">
-  	<input type="text" id="name" class="input" placeholder="이름">
+  	<input type="text" name="username" id="username" class="input" placeholder="이름">
   </div>
   <div class="group">
-  	<input type="text" id="tel" class="input" placeholder="휴대폰번호(숫자만 입력)">&nbsp;<input type="button" class="btn2" value="인증번호 받기">
+  	<input type="text" name="usertel" id="usertel" class="input" placeholder="휴대폰번호(숫자만 입력)">&nbsp;<input type="button" class="btn2" value="인증번호 받기">
   </div>
-  <div class="group">
+<!--   <div class="group">
   	<input type="text" id="anum" class="input" placeholder="인증번호">
-  </div>
+  </div> -->
   <div class="group">
     <input type="submit" class="btn1" value="아이디 찾기">
   </div>
+  </form>
   </div>
  </div>
 </body>
