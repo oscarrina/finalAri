@@ -58,6 +58,7 @@
 .container2 .containerHead{
 	display: flex;
 	height:10%;
+	margin-bottom: 10px;
 }
 .container2 .containerHead div{
 	margin-top:5px;
@@ -148,13 +149,14 @@
 						<img class="img" src="/img/img.jpg" alt="Image">
 						<img class="arrow" src="/img/planArrow.png">
 						<img class="img" src="/img/img.jpg" alt="Image">
-						<img class="img" src="/img/img.jpg" alt="Image">
 						<img class="arrow" src="/img/planArrow.png">
 						<img class="img" src="/img/img.jpg" alt="Image">
 						<img class="arrow" src="/img/planArrow.png">
 						<img class="img" src="/img/img.jpg" alt="Image">
-					</div>	
-			</div>		
+						<img class="arrow" src="/img/planArrow.png">
+						<img class="img" src="/img/img.jpg" alt="Image">
+					</div>
+			</div>
 			<div class= "container2">
 				<div class="containerHead">
 					<div id = "categoryButton1" onclick="categoryButton('categoryButton1')">관광지</div>
