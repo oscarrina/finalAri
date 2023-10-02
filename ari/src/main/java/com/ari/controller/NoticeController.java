@@ -24,17 +24,105 @@ public class NoticeController {
 	private NoticeService service;
 	
 	@RequestMapping("/notice")
-	public String notice(@RequestParam(value = "type", defaultValue = "1")int type, HttpSession session) {
+	public ModelAndView notice(@RequestParam(value = "type", defaultValue = "3")int type,
+			@RequestParam(value = "cp", defaultValue = "1")int cp,
+			HttpSession session) {
+		ModelAndView mav=new ModelAndView();
+		if(session.getAttribute("sid")==null || session.getAttribute("sid").equals("")) {
+			mav.addObject("msg","비정상적인 접근입니다. 고객 센터에 문의해주세요.");
+			mav.addObject("url", "admin");
+			mav.setViewName("admin/adminMsg");
+			return mav;
+		}
+		int totalCnt=0;
+		int listSize=0;
+		int pageSize=5;
+		
+		List<NoticeDTO> topLists=null;
+		List<NoticeDTO> lists=null;
 		if(type==service.admin) {
 			if(session.getAttribute("sid")==null || session.getAttribute("sid").equals("")) {
-				return "admin/login/adminLogin";
+				mav.setViewName("admin/login/adminLogin");
+			}else {
+				
+				try {
+					totalCnt=service.totalCntA();
+					listSize=10;
+						
+					lists=service.noticeAllList(cp, listSize);
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				mav.setViewName("notice/adminNotice");
 			}
-			return "notice/adminNotice";
-		}else if(type==service.ceo) {
-			return "notice/ceoNotice";
 		}else {
-			return "notice/userNotice";
+			try {
+				topLists=service.getUserTop(type);
+				totalCnt=service.totalCntU(type)-topLists.size();
+				listSize=10-topLists.size();
+					
+				lists=service.noticeUserList(type, cp, listSize);
+				
+				for(int i=0;i<topLists.size();i++) {
+					lists.add(i, topLists.get(i));
+				}
+
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			
 		}
+		String url="/notice?type="+type;
+		String pageStr=com.ari.page.PageModuleNotice
+					.makeNoticePage(url, totalCnt, listSize, pageSize, cp);
+		mav.addObject("pageStr", pageStr);
+		mav.addObject("lists", lists);
+		mav.setViewName("notice/adminNotice");
+		mav.addObject("type", type);
+		return mav;
+	}
+	@RequestMapping("/not")
+	public ModelAndView userNotice(@RequestParam(value = "type", defaultValue = "1")int type,
+			@RequestParam(value = "cp", defaultValue = "1")int cp,
+			HttpSession session) {
+		ModelAndView mav=new ModelAndView();
+		int totalCnt=0;
+		int listSize=0;
+		int pageSize=5;
+		
+		List<NoticeDTO> topLists=null;
+		List<NoticeDTO> lists=null;
+		
+			try {
+				topLists=service.getUserTop(type);
+				totalCnt=service.totalCntU(type)-topLists.size();
+				listSize=10-topLists.size();
+					
+				lists=service.getUserList(type, cp, listSize);
+				
+				for(int i=0;i<topLists.size();i++) {
+					lists.add(i, topLists.get(i));
+				}
+
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			String url="/not?type="+type;
+			String pageStr=com.ari.page.PageModuleNotice
+					.makeNoticePage(url, totalCnt, listSize, pageSize, cp);
+			mav.addObject("pageStr", pageStr);
+			mav.addObject("lists", lists);
+			if(type==1) {
+				mav.setViewName("notice/userNotice");
+			}else {
+				mav.setViewName("notice/ceoNotice");
+			}
+		
+		mav.addObject("type", type);
+
+
+		return mav;
 	}
 	
 	@RequestMapping("/cateList")
@@ -87,7 +175,7 @@ public class NoticeController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		String msg=result>0?"공지사항이 정상적으로 등록되었습니다.":"공지사항 등록에 실패하였습니다.";
+		String msg=result>0?"정상적으로 등록되었습니다.":"등록에 실패하였습니다.";
 
 		mav.addObject("msg", msg);
 		mav.addObject("url", "notice?type=3");
@@ -100,15 +188,17 @@ public class NoticeController {
 		ModelAndView mav=new ModelAndView();
 		int count=0;
 		if(cate==3) {
+			int temp1=0;
+			int temp2=0;
 			try {
-				count=service.CheckTopA();
-				System.out.println(count);
+				temp1=service.checkTopU(1);
+				temp2=service.checkTopU(2);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			if(count==6) {
-				mav.addObject("msg", "*고정 가능한 공지는 총 6개까지입니다.");
+			if(temp1>=3 || temp2>=3) {
+				mav.addObject("msg", "고정 가능한 공지는 3개까지입니다.");
 			}else {
 				mav.addObject("msg", "0");
 			}
@@ -120,8 +210,8 @@ public class NoticeController {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			if(count==3) {
-				mav.addObject("msg", "*고정 가능한 공지는 3개까지입니다.");
+			if(count>=3) {
+				mav.addObject("msg", "고정 가능한 공지는 3개까지입니다.");
 			}else {
 				mav.addObject("msg", "0");
 			}
@@ -129,6 +219,87 @@ public class NoticeController {
 		
 		
 		mav.setViewName("notice/topCheckMsg");
+		return mav;
+	}
+	@RequestMapping("/noticeCont")
+	public ModelAndView noticeContent(@RequestParam(value = "noticeidx")int noticeidx,
+			HttpSession session) {
+		ModelAndView mav=new ModelAndView();
+		NoticeDTO dto=null;
+		try {
+			dto=service.getNoticeContent(noticeidx);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		if(dto==null) {
+			mav.addObject("msg","삭제된 게시물 혹은 비정상적인 접근입니다.");
+			mav.addObject("url", "/");
+			mav.setViewName("admin/adminMsg");
+		}else {
+			dto.setNoticecontent(dto.getNoticecontent().replaceAll("\n", "<br>"));
+			mav.addObject("dto", dto);
+			mav.setViewName("notice/noticeContent");
+		}
+		return mav;
+	}
+	@RequestMapping("/noticeDel")
+	public ModelAndView noticeDel(@RequestParam(value = "noticeidx", defaultValue = "0")int noticeidx) {
+		ModelAndView mav=new ModelAndView();
+		int result=0;
+		try {
+			result=service.noticeDel(noticeidx);
+			if(noticeidx==0) {
+				result=-1;
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		String msg=result>0?"공지사항이 삭제되었습니다.":"[ERROR] 삭제 실패.\n 고객센터에 문의해주세요";
+		mav.addObject("msg", msg);
+		mav.addObject("url", "/notice");
+		mav.setViewName("admin/adminMsg");
+		return mav;
+	}
+	@GetMapping("/noticeUpd")
+	public ModelAndView noticeUpdate(@RequestParam(value = "noticeidx", required = false)int noticeidx) {
+		ModelAndView mav=new ModelAndView();
+		NoticeDTO dto=null;
+		try {
+			dto=service.getNoticeContent(noticeidx);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		if(dto==null) {
+			mav.addObject("msg","삭제된 게시물 혹은 비정상적인 접근입니다.");
+			mav.addObject("url", "/");
+			mav.setViewName("admin/adminMsg");
+		}else {
+			dto.setNoticecontent(dto.getNoticecontent().replaceAll("\n", "<br>"));
+			mav.addObject("dto", dto);
+			mav.setViewName("notice/noticeUpdate");
+		}
+		
+		return mav;
+	}
+	
+	public ModelAndView noticeUpdateSubmit(@RequestParam(value = "topcheck",defaultValue = "pass")String topcheck,
+			@RequestParam(value = "noticeidx", required = false)int noticeidx,
+			@RequestParam(value = "adminid",defaultValue = "admin")String adminid,
+			@RequestParam(value = "noticetype", defaultValue = "3")int type,
+			@RequestParam(value = "noticetitle",defaultValue = "수정한 공지사항입니다.")String title,
+			@RequestParam(value = "noticecontent", defaultValue = "공지사항 점검 중입니다.")String content,
+			@RequestParam(value = "noticetop", required = false)String ck) {
+		ModelAndView mav=new ModelAndView();
+		if(topcheck.equals("fail")) {
+			mav.addObject("msg","고정 공지사항을 추가할 수 없습니다.\n다시 작성하십시오.");
+			mav.addObject("url", "notice?type=3");
+			mav.setViewName("admin/adminMsg");
+			return mav;
+		}
+		int cknum=0;
+		if(ck!=null) {cknum=1;}
+		
 		return mav;
 	}
 
