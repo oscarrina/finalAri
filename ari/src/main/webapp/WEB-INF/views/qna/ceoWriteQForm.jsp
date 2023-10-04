@@ -5,9 +5,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-</head>
-<body>
-<%@ include file="../ceo/ceoHeader.jsp" %>
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
+<script src="//code.jquery.com/jquery.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/css/adminMainLayout.css">
 <style>
 .content{
   display: block;
@@ -42,9 +43,16 @@ table{
 </style>
 </head>
 <body>
-<div class="content">
+<div id="page-wrapper">
+<%@ include file="../ceo/ceoHeader.jsp" %>
+  <!-- /사이드바 -->
+
+  <!-- 본문 -->
+  <div id="page-content-wrapper">
+    <div class="container-fluid" id="content1">
+     <div class="content">
 <h4>관리자에게 문의하기</h4>
-<form name="writeqform" action="ceowriteQ">
+<form name="writeqform" action="ceoWriteQ">
 <table width="900px">
 <tr>
 	<td>
@@ -53,7 +61,7 @@ table{
 	   		<option value="2">제휴</option>
 	   		<option value="3">사업자정보</option>
 	  	    <option value="4">기타</option>
-		</select> 
+		</select>
 	</td>
 	<td align="right">
 		<button type="submit" class="btn btn-primary" style="background-color:#666CDE; width:70px; height:40px; font-size:13px;">등록</button>
@@ -61,17 +69,22 @@ table{
 </tr>
 <tr>
 	<td>
-		<input type="text" name="qnaTitle" id="qnaTitle" value="제목을 입력하세요.">
+		<input type="text" name="qnaTitle" id="qnaTitle" placeholder="제목을 입력하세요.">
 	</td>
 </tr>
 <tr>
 	<td colspan="2">
-	<textarea class="form-control" id="exampleTextarea" rows="8" name="qnaContent"></textarea>
+	<textarea class="form-control" id="exampleTextarea" rows="8" name="qnaContent" placeholder="내용을 입력하세요."></textarea>
 	</td>
 </tr>
 </table>     
 </form>     
 </div>
-<%@include file="../ceo/ceoFooter.jsp" %>
+    </div>
+    <%@include file="../ceo/ceoFooter.jsp" %>
+  </div>
+  <!-- /본문 -->
+</div>
+
 </body>
 </html>
