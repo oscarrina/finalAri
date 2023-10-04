@@ -12,20 +12,23 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ari.member.model.MemberDTO;
 import com.ari.member.service.*;
 import com.ari.password.PasswordModule;
+import com.ari.sms.service.SmsService;
 
 @Controller
 public class MemberController {
 	
 	@Autowired
 	private MemberService service;
-	
+	private SmsService smsservice;
 	
 	@RequestMapping("/memberJoinChoice")
 	public String memberJoinChoice() {
@@ -202,17 +205,28 @@ public class MemberController {
 	public String pwdFind3() {
 		return "member/pwdFind3";
 	}
-	@RequestMapping("/idCheck")
+	
+	@GetMapping("/idCheck")
 	public ModelAndView idCheck(@RequestParam(value = "userid", required=false)String userid) {
 		ModelAndView mav = new ModelAndView();
 		try {
-			boolean result = service.idCheck(userid);
-			String msg = result?"중복된 아이디 입니다.":"사용가능한 아이디 입니다.";
+			int result = service.idCheck(userid);
+			String msg = result>=1?"중복된 아이디 입니다.":"사용가능한 아이디 입니다.";
 			mav.addObject("msg", msg);
 			mav.setViewName("member/idCheck_ok");
 		} catch (Exception e) {
 		}
 	
+		return mav;
+	}
+	@PostMapping("/sendNum")
+	@ResponseBody
+	public ModelAndView sendMsg(@RequestParam(value = "tel", required = false)String tel) {
+		ModelAndView mav = new ModelAndView();
+		String rannum = smsservice.sendRandomMessage(tel);
+		smsservice.send_msg(tel, rannum);
+		mav.addObject("msg", rannum);
+		mav.setViewName("member/idCheck_ok");
 		return mav;
 	}
 }
