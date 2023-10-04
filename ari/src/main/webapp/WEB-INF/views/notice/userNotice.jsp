@@ -57,6 +57,9 @@ table{
   color:#666CDE;
   background-size: 100% 100%;
 }
+.bgcolor1{
+	background-color: #EAEDF4;
+}
 </style>
 </head>
 <body>
@@ -86,8 +89,8 @@ table{
 		      </button>
 		    </h2>
 		    <div id="collapse${dto.noticeidx}" class="accordion-collapse collapse" aria-labelledby="heading${dto.noticeidx}" data-bs-parent="#accordionExample">
-		      <div class="accordion-body">
-		        <strong>This is the first item's accordion body.</strong> ${dto.noticecontent}
+		      <div class="accordion-body bgcolor1">
+		         ${dto.noticecontent}
 		      </div>
 		    </div>
 		  </div>
