@@ -196,5 +196,17 @@ public class MemberController {
 	public String pwdFind3() {
 		return "member/pwdFind3";
 	}
-
+	@RequestMapping("/idCheck")
+	public ModelAndView idCheck(@RequestParam(value = "userid", required=false)String userid) {
+		ModelAndView mav = new ModelAndView();
+		try {
+			boolean result = service.idCheck(userid);
+			String msg = result?"중복된 아이디 입니다.":"사용가능한 아이디 입니다.";
+			mav.addObject("msg", msg);
+			mav.setViewName("member/idCheck_ok");
+		} catch (Exception e) {
+		}
+	
+		return mav;
+	}
 }
