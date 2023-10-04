@@ -28,12 +28,6 @@ public class NoticeController {
 			@RequestParam(value = "cp", defaultValue = "1")int cp,
 			HttpSession session) {
 		ModelAndView mav=new ModelAndView();
-		if(session.getAttribute("sid")==null || session.getAttribute("sid").equals("")) {
-			mav.addObject("msg","비정상적인 접근입니다. 고객 센터에 문의해주세요.");
-			mav.addObject("url", "admin");
-			mav.setViewName("admin/adminMsg");
-			return mav;
-		}
 		int totalCnt=0;
 		int listSize=0;
 		int pageSize=5;
@@ -103,6 +97,10 @@ public class NoticeController {
 				
 				for(int i=0;i<topLists.size();i++) {
 					lists.add(i, topLists.get(i));
+				}
+				
+				for(int i=0;i<lists.size();i++) {
+					lists.get(i).setNoticecontent(lists.get(i).getNoticecontent().replaceAll("\n", "<br>"));
 				}
 
 			} catch (Exception e) {

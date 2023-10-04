@@ -60,12 +60,13 @@ table{
 </tr>
 <tr>
 	<td>
-		<input type="text" name="qnaTitle" id="qnaTitle" value="제목을 입력하세요.">
+		<input type="text" name="qnaTitle" id="qnaTitle" placeholder="제목을 입력하세요.">
 	</td>
 </tr>
 <tr>
 	<td colspan="2">
-	<textarea class="form-control" id="exampleTextarea" rows="8" name="qnaContent"></textarea>
+	<textarea class="form-control" id="exampleTextarea" rows="8" name="qnaContent"
+	placeholder="내용을 입력하세요."></textarea>
 	</td>
 </tr>
 </table>     

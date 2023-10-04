@@ -108,19 +108,19 @@ svg{
 		<div class="content5">	
 		<div class="content4">	
 		  <div class="mb-3 row">
-		  	<label for="staticEmail" class="col-sm-2 col-form-label">공지사항 번호</label>
+		  	<label for="noticeidx" class="col-sm-2 col-form-label">공지사항 번호</label>
 		    <div class="col-sm-10">
-		      <input type="text" readonly class="form-control-plaintext" id="staticEmail" name="noticeidx" value="${dto.noticeidx}">
+		      <input type="text" readonly class="form-control-plaintext" id="noticeidx" name="noticeidx" value="${dto.noticeidx}">
 		    </div>
-		    <label for="staticEmail" class="col-sm-2 col-form-label">작성자</label>
+		    <label for="adminid" class="col-sm-2 col-form-label">작성자</label>
 		    <div class="col-sm-10">
-		      <input type="text" readonly class="form-control-plaintext" id="staticEmail" name="adminid" value="${adminid}">
+		      <input type="text" readonly class="form-control-plaintext" id="adminid" name="adminid" value="${adminid}">
 		    </div>
-		    <label for="staticEmail" class="col-sm-2 col-form-label">작성날짜</label>
+		    <label for="noticedate" class="col-sm-2 col-form-label">작성날짜</label>
 		    <div class="col-sm-10">
-		      <input type="text" readonly class="form-control-plaintext" id="staticEmail" name="noticedate" value="${noticedate}">
+		      <input type="text" readonly class="form-control-plaintext" id="noticedate" name="noticedate" value="${noticedate}">
 		    </div>
-		    <label for="staticEmail" class="col-sm-2 col-form-label">분류</label>
+		    <label for="sbox" class="col-sm-2 col-form-label">분류</label>
 		    <div class="col-sm-10">
 			  <select class="form-select border1 margint" aria-label="Default select example" name="noticetype" id="sbox" onchange="checkTop()">
 				  <option value="3" ${dto.noticetype==3?"selected":"" }>전체</option>
@@ -128,21 +128,21 @@ svg{
 				  <option value="2" ${dto.noticetype==2?"selected":"" }>사업자</option>
 			  </select>
 		    </div>
-		    <label for="staticEmail" class="col-sm-2 col-form-label">고정여부</label>
+		    <label for="noticetop" class="col-sm-2 col-form-label">고정여부</label>
 		    <div class="col-sm-10 margint" style="padding-left:35px;">
-			  <input class="form-check-input" type="checkbox" name="noticetop" id="flexCheckDefault" 
+			  <input class="form-check-input" type="checkbox" name="noticetop" id="noticetop" 
 			  			onclick="checkTop()" ${dto.noticetop==1?"checked":"" }>
-			  <label class="form-check-label" for="flexCheckDefault">
+			  <label class="form-check-label" for="noticetop">
 			   공지사항 고정<span id="topmsg"></span>
 			  </label>
 		    </div>
-			  <label for="staticEmail" class="col-sm-2 col-form-label">제목</label>
+			  <label for="noticetitle" class="col-sm-2 col-form-label">제목</label>
 			  <div class="marginl">
-			  	<input type="text" maxlength="33" value="${dto.noticetitle }" class="form-control contentwidth border1" name="noticetitle" id="exampleFormControlInput1" placeholder="공지사항 제목">
+			  	<input type="text" maxlength="33" value="${dto.noticetitle }" class="form-control contentwidth border1" name="noticetitle" id="noticetitle" placeholder="공지사항 제목">
 			  </div>
-			  <label for="staticEmail" class="col-sm-2 col-form-label">내용</label>
+			  <label for="noticecontent" class="col-sm-2 col-form-label">내용</label>
 			  <div class="marginl margint">
-			  	<textarea class="form-control border1 content3" maxlength="1000" name="noticecontent" id="exampleFormControlTextarea1" >${dto.noticecontent }</textarea>
+			  	<textarea class="form-control border1 content3" maxlength="1000" name="noticecontent" id="noticecontent" >${dto.noticecontent }</textarea>
 			  	
 			  </div>
 		  </div>

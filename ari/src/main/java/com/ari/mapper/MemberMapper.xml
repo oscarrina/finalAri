@@ -23,4 +23,30 @@
 		from userinfo
 		where userid=#{userid}
 	</select>
+	<select id="kakaoCheck" parameterType="String" resultType="Integer">
+		select count(*)
+		from userInfo
+		where userid = #{userid}
+	</select>
+	<insert id="kakaoJoin" parameterType="com.ari.member.model.MemberDTO">
+	insert into userInfo
+	values(
+	userInfo_userIdx.nextval,
+	1,
+	'123',
+	#{userid},
+	'1234',
+	#{username},
+	#{usertel},
+	'테스트',
+	#{usertoken},
+	'0',
+	'N'
+	)
+	</insert>
+	<select id="kakaoToken" parameterType="String" resultType="String">
+	select usertoken
+	from userinfo
+	where userid = #{userid}
+	</select>
 </mapper>

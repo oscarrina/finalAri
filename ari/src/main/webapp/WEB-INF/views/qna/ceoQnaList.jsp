@@ -6,22 +6,19 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="/css/mypage.css">
-<style>
-#myQna{color: #253BFF;}
-.maindiv{
-	margin-top:150px;
-	display: inline-block;
-	width: 75%;
-	height: 100vh;
-	float: right;
-}
-</style>
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
+<script src="//code.jquery.com/jquery.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="/css/adminMainLayout.css">
+
 </head>
 <body>
-<%@include file="/WEB-INF/views/header.jsp" %>
-<%@include file="/WEB-INF/views/mypage/mypageSide.jsp" %>
-<div class="maindiv">
+<div id="page-wrapper">
+<%@ include file="../ceo/ceoHeader.jsp" %>
+<div id="page-content-wrapper">
+    <div class="container-fluid" id="content1">
+     <div class="content">
+     <br><br><br><br>
 <table class="table table-hover">
 <tr>
    <thead>
@@ -43,7 +40,7 @@
     <c:forEach var="dto" items="${lists }">
     <tr class="table-primary">
       <th scope="row">${dto.qnaIdx }</th>
-      <td><a href="myQnaDetail?qnaIdx=${dto.qnaIdx }">${dto.qnaTitle }</a></td>
+      <td><a href="ceoQnaDetail?qnaIdx=${dto.qnaIdx }">${dto.qnaTitle }</a></td>
       <td>${dto.qnaDate }</td>
       <td>
       <c:if test="${dto.qnaOk==0 }">
@@ -61,6 +58,10 @@
 			${pageStr }
 		</div>
 </div>
-<%@include file="/WEB-INF/views/footer.jsp" %>
+    </div>
+    <%@include file="../ceo/ceoFooter.jsp" %>
+  </div>
+  <!-- /본문 -->
+</div>
 </body>
 </html>

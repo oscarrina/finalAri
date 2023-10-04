@@ -139,18 +139,19 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/memberLogout")
-	   public ModelAndView logout(HttpSession session) {
-
-	      String access_Token = (String)session.getAttribute("access_Token");
-	      Map<String, String> map = new HashMap<String, String>();
-	      map.put("Authorization", "Bearer "+ access_Token);
-	      session.invalidate();
-	      ModelAndView mav=new ModelAndView();
-	      mav.addObject("msg", "로그아웃 되었습니다");
-	      mav.addObject("url","/");
-	      mav.setViewName("member/memberMsg");
-	      return mav;
-	   }
+	public ModelAndView logout(HttpSession session) {
+		
+		session.invalidate();
+//		String access_Token = (String)session.getAttribute("access_Token");
+//		Map<String, String> map = new HashMap<String, String>();
+//		map.put("Authorization", "Bearer "+ access_Token);
+		
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("msg", "로그아웃 되었습니다");
+		mav.addObject("url","/");
+		mav.setViewName("member/memberMsg");
+		return mav;
+	}
 	
 	@GetMapping("/idFind")
 	public ModelAndView idFindForm() {
