@@ -63,6 +63,8 @@ function showUpd(idx){
 	align:left;
 }
 .content2{
+	align:left;
+	width:800px;
 	margin-right: 200px;
 }
 .border1{
@@ -79,7 +81,8 @@ svg{
 }
 .content3{
 	width:500px;
-	height:300px;
+	height:auto;
+
 }
 .btn2{
 	border-top: none;
@@ -90,6 +93,7 @@ svg{
 .p1{
 	padding-left:10px;
 	padding-top:10px;
+	padding-bottom:10px;
 	background-color: #D9D9D9;
 	border-radius: 10px;
 }
@@ -102,8 +106,9 @@ svg{
 
   <!-- 본문 -->
   <div id="page-content-wrapper">
-    <div class="container-fluid content1 content2" >
+    <div class="container-fluid content1" >
       <h3>공지사항 상세</h3>
+      <div class=" content2">
 		<table class="table1">
 			<tr>
 				<th class="th1 thtd1 thtd2 thtd3">제목</th>
@@ -113,7 +118,7 @@ svg{
 				<th class="th1 thtd1 thtd2">글번호</th>
 				<td class="td1 thtd1 thtd2 td2">${dto.noticeidx }</td>	
 				<th class="th1 thtd1 thtd2">작성날짜</th>
-				<td class="thtd1 thtd2 td2">${dto.noticedate }</td>
+				<td class="thtd1 thtd2 td2">${noticedate }</td>
 			</tr>
 			<tr>
 				<th class="th1 thtd1 thtd2">카테고리</th>
@@ -152,11 +157,12 @@ svg{
 		</table>
 			<div class="d-grid gap-2 d-md-flex justify-content-center contentwidth">
 			<button type="button" class="btn btn-primary btn1 btn2" 
-				style="background-color:#D9D9D9; width:70px; height:40px; font-size:11px; color:black; " onclick="javascript:history.go(-1)">뒤로가기</button>&nbsp;&nbsp;
+				style="background-color:#D9D9D9; width:70px; height:40px; font-size:11px; color:black; " onclick="javascript:location.href='/notice'">목록</button>&nbsp;&nbsp;
 				<button type="button" class="btn btn-primary btn2" 
 				style="background-color:#666CDE; width:70px; height:40px; font-size:11px; " onclick="showDel(${dto.noticeidx},${dto.noticetype})">삭제</button>&nbsp;&nbsp;
 				<button type="button" class="btn btn-primary btn2" 
 				style="background-color:#3239AF; width:70px; height:40px; font-size:11px;" onclick="showUpd(${dto.noticeidx})">수정</button>
+			</div>
 			</div>
     </div>
     <%@include file="../admin/adminFooter.jsp" %>
