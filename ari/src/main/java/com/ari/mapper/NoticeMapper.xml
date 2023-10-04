@@ -55,7 +55,7 @@
 		select * from 
 			(select rownum as rnum, a.* from 
 			(select * from notice where noticetop=0 
-				and noticetype=#{type}
+				and (noticetype=#{type} or noticetype=3)
 				order by noticeidx desc) a) b
 		where rnum<![CDATA[>=]]>#{start} and rnum<![CDATA[<=]]>#{end}
 	</select>
@@ -76,4 +76,13 @@
 		delete from notice
 		where noticeidx=#{idx}
 	</delete>
+	<update id="noticeUpd" parameterType="com.ari.notice.model.NoticeDTO">
+		update notice
+		set adminid=#{adminid},
+			noticetype=#{noticetype},
+			noticetitle=#{noticetitle},
+			noticecontent=#{noticecontent},
+			noticetop=#{noticetop}
+		where noticeidx=#{noticeidx}
+	</update>
 </mapper>  

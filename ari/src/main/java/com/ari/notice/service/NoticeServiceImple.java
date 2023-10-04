@@ -92,5 +92,10 @@ public class NoticeServiceImple implements NoticeService {
 		int result=mapper.noticeDel(idx);
 		return result;
 	}
+	@Override
+	public int noticeUpd(NoticeDTO dto) throws Exception {
+		int result=mapper.noticeUpd(dto);
+		return result;
+	}
 
 }

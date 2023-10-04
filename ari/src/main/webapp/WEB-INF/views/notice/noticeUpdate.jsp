@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,8 +14,8 @@
 <script>
 var check="";
 function checkTop(){
-	check=document.noticeAdd.noticetop.checked;
-	var cate=document.noticeAdd.noticetype.value;
+	check=document.noticeUpd.noticetop.checked;
+	var cate=document.noticeUpd.noticetype.value;
 	var param="cate="+cate;
 	if(check==true){
 		sendRequest('topCheck', param, showResult,'GET');
@@ -35,6 +36,7 @@ function showResult(){
 				str='<input type="hidden" name="topcheck" value="pass">';
 			}else{
 				str='<div class="alert alert-danger d-flex align-items-cente" role="alert">';
+				str+='<input type="hidden" name="topcheck" value="fail">';
 				str+='<svg xmlns="http://www.w3.org/2000/svg" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:">';
 				str+='<path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>';
 				str+=' </svg><div>&nbsp;';
@@ -46,14 +48,26 @@ function showResult(){
 		}
 	}
 }
-
 </script>
 <style>
 .contentwidth{
-	width:70%;
+	width:600px;
 }
 .content2{
-	margin-top: 30px;
+	width:800px;
+	margin-top:50px;
+
+}
+.content5{
+	border: 2px solid #4068A7;
+	border-radius: 10px;
+	margin-bottom: 20px;
+}
+.content4{
+	margin-top:20px;
+	margin-bottom:20px;
+	margin-left:20px;
+	
 }
 .border1{
 	border: 1px solid #4068A7;
@@ -62,6 +76,20 @@ function showResult(){
 svg{
 	width:20px;
 	height:25px;
+}
+.content3{
+	width:600px; 
+	height:300px !important;
+    resize:none;
+}
+.margint{
+	margin-top:5px;
+}
+.marginl{
+	margin-left:15px;
+}
+.marginl2{
+	margin-left:180px;
 }
 </style>
 </head>
@@ -73,50 +101,61 @@ svg{
   <!-- 본문 -->
   <div id="page-content-wrapper">
     <div class="container-fluid content1" >
-      <h3>공지사항 등록</h3>
-		<form name="noticeAdd" action="noticeAdd" method="post">
+      <h3>공지사항 수정</h3>
+		<form name="noticeUpd" action="noticeUpd" method="post">
+		<input type="hidden" name="noticetopck" value="${dto.noticetop }">
 		<div class="content2">	
+		<div class="content5">	
+		<div class="content4">	
 		  <div class="mb-3 row">
+		  	<label for="staticEmail" class="col-sm-2 col-form-label">공지사항 번호</label>
+		    <div class="col-sm-10">
+		      <input type="text" readonly class="form-control-plaintext" id="staticEmail" name="noticeidx" value="${dto.noticeidx}">
+		    </div>
 		    <label for="staticEmail" class="col-sm-2 col-form-label">작성자</label>
 		    <div class="col-sm-10">
 		      <input type="text" readonly class="form-control-plaintext" id="staticEmail" name="adminid" value="${adminid}">
 		    </div>
 		    <label for="staticEmail" class="col-sm-2 col-form-label">작성날짜</label>
 		    <div class="col-sm-10">
-		      <input type="text" readonly class="form-control-plaintext" id="staticEmail" name="noticedate" value="${date}">
+		      <input type="text" readonly class="form-control-plaintext" id="staticEmail" name="noticedate" value="${noticedate}">
 		    </div>
 		    <label for="staticEmail" class="col-sm-2 col-form-label">분류</label>
 		    <div class="col-sm-10">
-			  <select class="form-select border1" aria-label="Default select example" name="noticetype" id="sbox" onchange="checkTop()">
-				  <option value="3" selected>전체</option>
-				  <option value="1">사용자</option>
-				  <option value="2">사업자</option>
+			  <select class="form-select border1 margint" aria-label="Default select example" name="noticetype" id="sbox" onchange="checkTop()">
+				  <option value="3" ${dto.noticetype==3?"selected":"" }>전체</option>
+				  <option value="1" ${dto.noticetype==1?"selected":"" }>사용자</option>
+				  <option value="2" ${dto.noticetype==2?"selected":"" }>사업자</option>
 			  </select>
 		    </div>
 		    <label for="staticEmail" class="col-sm-2 col-form-label">고정여부</label>
-		    <div class="col-sm-10" style="padding-left:35px;">
-			  <input class="form-check-input" type="checkbox" name="noticetop" id="flexCheckDefault" onclick="checkTop()">
+		    <div class="col-sm-10 margint" style="padding-left:35px;">
+			  <input class="form-check-input" type="checkbox" name="noticetop" id="flexCheckDefault" 
+			  			onclick="checkTop()" ${dto.noticetop==1?"checked":"" }>
 			  <label class="form-check-label" for="flexCheckDefault">
 			   공지사항 고정<span id="topmsg"></span>
 			  </label>
 		    </div>
+			  <label for="staticEmail" class="col-sm-2 col-form-label">제목</label>
+			  <div class="marginl">
+			  	<input type="text" maxlength="33" value="${dto.noticetitle }" class="form-control contentwidth border1" name="noticetitle" id="exampleFormControlInput1" placeholder="공지사항 제목">
+			  </div>
+			  <label for="staticEmail" class="col-sm-2 col-form-label">내용</label>
+			  <div class="marginl margint">
+			  	<textarea class="form-control border1 content3" maxlength="1000" name="noticecontent" id="exampleFormControlTextarea1" >${dto.noticecontent }</textarea>
+			  	
+			  </div>
 		  </div>
-		  
-		  <div class="mb-3">
-			  <label for="exampleFormControlInput1" class="form-label">제목</label>
-			  <input type="text" class="form-control contentwidth border1" name="noticetitle" id="exampleFormControlInput1" placeholder="공지사항 제목">
 			</div>
-			<div class="mb-3">
-			  <label for="exampleFormControlTextarea1" class="form-label">내용</label>
-			  <textarea class="form-control contentwidth border1" name="noticecontent" id="exampleFormControlTextarea1" rows="5"></textarea>
 			</div>
-			<div class="d-grid gap-2 d-md-flex justify-content-md-end contentwidth">
+			<div class="d-grid gap-2 d-md-flex justify-content-end marginl2 contentwidth">
 				<button type="button" class="btn btn-primary" 
 				style="background-color:#666CDE; width:70px; height:40px; font-size:11px;" onclick="javascript:history.go(-1)">취소</button>&nbsp;&nbsp;
-				<input type="submit" value="등록" class="btn btn-primary" 
+				<input type="submit" value="수정" class="btn btn-primary" 
 				style="background-color:#3239AF; width:70px; height:40px; font-size:11px;">
 
 			</div>
+			
 		  </div>
 		</form>
     </div>

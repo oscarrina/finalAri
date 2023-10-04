@@ -23,5 +23,6 @@ public interface NoticeService {
 	public List<NoticeDTO> getUserList(int type,int cp, int ls)throws Exception;
 	public NoticeDTO getNoticeContent(int noticeidx)throws Exception;
 	public int noticeDel(int idx)throws Exception;
+	public int noticeUpd(NoticeDTO dto)throws Exception;
 
 }

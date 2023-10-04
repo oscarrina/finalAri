@@ -19,4 +19,5 @@ public interface NoticeMapper {
 	public List<NoticeDTO> getUserList(Map map);
 	public NoticeDTO getNoticeContent(int noticeidx);
 	public int noticeDel(int idx);
+	public int noticeUpd(NoticeDTO dto);
 }
