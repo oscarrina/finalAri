@@ -14,6 +14,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
 <style>
 .login-wrap{
   width:100%;
@@ -53,7 +54,6 @@
   width: 330px;
   height: 130px;
 }
-<<<<<<< HEAD
 .kakaoDiv{
 	margin-top: 10px;
 }
@@ -76,7 +76,6 @@
 .naverImg{
 	width: 340px;
 	height: 50px;
-=======
 .b{
   margin-right: 150px;
   text-decoration: none;
@@ -88,28 +87,15 @@ a:link{
   color: black;
 }
 a:hover{
-  color: black; 
->>>>>>> f5d93267f5f2502304e01e31dbc28bdfab732703
+  color: black;
 }
 </style>
-<script>
-function naverLogin(){
-	let uri = 'https://nid.naver.com/oauth2.0/authorize?' +
-    'response_type=code' +                  // 인증과정에 대한 내부 구분값 code 로 전공 (고정값)
-    '&client_id=FbQAWCCkBvA2Ux7alTCK' +     // 발급받은 client_id 를 입력
-    '&state=NAVER_LOGIN_TEST' +             // CORS 를 방지하기 위한 특정 토큰값(임의값 사용)
-    '&redirect_uri=http://localhost9091/ariari/naver/login/callback';   // 어플케이션에서 등록했던 CallBack URL를 입력
-
-	// 사용자가 사용하기 편하게끔 팝업창으로 띄어준다.
-	window.open(uri, "Naver Login Test PopupScreen", "width=450, height=600");
-}
-</script>
 </head>
 <body>
 <form name="memberLogin" action="memberLogin" method="post">
 <div class="login-wrap">
   <div class="login-html">
-  <img src="img/logo.png" class="mainimg">
+  <a href="/"><img src="img/logo.png" class="mainimg"></a>
   <div class="group">
   	<input type="text" id="id" class="input" placeholder="아이디" name="userid" required="required">
   </div>
@@ -123,19 +109,15 @@ function naverLogin(){
   <div class="group">
     <input type="submit" class="btn1" value="로그인">
   </div>
-<<<<<<< HEAD
   <div class="kakaoDiv">
-  	<button type="button" class="naverBtn" onclick="naverLogin();"><img src="/img/naver_login.png" alt="네이버로그인" class="naverImg"></button>
-  </div>
-  <div class="kakaoDiv">
-  	<button type="button" class="kakaoBtn"><img src="/img/kakao_login_medium_wide.png" alt="카카오로그인" class="kakaoImg"></button>
-=======
+  	<a href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=3623a44fed0e1055e089acc18ec7aacf&redirect_uri=http://localhost:9091/oauth/kakao&response_type=code"><button type="button" class="kakaoBtn"><img src="/img/kakao_login_medium_wide.png" alt="카카오로그인" class="kakaoImg"></button>
+  	</a>
   <div class="group">
     <a href="idFind" class="b">아이디 찾기</a>
     <a href="pwdFind1" class="b">비밀번호 찾기</a>
->>>>>>> f5d93267f5f2502304e01e31dbc28bdfab732703
   </div>
   </div>
+ </div>
  </div>
  </form>
 </body>
