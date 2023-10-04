@@ -39,5 +39,9 @@ public class MemberServiceImple implements MemberService {
 		MemberDTO dto=mapper.idFind(username, usertel);
 		return dto;
 	}
-
+	@Override
+	public boolean idCheck(String userid) throws Exception {
+		boolean result = mapper.idCheck(userid);
+		return result;
+	}
 }

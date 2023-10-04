@@ -68,27 +68,103 @@
   margin-top: -50px;
 }
 .whiteSpace{
- height: 10px;
- text-align: center;	
- font-size: 15px;
+ height: 10px;	
+ font-size: 13px;
 }
 </style>
 <script src = "js/httpRequest.js"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
-	var idStr = document.getElementById("id");
-
-	function idCheck() {	
-		var pattern1 = /[0-9]/; // 숫자
-		var pattern2 = /[a-zA-Z]/; // 문자
-		var pattern3 = /[~!@#$%^&*()_+|<>?:{}]/; // 특수문자
-		if(!pattern1.test(idStr) || !pattern2.test(idStr) || !pattern3.test(idStr) || idStr.length < 8) {
-			alert(idStr+"비밀번호는 8자리 이상 문자, 숫자, 특수문자로 구성하여야 합니다.");
-			return false;
-		} else {
-			return true;
+	//주소 api
+    function findAddr() {
+        new daum.Postcode({
+            oncomplete: function(data) {
+                var addr = '';
+                var extraAddr = ''; 
+                if (data.userSelectedType === 'R') {
+                    addr = data.roadAddress;
+                } else { 
+                    addr = data.jibunAddress;
+                }
+                if(data.userSelectedType === 'R'){
+                    if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                        extraAddr += data.bname;
+                    }
+                    if(data.buildingName !== '' && data.apartment === 'Y'){
+                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                    }
+                    if(extraAddr !== ''){
+                        extraAddr = ' (' + extraAddr + ')';
+                    }
+                    document.getElementById("addr2").value = extraAddr;
+                } else {
+                    document.getElementById("addr2").value = '';
+                }
+                document.getElementById('addr1').value = data.zonecode;
+                document.getElementById("addr2").value = addr;
+                document.getElementById("addr3").focus();
+            }
+        }).open();
+    }
+	//id 유효성검사
+	function idCheck(id){
+		var idcheckMsg= document.getElementById("idCheckMsg");
+		let reg = /^[A-Za-z0-9]{6,}$/;
+		if(id.value != '') {
+	         if(!reg.test(id.value)) {
+	        	 idcheckMsg.innerHTML = '아이디는 6~12자, 영문 또는 숫자를 입력바랍니다.';
+	        	 idcheckMsg.style.color = 'red';
+			} else {
+				idcheckMsg.innerHTML = "중복검사가 필요합니다.";
+				idcheckMsg.style.color = "";
+			}
+	    }
+	}
+	//id중복검사 
+	function idDouble(){
+		var idvalue = document.getElementById("id").value;
+		var param = 'id='+idvalue;
+		sendRequest('idCheck',param,showResult,'GET')
+	}
+	function showResult(){
+		if(XHR.readyState==4){
+			if(XHR.status==200){
+				var data = XHR.responseText;
+				var idcheckMsg = document.getElementById("idCheckMsg");
+				idcheckMsg.innerHTML = data;
+			}
+		}	
+	}
+    //비밀번호 유효성 검사 
+	function passwordCheck(password) {	
+		let passwordCheckMsg = document.getElementById("passwordCheckMsg");
+	    let reg = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,}$/;
+	    if(password.value != '') {
+	         if(!reg.test(pwd.value)||password.length < 8) {
+				passwordCheckMsg.innerHTML = '비밀번호는 공백없이 8~12자리, 문자, 숫자, 특수문자로 구성하여야 합니다.';
+				passwordCheckMsg.style.color = 'red';
+			} else {
+				passwordCheckMsg.innerHTML = "사용이 가능한 비밀번호입니다.";
+				passwordCheckMsg.style.color = 'green';
+			}
+	    }
+    }
+	function passwordDouble(chk){
+		let passwordDoubleMsg = document.getElementById("passwordDoubleMsg");
+		if(document.getElementById("passwordCheckMsg").innerHTML=="사용이 가능한 비밀번호입니다."){
+			if(document.getElementById("pwd").value != document.getElementById("pwd2").value){
+				passwordDoubleMsg.innerHTML = "비밀번호가 일치하지 않습니다.";
+				passwordDoubleMsg.style.color = 'red';
+			}else{
+				passwordDoubleMsg.innerHTML = "비밀번호가 일치합니다.";
+				passwordDoubleMsg.style.color = 'green';
+			}
+		}else{
+			passwordDoubleMsg.innerHTML = "";
+			passwordDoubleMsg.style.color = "";
 		}
+	}
 
-}
 </script>
 </head>
 <body>
@@ -100,17 +176,17 @@
   </div>
    <div class = "whiteSpace"></div>
   <div class="group">
-  	<input type="text" id="id" class="input" placeholder="아이디">&nbsp;<input type="button" class="btn2" value="중복확인" onclick = "idCheck()">
+  	<input type="text" id="id" class="input" placeholder="아이디" oninput = "idCheck(this)">&nbsp;<input type="button" class="btn2" value="중복확인" onclick="idDouble()">
   </div>
-  <div class = "whiteSpace" id = "idCheck"></div>
+  <div class = "whiteSpace" id = "idCheckMsg"></div>
   <div class="group">
-  	<input type="password" id="pwd" class="input" data-type="password" placeholder="비밀번호">
+  	<input type="password" id="pwd" class="input" data-type="password" placeholder="비밀번호" oninput = "passwordCheck(this)">
   </div>
-  <div class = "whiteSpace"></div>
+  <div class = "whiteSpace" id= "passwordCheckMsg"></div>
   <div class="group">
-  	<input type="password" id="pwd2" class="input" data-type="password" placeholder="비밀번호 확인">
+  	<input type="password" id="pwd2" class="input" data-type="password" placeholder="비밀번호 확인" oninput = "passwordDouble(this)">
   </div>
-  <div class = "whiteSpace"></div>
+  <div class = "whiteSpace" id = "passwordDoubleMsg"></div>
   <div class="group">
   	<input type="text" id="email" class="input" placeholder="이메일">
   </div>
@@ -123,10 +199,10 @@
   </div>
   <div class = "whiteSpace"></div>
   <div class="group">
-  	<input type="text" id="addr1" class="input2" placeholder="우편번호">&nbsp;<input type="button" class="btn2" value="주소검색">
+  	<input type="text" id="addr1" class="input2" placeholder="우편번호" readonly >&nbsp;<input type="button" class="btn2" value="주소검색" onclick="findAddr()">
   </div>
   <div class="group">
-  	<input type="text" id="addr2" class="input" placeholder="주소">
+  	<input type="text" id="addr2" class="input" placeholder="주소" readonly>
   </div>
   <div class="group">
   	<input type="text" id="addr3" class="input" placeholder="상세주소">
@@ -137,6 +213,6 @@
   </div>
   </div>
  </div>
- <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
 </body>
 </html>

@@ -18,4 +18,9 @@
 		from userinfo
 		where username=#{username} and usertel=#{usertel}
 	</select>
+	<select id="idCheck" parameterType="String" resultType="boolean">
+		select userid
+		from userinfo
+		where userid=#{userid}
+	</select>
 </mapper>
