@@ -7,4 +7,17 @@
 		insert into qna values(qna_qnaIdx.nextval,#{userId},1,#{qnaCategory},
 		0,#{qnaTitle},#{qnaContent},sysdate)
 	</insert>
+	<insert id="ceoQnaWrite" parameterType="com.ari.qna.model.QnaDTO">
+		insert into qna values(qna_qnaIdx.nextval,#{userId},2,#{qnaCategory},
+		0,#{qnaTitle},#{qnaContent},sysdate)
+	</insert>
+	<select id="QnaList" resultType="com.ari.qna.model.QnaDTO" parameterType="String">
+		select qnaIdx,qnaOk,qnaTitle,qnaContent,qnaDate from qna where userid=#{sid}
+	</select>
+	<select id="QnaDetail" resultType="com.ari.qna.model.QnaDTO" parameterType="int">
+		select qnaCategory,qnaOk,qnaTitle,qnaContent,qnaDate from qna where qnaIdx=#{qnaIdx}
+	</select>
+	<select id="totalCnt" resultType="int">
+		select count(*) from qna
+	</select>
 </mapper>
