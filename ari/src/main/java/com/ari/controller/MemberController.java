@@ -1,5 +1,8 @@
 package com.ari.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -136,6 +139,9 @@ public class MemberController {
 	public ModelAndView logout(HttpSession session) {
 		
 		session.invalidate();
+		String access_Token = (String)session.getAttribute("access_Token");
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("Authorization", "Bearer "+ access_Token);
 		
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("msg", "로그아웃 되었습니다");
