@@ -109,10 +109,10 @@
 	//id 유효성검사
 	function idCheck(id){
 		var idcheckMsg= document.getElementById("idCheckMsg");
-		let reg = /^[A-Za-z0-9]{6,}$/;
+		let reg = /^[A-Za-z0-9]{6,12}$/;
 		if(id.value != '') {
 	         if(!reg.test(id.value)) {
-	        	 idcheckMsg.innerHTML = '아이디는 6~12자, 영문 또는 숫자를 입력바랍니다.';
+	        	 idcheckMsg.innerHTML = '아이디는 6~12자 이상, 영문 또는 숫자를 입력바랍니다.';
 	        	 idcheckMsg.style.color = 'red';
 			} else {
 				idcheckMsg.innerHTML = "중복검사가 필요합니다.";
@@ -122,9 +122,9 @@
 	}
 	//id중복검사 
 	function idDouble(){
-		var idvalue = document.getElementById("id").value;
-		var param = 'id='+idvalue;
-		sendRequest('idCheck',param,showResult,'GET')
+		var idvalue = document.getElementById("userid").value;
+		var param = 'userid='+idvalue;
+		sendRequest('idCheck',param,showResult,'GET');
 	}
 	function showResult(){
 		if(XHR.readyState==4){
@@ -132,27 +132,44 @@
 				var data = XHR.responseText;
 				var idcheckMsg = document.getElementById("idCheckMsg");
 				idcheckMsg.innerHTML = data;
+				let color = data=="중복된 아이디 입니다."?'red':'green';
+				idcheckMsg.style.color=color;
 			}
 		}	
 	}
     //비밀번호 유효성 검사 
 	function passwordCheck(password) {	
 		let passwordCheckMsg = document.getElementById("passwordCheckMsg");
-	    let reg = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,}$/;
+	    let reg = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,20}$/;
 	    if(password.value != '') {
 	         if(!reg.test(pwd.value)||password.length < 8) {
-				passwordCheckMsg.innerHTML = '비밀번호는 공백없이 8~12자리, 문자, 숫자, 특수문자로 구성하여야 합니다.';
+				passwordCheckMsg.innerHTML = '비밀번호는 공백없이 8~20자리, 문자, 숫자, 특수문자로 구성하여야 합니다.';
 				passwordCheckMsg.style.color = 'red';
 			} else {
-				passwordCheckMsg.innerHTML = "사용이 가능한 비밀번호입니다.";
+				passwordCheckMsg.innerHTML = "사용 가능한 비밀번호입니다.";
 				passwordCheckMsg.style.color = 'green';
 			}
 	    }
+	    let passwordDoubleMsg = document.getElementById("passwordDoubleMsg");
+	    let chk = document.getElementById("pwd2")
+	    if(document.getElementById("passwordCheckMsg").innerHTML=="사용 가능한 비밀번호입니다."&&chk.value!==''){
+			if(document.getElementById("pwd").value != chk.value){
+				passwordDoubleMsg.innerHTML = "비밀번호가 일치하지 않습니다.";
+				passwordDoubleMsg.style.color = 'red';
+			}else{
+				passwordDoubleMsg.innerHTML = "비밀번호가 일치합니다.";
+				passwordDoubleMsg.style.color = 'green';
+			}
+		}else{
+			passwordDoubleMsg.innerHTML = "";
+			passwordDoubleMsg.style.color = "";
+		}
     }
+    //비밀번호 재확인 검사 
 	function passwordDouble(chk){
 		let passwordDoubleMsg = document.getElementById("passwordDoubleMsg");
-		if(document.getElementById("passwordCheckMsg").innerHTML=="사용이 가능한 비밀번호입니다."){
-			if(document.getElementById("pwd").value != document.getElementById("pwd2").value){
+		if(document.getElementById("passwordCheckMsg").innerHTML=="사용 가능한 비밀번호입니다." && chk.value!==''){
+			if(document.getElementById("pwd").value != chk.value){
 				passwordDoubleMsg.innerHTML = "비밀번호가 일치하지 않습니다.";
 				passwordDoubleMsg.style.color = 'red';
 			}else{
@@ -164,36 +181,47 @@
 			passwordDoubleMsg.style.color = "";
 		}
 	}
-
+    //sms 인증번호 api
+	function sendMsg(){
+		var telvalue = document.getElementById("tel").value;
+		var param = 'tel='+telvalue;
+		sendRequest('sendNum',param,sendMsg2,'POST');
+	}
+	function sendMsg2(){
+		if(XHR.readyState==4){
+			if(XHR.status==200){
+				var data = XHR.responseText;
+				var idcheckMsg = document.getElementById("tel");
+				idcheckMsg.value = '성공';
+			}
+		}	
+	}
 </script>
 </head>
 <body>
+
 <div class="login-wrap">
   <div class="login-html">
-  <img src="img/logo.png" class="mainimg">
+  <img src="/img/logo.png" class="mainimg">
   <div class="group">
   	<input type="text" id="name" class="input" placeholder="이름">
   </div>
    <div class = "whiteSpace"></div>
   <div class="group">
-  	<input type="text" id="id" class="input" placeholder="아이디" oninput = "idCheck(this)">&nbsp;<input type="button" class="btn2" value="중복확인" onclick="idDouble()">
+  	<input type="text" id = "userid" class="input" placeholder="아이디" oninput = "idCheck(this)">&nbsp;<input type="button" class="btn2" value="중복확인" onclick="idDouble()">
   </div>
   <div class = "whiteSpace" id = "idCheckMsg"></div>
   <div class="group">
-  	<input type="password" id="pwd" class="input" data-type="password" placeholder="비밀번호" oninput = "passwordCheck(this)">
+  	<input type="password" id = "pwd" class="input" data-type="password" placeholder="비밀번호" oninput = "passwordCheck(this)">
   </div>
-  <div class = "whiteSpace" id= "passwordCheckMsg"></div>
+  <div class = "whiteSpace" id = "passwordCheckMsg"></div>
   <div class="group">
-  	<input type="password" id="pwd2" class="input" data-type="password" placeholder="비밀번호 확인" oninput = "passwordDouble(this)">
+  	<input type="password" id = "pwd2" class="input" data-type="password" placeholder="비밀번호 확인" oninput = "passwordDouble(this)">
   </div>
   <div class = "whiteSpace" id = "passwordDoubleMsg"></div>
-  <div class="group">
-  	<input type="text" id="email" class="input" placeholder="이메일">
-  </div>
-  <div class = "whiteSpace"></div>
-  <div class="group">
-  	<input type="text" id="tel" class="input" placeholder="휴대폰번호(숫자만 입력)">&nbsp;<input type="button" class="btn2" value="인증번호 받기">
-  </div>
+  <form name = "dsa" action ="sendNum" method = "post"><div class="group">
+  	<input type="text" id="tel" class="input" placeholder="휴대폰번호(숫자만 입력)">&nbsp;<input type="submit" class="btn2" value="인증번호 받기" onclick = "sendMsg()">
+  </div></form>
   <div class="group">
   	<input type="text" id="anum" class="input" placeholder="인증번호">
   </div>
@@ -213,6 +241,5 @@
   </div>
   </div>
  </div>
-
 </body>
 </html>

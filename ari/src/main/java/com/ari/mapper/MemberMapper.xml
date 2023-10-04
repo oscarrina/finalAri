@@ -18,8 +18,8 @@
 		from userinfo
 		where username=#{username} and usertel=#{usertel}
 	</select>
-	<select id="idCheck" parameterType="String" resultType="boolean">
-		select userid
+	<select id="idCheck" parameterType="String" resultType="int">
+		select count(*)
 		from userinfo
 		where userid=#{userid}
 	</select>

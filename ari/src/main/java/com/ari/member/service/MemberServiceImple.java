@@ -40,8 +40,8 @@ public class MemberServiceImple implements MemberService {
 		return dto;
 	}
 	@Override
-	public boolean idCheck(String userid) throws Exception {
-		boolean result = mapper.idCheck(userid);
+	public int idCheck(String userid) throws Exception {
+		int result = mapper.idCheck(userid);
 		return result;
 	}
 }
