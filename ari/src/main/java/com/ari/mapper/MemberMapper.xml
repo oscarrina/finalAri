@@ -56,9 +56,9 @@
 		#{userAddr1},
 		#{userAddr2},
 		#{userAddr3},
-		#{userpr},
-		#{userpr},
-		,
+		'/img/profile.png',
+		'0',
+		'N'
 		)
 	</insert>
 </mapper>
