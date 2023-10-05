@@ -71,6 +71,7 @@ public class NoticeController {
 		String url="/notice?type="+type;
 		String pageStr=com.ari.page.PageModuleNotice
 					.makeNoticePage(url, totalCnt, listSize, pageSize, cp);
+		if(lists==null) {pageStr="";}
 		mav.addObject("pageStr", pageStr);
 		mav.addObject("lists", lists);
 		mav.setViewName("notice/adminNotice");
@@ -110,6 +111,7 @@ public class NoticeController {
 			String url="/not?type="+type;
 			String pageStr=com.ari.page.PageModuleNotice
 					.makeNoticePage(url, totalCnt, listSize, pageSize, cp);
+			if(lists==null) {pageStr="";}
 			mav.addObject("pageStr", pageStr);
 			mav.addObject("lists", lists);
 			if(type==1) {

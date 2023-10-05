@@ -15,7 +15,7 @@
 function show(type){
 	var cate=document.all.sbox.value;
 	if(cate==2){
-		location.href='fest?type='+type;
+		location.href='fest?type='+type+'&area=0';
 	}else{
 		sendRequest('getArea', null, showResult, 'GET');
 	}	
@@ -29,7 +29,7 @@ function showResult(){
 			
 			var spanTag=document.all.sboxspan;
 			var str='';
-			str='<select class="border2 border3" aria-label="Default select example" onchange="show2()" id="sbox2">';
+			str='<select class="border2 border3" aria-label="Default select example" onchange="show2(${type})" id="sbox2">';
 			var areaList=data.getElementsByTagName('item');
 			for(var i=0;i<areaList.length;i++){
 				var area=areaList[i]; //studentList.item(i)
@@ -44,9 +44,9 @@ function showResult(){
 		}
 	}
 }
-function show2(){
-	var code=document.all.sbox2.value;
-	window.alert(code);
+function show2(type){
+	var area=document.all.sbox2.value;
+	location.href='fest?type='+type+'&area='+area;
 }
 </script>
 <style>
@@ -59,8 +59,7 @@ function show2(){
 
 }
 .content5{
-	border: 2px solid #4068A7;
-	border-radius: 10px;
+	
 	margin-bottom: 20px;
 }
 .content4{
@@ -128,6 +127,32 @@ svg{
 		
 		<div class="content5">	
 		<div class="content4">	
+		
+		<table class="table">
+		  <tfoot>
+		  	<tr>
+				<td colspan="3" align="center">
+					${pageStr }
+				</td>
+			</tr>
+		  </tfoot>
+		  <tbody>
+		    <c:if test="${empty lists }">
+		    	<tr>
+				<td colspan="6" align="center">
+				등록된 공지사항이 없습니다.
+				</td>
+			</tr>
+		    </c:if>
+		    <c:forEach var="dto" items="${lists }">
+			<tr>
+				<!--반복적으로 보여줄 데이터-->
+			</tr>
+		</c:forEach>
+		    
+		  </tbody>
+		</table>
+		
 			<img alt="이미지" src="/imgs/cute2.png">
 
 		</div>

@@ -3,6 +3,7 @@ package com.ari.controller;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.net.http.HttpRequest;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -26,19 +27,44 @@ public class FestivalController {
 	private FestivalService service;
 	
 	@RequestMapping("/fest")
-	public ModelAndView fest(@RequestParam(value = "type", defaultValue = "2")int type,HttpSession session) {
+	public ModelAndView fest(@RequestParam(value = "type", defaultValue = "2")int type,
+			HttpSession session,
+			@RequestParam(value = "area", defaultValue = "0")int area,
+			@RequestParam(value = "cp", defaultValue = "1")int cp) {
 		ModelAndView mav=new ModelAndView();
 		if(session.getAttribute("sid")==null || session.getAttribute("sid").equals("")) {
 			mav.setViewName("admin/login/adminLogin");
 			return mav;
 		}
-		File f=new File("c:/student_java/upload");
-		File files[]=f.listFiles();
-		mav.addObject("files", files);
+		int totalCnt=0;
+		int listSize=5;
+		int pageSize=5;
+		
+		List<FestivalDTO> lists=null;
+		try {
+			if(area==0) { //전체
+				totalCnt=service.totalCnt();
+				lists=service.festList(cp, listSize);
+				
+			}else {
+				totalCnt=service.totalCntArea(area);
+				lists=service.festListArea(area, cp, listSize);
+			}
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		String url="/fest?type="+type+"&area="+area;
+		String pageStr=com.ari.page.PageModuleNotice
+				.makeNoticePage(url, totalCnt, listSize, pageSize, cp);
+		if(lists==null) {pageStr="";}
+		mav.addObject("pageStr", pageStr);
+		mav.addObject("lists", lists);
 		mav.addObject("type", type);
 		mav.setViewName("festival/festivalList");
 		return mav;
 	}
+	
 	@GetMapping("/festAdd")
 	public ModelAndView festAdd() {
 		ModelAndView mav=new ModelAndView();
@@ -52,7 +78,7 @@ public class FestivalController {
 		ModelAndView mav=new ModelAndView();
 		copyInto(upload);
 		dto.setFestimg(upload.getOriginalFilename());
-		System.out.println(dto.toString());
+		
 		int result=0;
 		try {
 			result=service.festAdd(dto);
@@ -61,7 +87,7 @@ public class FestivalController {
 			e.printStackTrace();
 		}
 		if(result>0) {
-			mav.setViewName("festival/festivalList");
+			mav.setViewName("redirect:/fest");
 		}else {
 			mav.addObject("msg", "[ERROR]축제 등록 실패. 문의 바랍니다.");
 			mav.addObject("url", "fest?type=2");
@@ -71,9 +97,6 @@ public class FestivalController {
 	}
 	
 	public void copyInto(MultipartFile upload) {
-		
-		System.out.println("올린파일명:"+upload.getOriginalFilename());
-		
 		File f=new File("c:/student_java/upload/"+upload.getOriginalFilename());
 		
 		try {
