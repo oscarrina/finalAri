@@ -31,4 +31,9 @@
 		set likeYN = 'N'
 		where idx = #{idx} and likeType = #{likeType} and userIdx = #{userIdx}
 	</update>
+	<select id="likeSelect" parameterType="com.ari.like.model.LikeDTO" resultType="String">
+		SELECT LikeYN
+		FROM LIKETABLE
+		WHERE IDX = #{idx} AND LIKETYPE = #{liketype} AND USERID = #{userid}
+	</select>
 </mapper>
