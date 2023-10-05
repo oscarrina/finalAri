@@ -31,14 +31,15 @@
 	<insert id="kakaoJoin" parameterType="com.ari.member.model.MemberDTO">
 	insert into userInfo
 	values(
-	userInfo_userIdx.nextval,
+	#{userid},
 	1,
 	'123',
-	#{userid},
 	'1234',
 	#{username},
 	#{usertel},
-	'테스트',
+	#{userAddr1},
+	#{userAddr2},
+	#{userAddr3},
 	#{usertoken},
 	'0',
 	'N'

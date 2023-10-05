@@ -6,4 +6,5 @@ public interface LikeMapper {
 
 	public int like(LikeDTO dto);
 	public int likeNo(LikeDTO dto);
+	public String likeSelect(LikeDTO dto);
 }
