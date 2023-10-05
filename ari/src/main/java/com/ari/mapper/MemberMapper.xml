@@ -44,9 +44,4 @@
 	'N'
 	)
 	</insert>
-	<select id="kakaoToken" parameterType="String" resultType="String">
-	select usertoken
-	from userinfo
-	where userid = #{userid}
-	</select>
 </mapper>

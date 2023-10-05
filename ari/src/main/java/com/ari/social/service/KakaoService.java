@@ -11,7 +11,5 @@ public interface KakaoService {
 
 	public int getUserInfo (String access_Token);
 	public String getAccessToken (String authorize_code);
-	public boolean KakaoTokenValidator(String token);
-	public String renewAccessToken(String userid)throws IOException;
 	public int kakaoJoin (MemberDTO dto)throws Exception;
 }

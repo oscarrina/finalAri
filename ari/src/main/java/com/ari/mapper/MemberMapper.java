@@ -10,6 +10,5 @@ public interface MemberMapper {
 	public int idCheck(String userid);
 	public int kakaoCheck(String userid);
 	public int kakaoJoin(MemberDTO dto);
-	public String kakaoToken(String userid);
 
 }

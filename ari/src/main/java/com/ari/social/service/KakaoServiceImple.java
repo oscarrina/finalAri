@@ -23,9 +23,6 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
-
 @Service
 public class KakaoServiceImple implements KakaoService {
 
@@ -50,7 +47,6 @@ public class KakaoServiceImple implements KakaoService {
 	        conn.setRequestProperty("Authorization", "Bearer " + access_Token);
 	        
 	        int responseCode = conn.getResponseCode();
-	        System.out.println("responseCode : " + responseCode);
 	        
 	        BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 	        
@@ -60,7 +56,6 @@ public class KakaoServiceImple implements KakaoService {
 	        while ((line = br.readLine()) != null) {
 	            result += line;
 	        }
-	        System.out.println("response body : " + result);
 	        
 	        JsonParser parser = new JsonParser();
 	        JsonElement element = parser.parse(result);
@@ -118,7 +113,6 @@ public class KakaoServiceImple implements KakaoService {
             while ((line = br.readLine()) != null) {
                 result += line;
             }
-            System.out.println("response body : " + result);
             
             //    Gson 라이브러리에 포함된 클래스로 JSON파싱 객체 생성
             JsonParser parser = new JsonParser();
@@ -130,9 +124,6 @@ public class KakaoServiceImple implements KakaoService {
             HttpSession session = request.getSession();
             session.setAttribute("userToken", refresh_Token);
             
-            System.out.println("access_token : " + access_Token);
-            System.out.println("refresh_token : " + refresh_Token);
-            
             br.close();
             bw.close();
         } catch (IOException e) {
@@ -141,82 +132,6 @@ public class KakaoServiceImple implements KakaoService {
         } 
         
         return access_Token;
-	}
-	@Override
-	public boolean KakaoTokenValidator(String token) {
-		try {
-            Claims claims = Jwts.parser()
-                    .setSigningKey(SECRET_KEY)
-                    .parseClaimsJws(token)
-                    .getBody();
-
-            // 여기서 필요한 유효성 검사를 수행합니다.
-            // 예를 들어, 토큰의 만료 여부, 발급자 확인 등을 검사할 수 있습니다.
-
-            // 만료 여부 확인 (exp: 필드에 토큰의 만료 시간이 포함되어 있다고 가정)
-            long expirationTimeMillis = claims.get("exp", Long.class) * 1000L; // 초를 밀리초로 변환
-            long currentTimeMillis = System.currentTimeMillis();
-            if (currentTimeMillis > expirationTimeMillis) {
-                return false; // 토큰이 만료됨
-            }
-
-            // 발급자 확인 (iss: 필드에 토큰 발급자 정보가 포함되어 있다고 가정)
-            String issuer = claims.get("iss", String.class);
-            if (!"https://kauth.kakao.com".equals(issuer)) {
-                return false; // 올바른 발급자가 아님
-            }
-
-            // 필요한 다른 유효성 검사를 수행할 수 있습니다.
-
-            return true; // 토큰이 유효함
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false; // 토큰 검증 실패
-        }
-	}
-
-	@Override
-	public String renewAccessToken(String userid) throws IOException{
-		String kakaoTokenEndpoint = "https://kauth.kakao.com/oauth/token";
-        URL url = new URL(kakaoTokenEndpoint);
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-
-        // HTTP 요청 설정
-        connection.setRequestMethod("POST");
-        connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8");
-        connection.setDoOutput(true);
-
-        String refreshToken = mapper.kakaoToken(userid);
-        
-        // 요청 본문 작성
-        String requestBody = "grant_type=refresh_token" +
-                "&client_id=" + CLIENT_ID +
-                "&client_secret=" + SECRET_KEY +
-                "&refresh_token=" + refreshToken;
-
-        // 요청 전송
-        try (DataOutputStream wr = new DataOutputStream(connection.getOutputStream())) {
-            wr.writeBytes(requestBody);
-            wr.flush();
-        }
-
-        // 응답 처리
-        int responseCode = connection.getResponseCode();
-        if (responseCode == HttpURLConnection.HTTP_OK) {
-            BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-            String inputLine;
-            StringBuilder response = new StringBuilder();
-
-            while ((inputLine = in.readLine()) != null) {
-                response.append(inputLine);
-            }
-            in.close();
-
-            return response.toString();
-        } else {
-            System.err.println("토큰 갱신 실패: " + responseCode);
-            return null;
-        }
 	}
 	@Override
 	public int kakaoJoin(MemberDTO dto) throws Exception{
