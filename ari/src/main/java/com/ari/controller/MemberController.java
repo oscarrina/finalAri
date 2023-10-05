@@ -231,4 +231,16 @@ public class MemberController {
 		mav.setViewName("member/idCheck_ok");
 		return mav;
 	}
+	@GetMapping("/bnCheck")
+	public ModelAndView bnCheck(@RequestParam(value = "userbn", required=false)String userbn) {
+		ModelAndView mav = new ModelAndView();
+		try {
+			int result = service.idCheck(userbn);
+			String msg = result>=1?"이미 존재하는 번호 입니다.":"사용가능한 번호 입니다.";
+			mav.addObject("msg", msg);
+			mav.setViewName("member/idCheck_ok");
+		} catch (Exception e) {
+		}
+		return mav;
+	}
 }

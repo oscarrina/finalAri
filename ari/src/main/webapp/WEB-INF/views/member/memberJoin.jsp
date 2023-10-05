@@ -126,9 +126,9 @@
 	function idDouble(){
 		var idvalue = document.getElementById("userid").value;
 		var param = 'userid='+idvalue;
-		sendRequest('idCheck',param,showResult,'GET');
+		sendRequest('idCheck',param,idDoubleResult,'GET');
 	}
-	function showResult(){
+	function idDoubleResult(){
 		if(XHR.readyState==4){
 			if(XHR.status==200){
 				var data = XHR.responseText;
@@ -136,6 +136,29 @@
 				idcheckMsg.innerHTML = data;
 				let color = data=="중복된 아이디 입니다."?'red':'green';
 				idcheckMsg.style.color=color;
+			}
+		}	
+	}
+	//사업자 번호 중복검사 
+	function bnDouble(){
+		var bnvalue = document.getElementById("userbn").value;
+		var bncheckMsg = document.getElementById("bnCheckMsg");
+		var param = 'userbn='+bnvalue;
+		if(bnvalue.length<10){
+			bnCheckMsg.innerHTML = "사업자번호는 10자입니다."
+			bncheckMsg.style.color = "red";
+		}else{
+			sendRequest('bnCheck',param,bnDoubleResult,'GET');
+		}
+	}
+	function bnDoubleResult(){
+		if(XHR.readyState==4){
+			if(XHR.status==200){
+				var data = XHR.responseText;
+				var bncheckMsg = document.getElementById("bnCheckMsg");
+				bncheckMsg.innerHTML = data;
+				let color = data=="이미 존재하는 번호 입니다."?'red':'green';
+				bncheckMsg.style.color=color;
 			}
 		}	
 	}
@@ -232,9 +255,9 @@
    	</c:when>
    	<c:when test="${userType == 2}">
    		<div class="group">
-	   	<input type="text" id="name" class="input" name = "userbn" placeholder="사업자번호(-없이 숫자만 입력)" oninput="onlynum(this)">&nbsp;<input type="button" class="btn2" value="중복확인" onclick="idDouble()">
+	   	<input type="text" id="userbn" class="input" name = "userbn" placeholder="사업자번호(-없이 숫자만 입력)" oninput="onlynum(this)" maxlength ="10">&nbsp;<input type="button" class="btn2" value="중복확인" onclick="bnDouble()">
 	   	</div>
-	   	<div class = "whiteSpace" ></div> 
+	   	<div class = "whiteSpace" id = "bnCheckMsg"></div> 
    	</c:when>
    </c:choose>
   <div class="group">

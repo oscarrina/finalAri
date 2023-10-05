@@ -11,5 +11,6 @@ public interface MemberMapper {
 	public int kakaoCheck(String userid);
 	public int kakaoJoin(MemberDTO dto);
 	public int memberJoin(MemberDTO dto);
+	public int bnCheck(String userbn);
 
 }
