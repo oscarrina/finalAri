@@ -2,24 +2,20 @@ package com.ari.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.security.Provider.Service;
+import java.lang.ProcessBuilder.Redirect;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.Banner;
-import org.springframework.boot.ImageBanner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
-import com.fasterxml.jackson.core.json.ByteSourceJsonBootstrapper;
+
 import java.io.*;
 
 import com.ari.banner.model.BannerDTO;
@@ -30,10 +26,14 @@ public class BannerController {
 
 	@Autowired
 	private BannerService service;
-
 	
-	@RequestMapping("/banner/bannerList")
-	public List<BannerDTO> bannerList() {
+	
+	@RequestMapping("/bannerList")
+	public ModelAndView empList() {
+		ModelAndView mav=new ModelAndView();
+		File f=new File("c:/student_java/upload/");
+		File files[]=f.listFiles();
+		mav.addObject("files", files);
 		List<BannerDTO> lists=null;
 		try {
 			lists=service.bannerList();
@@ -41,36 +41,47 @@ public class BannerController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return lists;
+		
+		mav.addObject("lists", lists);
+		mav.setViewName("banner/bannerList");
+		return mav;
 	}
-	
 	
 	@GetMapping("/bannerUpload")
 	public String bannerUploadForm(ModelMap map) {
-		
-		File f=new File("c:/student_java/upload/");
-		File files[]=f.listFiles();
-		map.addAttribute("files", files);
-		
 		return "banner/bannerUpload";
 	}
 	
 	@PostMapping("/bannerUpload")
-	public String bannerUpload(
-			@RequestParam("bannerName")String bannerName,
-			@RequestParam("bannerImg")MultipartFile bannerImg) {
+	public ModelAndView bannerUpload(
+			@RequestParam("banner")MultipartFile banner,
+			BannerDTO dto) {
 		
-		copyInto(bannerName, bannerImg);
-		
-		return "banner/bannerUpload";
+		ModelAndView mav=new ModelAndView();
+		copyInto(banner);
+		dto.setBannerImg(banner.getOriginalFilename());
+		int result=0;
+		try {
+			result=service.bannerUpload(dto);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(result>0) {
+			mav.setViewName("redirect:bannerList");
+		}else {
+			mav.addObject("msg", "배너 등록 실패");
+			mav.setViewName("banner/bannerMsg");
+		}
+		return mav;
 	}
 	
-	public void copyInto(String bannerName, MultipartFile bannerImg) {
+	public void copyInto(MultipartFile banner) {
 		
-		File f=new File("c:/student_java/upload/"+bannerImg.getOriginalFilename());
+		File f=new File("c:/student_java/upload/"+banner.getOriginalFilename());
 		
 		try {
-			byte[] bytes=bannerImg.getBytes();
+			byte[] bytes=banner.getBytes();
 			
 			FileOutputStream fos=new FileOutputStream(f);
 			fos.write(bytes);
@@ -81,4 +92,22 @@ public class BannerController {
 		}
 	}
 
+	@PostMapping("/bannerDel")
+	@ResponseBody
+	public ModelAndView bannerDel(@RequestParam("bannerIdx") int bannerIdx) {
+		ModelAndView mav=new ModelAndView();
+		int result=0;
+		try {
+			BannerDTO dto = new BannerDTO();
+		    dto.setBannerIdx(bannerIdx);
+			result=service.bannerDel(dto);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		String msg=result>0?"배너삭제 성공":"배너 삭제 실패";
+		mav.addObject("msg", msg);
+		mav.setViewName("banner/bannerMsg");
+		return mav;
+	}
 }

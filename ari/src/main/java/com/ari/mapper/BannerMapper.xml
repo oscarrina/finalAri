@@ -15,4 +15,10 @@
 			#{bannerName},
 			#{bannerImg})
 	</insert>
+	
+	<delete id="bannerDel">
+        delete from banner
+        where bannerIdx = #{bannerIdx}
+    </delete>
+    
 </mapper>

@@ -8,4 +8,5 @@ public interface BannerMapper {
 
 	public List<BannerDTO> bannerList();
 	public int bannerUpload(BannerDTO dto);
+	public int bannerDel(BannerDTO dto);
 }

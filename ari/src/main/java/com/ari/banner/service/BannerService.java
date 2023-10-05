@@ -8,4 +8,5 @@ public interface BannerService {
 	
 	public int bannerUpload(BannerDTO dto)throws Exception;
 	public List<BannerDTO> bannerList()throws Exception;
+	public int bannerDel(BannerDTO dto)throws Exception;
 }
