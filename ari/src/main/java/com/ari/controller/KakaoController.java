@@ -30,20 +30,10 @@ public class KakaoController {
     @GetMapping("/oauth/kakao")
     public ModelAndView login(@RequestParam("code") String code, HttpSession session) {
     	ModelAndView mav = new ModelAndView();
-    	String userid = (String)session.getAttribute("userid");
     	
         String access_Token = kakao.getAccessToken(code);
-        String renewAccessToken = access_Token;
-        boolean isValid = kakao.KakaoTokenValidator(access_Token);
-        if(!isValid) {
-        	System.out.println("teste");
-        	try {
-        		renewAccessToken = kakao.renewAccessToken(userid);
-        	} catch (IOException e1) {
-        		// TODO Auto-generated catch block
-        	}
-        }
-        int userInfo = kakao.getUserInfo(renewAccessToken);
+        int userInfo = kakao.getUserInfo(access_Token);
+        String userid = (String)session.getAttribute("userid");
         
         MemberDTO dto= null;
         
