@@ -20,6 +20,7 @@
 }
 </style>
 <script>
+var liketest='${likeYN}';
 function like(likeYN){
 	
 	if(likeYN == 'N'){ //좋아요 안 누른 상태
@@ -47,6 +48,7 @@ function likeOK(){
 		if(XHR.status == 200){
 			let data = XHR.responseText;
 			window.alert(data);
+			liketest='Y';
 		}
 	}
 }
@@ -55,6 +57,7 @@ function likeCancel(){
 		if(XHR.status == 200){
 			let data = XHR.responseText;
 			window.alert(data);
+			liketest='N';
 		}
 	}
 }
@@ -63,7 +66,7 @@ function likeCancel(){
 <body>
 <%@include file="/WEB-INF/views/header.jsp" %>
 <h1 class="test">코스 좋아요 테스트 페이지</h1>
-<button type="button" onclick="like('${likeYN}')" class="likeBtn" id="likeBtn123">
+<button type="button" onclick="like(liketest)" class="likeBtn" id="likeBtn123">
 <c:if test="${likeYN == 'N' }">
 <i class="bi bi-heart like" id="likeBtn"></i>
 </c:if>
@@ -71,8 +74,6 @@ function likeCancel(){
 <i class="bi bi-heart-fill like" id="likeBtn"></i>
 </c:if>
 </button>
-<h1>${idx }</h1>
-<h1>${likeType }</h1>
 <input type="hidden" value="${idx }" id="idx">
 <input type="hidden" value="${likeType }" id="likeType">
 <%@include file="/WEB-INF/views/footer.jsp" %>
