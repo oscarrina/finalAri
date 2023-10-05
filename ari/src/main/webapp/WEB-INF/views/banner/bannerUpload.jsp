@@ -17,7 +17,7 @@
 	margin-top: 100px;
 }
 .c{
-	width:400px;
+	width:800px;
 	height:45px;
 	border:1px solid;
 	border-color:#253BFF;
@@ -37,7 +37,7 @@
 	margin-top:20px;
 	border-radius:25px;
 	border-color:#253BFF;
-	width: 400px;
+	width: 800px;
 	
 }
 .btn2 {
@@ -59,7 +59,7 @@
   background: #4d4d4d;
   color: #fff;
 }
-#bannerImg {
+#banner {
 	display: none;
 	margin-left: 10px;
 }
@@ -74,15 +74,19 @@
   border:none;
   padding:15px 20px;
   border-radius:25px;
-  background:#253BFF;
+  background:#3239AF;
   margin-top: 40px;
-  margin-left: 300px;
+  margin-left: 700px;
   width: 100px;
   color: #fff;
   cursor: pointer;
 }
 .btn1:hover{
-  background-color: #38B6FF;
+  background-color: #686DB9;
+}
+.e{
+	margin-left: 30px;
+	margin-top:  50px;
 }
 </style>
 </head>
@@ -91,15 +95,15 @@
 <%@ include file="/WEB-INF/views/admin/adminHeader.jsp" %>
   <div id="page-content-wrapper">
     <div class="container-fluid" id="content1">
-    <h1>배너 등록</h1>
+    <h1 class="e">배너 등록</h1>
     <form name="bannerUpload" action="bannerUpload" method="post" enctype="multipart/form-data" class="b">
     <div class="c">
     	<span class="d">배너 이름</span> <input type="text" name="bannerName" class="bannerName" placeholder="  제목을 입력하세요.">
     </div>
     
     <div class="a">
-    	<label for="bannerImg" class="btn2">+</label>
-		<input type="file" name="bannerImg" id="bannerImg">
+    	<label for="banner" class="btn2">+</label>
+		<input type="file" name="banner" id="banner">
     </div>
     <div>
     	<input type="submit" class="btn1" value="등록">

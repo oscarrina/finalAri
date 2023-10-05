@@ -24,4 +24,10 @@ public class BannerServiceImple implements BannerService {
 		int result=mapper.bannerUpload(dto);
 		return result;
 	}
+	
+	@Override
+	public int bannerDel(BannerDTO dto) throws Exception {
+		int result=mapper.bannerDel(dto);
+		return 0;
+	}
 }
