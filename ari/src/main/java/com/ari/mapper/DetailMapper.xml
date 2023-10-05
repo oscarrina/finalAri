@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.ari.mapper.DetailMapper">
+  	<select id="foodList" parameterType="Integer" resultType="com.ari.detail.model.FoodDTO">
+  		select * from food where area=#{area}
+  	</select>
+  	<select id="berthInfoList" parameterType="Integer" resultType="com.ari.detail.model.BerthInfoDTO">
+  	    select * from berthInfo where area=#{area}
+  	</select>
+  	<select id="attList" parameterType="Integer" resultType="com.ari.detail.model.AttDTO">
+  		select * from att where area=#{area}
+  	</select>
+  	<select id="festivalList" parameterType="Integer" resultType="com.ari.festival.model.FestivalDTO">
+  		select * from fest where area=#{area}
+  	</select>
+  	
+  </mapper>

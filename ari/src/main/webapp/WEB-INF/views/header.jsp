@@ -146,24 +146,24 @@ body{
       </div>
       <div class="region">
       	<select name="region" class="regionSelect">
-      	<option selected="selected">전체</option>
-      	<option>서울</option>
-      	<option>제주도</option>
-      	<option>부산</option>
-      	<option>세종</option>
-      	<option>대전</option>
-      	<option>인천</option>
-      	<option>대구</option>
-      	<option>광주</option>
-      	<option>울산</option>
-      	<option>경기도</option>
-      	<option>강원도</option>
-      	<option>충청북도</option>
-      	<option>충청남도</option>
-      	<option>경상북도</option>
-      	<option>경상남도</option>
-      	<option>전라북도</option>
-      	<option>전라남도</option>
+      	<option selected="selected" value="0">전체</option>
+      	<option value="1">서울</option>
+      	<option value="17">제주도</option>
+      	<option value="6">부산</option>
+      	<option value="8">세종</option>
+      	<option value="3">대전</option>
+      	<option value="2">인천</option>
+      	<option value="4">대구</option>
+      	<option value="5">광주</option>
+      	<option value="7">울산</option>
+      	<option value="9">경기도</option>
+      	<option value="10">강원도</option>
+      	<option value="11">충청북도</option>
+      	<option value="12">충청남도</option>
+      	<option value="13">경상북도</option>
+      	<option value="14">경상남도</option>
+      	<option value="15">전라북도</option>
+      	<option value="16">전라남도</option>
       	</select>
       	</div>
       	<div class="searchBoxDiv">
