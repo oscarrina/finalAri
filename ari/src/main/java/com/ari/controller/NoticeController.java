@@ -37,6 +37,7 @@ public class NoticeController {
 		if(type==service.admin) {
 			if(session.getAttribute("sid")==null || session.getAttribute("sid").equals("")) {
 				mav.setViewName("admin/login/adminLogin");
+				return mav;
 			}else {
 				
 				try {

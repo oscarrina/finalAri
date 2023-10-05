@@ -128,6 +128,7 @@ svg{
 		
 		<div class="content5">	
 		<div class="content4">	
+			<img alt="이미지" src="/imgs/cute2.png">
 
 		</div>
 		</div>

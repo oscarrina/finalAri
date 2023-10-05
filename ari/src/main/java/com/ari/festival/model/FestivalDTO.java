@@ -21,7 +21,7 @@ public class FestivalDTO {
 	private String festtel;
 	private String festtelname;
 	private String festhome;
-	private int festarea;
+	private int area;
 	private int festsigungu;
 	private String festaddr;
 	private String festcont;
@@ -32,4 +32,5 @@ public class FestivalDTO {
 	private String festcontent;
 	private String feststart;
 	private String festend;
+	private int festapi;
 }
