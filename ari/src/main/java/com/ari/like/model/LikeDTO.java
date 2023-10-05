@@ -15,6 +15,6 @@ public class LikeDTO {
 
 	private int idx;
 	private int likeType;
-	private int userIdx;
+	private String userId;
 	private String likeYN;
 }
