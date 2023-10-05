@@ -31,7 +31,6 @@
 	<insert id="kakaoJoin" parameterType="com.ari.member.model.MemberDTO">
 	insert into userInfo
 	values(
-	#{userid},
 	1,
 	'123',
 	'1234',
@@ -44,5 +43,22 @@
 	'0',
 	'N'
 	)
+	</insert>
+	<insert id="memberJoin" parameterType="com.ari.member.model.MemberDTO">
+		INSERT INTO USERINFO
+		VALUES(
+		#{userType},
+		#{userbn},
+		#{userid},
+		#{userpwd},
+		#{username},
+		#{usertel},
+		#{userAddr1},
+		#{userAddr2},
+		#{userAddr3},
+		#{userpr},
+		#{userpr},
+		,
+		)
 	</insert>
 </mapper>

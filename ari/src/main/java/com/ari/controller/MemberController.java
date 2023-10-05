@@ -228,4 +228,8 @@ public class MemberController {
 		mav.setViewName("member/idCheck_ok");
 		return mav;
 	}
+	@GetMapping("/memberJoin")
+	public ModelAndView memberJoinSubmit() {
+		
+	}
 }

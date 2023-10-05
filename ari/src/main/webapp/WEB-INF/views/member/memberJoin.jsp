@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -75,6 +76,7 @@
 <script src = "js/httpRequest.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
+var data = "";
 	//주소 api
 	var ranNum
     function findAddr() {
@@ -110,10 +112,10 @@
 	//id 유효성검사
 	function idCheck(id){
 		var idcheckMsg= document.getElementById("idCheckMsg");
-		let reg = /^[A-Za-z0-9]{6,12}$/;
+		let reg = /^[A-Za-z0-9]{6,10}$/;
 		if(id.value != '') {
 	         if(!reg.test(id.value)) {
-	        	 idcheckMsg.innerHTML = '아이디는 6~12자 이상, 영문 또는 숫자를 입력바랍니다.';
+	        	 idcheckMsg.innerHTML = '아이디는 6~10자 이상, 영문 또는 숫자를 입력바랍니다.';
 	        	 idcheckMsg.style.color = 'red';
 			} else {
 				idcheckMsg.innerHTML = "중복검사가 필요합니다.";
@@ -191,7 +193,7 @@
 	function sendMsg2(){
 		if(XHR.readyState==4){
 			if(XHR.status==200){
-				var data = XHR.responseText;
+				data = XHR.responseText;
 				return data;
 			}
 		}
@@ -200,32 +202,37 @@
 	function numCheck(){
 		let anum = document.getElementById("anum");
 		let anumCheck = document.getElementById("anumCheck");
-		let ranNum = sendMsg2()
-		if(anum.value==ranNum){	
+		if(anum.value==data){	
 			window.alert('인증 되었습니다.');
 			anumCheck.innerHTML = "인증되었습니다.";
 			anumCheck.style.color = 'green';
 		}else{
 			window.alert('인증 번호가 일치하지 않습니다.');
 		}
-	}
-	
+	}	
 </script>
 </head>
 <body>
+<form name="memberJoin" action="memberJoin" method="post">
 <div class="login-wrap">
   <div class="login-html">
   <img src="/img/logo.png" class="mainimg">
   <div class="group">
-  	<input type="text" id="name" class="input" placeholder="이름">
+  	<input type="text" id="name" class="input" name = "username" placeholder="이름">
   </div>
    <div class = "whiteSpace"></div>
+   <c:if test="${userType == 2}">
+   <div class="group">
+    <input type="text" id="name" class="input" name = "userbn" placeholder="사업자번호">
+   </div>
+   <div class = "whiteSpace"></div>
+  </c:if>
   <div class="group">
-  	<input type="text" id = "userid" class="input" placeholder="아이디" oninput = "idCheck(this)">&nbsp;<input type="button" class="btn2" value="중복확인" onclick="idDouble()">
+  <input type="text" id = "userid" class="input" name = "userid" placeholder="아이디" oninput = "idCheck(this)">&nbsp;<input type="button" class="btn2" value="중복확인" onclick="idDouble()">
   </div>
   <div class = "whiteSpace" id = "idCheckMsg"></div>
   <div class="group">
-  	<input type="password" id = "pwd" class="input" data-type="password" placeholder="비밀번호" oninput = "passwordCheck(this)">
+  	<input type="password" id = "pwd" class="input" data-type="password" name = "userpwd" placeholder="비밀번호" oninput = "passwordCheck(this)">
   </div>
   <div class = "whiteSpace" id = "passwordCheckMsg"></div>
   <div class="group">
@@ -233,20 +240,20 @@
   </div>
   <div class = "whiteSpace" id = "passwordDoubleMsg"></div>
   <div class="group">
-  	<input type="text" id="tel" class="input" placeholder="휴대폰번호(숫자만 입력)">&nbsp;<input type="button" class="btn2" value="인증번호 받기" onclick = "sendMsg()">
+  	<input type="text" id="tel" class="input" name = "usertel" placeholder="휴대폰번호(숫자만 입력)">&nbsp;<input type="button" class="btn2" value="인증번호 받기" onclick = "sendMsg()">
   </div>
   <div class="group">
   	<input type="text" id="anum" class="input" placeholder="인증번호">&nbsp;<input type="button" class="btn2" value="인증번호 확인" onclick = "numCheck(sendMsg2()	 )">
   </div>
   <div class = "whiteSpace" id="anumCheck"></div>
   <div class="group">
-  	<input type="text" id="addr1" class="input2" placeholder="우편번호" readonly >&nbsp;<input type="button" class="btn2" value="주소검색" onclick="findAddr()">
+  	<input type="text" id="addr1" class="input2" name = "userAddr1" placeholder="우편번호" readonly >&nbsp;<input type="button" class="btn2" value="주소검색" onclick="findAddr()">
   </div>
   <div class="group">
-  	<input type="text" id="addr2" class="input" placeholder="주소" readonly>
+  	<input type="text" id="addr2" class="input" name = "userAddr2" placeholder="주소" readonly>
   </div>
   <div class="group">
-  	<input type="text" id="addr3" class="input" placeholder="상세주소">
+  	<input type="text" id="addr3" class="input" name = "userAddr3" placeholder="상세주소">
   </div>
   <div class = "whiteSpace"></div>
   <div class="group">
@@ -254,5 +261,6 @@
   </div>
   </div>
  </div>
+ </form>
 </body>
 </html>
