@@ -25,9 +25,9 @@ import com.ari.sms.service.SmsService;
 
 @Controller
 public class MemberController {
-	
 	@Autowired
 	private MemberService service;
+	@Autowired
 	private SmsService smsservice;
 	
 	@RequestMapping("/memberJoinChoice")
@@ -216,16 +216,15 @@ public class MemberController {
 			mav.setViewName("member/idCheck_ok");
 		} catch (Exception e) {
 		}
-	
 		return mav;
 	}
+	
 	@PostMapping("/sendNum")
-	@ResponseBody
-	public ModelAndView sendMsg(@RequestParam(value = "tel", required = false)String tel) {
+	public ModelAndView sendNum(@RequestParam(value = "tel", required = false)String tel){
 		ModelAndView mav = new ModelAndView();
-		String rannum = smsservice.sendRandomMessage(tel);
-		smsservice.send_msg(tel, rannum);
-		mav.addObject("msg", rannum);
+		System.out.println(tel);
+		String ranNum = smsservice.sendRandomMessage(tel);
+		mav.addObject("msg",ranNum);
 		mav.setViewName("member/idCheck_ok");
 		return mav;
 	}

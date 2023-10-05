@@ -76,6 +76,7 @@
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
 	//주소 api
+	var ranNum
     function findAddr() {
         new daum.Postcode({
             oncomplete: function(data) {
@@ -191,15 +192,27 @@
 		if(XHR.readyState==4){
 			if(XHR.status==200){
 				var data = XHR.responseText;
-				var idcheckMsg = document.getElementById("tel");
-				idcheckMsg.value = '성공';
+				return data;
 			}
-		}	
+		}
 	}
+	//인증번호 확인
+	function numCheck(){
+		let anum = document.getElementById("anum");
+		let anumCheck = document.getElementById("anumCheck");
+		let ranNum = sendMsg2()
+		if(anum.value==ranNum){	
+			window.alert('인증 되었습니다.');
+			anumCheck.innerHTML = "인증되었습니다.";
+			anumCheck.style.color = 'green';
+		}else{
+			window.alert('인증 번호가 일치하지 않습니다.');
+		}
+	}
+	
 </script>
 </head>
 <body>
-
 <div class="login-wrap">
   <div class="login-html">
   <img src="/img/logo.png" class="mainimg">
@@ -219,13 +232,13 @@
   	<input type="password" id = "pwd2" class="input" data-type="password" placeholder="비밀번호 확인" oninput = "passwordDouble(this)">
   </div>
   <div class = "whiteSpace" id = "passwordDoubleMsg"></div>
-  <form name = "dsa" action ="sendNum" method = "post"><div class="group">
-  	<input type="text" id="tel" class="input" placeholder="휴대폰번호(숫자만 입력)">&nbsp;<input type="submit" class="btn2" value="인증번호 받기" onclick = "sendMsg()">
-  </div></form>
   <div class="group">
-  	<input type="text" id="anum" class="input" placeholder="인증번호">
+  	<input type="text" id="tel" class="input" placeholder="휴대폰번호(숫자만 입력)">&nbsp;<input type="button" class="btn2" value="인증번호 받기" onclick = "sendMsg()">
   </div>
-  <div class = "whiteSpace"></div>
+  <div class="group">
+  	<input type="text" id="anum" class="input" placeholder="인증번호">&nbsp;<input type="button" class="btn2" value="인증번호 확인" onclick = "numCheck(sendMsg2()	 )">
+  </div>
+  <div class = "whiteSpace" id="anumCheck"></div>
   <div class="group">
   	<input type="text" id="addr1" class="input2" placeholder="우편번호" readonly >&nbsp;<input type="button" class="btn2" value="주소검색" onclick="findAddr()">
   </div>
