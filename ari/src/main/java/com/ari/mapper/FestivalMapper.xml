@@ -26,5 +26,27 @@
 			0
 		)
 	</insert>
+	<select id="totalCnt">
+		select count(*)
+		from fest
+	</select>
+	<select id="totalCntArea" parameterType="int">
+		select count(*)
+		from fest
+		where area=#{area}
+	</select>
+	<select id="festList" parameterType="Map" resultType="com.ari.festival.model.FestivalDTO">
+		select * from 
+			(select rownum as rnum, a.* from 
+			(select * from fest order by festidx desc) a) b
+		where rnum<![CDATA[>=]]>#{start} and rnum<![CDATA[<=]]>#{end}
+	</select>
+	<select id="fesListArea" parameterType="Map" resultType="com.ari.festival.model.FestivalDTO">
+		select * from 
+			(select rownum as rnum, a.* from 
+			(select * from fest where area=#{area} 
+						order by festidx desc) a) b
+		where rnum<![CDATA[>=]]>#{start} and rnum<![CDATA[<=]]>#{end}
+	</select>
 
 </mapper>
