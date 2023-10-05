@@ -7,7 +7,7 @@
 	<![CDATA[
 	MERGE INTO likeTable a
 	using dual
-	on (a.idx = #{idx} and a.likeType = #{likeType} and a.userIdx = #{userIdx})
+	on (a.idx = #{idx} and a.likeType = #{likeType} and a.userId = #{userId})
 	when matched then
 	update set
 		a.likeYN = 'Y'
@@ -15,13 +15,13 @@
 	insert(
 	a.idx,
 	a.likeType,
-	a.userIdx,
+	a.userId,
 	a.likeYN
 	)
 	values(
 	#{idx},
 	#{likeType},
-	#{userIdx},
+	#{userId},
 	'Y'
 	)
 	]]>
@@ -29,11 +29,11 @@
 	<update id="likeNo" parameterType="com.ari.like.model.LikeDTO">
 		update liketable
 		set likeYN = 'N'
-		where idx = #{idx} and likeType = #{likeType} and userIdx = #{userIdx}
+		where idx = #{idx} and likeType = #{likeType} and userId = #{userId}
 	</update>
 	<select id="likeSelect" parameterType="com.ari.like.model.LikeDTO" resultType="String">
 		SELECT LikeYN
 		FROM LIKETABLE
-		WHERE IDX = #{idx} AND LIKETYPE = #{liketype} AND USERID = #{userid}
+		WHERE IDX = #{idx} AND LIKETYPE = #{likeType} AND USERID = #{userId}
 	</select>
 </mapper>
