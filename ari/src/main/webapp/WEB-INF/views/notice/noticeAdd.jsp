@@ -59,8 +59,6 @@ function showResult(){
 
 }
 .content5{
-	border: 2px solid #4068A7;
-	border-radius: 10px;
 	margin-bottom: 20px;
 }
 .content4{
@@ -70,15 +68,16 @@ function showResult(){
 	
 }
 .border1{
-	border: 1px solid #4068A7;
-	border-radius: 10px;
+	border: 1px solid #4068A7 !important;
+	border-radius: 15px !important;
+	width:600px !important;
 }
 svg{
 	width:20px;
 	height:25px;
 }
 .content3{
-	width:600px; 
+	width:600px !important; 
 	height:300px !important;
     resize:none;
 }
@@ -90,6 +89,12 @@ svg{
 }
 .marginl2{
 	margin-left:180px;
+}
+#sbox{
+	width:100px !important;
+	heght:50px !important;
+	margin-top:5px;
+	margin-bottom:5px;	
 }
 </style>
 </head>
@@ -118,7 +123,7 @@ svg{
 		    </div>
 		    <label for="sbox" class="col-sm-2 col-form-label">분류</label>
 		    <div class="col-sm-10">
-			  <select class="form-select border1 margint" aria-label="Default select example" name="noticetype" id="sbox" onchange="checkTop()">
+			  <select class="form-select border1 margint"  aria-label="Default select example" name="noticetype" id="sbox" onchange="checkTop()">
 				  <option value="3" selected>전체</option>
 				  <option value="1">사용자</option>
 				  <option value="2">사업자</option>

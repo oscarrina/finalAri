@@ -7,6 +7,7 @@ import java.net.http.HttpRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,17 +17,19 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ari.festival.model.FestivalDTO;
+import com.ari.festival.service.FestivalService;
 
 @Controller
 public class FestivalController {
+	
+	@Autowired
+	private FestivalService service;
 	
 	@RequestMapping("/fest")
 	public ModelAndView fest(@RequestParam(value = "type", defaultValue = "2")int type,HttpSession session) {
 		ModelAndView mav=new ModelAndView();
 		if(session.getAttribute("sid")==null || session.getAttribute("sid").equals("")) {
-			mav.addObject("msg","비정상적인 접근입니다. 고객 센터에 문의해주세요.");
-			mav.addObject("url", "admin");
-			mav.setViewName("admin/adminMsg");
+			mav.setViewName("admin/login/adminLogin");
 			return mav;
 		}
 		File f=new File("c:/student_java/upload");
@@ -46,10 +49,24 @@ public class FestivalController {
 	public ModelAndView festAddSubmit(FestivalDTO dto,
 			@RequestParam("upload")MultipartFile upload,
 			HttpServletRequest request) {
-		copyInto(upload);
 		ModelAndView mav=new ModelAndView();
-		
-		mav.setViewName("festival/festivalList");
+		copyInto(upload);
+		dto.setFestimg(upload.getOriginalFilename());
+		System.out.println(dto.toString());
+		int result=0;
+		try {
+			result=service.festAdd(dto);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(result>0) {
+			mav.setViewName("festival/festivalList");
+		}else {
+			mav.addObject("msg", "[ERROR]축제 등록 실패. 문의 바랍니다.");
+			mav.addObject("url", "fest?type=2");
+			mav.setViewName("admin/adminMsg");
+		}
 		return mav;
 	}
 	
@@ -70,6 +87,7 @@ public class FestivalController {
 			e.printStackTrace();
 		}
 	}
+	
 	@RequestMapping("/getArea")
 	public String getAreacode() {
 		return "festival/getAreacodeXML";

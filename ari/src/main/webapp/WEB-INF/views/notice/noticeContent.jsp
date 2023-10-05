@@ -21,43 +21,27 @@ function showUpd(idx){
 </script>
 <style>
 .table1{
-	border: 2px solid #4068A7;
 	border-collapse:separate;
-	border-radius: 10px;
 	width:90%;
 	margin-top:50px;
 	margin-bottom:20px;
 	align:left;
 	text-align: left;
 }
-
 .th1{
 	width:15%;
 	padding-left: 10px;
-	text-align:center;
-	border-bottom:2px solid #B7B9DD;
+	text-align:left;
+	
 }
 .td1{
 	width:30%;
-	border-bottom:1px solid #B7B9DD;
-}
-.td2{
-	border-bottom:1px solid #B7B9DD;
 }
 .thtd1{
 	padding-top: 10px;
 	padding-bottom: 10px;
-	
-	
 }
-.thtd2{
-	
-	
-}
-.thtd3{
-	border-bottom:2px solid #B7B9DD;
-	
-}
+
 .contentwidth{
 	width:80%;
 	align:left;
@@ -76,19 +60,17 @@ svg{
 	height:25px;
 }
 
-.btn1{
-	align:left;
-}
+
 .content3{
 	width:500px;
 	height:auto;
 
 }
 .btn2{
-	border-top: none;
-	border-bottom: none;
-	border-left: none;
-	border-right: none;
+	border-top: none !important;
+	border-bottom: none !important;
+	border-left: none !important;
+	border-right: none !important;
 }
 .p1{
 	padding-left:10px;
@@ -156,7 +138,7 @@ svg{
 			</tr>
 		</table>
 			<div class="d-grid gap-2 d-md-flex justify-content-center contentwidth">
-			<button type="button" class="btn btn-primary btn1 btn2" 
+			<button type="button" class="btn btn-primary btn2" 
 				style="background-color:#D9D9D9; width:70px; height:40px; font-size:11px; color:black; " onclick="javascript:location.href='/notice'">목록</button>&nbsp;&nbsp;
 				<button type="button" class="btn btn-primary btn2" 
 				style="background-color:#666CDE; width:70px; height:40px; font-size:11px; " onclick="showDel(${dto.noticeidx},${dto.noticetype})">삭제</button>&nbsp;&nbsp;

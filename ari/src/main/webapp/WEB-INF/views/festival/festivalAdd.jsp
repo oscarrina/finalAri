@@ -22,7 +22,7 @@ function showResult(){
 			var data=XHR.responseXML;
 			var spanTag=document.all.sboxspan1;
 			var str='';
-			str='<select class="border3" id="festarea" aria-label="Default select example" onchange="show2()" id="sbox1">';
+			str='<select class="border3" aria-label="Default select example" onchange="show2()" id="sbox1" name="area">';
 			var areaList=data.getElementsByTagName('item');
 			for(var i=0;i<areaList.length;i++){
 				var area=areaList[i]; //studentList.item(i)
@@ -49,7 +49,7 @@ function showResult2(){
 			var data=XHR.responseXML;
 			var spanTag=document.all.sboxspan2;
 			var str='';
-			str='<select class="border3" id="festarea" aria-label="Default select example" id="sbox2">';
+			str='<select class="border3" aria-label="Default select example" id="sbox2" name="festsigungu">';
 			var areaList=data.getElementsByTagName('item');
 			for(var i=0;i<areaList.length;i++){
 				var area=areaList[i]; //studentList.item(i)
@@ -63,10 +63,7 @@ function showResult2(){
 		}
 	}
 }
-function calc(){
-	var end=document.all.festend.value;
-	window.alert(end);
-}
+
 </script>
 <style>
 .contentwidth{
@@ -150,19 +147,19 @@ svg{
 		  <div class="mb-3 row">
 		    <label for="festtitle" class="col-sm-2 col-form-label label1">축제명</label>
 		    <div class="col-sm-10">
-		      <input type="text" class="form-control border1 width1" id="festtitle" name="festtitle" style="width:500px;" placeholder="낙동강 캠핑&뮤직 페스타">
+		      <input type="text" class="form-control border1 width1" id="festtitle" name="festtitle" style="width:500px;" placeholder="낙동강 캠핑&뮤직 페스타" required="required">
 		    </div>
 		    <label for="festtelname" class="col-sm-2 col-form-label label1">주최자 정보</label>
 		    <div class="col-sm-10">
-		      <input type="text" class="form-control border1 width1" style="width:250px;" id="festtelname" name="festtelname" placeholder="대구광역시 달성군">
+		      <input type="text" class="form-control border1 width1" style="width:250px;" id="festtelname" name="festtelname" placeholder="대구광역시 달성군" required="required">
 		    </div>
 		    <label for="festtel" class="col-sm-2 col-form-label label1">주최자 전화번호</label>
 		    <div class="col-sm-10">
-		      <input type="text" class="form-control border1 width1" style="width:250px;" id="festtel" name="festtel" placeholder="053-242-1104">
+		      <input type="text" class="form-control border1 width1" style="width:250px;" id="festtel" name="festtel" placeholder="053-242-1104" required="required">
 		    </div>
 		    <label for="festhome" class="col-sm-2 col-form-label label1">홈페이지 주소</label>
 		    <div class="col-sm-10">
-		      <input type="text" class="form-control border1 width1" id="festhome" name="festhome" style="width:500px;" placeholder="http://ncmf.co.kr/main">
+		      <input type="text" class="form-control border1 width1" id="festhome" name="festhome" style="width:500px;" placeholder="http://ncmf.co.kr/main" required="required">
 		    </div>
 		    
 		    <label for="staticEmail" class="col-sm-2 col-form-label label1">지역</label>
@@ -172,36 +169,36 @@ svg{
 		    </div>
 		     <label for="festaddr" class="col-sm-2 col-form-label label1">주소</label>
 		    <div class="col-sm-10">
-		      <input type="text" class="form-control border1 width1" id="festaddr" name="festaddr" placeholder="대구광역시 달성군 구지서로 199 낙동강 레포츠밸리 수상레저센터 ">
+		      <input type="text" class="form-control border1 width1" id="festaddr" name="festaddr" placeholder="대구광역시 달성군 구지서로 199 낙동강 레포츠밸리 수상레저센터 " required="required">
 		    </div>
 			<label for="festdate" class="col-sm-2 col-form-label label1">공연시간</label>
 		    <div class="col-sm-10">
-		      <input type="text" class="form-control border1 width1" style="width:250px;" id="festdate" name="festdate" placeholder="9:00 - 21:00">
+		      <input type="text" class="form-control border1 width1" style="width:250px;" id="festdate" name="festdate" placeholder="9:00 - 21:00" required="required">
 		    </div>
 		    <label for="festprice" class="col-sm-2 col-form-label label1">이용요금</label>
 		    <div class="col-sm-10">
-		      <input type="text" class="form-control border1 width1" style="width:250px;" id="festprice" name="festprice" placeholder="부분 유료">
+		      <input type="text" class="form-control border1 width1" style="width:250px;" id="festprice" name="festprice" placeholder="부분 유료" required="required">
 		    </div>
 		    <label for="feststart" class="col-sm-2 col-form-label label1">시작날짜</label>
 		    <div class="col-sm-10">
-		      <input type="date" class="form-control border1 width1" style="width:250px;" id="feststart" name="feststart" >
+		      <input type="date" class="form-control border1 width1" style="width:250px;" id="feststart" name="feststart" required="required" >
 		    </div>
 		    <label for="festend" class="col-sm-2 col-form-label label1">종료날짜</label>
 		    <div class="col-sm-10">
-		      <input type="date" class="form-control border1 width1" style="width:250px;" id="festend" name="festend" onchange="calcdate()">
+		      <input type="date" class="form-control border1 width1" style="width:250px;" id="festend" name="festend" required="required">
 		    </div>
 		    <label for="festimg" class="col-sm-2 col-form-label label1">포스터 이미지</label>
 		    <div class="col-sm-10">
- 		 		<input class="form-control" type="file" name="upload" id="festimg">
+ 		 		<input class="form-control" type="file" name="upload" id="festimg" required="required">
  		 	</div>
 			  <label for="festcont" class="col-sm-2 col-form-label label1">개요</label>
 			  <div class="col-sm-10">
-			  	<textarea class="form-control border2 content3" id="festcont" maxlength="1000" name="noticecontent"  
+			  	<textarea class="form-control border2 content3" id="festcont" maxlength="1000" name="festcont"  required="required"
 			  			placeholder="2023 낙동강 캠핑&뮤직 페스타는 천혜의 자연을 간직한 대구 달성군에서 개최되는 대구 최초, 최대 캠핑과 음악이 함께하는 행사이다. 음악과 함께 즐기는 캠핑, 캠프닉 그리고 다양한 체험프로그램들을 통해 새로운 캠핑 경험을 선사한다."></textarea>
 			  </div>
 			   <label for="festcontent" class="col-sm-2 col-form-label label1">내용</label>
 			  <div class="col-sm-10">
-			  	<textarea class="form-control border2 content3" id="festcontent" maxlength="1000" name="noticecontent" 
+			  	<textarea class="form-control border2 content3" id="festcontent" maxlength="1000" name="festcontent" required="required"
 			  			placeholder="1. 메인프로그램 : 캠핑, 캠프닉, 캠핑용품전시, 공연 등  &#13;&#10;2. 부대프로그램 : 원데이 클래스, 플리마켓 등 &#13;&#10;3. 소비자 참여 프로그램 : 원그리들 캠핑요리컨테스트, 과학토크콘서트, 캠핑브랜드 이벤트 등"></textarea>
 			  </div>
 		  </div>

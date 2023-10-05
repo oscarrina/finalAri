@@ -29,9 +29,9 @@ h3{
 	margin-bottom: 15px;
 }
 .border1{
-	border: 1px solid #4068A7;
-	border-radius: 15px;
-	width:80px;
+	border: 1px solid #4068A7 !important;
+	border-radius: 15px !important;
+	width:100px !important;
 	padding-top: 5px;
 	padding-bottom: 5px;
 }
