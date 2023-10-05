@@ -76,7 +76,6 @@
 <script src = "js/httpRequest.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
-var data = "";
 	//주소 api
 	var ranNum
     function findAddr() {
@@ -112,10 +111,10 @@ var data = "";
 	//id 유효성검사
 	function idCheck(id){
 		var idcheckMsg= document.getElementById("idCheckMsg");
-		let reg = /^[A-Za-z0-9]{6,10}$/;
+		let regexId = /^[A-Za-z0-9`~!@#\$%\^&\*\(\)\{\}\[\]\-_=\+\\|;:'"<>,\./\?]{6,10}$/;
 		if(id.value != '') {
-	         if(!reg.test(id.value)) {
-	        	 idcheckMsg.innerHTML = '아이디는 6~10자 이상, 영문 또는 숫자를 입력바랍니다.';
+	         if(!regexId.test(id.value)) {
+	        	 idcheckMsg.innerHTML = '아이디는 6~10자 이상, 영문 또는 숫자를 포함해야 합니다.';
 	        	 idcheckMsg.style.color = 'red';
 			} else {
 				idcheckMsg.innerHTML = "중복검사가 필요합니다.";
@@ -143,10 +142,10 @@ var data = "";
     //비밀번호 유효성 검사 
 	function passwordCheck(password) {	
 		let passwordCheckMsg = document.getElementById("passwordCheckMsg");
-	    let reg = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,20}$/;
+	    let regexPw = /^[A-Za-z0-9`~!@#\$%\^&\*\(\)\{\}\[\]\-_=\+\\|;:'"<>,\./\?]{8,20}$/;
 	    if(password.value != '') {
-	         if(!reg.test(pwd.value)||password.length < 8) {
-				passwordCheckMsg.innerHTML = '비밀번호는 공백없이 8~20자리, 문자, 숫자, 특수문자로 구성하여야 합니다.';
+	         if(!regexPw.test(pwd.value)||password.length < 8) {
+				passwordCheckMsg.innerHTML = '비밀번호는 공백없이 8~20자리, 대소문자, 숫자, 특수문자로 구성하여야 합니다.';
 				passwordCheckMsg.style.color = 'red';
 			} else {
 				passwordCheckMsg.innerHTML = "사용 가능한 비밀번호입니다.";
@@ -154,8 +153,8 @@ var data = "";
 			}
 	    }
 	    let passwordDoubleMsg = document.getElementById("passwordDoubleMsg");
-	    let chk = document.getElementById("pwd2")
-	    if(document.getElementById("passwordCheckMsg").innerHTML=="사용 가능한 비밀번호입니다."&&chk.value!==''){
+	    let passwordDoubleCheck = document.getElementById("pwd2")
+	    if(document.getElementById("passwordCheckMsg").innerHTML=="사용 가능한 비밀번호입니다."&&passwordDoubleCheck.value!==''){
 			if(document.getElementById("pwd").value != chk.value){
 				passwordDoubleMsg.innerHTML = "비밀번호가 일치하지 않습니다.";
 				passwordDoubleMsg.style.color = 'red';
@@ -169,10 +168,10 @@ var data = "";
 		}
     }
     //비밀번호 재확인 검사 
-	function passwordDouble(chk){
+	function passwordDouble(passwordDoubleCheck){
 		let passwordDoubleMsg = document.getElementById("passwordDoubleMsg");
-		if(document.getElementById("passwordCheckMsg").innerHTML=="사용 가능한 비밀번호입니다." && chk.value!==''){
-			if(document.getElementById("pwd").value != chk.value){
+		if(document.getElementById("passwordCheckMsg").innerHTML=="사용 가능한 비밀번호입니다." && passwordDoubleCheck.value!==''){
+			if(document.getElementById("pwd").value != passwordDoubleCheck.value){
 				passwordDoubleMsg.innerHTML = "비밀번호가 일치하지 않습니다.";
 				passwordDoubleMsg.style.color = 'red';
 			}else{
@@ -184,6 +183,11 @@ var data = "";
 			passwordDoubleMsg.style.color = "";
 		}
 	}
+    //숫자만 입력되게하는 함수
+    function onlynum(num){
+    	let regexnum = /[^0-9]/g;
+    	num.value = num.value.replace(/[^0-9]/g, '');
+    }
     //sms 인증번호 api
 	function sendMsg(){
 		var telvalue = document.getElementById("tel").value;
@@ -193,7 +197,7 @@ var data = "";
 	function sendMsg2(){
 		if(XHR.readyState==4){
 			if(XHR.status==200){
-				data = XHR.responseText;
+				var data = XHR.responseText;
 				return data;
 			}
 		}
@@ -210,6 +214,7 @@ var data = "";
 			window.alert('인증 번호가 일치하지 않습니다.');
 		}
 	}	
+	
 </script>
 </head>
 <body>
@@ -221,18 +226,23 @@ var data = "";
   	<input type="text" id="name" class="input" name = "username" placeholder="이름">
   </div>
    <div class = "whiteSpace"></div>
-   <c:if test="${userType == 2}">
-   <div class="group">
-    <input type="text" id="name" class="input" name = "userbn" placeholder="사업자번호">
-   </div>
-   <div class = "whiteSpace"></div>
-  </c:if>
+   <c:choose>
+    <c:when test="${userType == 1}">
+		<input type = "hidden" value ="1">
+   	</c:when>
+   	<c:when test="${userType == 2}">
+   		<div class="group">
+	   	<input type="text" id="name" class="input" name = "userbn" placeholder="사업자번호(-없이 숫자만 입력)" oninput="onlynum(this)">&nbsp;<input type="button" class="btn2" value="중복확인" onclick="idDouble()">
+	   	</div>
+	   	<div class = "whiteSpace" ></div> 
+   	</c:when>
+   </c:choose>
   <div class="group">
-  <input type="text" id = "userid" class="input" name = "userid" placeholder="아이디" oninput = "idCheck(this)">&nbsp;<input type="button" class="btn2" value="중복확인" onclick="idDouble()">
+  <input type="text" id = "userid" class="input" name = "userid" placeholder="아이디" oninput = "idCheck(this)" maxlength ="10">&nbsp;<input type="button" class="btn2" value="중복확인" onclick="idDouble()">
   </div>
   <div class = "whiteSpace" id = "idCheckMsg"></div>
   <div class="group">
-  	<input type="password" id = "pwd" class="input" data-type="password" name = "userpwd" placeholder="비밀번호" oninput = "passwordCheck(this)">
+  	<input type="password" id = "pwd" class="input" data-type="password" name = "userpwd" placeholder="비밀번호" oninput = "passwordCheck(this)" maxlength ="20">
   </div>
   <div class = "whiteSpace" id = "passwordCheckMsg"></div>
   <div class="group">
@@ -240,10 +250,10 @@ var data = "";
   </div>
   <div class = "whiteSpace" id = "passwordDoubleMsg"></div>
   <div class="group">
-  	<input type="text" id="tel" class="input" name = "usertel" placeholder="휴대폰번호(숫자만 입력)">&nbsp;<input type="button" class="btn2" value="인증번호 받기" onclick = "sendMsg()">
+  	<input type="text" id="tel" class="input" name = "usertel" placeholder="휴대폰번호(-없이 숫자만 입력)" oninput="onlynum(this)" maxlength ="11">&nbsp;<input type="button" class="btn2" value="인증번호 받기" onclick = "sendMsg()">
   </div>
   <div class="group">
-  	<input type="text" id="anum" class="input" placeholder="인증번호">&nbsp;<input type="button" class="btn2" value="인증번호 확인" onclick = "numCheck(sendMsg2()	 )">
+  	<input type="text" id="anum" class="input" placeholder="인증번호">&nbsp;<input type="button" class="btn2" value="인증번호 확인" onclick = "numCheck(sendMsg2())">
   </div>
   <div class = "whiteSpace" id="anumCheck"></div>
   <div class="group">
@@ -257,7 +267,7 @@ var data = "";
   </div>
   <div class = "whiteSpace"></div>
   <div class="group">
-    <input type="submit" class="btn1" value="회원가입">
+    <input type="submit" class="btn1" value="회원가입" onclick = "submitCheck()">
   </div>
   </div>
  </div>

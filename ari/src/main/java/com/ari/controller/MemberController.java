@@ -32,12 +32,15 @@ public class MemberController {
 	
 	@RequestMapping("/memberJoinChoice")
 	public String memberJoinChoice() {
-		return "memberJoin/memberJoinChoice";
+		return "member/memberJoinChoice";
 	}
 	
 	@RequestMapping("/memberJoin")
-	public String memberJoin() {
-		return "member/memberJoin";
+	public ModelAndView memberJoin(@RequestParam(value="userType")int userType) {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("userType",userType);
+		mav.setViewName("member/memberJoin");
+		return mav;
 	}
 	
 	@GetMapping("/memberLogin")
@@ -227,9 +230,5 @@ public class MemberController {
 		mav.addObject("msg",ranNum);
 		mav.setViewName("member/idCheck_ok");
 		return mav;
-	}
-	@GetMapping("/memberJoin")
-	public ModelAndView memberJoinSubmit() {
-		
 	}
 }
