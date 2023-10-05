@@ -1,6 +1,7 @@
 package com.ari.qna.service;
 
 import com.ari.qna.model.*;
+
 import java.util.*;
 
 public interface QnaService {

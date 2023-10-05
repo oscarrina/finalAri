@@ -30,7 +30,6 @@ public class QnaServiceImple implements QnaService {
 	@Override
 	public List<QnaDTO> QnaList(String sid) throws Exception {
 		List<QnaDTO> lists=mapper.QnaList(sid);
-		System.out.println("what the fuck");
 		return lists;
 	}
 	

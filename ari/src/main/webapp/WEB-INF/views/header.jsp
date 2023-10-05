@@ -137,11 +137,10 @@ body{
       <form class="d-flex searchForm" role="search" action="searchResult">
       <div class="category">
       	<select name="category" class="categorySelect">
-      	<option selected="selected">전체</option>
-      	<option>음식점</option>
-      	<option>숙박</option>
-      	<option>관광명소</option>
-      	<option>축제</option>
+      	<option selected="selected" value="1">관광명소</option>
+      	<option value="2">음식점</option>
+      	<option value="3">숙박</option>
+      	<option value="4">축제</option>
       	</select>
       </div>
       <div class="region">
@@ -199,7 +198,7 @@ body{
     <ul class="sideUl">
     	<li class="sideLi"><a class="sideA">사이트 소개</a></li>
     	<hr class="sidehr">
-    	<li class="sideLi"><a class="sideA">공지사항</a></li>
+    	<li class="sideLi"><a class="sideA" href="not?type=1">공지사항</a></li>
     	<hr class="sidehr">
     	<li class="sideLi"><a class="sideA" href="writeQForm">문의하기</a></li>
     	<hr class="sidehr">
