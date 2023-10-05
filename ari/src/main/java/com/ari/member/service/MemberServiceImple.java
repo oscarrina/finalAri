@@ -44,4 +44,9 @@ public class MemberServiceImple implements MemberService {
 		int result = mapper.idCheck(userid);
 		return result;
 	}
+	@Override
+	public int memberJoin(MemberDTO dto) {
+		int result = mapper.memberJoin(dto);
+		return result;
+	}
 }
