@@ -126,13 +126,13 @@
   </div>
   <div class = "whiteSpace"></div>
   <div class="group">
-  	<input type="text" id="addr1" name="addr1" class="input2" placeholder="우편번호" readonly >&nbsp;<input type="button" class="btn2" value="주소검색" onclick="findAddr()">
+  	<input type="text" id="addr1" name="useraddr1" class="input2" placeholder="우편번호" readonly >&nbsp;<input type="button" class="btn2" value="주소검색" onclick="findAddr()">
   </div>
   <div class="group">
-  	<input type="text" id="addr2" name="addr2" class="input" placeholder="주소" readonly>
+  	<input type="text" id="addr2" name="useraddr2" class="input" placeholder="주소" readonly>
   </div>
   <div class="group">
-  	<input type="text" id="addr3" name="addr3" class="input" placeholder="상세주소">
+  	<input type="text" id="addr3" name="useraddr3" class="input" placeholder="상세주소">
   </div>
   <div class = "whiteSpace"></div>
   <input type="hidden" name="userid" value="${userid }">

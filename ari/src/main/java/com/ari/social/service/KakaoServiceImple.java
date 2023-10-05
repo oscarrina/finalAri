@@ -28,8 +28,6 @@ public class KakaoServiceImple implements KakaoService {
 
 	@Autowired
 	private MemberMapper mapper;
-	private static final String SECRET_KEY = "hcz3QkD7urPS2tpzxzvNRvAFwaVv1ccq";
-	 private static final String CLIENT_ID = "3623a44fed0e1055e089acc18ec7aacf";
 			
 	@Override
 	public int getUserInfo(String access_Token) {
