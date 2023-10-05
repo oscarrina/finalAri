@@ -1,5 +1,31 @@
 package com.ari.detail.service;
 
-public class DetailService implements DetailSerivce {
+import java.util.HashMap;
 
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
+import com.ari.detail.model.AttDTO;
+import com.ari.detail.model.BerthInfoDTO;
+import com.ari.detail.model.FoodDTO;
+import com.ari.festival.model.FestivalDTO;
+
+public interface DetailService {
+
+	public List<FoodDTO> foodListIn(int area,String search) throws Exception;
+		
+	public List<BerthInfoDTO> berthInfoListIn(int area,String search) throws Exception;
+	
+	public List<AttDTO> attListIn(int area,String search) throws Exception;
+	
+	public List<FestivalDTO> festivalListIn(int area,String search) throws Exception;
+	
+	public List<FoodDTO> foodList(String search) throws Exception;
+	
+	public List<BerthInfoDTO> berthInfoList(String search) throws Exception;
+	
+	public List<AttDTO> attList(String search) throws Exception;
+	
+	public List<FestivalDTO> festivalList(String search) throws Exception;
 }

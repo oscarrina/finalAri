@@ -3,17 +3,48 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="com.ari.mapper.DetailMapper">
-  	<select id="foodList" parameterType="Integer" resultType="com.ari.detail.model.FoodDTO">
-  		select * from food where area=#{area}
+  	<select id="foodListIn" parameterType="map" resultType="com.ari.detail.model.FoodDTO">
+  		select idx,foodInfoName,foodAddr,foodTel 
+  		from food 
+  		where area=#{area} 
+  		and foodInfoName like '%#{search}%'
   	</select>
-  	<select id="berthInfoList" parameterType="Integer" resultType="com.ari.detail.model.BerthInfoDTO">
-  	    select * from berthInfo where area=#{area}
+  	<select id="berthInfoListIn" parameterType="map" resultType="com.ari.detail.model.BerthInfoDTO">
+  	    select idx,berthInfoAddr,berthInfoTel,berthInfoName 
+  	    from berthInfo 
+  	    where area=#{area}
+  	    and berthInfoName like '%#{search}%'
   	</select>
-  	<select id="attList" parameterType="Integer" resultType="com.ari.detail.model.AttDTO">
-  		select * from att where area=#{area}
+  	<select id="attListIn" parameterType="map" resultType="com.ari.detail.model.AttDTO">
+  		select attIdx,attAddr,attTel,attName 
+  		from att 
+  		where area=#{area}
+  		and attName like '%#{search}%'
   	</select>
-  	<select id="festivalList" parameterType="Integer" resultType="com.ari.festival.model.FestivalDTO">
-  		select * from fest where area=#{area}
+  	<select id="festivalListIn" parameterType="map" resultType="com.ari.festival.model.FestivalDTO">
+  		select festIdx,festTel,festAddr,festTitle 
+  		from fest 
+  		where area=#{area}
+  		and festTitle like '%#{search}%'
   	</select>
-  	
+  	<select id="foodList" parameterType="String" resultType="com.ari.detail.model.FoodDTO">
+  		select idx,foodInfoName,foodAddr,foodTel 
+  		from food
+  		where foodInfoName like '%#{search}%'
+  	</select>
+  	<select id="berthInfoList" parameterType="String" resultType="com.ari.detail.model.BerthInfoDTO">
+  	    select idx,berthInfoAddr,berthInfoTel,berthInfoName 
+  	    from berthInfo
+  	    where berthInfoName like '%#{search}%'
+  	</select>
+  	<select id="attList" parameterType="String" resultType="com.ari.detail.model.AttDTO">
+  		select attIdx,attAddr,attTel,attName 
+  		from att
+  		where attName like '%#{search}%' 
+  	</select>
+  	<select id="festivalList" parameterType="String" resultType="com.ari.festival.model.FestivalDTO">
+  		select festIdx,festTel,festAddr,festTitle 
+  		from fest 
+  		where festTitle like '%#{search}%'
+  	</select>
   </mapper>
