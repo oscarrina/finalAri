@@ -14,5 +14,6 @@ public interface MemberService {
 	public MemberDTO idFind(String username,String usertel)throws Exception;
 	public int idCheck(String userid)throws Exception;
 	public int memberJoin(MemberDTO dto);
+	public int bnCheck(String userbn);
 
 }

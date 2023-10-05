@@ -18,10 +18,15 @@
 		from userinfo
 		where username=#{username} and usertel=#{usertel}
 	</select>
-	<select id="idCheck" parameterType="String" resultType="int">
+	<select id="idCheck" parameterType="String" resultType="Integer">
 		select count(*)
 		from userinfo
 		where userid=#{userid}
+	</select>
+	<select id="bnCheck" parameterType="String" resultType="Integer">
+		select count(*)
+		from userinfo
+		where userbn=#{userbn}
 	</select>
 	<select id="kakaoCheck" parameterType="String" resultType="Integer">
 		select count(*)
