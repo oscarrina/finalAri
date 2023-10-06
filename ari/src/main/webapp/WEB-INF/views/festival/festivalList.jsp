@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,12 +11,13 @@
 <script src="//code.jquery.com/jquery.min.js"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css" href="/css/adminMainLayout.css">
+<link rel="stylesheet" type="text/css" href="/css/festivalListLayout.css">
 <script type="text/javascript" src="../../../js/httpRequest.js"></script>
 <script>
-function show(type){
+function show(){
 	var cate=document.all.sbox.value;
 	if(cate==2){
-		location.href='fest?type='+type+'&area=0';
+		location.href='fest?area=0';
 	}else{
 		sendRequest('getArea', null, showResult, 'GET');
 	}	
@@ -28,15 +30,23 @@ function showResult(){
 			var data=XHR.responseXML;
 			
 			var spanTag=document.all.sboxspan;
+			var sbox=document.all.sbox.value;
+			let uarea=<c:out value="${area}" />;
 			var str='';
-			str='<select class="border2 border3" aria-label="Default select example" onchange="show2(${type})" id="sbox2">';
+			str='<select class="border2 border3" aria-label="Default select example" onchange="show2()" id="sbox2">';
 			var areaList=data.getElementsByTagName('item');
 			for(var i=0;i<areaList.length;i++){
 				var area=areaList[i]; //studentList.item(i)
 				var code=area.getElementsByTagName('code').item(0).firstChild.nodeValue;
 				var name=area.getElementsByTagName('name').item(0).firstChild.nodeValue;
+				
+				if(sbox==1 && code==uarea){
+					str+='<option value="'+code+'" selected>'+name+'</option>';
+				}else{
+					str+='<option value="'+code+'">'+name+'</option>';
+				}
 
-				str+='<option value="'+code+'">'+name+'</option>';
+				
 			}
 			str+='</select>'
 			spanTag.innerHTML=str;
@@ -44,71 +54,18 @@ function showResult(){
 		}
 	}
 }
-function show2(type){
+function show2(){
 	var area=document.all.sbox2.value;
-	location.href='fest?type='+type+'&area='+area;
+	location.href='fest?area='+area;
 }
 </script>
-<style>
-.contentwidth{
-	width:600px;
-}
-.content2{
-	width:800px;
-	margin-top:50px;
 
-}
-.content5{
-	
-	margin-bottom: 20px;
-}
-.content4{
-	margin-top:20px;
-	margin-bottom:20px;
-	margin-left:20px;
-	
-}
-.border1{
-	border: 1px solid #4068A7;
-	border-radius: 10px;
-}
-.border2{
-	border: 1px solid #4068A7;
-	border-radius: 15px;
-	width:80px;
-	padding-top: 5px;
-	padding-bottom: 5px;
-}
-.border3{
-	
-	width:150px;
-	padding-top: 5px;
-	padding-bottom: 5px;
-}
-svg{
-	width:20px;
-	height:25px;
-}
-.content3{
-	width:600px; 
-	height:300px !important;
-    resize:none;
-}
-
-.poster{
-	width:100px;
-	height:150px;
-}
-</style>
 </head>
 <body>
 <div id="page-wrapper">
-<c:if test="${type==2 }">
-<%@ include file="../ceo/ceoHeader.jsp" %>
-</c:if>
-<c:if test="${type==3 }">
+
 <%@ include file="../admin/adminHeader.jsp" %>
-</c:if>
+
   <!-- /사이드바 -->
 
   <!-- 본문 -->
@@ -116,43 +73,24 @@ svg{
     <div class="container-fluid content1" >
       <h3>축제 목록</h3>
 		<div class="content2">
-		<select class="border2" aria-label="Default select example" onchange="show(${type})" id="sbox">
-		  <option value="2" selected>전체</option>
-		  <option value="1">지역별</option>
+		<select class="border2" aria-label="Default select example" onchange="show()" id="sbox">
+		  <option value="2" ${area==0?"selected":"" }>전체</option>
+		  <option value="1" ${area!=0?"selected":"" }>지역별</option>
 		</select>
 		<span id="sboxspan"></span>	
-		<c:if test="${type==2 }">
-			<div class="d-grid gap-2 d-md-flex justify-content-md-end ">
-				<button type="button" class="btn btn-primary" align="right"
-				style="background-color:#3239AF; width:70px; height:40px; font-size:11px; margin-top:-40px; margin-bottom:10px;" 
-				onclick="javascript:location.href='festAdd'">등록</button>
-			</div>
-		</c:if>
-		
+
 		<div class="content5">	
 		<div class="content4">	
-		
-		<table class="table">
-		  <tfoot>
-		  	<tr>
-				<td colspan="3" align="center">
-					${pageStr }
-				</td>
-			</tr>
-		  </tfoot>
-		  <tbody>
-		    <c:if test="${empty lists }">
-		    	<tr>
-				<td colspan="6" align="center">
-				등록된 공지사항이 없습니다.
-				</td>
-			</tr>
-		    </c:if>
-		    <c:forEach var="dto" items="${lists }">
+		  <c:forEach var="dto" items="${lists }">
+		  <c:url var="conturl" value="festCont">
+		    	<c:param name="festidx">${dto.festidx }</c:param>
+		    	<c:param name="type">3</c:param>
+		    </c:url>
+		  <table class="table">
 			<tr>
-				<td rowspan="3"><img class="poster" alt="" src="/imgs/${dto.festimg }"></td>
+				<td style="width:120px;" rowspan="3"><img class="poster" alt="" src="/imgs/${dto.festimg }"></td>
 				<td>${dto.festtitle }</td>
-				<td rowspan="3">상세버튼</td>
+				<td rowspan="3"><a href="${conturl }">상세</a></td>
 			</tr>
 			<tr>
 				<td>${dto.festtelname }(tel.${dto.festtel })</td>
@@ -160,21 +98,17 @@ svg{
 			<tr>
 				<td>${dto.festaddr }</td>
 			</tr>
+			</table>
 		</c:forEach>
-		    
-		  </tbody>
-		</table>
+		<div align="center">${pageStr }</div>
 		</div>
 		</div>
 					
 		</div>
     </div>
-	   <c:if test="${type==2 }">
-	<%@ include file="../ceo/ceoFooter.jsp" %>
-	</c:if>
-	<c:if test="${type==3 }">
+	  
 	<%@ include file="../admin/adminFooter.jsp" %>
-	</c:if>
+
   </div>
   <!-- /본문 -->
 </div>

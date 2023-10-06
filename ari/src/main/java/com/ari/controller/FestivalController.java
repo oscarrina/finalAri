@@ -27,7 +27,7 @@ public class FestivalController {
 	private FestivalService service;
 	
 	@RequestMapping("/fest")
-	public ModelAndView fest(@RequestParam(value = "type", defaultValue = "2")int type,
+	public ModelAndView fest(
 			HttpSession session,
 			@RequestParam(value = "area", defaultValue = "0")int area,
 			@RequestParam(value = "cp", defaultValue = "1")int cp) {
@@ -54,16 +54,56 @@ public class FestivalController {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-		String url="/fest?type="+type+"&area="+area;
+		String url="/fest?area="+area;
 		String pageStr=com.ari.page.PageModuleNotice
 				.makeNoticePage(url, totalCnt, listSize, pageSize, cp);
 		if(lists==null) {pageStr="";}
 		mav.addObject("pageStr", pageStr);
 		mav.addObject("lists", lists);
-		mav.addObject("type", type);
+		mav.addObject("area", area);
 		mav.setViewName("festival/festivalList");
 		return mav;
 	}
+	@RequestMapping("/festival")
+	public ModelAndView ceofest(
+			HttpSession session,
+			@RequestParam(value = "type", defaultValue = "1")int type,
+			@RequestParam(value = "cp", defaultValue = "1")int cp) {
+		ModelAndView mav=new ModelAndView();
+		if(session.getAttribute("suserArea")==null || session.getAttribute("suserArea").equals("")) {
+			mav.setViewName("member/memberLogin");
+			return mav;
+		}
+//		int area=(int) session.getAttribute("suserArea");
+		int area=6;
+		int totalCnt=0;
+		int listSize=5;
+		int pageSize=5;
+		
+		List<FestivalDTO> lists=null;
+		try {
+			if(type==1) { //최신등록순
+				totalCnt=service.totalCntArea(area);
+				lists=service.festListArea(area, cp, listSize);
+			}else { //제목순
+				totalCnt=service.totalCntArea(area);
+				lists=service.festListAreaTitleDesc(area, cp, listSize);
+			}
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		String url="/fest?type="+type;
+		String pageStr=com.ari.page.PageModuleNotice
+				.makeNoticePage(url, totalCnt, listSize, pageSize, cp);
+		if(lists==null) {pageStr="";}
+		mav.addObject("pageStr", pageStr);
+		mav.addObject("lists", lists);
+		
+		mav.setViewName("festival/ceoFestivalList");
+		return mav;
+	}
+	
 	
 	@GetMapping("/festAdd")
 	public ModelAndView festAdd() {
@@ -87,14 +127,68 @@ public class FestivalController {
 			e.printStackTrace();
 		}
 		if(result>0) {
-			mav.setViewName("redirect:/fest");
+			mav.setViewName("redirect:/festival");
 		}else {
 			mav.addObject("msg", "[ERROR]축제 등록 실패. 문의 바랍니다.");
-			mav.addObject("url", "fest?type=2");
+			mav.addObject("url", "festival");
 			mav.setViewName("admin/adminMsg");
 		}
 		return mav;
 	}
+	@RequestMapping("/festCont")
+	public ModelAndView festContent(
+			@RequestParam(value = "festidx", defaultValue = "0")int festidx,
+			@RequestParam(value = "type", defaultValue = "2")int type) {//2-사업자 / 3-관리자
+		ModelAndView mav=new ModelAndView();
+		FestivalDTO dto=null;
+		try {
+			dto=service.festContent(festidx);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(dto==null) {
+			mav.addObject("msg", "[ERROR]삭제된 게시물이거나 비정상적인 접근입니다.");
+			mav.addObject("url", "festival");
+			mav.setViewName("admin/adminMsg");
+		}
+		dto.setFestcont(dto.getFestcont().replaceAll("\n", "<br>"));
+		dto.setFestcontent(dto.getFestcontent().replaceAll("\n", "<br>"));
+		mav.addObject("dto", dto);
+		mav.setViewName("festival/festCont");
+		mav.addObject("type", type);
+		return mav;
+	}
+	@RequestMapping("/festDel")
+	public ModelAndView festDel(@RequestParam(value = "festidx", defaultValue = "0")int festidx,
+			@RequestParam(value = "type", defaultValue = "2")int type) {
+		ModelAndView mav=new ModelAndView();
+		int result=0;
+		try {
+			result=service.festDel(festidx);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(result>0) {
+			if(type==2) {
+				mav.setViewName("redirect:/festival"); //사업자
+			}else {
+				mav.setViewName("redirect:/fest"); //관리자
+			}
+		}else {
+			mav.addObject("msg", "[ERROR]축제 삭제 실패");
+			if(type==2) {
+				mav.addObject("url", "festival");
+			}else {
+				mav.addObject("url", "fest");
+			}
+			mav.setViewName("admin/adminMsg");
+		}
+
+		return mav;
+	}
+	
 	
 	public void copyInto(MultipartFile upload) {
 		File f=new File("c:/student_java/upload/"+upload.getOriginalFilename());
@@ -110,6 +204,8 @@ public class FestivalController {
 			e.printStackTrace();
 		}
 	}
+	
+	
 	
 	@RequestMapping("/getArea")
 	public String getAreacode() {

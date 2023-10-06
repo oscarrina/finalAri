@@ -53,4 +53,25 @@ public class FestivalServiceImple implements FestivalService {
 		List<FestivalDTO> lists=mapper.festListArea(map);
 		return lists;
 	}
+	@Override
+	public List<FestivalDTO> festListAreaTitleDesc(int area, int cp, int ls) throws Exception {
+		int start=(cp-1)*ls+1;
+		int end=cp*ls;
+		Map map=new HashMap();
+		map.put("area", area);
+		map.put("start", start);
+		map.put("end", end);
+		List<FestivalDTO> lists=mapper.festListAreaTitleDesc(map);
+		return lists;
+	}
+	@Override
+	public FestivalDTO festContent(int festidx) throws Exception {
+		FestivalDTO dto=mapper.festContent(festidx);
+		return dto;
+	}
+	@Override
+	public int festDel(int festidx) throws Exception {
+		int result=mapper.festDel(festidx);
+		return result;
+	}
 }

@@ -12,4 +12,7 @@ public interface FestivalService {
 	public int totalCntArea(int area)throws Exception;
 	public List<FestivalDTO> festList(int cp, int ls)throws Exception;
 	public List<FestivalDTO> festListArea(int area,int cp, int ls)throws Exception;
+	public List<FestivalDTO> festListAreaTitleDesc(int area, int cp, int ls)throws Exception;
+	public FestivalDTO festContent(int festidx)throws Exception;
+	public int festDel(int festidx)throws Exception;
 }
