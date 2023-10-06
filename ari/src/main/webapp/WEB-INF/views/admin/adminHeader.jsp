@@ -15,7 +15,7 @@
       <li><a href="#">일정 게시판</a></li>
       <li><a href="#">코스 목록 보기</a></li>
       <li><a href="#">배너 이미지 관리</a></li>
-      <li><a href="#">축제 등록 및 삭제</a></li>
+      <li><a href="fest">축제 등록 및 삭제</a></li>
       <li><a href="#">전체 문의 내용 보기</a></li>
       <li><a href="notice?type=3">공지사항</a></li>
 	  <li class="admin_login">

@@ -15,7 +15,7 @@
       <li><a href="#">사업체 등록</a></li>
       <li><a href="#">사업체 수정/삭제</a>
       <li><a href="#">일정 게시판</a></li>
-      <li><a href="/fest?type=2">축제 관리</a></li>
+      <li><a href="/festival">축제 관리</a></li>
       <li><a href="ceoQnaList">나의 문의</a></li>
       <li><a href="ceoWriteQForm">관리자에게 문의하기</a></li>
       <li><a href="not?type=2">공지사항</a></li>
