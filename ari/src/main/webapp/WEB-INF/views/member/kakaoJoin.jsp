@@ -73,7 +73,7 @@
  font-size: 13px;
 }
 </style>
-<script src = "js/httpRequest.js"></script>
+<script src = "/js/httpRequest.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
 	//주소 api
@@ -107,6 +107,46 @@
             }
         }).open();
     }
+  //숫자만 입력되게하는 함수
+    function onlynum(num){
+    	let regexnum = /[^0-9]/g;
+    	num.value = num.value.replace(/[^0-9]/g, '');
+    }
+  //sms 인증번호 api 호출 및 인증확인 버튼 생성
+	function sendMsg(){
+		let tel = document.getElementById("tel");
+		let telCheck = document.getElementById("telCheck");
+		telCheck.innerHTML = '';
+		if(tel.value.length < 11){
+			telCheck.innerHTML = '올바른 핸드폰 번호를 입력해 주세요';
+			telCheck.style.color = 'red';
+			return false;
+		}else{
+			var param = 'tel='+tel.value;
+			sendRequest('sendNum',param,sendMsg2,'POST');
+		}
+	}
+	function sendMsg2(){
+		if(XHR.readyState==4){
+			if(XHR.status==200){
+				document.getElementById('checkBtn').setAttribute('type','button');
+				var data = XHR.responseText;
+				return data;
+			}
+		}
+	}
+	//인증번호 확인
+	function numCheck(){
+		let anum = document.getElementById("anum");
+		let anumCheck = document.getElementById("anumCheck");
+		if(anum.value==sendMsg2()){	
+			window.alert('인증 되었습니다.');
+			anumCheck.innerHTML = "인증되었습니다.";
+			anumCheck.style.color = 'green';
+		}else{
+			window.alert('인증 번호가 일치하지 않습니다.');
+		}
+	}
 </script>
 </head>
 <body>
@@ -117,14 +157,14 @@
   <div class="group">
   	<input type="text" name="username" class="input" placeholder="이름">
   </div>
-   <div class = "whiteSpace"></div>
   <div class="group">
-  	<input type="text" name="usertel" class="input" placeholder="휴대폰번호(숫자만 입력)">&nbsp;<input type="button" class="btn2" value="인증번호 받기">
+  	<input type="text" required id="tel" class="input" name = "usertel" placeholder="휴대폰번호(-없이 숫자만 입력)" oninput="onlynum(this)" maxlength ="11">&nbsp;<input type="button" class="btn2" value="인증번호 받기" onclick = "sendMsg()">
   </div>
+  <div class = "whiteSpace" id="telCheck"></div>
   <div class="group">
-  	<input type="text" name="anum" class="input" placeholder="인증번호">
+  	<input type="text" required id="anum" class="input" placeholder="인증번호" oninput = "onlynum(this)" maxlength = "6">&nbsp;<input type="hidden" id= "checkBtn" class="btn2" value="인증번호 확인" onclick = "numCheck(sendMsg2())">
   </div>
-  <div class = "whiteSpace"></div>
+  <div class = "whiteSpace" id="anumCheck"></div>
   <div class="group">
   	<input type="text" id="addr1" name="useraddr1" class="input2" placeholder="우편번호" readonly >&nbsp;<input type="button" class="btn2" value="주소검색" onclick="findAddr()">
   </div>
