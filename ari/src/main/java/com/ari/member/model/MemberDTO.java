@@ -1,5 +1,7 @@
 package com.ari.member.model;
 
+import java.sql.Date;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,6 +28,7 @@ public class MemberDTO {
 	private String userimg;
 	private String userstate;
 	private int userarea;
+	private Date userdate;
 	
 
 }

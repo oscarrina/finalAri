@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.ari.mapper.ReserMapper">
+  <select id="reserSelect" parameterType="map" resultType="com.ari.reser.model.ReserDTO">
+  select * from
+		(select rownum as rnum,a.* from
+		(select r.reserIdx,r.idx,r.userid,r.resername,
+		r.reservisitstart,r.reservisitend,r.reserpriceinfo,
+		r.reserprice,r.reserpriceday,r.resertel,r.reserstate,
+		r.reserreview,r.reserper,b.berthinfoimg,b.berthinfoname,c.berthname
+		from reser r,berthinfo b,berth c
+		where r.idx = b.idx and r.idx = c.idx
+		order by reservisitstart desc) a) b
+	where rnum<![CDATA[>=]]>#{start} and rnum<![CDATA[<=]]>#{end}
+  </select>
+  <select id="reserTotalCnt" resultType="Integer">
+  select count(*)
+  from reser
+  </select>
+  </mapper>

@@ -6,6 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src ="/js/httpRequest.js"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <style>
 html{
 	user-select: none;
@@ -91,8 +93,6 @@ select{
 	padding: 15px;
 }
 </style>
-<script src = "js/httpRequest.js"></script>
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
 	//주소 api
 	var ranNum

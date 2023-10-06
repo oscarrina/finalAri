@@ -6,6 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src = "/js/httpRequest.js"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <style>
 .login-wrap{
   width:100%;
@@ -73,8 +75,6 @@
  font-size: 13px;
 }
 </style>
-<script src = "/js/httpRequest.js"></script>
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
 	//주소 api
     function findAddr() {
@@ -123,7 +123,7 @@
 			return false;
 		}else{
 			var param = 'tel='+tel.value;
-			sendRequest('sendNum',param,sendMsg2,'POST');
+			sendRequest('/sendNum',param,sendMsg2,'POST');
 		}
 	}
 	function sendMsg2(){

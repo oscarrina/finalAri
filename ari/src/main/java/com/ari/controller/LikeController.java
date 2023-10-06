@@ -31,6 +31,10 @@ public class LikeController {
 		HttpSession session = request.getSession();
 		ModelAndView mav = new ModelAndView();
 		String userId = (String)session.getAttribute("sid");
+		if(userId == null || userId.equals("")) {
+			mav.setViewName("member/memberLogin");
+			return mav;
+		}
 		dto.setUserId(userId);
 		String likeYN = service.likeSelect(dto);
 		if(likeYN == null || likeYN.equals("N")) {

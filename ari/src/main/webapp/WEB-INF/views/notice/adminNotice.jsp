@@ -10,6 +10,7 @@
 <script src="//code.jquery.com/jquery.min.js"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css" href="/css/adminMainLayout.css">
+<link rel="stylesheet" type="text/css" href="/css/adminNotice.css">
 <script type="text/javascript" src="../../../js/httpRequest.js"></script>
 <script>
 function show(){
@@ -18,49 +19,6 @@ function show(){
 	location.href='notice?'+param;
 }
 </script>
-<style>
-.content1{
-	width:100px;
-}
-.content2{
-	margin-top: 30px;
-}
-h3{
-	margin-bottom: 15px;
-}
-.border1{
-	border: 1px solid #4068A7 !important;
-	border-radius: 15px !important;
-	width:100px !important;
-	padding-top: 5px;
-	padding-bottom: 5px;
-}
-.underline {
-  text-decoration:none;
-  line-height: 1.2;
-  font-size: 15px;
-  font-weight: 700;
-  background-image: linear-gradient(transparent calc(100% - 3px), #666CDE 3px);
-  background-repeat: no-repeat;
-  background-size: 0% 100%;
-  transition: background-size 0.8s;
-  color: #213555;
-  cursor: pointer;
-}
-@media (min-width: 1000px) {
-  .underline {
-    font-size: 15px;;
-  }
-}
-.underline.yellow {
-  background-image: linear-gradient(transparent 60%, #666CDE 40%);
-}
-.underline:hover {
-  text-decoration:none;
-  color:#666CDE;
-  background-size: 100% 100%;
-}
-</style>
 </head>
 <body>
 <div id="page-wrapper">

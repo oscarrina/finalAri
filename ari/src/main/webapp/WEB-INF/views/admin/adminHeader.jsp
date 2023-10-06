@@ -10,7 +10,7 @@
       <li class="sidebar-brand">
       <a href="#" id="img1"><img id="logoimg" alt="로고이미지" src="/img/logoX.png"></a>
       </li>      
-      <li><a href="#">유저 관리</a></li>
+      <li><a href="adminUser?type=3">유저 관리</a></li>
       <li><a href="#">지역별 여행 통계</a></li>
       <li><a href="#">일정 게시판</a></li>
       <li><a href="#">코스 목록 보기</a></li>
