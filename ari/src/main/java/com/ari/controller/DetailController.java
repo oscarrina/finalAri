@@ -34,7 +34,7 @@ public class DetailController {
 		List<FestivalDTO> fest=null;
 		
 		ModelAndView mav=new ModelAndView();
-		
+
 		switch (category) {
 		case 1:
 			if(area==0) {
@@ -52,6 +52,9 @@ public class DetailController {
 					e.printStackTrace();
 				}
 			}
+			
+			mav.addObject("food",food);
+			mav.setViewName("detail/foodList");
 			
 			break;
 		case 2:
@@ -71,6 +74,10 @@ public class DetailController {
 					e.printStackTrace();
 				}
 			}
+			
+			mav.addObject("berthInfo",berthInfo);
+			mav.setViewName("detail/berthInfoList");
+			
 			break;
 		case 3:
 			if (area==0) {
@@ -89,6 +96,10 @@ public class DetailController {
 				}
 				
 			}
+			
+			mav.addObject("att",att);
+			mav.setViewName("detail/attList");
+			
 			break;
 		case 4:
 			if(area==0) {
@@ -105,17 +116,17 @@ public class DetailController {
 					e.printStackTrace();
 				}
 			}
+			
+			mav.addObject("fest",fest);
+			mav.setViewName("detail/festList");
+			
 			break;
 		default:
 			
 			break;
 		}
-				
-		
-		
-		mav.setViewName("detail/searchResult");
 		return mav;
-	}
+		}
 	
 	
 }
