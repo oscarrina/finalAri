@@ -171,14 +171,6 @@ svg{
 		    <div class="col-sm-10">
 		      <input type="text" class="form-control border1 width1" id="festaddr" name="festaddr" placeholder="대구광역시 달성군 구지서로 199 낙동강 레포츠밸리 수상레저센터 " required="required">
 		    </div>
-			<label for="festdate" class="col-sm-2 col-form-label label1">공연시간</label>
-		    <div class="col-sm-10">
-		      <input type="text" class="form-control border1 width1" style="width:250px;" id="festdate" name="festdate" placeholder="9:00 - 21:00" required="required">
-		    </div>
-		    <label for="festprice" class="col-sm-2 col-form-label label1">이용요금</label>
-		    <div class="col-sm-10">
-		      <input type="text" class="form-control border1 width1" style="width:250px;" id="festprice" name="festprice" placeholder="부분 유료" required="required">
-		    </div>
 		    <label for="feststart" class="col-sm-2 col-form-label label1">시작날짜</label>
 		    <div class="col-sm-10">
 		      <input type="date" class="form-control border1 width1" style="width:250px;" id="feststart" name="feststart" required="required" >
@@ -187,6 +179,15 @@ svg{
 		    <div class="col-sm-10">
 		      <input type="date" class="form-control border1 width1" style="width:250px;" id="festend" name="festend" required="required">
 		    </div>
+			<label for="festdate" class="col-sm-2 col-form-label label1">공연시간</label>
+		    <div class="col-sm-10">
+		      <input type="text" class="form-control border1 width1" style="width:250px;" id="festdate" name="festdate" placeholder="9:00 - 21:00" required="required">
+		    </div>
+		    <label for="festprice" class="col-sm-2 col-form-label label1">이용요금</label>
+		    <div class="col-sm-10">
+		      <input type="text" class="form-control border1 width1" style="width:250px;" id="festprice" name="festprice" placeholder="부분 유료" required="required">
+		    </div>
+		    
 		    <label for="festimg" class="col-sm-2 col-form-label label1">포스터 이미지</label>
 		    <div class="col-sm-10">
  		 		<input class="form-control" type="file" name="upload" id="festimg" required="required">

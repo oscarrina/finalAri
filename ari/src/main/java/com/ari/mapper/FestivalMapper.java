@@ -12,4 +12,7 @@ public interface FestivalMapper {
 	public int totalCntArea(int area);
 	public List<FestivalDTO> festList(Map map);
 	public List<FestivalDTO> festListArea(Map map);
+	public List<FestivalDTO> festListAreaTitleDesc(Map map);
+	public FestivalDTO festContent(int festidx);
+	public int festDel(int festidx);
 }
