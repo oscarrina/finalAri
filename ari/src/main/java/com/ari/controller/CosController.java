@@ -7,28 +7,28 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.ari.banner.model.BannerDTO;
-import com.ari.banner.service.BannerService;
+import com.ari.cos.model.CosDTO;
+import com.ari.cos.service.CosService;
 
 @Controller
-public class IndexController {
-	
-	@Autowired
-	private BannerService service;
+public class CosController {
 
-	@RequestMapping("/")
-	public ModelAndView index() {
-		ModelAndView mav=new ModelAndView();
-		List<BannerDTO> lists=null;
+	@Autowired
+	private CosService service;
+	
+	@RequestMapping("/cosList")
+	public ModelAndView cosList() {
+		List<CosDTO> lists=null;
+		
 		try {
-			lists=service.bannerList();
+			lists=service.cosList();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		ModelAndView mav=new ModelAndView();
 		mav.addObject("lists", lists);
-		mav.setViewName("index");
+		mav.setViewName("cos/cosList");
 		return mav;
 	}
 }
