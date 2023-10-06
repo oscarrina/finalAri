@@ -95,6 +95,10 @@ svg{
     resize:none;
 }
 
+.poster{
+	width:100px;
+	height:150px;
+}
 </style>
 </head>
 <body>
@@ -146,15 +150,20 @@ svg{
 		    </c:if>
 		    <c:forEach var="dto" items="${lists }">
 			<tr>
-				<!--반복적으로 보여줄 데이터-->
+				<td rowspan="3"><img class="poster" alt="" src="/imgs/${dto.festimg }"></td>
+				<td>${dto.festtitle }</td>
+				<td rowspan="3">상세버튼</td>
+			</tr>
+			<tr>
+				<td>${dto.festtelname }(tel.${dto.festtel })</td>
+			</tr>
+			<tr>
+				<td>${dto.festaddr }</td>
 			</tr>
 		</c:forEach>
 		    
 		  </tbody>
 		</table>
-		
-			<img alt="이미지" src="/imgs/cute2.png">
-
 		</div>
 		</div>
 					
