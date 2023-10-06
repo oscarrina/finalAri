@@ -13,7 +13,7 @@ public interface MemberService {
 	public MemberDTO getUserInfo(String userid)throws Exception;
 	public MemberDTO idFind(String username,String usertel)throws Exception;
 	public int idCheck(String userid)throws Exception;
-	public int memberJoin(MemberDTO dto);
+	public int memberJoin(MemberDTO dto)throws Exception;
 	public int bnCheck(String userbn);
 
 }

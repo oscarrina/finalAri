@@ -96,6 +96,7 @@ public class MemberController {
 					mav.setViewName("member/memberLoginOk");
 				}else {
 					mav.setViewName("ceo/ceoIndex");
+					session.setAttribute("suserArea", dto.getUserarea());
 				}
 				session.setAttribute("sid", userid);
 				session.setAttribute("sname", dto.getUsername());
@@ -134,7 +135,9 @@ public class MemberController {
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("msg",dto.getUsername()+"님 환영합니다!");
 		mav.setViewName("member/memberLoginOk");
-		
+		if(dto.getUsertype()==2) {
+			session.setAttribute("suserArea", dto.getUserarea());
+		}
 		session.setAttribute("sid", userid);
 		session.setAttribute("sname", dto.getUsername());
 			
@@ -226,7 +229,8 @@ public class MemberController {
 	public ModelAndView sendNum(@RequestParam(value = "tel", required = false)String tel){
 		ModelAndView mav = new ModelAndView();
 		System.out.println(tel);
-		String ranNum = smsservice.sendRandomMessage(tel);
+		String ranNum = "111111";
+		//String ranNum = smsservice.sendRandomMessage(tel);
 		mav.addObject("msg",ranNum);
 		mav.setViewName("member/idCheck_ok");
 		return mav;
@@ -243,4 +247,22 @@ public class MemberController {
 		}
 		return mav;
 	}
+	@PostMapping("/memberJoin")
+    public ModelAndView memberJoin(MemberDTO dto)throws Exception {
+		String shapwd = PasswordModule.testSHA256(dto.getUserpwd());
+		dto.setUserpwd(shapwd);
+    	int result = 0;
+    	try {
+			result = service.memberJoin(dto);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+    	String msg = result > 0 ? "회원가입 완료":"회원가입 실패";
+    	ModelAndView mav = new ModelAndView();
+    	mav.addObject("msg", msg);
+    	mav.addObject("url", "/");
+    	mav.setViewName("member/memberMsg");
+    	return mav;
+    	
+    }
 }
