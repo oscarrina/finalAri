@@ -45,7 +45,7 @@ public class MemberServiceImple implements MemberService {
 		return result;
 	}
 	@Override
-	public int memberJoin(MemberDTO dto) {
+	public int memberJoin(MemberDTO dto)throws Exception{
 		int result = mapper.memberJoin(dto);
 		return result;
 	}

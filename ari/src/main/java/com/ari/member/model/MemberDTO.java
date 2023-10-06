@@ -23,8 +23,9 @@ public class MemberDTO {
 	private String useraddr2;
 	private String useraddr3;
 	private String usertoken;
-	private String userprofile;
+	private String userimg;
 	private String userstate;
+	private int userarea;
 	
 
 }

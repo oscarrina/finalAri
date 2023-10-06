@@ -53,18 +53,19 @@
 	<insert id="memberJoin" parameterType="com.ari.member.model.MemberDTO">
 		INSERT INTO USERINFO
 		VALUES(
-		#{userType},
-		#{userbn},
 		#{userid},
+		#{usertype},
+		#{userbn},
 		#{userpwd},
 		#{username},
 		#{usertel},
-		#{userAddr1},
-		#{userAddr2},
-		#{userAddr3},
-		'/img/profile.png',
+		#{useraddr1},
+		#{useraddr2},
+		#{useraddr3},
 		'0',
-		'N'
+		'/img/profile.png',
+		'N',
+		#{userarea}
 		)
 	</insert>
 </mapper>

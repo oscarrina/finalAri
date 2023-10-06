@@ -76,8 +76,13 @@
 .naverImg{
 	width: 340px;
 	height: 50px;
+}
 .b{
   margin-right: 150px;
+  text-decoration: none;
+}
+.c{
+  margin-left: 28%;
   text-decoration: none;
 }
 a:visited{
@@ -115,6 +120,9 @@ a:hover{
   <div class="group">
     <a href="idFind" class="b">아이디 찾기</a>
     <a href="pwdFind1" class="b">비밀번호 찾기</a>
+  </div>
+  <div >
+  <a href = "memberJoinChoice" class="c">회원가입</a>
   </div>
   </div>
  </div>
