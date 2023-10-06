@@ -12,7 +12,7 @@
 </head>
 <body>
 <div id="page-wrapper">
-<%@ include file="adminHeader.jsp" %>
+<%@ include file="/WEB-INF/views/admin/adminHeader.jsp" %>
   <!-- /사이드바 -->
 
   <!-- 본문 -->
@@ -22,7 +22,7 @@
       <p>메뉴가 많아서 한 페이지를 넘으면 세로 스크롤바 생김</p>
       <h1>Content</h1>
     </div>
-    <%@include file="adminFooter.jsp" %>
+    <%@include file="/WEB-INF/views/admin/adminFooter.jsp" %>
   </div>
   <!-- /본문 -->
 </div>

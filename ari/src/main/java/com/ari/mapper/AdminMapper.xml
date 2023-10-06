@@ -8,4 +8,23 @@
 	from admin
 	where adminid=#{adminid}
 </select>
+<select id="userManager" parameterType="map" resultType="com.ari.member.model.MemberDTO">
+	select * from
+		(select rownum as rnum,a.* from
+		(select * from userinfo order by userdate desc)a)b
+	<if test='usertype lt 3'>
+	where usertype = #{usertype} and
+	 rnum<![CDATA[>=]]>#{start} and rnum<![CDATA[<=]]>#{end}
+	</if>
+	<if test='usertype gt 2'>
+	where rnum<![CDATA[>=]]>#{start} and rnum<![CDATA[<=]]>#{end}
+	</if>
+</select>
+<select id="userManagerTotalCnt" parameterType="Integer" resultType="Integer">
+	select count(*)
+	from userinfo
+	<if test='usertype lt 3'>
+	where usertype = #{usertype}
+	</if>
+</select>
 </mapper>  

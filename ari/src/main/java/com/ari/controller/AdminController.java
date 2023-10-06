@@ -1,6 +1,7 @@
 package com.ari.controller;
 
 import java.net.http.HttpResponse;
+import java.util.List;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -112,6 +114,30 @@ public class AdminController {
 		mav.setViewName("admin/adminMsg");
 		return mav;
 	}
-	
+	@GetMapping("/adminUser")
+	public ModelAndView userManager(@RequestParam("type")int type,
+			@RequestParam(value = "cp", defaultValue = "1")int cp,
+			HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		int totalCnt=service.userManagerTotalCnt(type);
+		int listSize=10;
+		int pageSize=5;
+		
+		if(session.getAttribute("sid") == null || session.getAttribute("sid").equals("")) {
+			mav.setViewName("admin/login/adminLogin");
+			return mav;
+		}else {
+			List<MemberDTO> list = service.userManager(type,cp,listSize);
+			String url = "/adminUser?type="+type;
+			String pageStr = com.ari.page.PageModuleNotice.makeNoticePage(url, totalCnt, listSize, pageSize, cp);
+			if(list == null) {pageStr = "";}
+			mav.addObject("pageStr", pageStr);
+			mav.addObject("list", list);
+			mav.addObject("type", type);
+			mav.setViewName("admin/adminUserManager");
+		}
+		
+		return mav;
+	}
 
 }

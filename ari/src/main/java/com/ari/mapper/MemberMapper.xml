@@ -38,16 +38,18 @@
 	values(
 	#{userid},
 	1,
-	'123',
-	'1234',
+	1,
+	'null',
 	#{username},
 	#{usertel},
 	#{useraddr1},
 	#{useraddr2},
 	#{useraddr3},
 	#{usertoken},
-	'0',
-	'N'
+	'/img/profile.png',
+	'N',
+	99,
+	sysdate
 	)
 	</insert>
 	<insert id="memberJoin" parameterType="com.ari.member.model.MemberDTO">
@@ -65,7 +67,8 @@
 		'0',
 		'/img/profile.png',
 		'N',
-		#{userarea}
+		#{userarea},
+		sysdate
 		)
 	</insert>
 </mapper>
