@@ -1,8 +1,8 @@
 package com.ari.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
-import org.apache.ibatis.annotations.Case;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,9 +12,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.ari.detail.model.AttDTO;
 import com.ari.detail.model.BerthInfoDTO;
 import com.ari.detail.model.FoodDTO;
+import com.ari.detail.model.searchVO;
 import com.ari.festival.model.FestivalDTO;
-
-import oracle.net.aso.i;
 
 import com.ari.detail.service.*;
 
@@ -26,7 +25,7 @@ public class DetailController {
 	
 	@RequestMapping("/searchResult")
 	public ModelAndView search(@RequestParam("category")int category,@RequestParam("region")int area,
-			@RequestParam("search")String search) {
+			@RequestParam(value="search",required=false)String search) {
 		
 		List<FoodDTO> food=null;
 		List<BerthInfoDTO> berthInfo=null;
@@ -34,7 +33,8 @@ public class DetailController {
 		List<FestivalDTO> fest=null;
 		
 		ModelAndView mav=new ModelAndView();
-
+		searchVO params=new searchVO();
+		
 		switch (category) {
 		case 1:
 			if(area==0) {
@@ -46,7 +46,9 @@ public class DetailController {
 				}
 			}else {
 				try {
-					food=service.foodListIn(area, search);
+					params.setArea(area);
+					params.setSearch(search);
+					food=service.foodListIn(params);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -68,7 +70,9 @@ public class DetailController {
 				
 			}else {
 				try {
-					berthInfo=service.berthInfoListIn(area,search);
+					params.setArea(area);
+					params.setSearch(search);
+					berthInfo=service.berthInfoListIn(params);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -89,7 +93,9 @@ public class DetailController {
 				}
 			}else {
 				try {
-					att=service.attListIn(area, search);
+					params.setArea(area);
+					params.setSearch(search);
+					att=service.attListIn(params);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -111,7 +117,9 @@ public class DetailController {
 				}
 			}else {
 				try {
-				fest=service.festivalListIn(area, search);
+					params.setArea(area);
+					params.setSearch(search);
+					fest=service.festivalListIn(params);
 				}catch(Exception e) {
 					e.printStackTrace();
 				}

@@ -137,9 +137,9 @@ body{
       <form class="d-flex searchForm" role="search" action="searchResult">
       <div class="category">
       	<select name="category" class="categorySelect">
-      	<option selected="selected" value="1">관광명소</option>
-      	<option value="2">음식점</option>
-      	<option value="3">숙박</option>
+      	<option selected="selected" value="1">음식점</option>
+      	<option value="2">숙박</option>
+      	<option value="3">관광명소</option>
       	<option value="4">축제</option>
       	</select>
       </div>
@@ -166,7 +166,7 @@ body{
       	</select>
       	</div>
       	<div class="searchBoxDiv">
-        <input class="form-control me-2 searchBox" type="text" placeholder="검색어를 입력해주세요" aria-label="Search">
+        <input class="form-control me-2 searchBox" type="text" placeholder="검색어를 입력해주세요" aria-label="Search" name="search">
         </div>
         <div class="searchBtnDiv">
         <button style="background: none;" class="btn btn-outline-success searchBtn" type="submit"><i class="bi bi-search searchBtn"></i></button>

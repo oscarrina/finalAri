@@ -9,13 +9,13 @@ import com.ari.festival.model.*;
 
 public interface DetailMapper {
 
-	public List<FoodDTO> foodListIn(@Param("area")int area,@Param("search")String search);
+	public List<FoodDTO> foodListIn(searchVO params);
 	
-	public List<BerthInfoDTO> berthInfoListIn(@Param("area")int area,@Param("search")String search);
+	public List<BerthInfoDTO> berthInfoListIn(searchVO params);
 	
-	public List<AttDTO> attListIn(@Param("area")int area,@Param("search")String search);
+	public List<AttDTO> attListIn(searchVO params);
 	
-	public List<FestivalDTO> festivalListIn(@Param("area")int area,@Param("search")String search);
+	public List<FestivalDTO> festivalListIn(searchVO params);
 	
 	public List<FoodDTO> foodList(String search);
 	
