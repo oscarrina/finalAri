@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -45,12 +46,11 @@ h4:visited{
  <div class="container-fluid px-0 mb-5">
         <div id="header-carousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
             <div class="carousel-inner">
+                <c:forEach var="dto" items="${lists }">
                 <div class="carousel-item active">
-                    <img class="w-100" src="/img/img.jpg" alt="Image">
+                    <img class="w-100" src="/imgs/${dto.bannerImg}" alt="Image">
                 </div>
-                <div class="carousel-item">
-                    <img class="w-100" src="/img/banner1.png" alt="Image">
-                </div>
+                </c:forEach>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#header-carousel"
                 data-bs-slide="prev">
