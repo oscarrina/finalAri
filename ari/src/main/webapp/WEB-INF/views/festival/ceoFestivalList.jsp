@@ -15,9 +15,7 @@
 <script>
 function showType(){
 	var type=document.all.sbox2.value;
-	if(type==1){
-		location.href='festival?type='+type;
-	}
+	location.href='festival?type='+type;
 	
 }
 </script>
@@ -39,48 +37,28 @@ function showType(){
 		</select>
 			<div class="d-grid gap-2 d-md-flex justify-content-md-end ">
 				<button type="button" class="btn btn-primary" align="right"
-				style="background-color:#3239AF; width:70px; height:40px; font-size:11px; margin-top:-40px; margin-bottom:10px;" 
+				style="background-color:#686DB9; width:70px; height:40px; font-size:11px; margin-top:-40px; margin-bottom:10px;" 
 				onclick="javascript:location.href='festAdd'">등록</button>
 			</div>
 		<div class="content5">	
 		<div class="content4">	
-		
-		<table class="table">
-		  <tfoot>
-		  	<tr>
-				<td colspan="3" align="center">
-					${pageStr }
-				</td>
-			</tr>
-		  </tfoot>
-		  <tbody>
-		    <c:if test="${empty lists }">
-		    	<tr>
-				<td colspan="6" align="center">
-				등록된 공지사항이 없습니다.
-				</td>
-			</tr>
-		    </c:if>
-		    <c:forEach var="dto" items="${lists }">
-		    <c:url var="conturl" value="festCont">
-		    	<c:param name="festidx">${dto.festidx }</c:param>
-		    	<c:param name="type">2</c:param>
-		    </c:url>
+		<c:forEach var="dto" items="${lists }">
+		  <table class="table">
 			<tr>
-				<td style="width:120px;" rowspan="3"><img class="poster" alt="" src="/imgs/${dto.festimg }"></td>
-				<td>${dto.festtitle }</td>
-				<td rowspan="3"><a href="${conturl }">상세</a></td>
+				<c:if test="${dto.festapi==0 }"><td style="width:120px;" rowspan="3"><img class="poster" alt="" src="/imgs/${dto.festimg }"></td></c:if>
+				<c:if test="${dto.festapi==1 }"><td style="width:120px;" rowspan="3"><img class="poster" alt="" src="${dto.festimg }"></td></c:if>
+				<td class="title1">${dto.festtitle }</td>
+				<td class="cont1" rowspan="3"><input type="button" class="btn2" value="상세" onclick="javascript:location.href='festCont?festidx=${dto.festidx}&type=2';"></td>
 			</tr>
 			<tr>
-				<td>${dto.festtelname }(tel.${dto.festtel })</td>
+				<td class="tel1">${dto.festtelname }(tel.${dto.festtel })</td>
 			</tr>
 			<tr>
-				<td>${dto.festaddr }</td>
+				<td class="addr1">${dto.festaddr }</td>
 			</tr>
+		  </table>
 		</c:forEach>
-		    
-		  </tbody>
-		</table>
+		<div style="text-align: center;">${pageStr }</div>
 		</div>
 		</div>
 					
