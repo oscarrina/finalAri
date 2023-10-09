@@ -16,13 +16,13 @@
   	    and berthInfoName like '%' || #{search} || '%'
   	</select>
   	<select id="attListIn" parameterType="com.ari.detail.model.searchVO" resultType="com.ari.detail.model.AttDTO">
-  		select idx,attAddr,attTel,attName,attImg
+  		select idx,attInfo,attName,attImg
   		from att 
   		where area=#{area}
   		and attName like '%' || #{search} || '%'
   	</select>
   	<select id="festivalListIn" parameterType="com.ari.detail.model.searchVO" resultType="com.ari.festival.model.FestivalDTO">
-  		select festIdx,festTel,festAddr,festTitle,festImg
+  		select festIdx,festCont,festTitle,festImg
   		from fest 
   		where area=#{area}
   		and festTitle like '%' || #{search} || '%'
@@ -38,12 +38,12 @@
   	    where berthInfoName like '%' || #{search} || '%'
   	</select>
   	<select id="attList" parameterType="String" resultType="com.ari.detail.model.AttDTO">
-  		select idx,attAddr,attTel,attName,attImg 
+  		select idx,attInfo,attName,attImg 
   		from att
   		where attName like '%' || #{search} || '%'
   	</select>
   	<select id="festivalList" parameterType="String" resultType="com.ari.festival.model.FestivalDTO">
-  		select festIdx,festTel,festAddr,festTitle,festImg
+  		select festIdx,festCont,festTitle,festImg
   		from fest 
   		where festTitle like '%' || #{search} || '%'
   	</select>
