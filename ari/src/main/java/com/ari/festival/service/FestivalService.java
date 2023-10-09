@@ -14,5 +14,7 @@ public interface FestivalService {
 	public List<FestivalDTO> festListArea(int area,int cp, int ls)throws Exception;
 	public List<FestivalDTO> festListAreaTitleDesc(int area, int cp, int ls)throws Exception;
 	public FestivalDTO festContent(int festidx)throws Exception;
+	public String getFestImg(int festidx)throws Exception;
 	public int festDel(int festidx)throws Exception;
+	public int festUpd(FestivalDTO dto)throws Exception;
 }

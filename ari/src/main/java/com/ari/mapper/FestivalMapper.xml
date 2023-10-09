@@ -60,9 +60,33 @@
 		from fest
 		where festidx=#{festidx}
 	</select>
+	<select id="getFestImg" parameterType="int" resultType="String">
+		select festimg
+		from fest
+		where festidx=#{festidx}
+	</select>
 	<delete id="festDel" parameterType="int">
 		delete from fest
 		where festidx=#{festidx}
 	</delete>
+	<update id="festUpd" parameterType="com.ari.festival.model.FestivalDTO">
+		update fest
+		set festtitle=#{festtitle},
+			festtel=#{festtel},
+			festtelname=#{festtelname},
+			festhome=#{festhome},
+			festsigungu=#{festsigungu},
+			festaddr=#{festaddr},
+			festcont=#{festcont},
+			festimg=#{festimg},
+			festdate=#{festdate},
+			festprice=#{festprice},
+			festcontent=#{festcontent},
+			feststart=#{feststart},
+			festend=#{festend},
+			festapi=#{festapi}
+		where festidx=#{festidx}
+	</update>
+	
 
 </mapper>

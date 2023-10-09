@@ -57,7 +57,7 @@ public class FestivalController {
 		String url="/fest?area="+area;
 		String pageStr=com.ari.page.PageModuleNotice
 				.makeNoticePage(url, totalCnt, listSize, pageSize, cp);
-		if(lists==null) {pageStr="";}
+		if(totalCnt==0) {pageStr="";}
 		mav.addObject("pageStr", pageStr);
 		mav.addObject("lists", lists);
 		mav.addObject("area", area);
@@ -96,7 +96,7 @@ public class FestivalController {
 		String url="/fest?type="+type;
 		String pageStr=com.ari.page.PageModuleNotice
 				.makeNoticePage(url, totalCnt, listSize, pageSize, cp);
-		if(lists==null) {pageStr="";}
+		if(totalCnt==0) {pageStr="";}
 		mav.addObject("pageStr", pageStr);
 		mav.addObject("lists", lists);
 		
@@ -106,15 +106,16 @@ public class FestivalController {
 	
 	
 	@GetMapping("/festAdd")
-	public ModelAndView festAdd() {
+	public ModelAndView festAdd(HttpSession session) {
 		ModelAndView mav=new ModelAndView();
+		int area=(int) session.getAttribute("suserArea");
+		mav.addObject("area", area);
 		mav.setViewName("festival/festivalAdd");
 		return mav;
 	}
 	@PostMapping("/festAdd")
 	public ModelAndView festAddSubmit(FestivalDTO dto,
-			@RequestParam("upload")MultipartFile upload,
-			HttpServletRequest request) {
+			@RequestParam("upload")MultipartFile upload) {
 		ModelAndView mav=new ModelAndView();
 		copyInto(upload);
 		dto.setFestimg(upload.getOriginalFilename());
@@ -151,6 +152,7 @@ public class FestivalController {
 			mav.addObject("msg", "[ERROR]삭제된 게시물이거나 비정상적인 접근입니다.");
 			mav.addObject("url", "festival");
 			mav.setViewName("admin/adminMsg");
+			return mav;
 		}
 		dto.setFestcont(dto.getFestcont().replaceAll("\n", "<br>"));
 		dto.setFestcontent(dto.getFestcontent().replaceAll("\n", "<br>"));
@@ -164,10 +166,15 @@ public class FestivalController {
 			@RequestParam(value = "type", defaultValue = "2")int type) {
 		ModelAndView mav=new ModelAndView();
 		int result=0;
+		String dbImg="";
 		try {
+			dbImg=service.getFestImg(festidx);
+			File f=new File("c:/student_java/upload/"+dbImg);
+			if(f.exists()) {
+				f.delete();
+			}
 			result=service.festDel(festidx);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		if(result>0) {
@@ -188,7 +195,54 @@ public class FestivalController {
 
 		return mav;
 	}
-	
+	@GetMapping("/festUpd")
+	public ModelAndView festUpdateForm(@RequestParam(value = "festidx", defaultValue = "0")int festidx) {
+		ModelAndView mav=new ModelAndView();
+		FestivalDTO dto=null;
+		try {
+			dto=service.festContent(festidx);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		if(dto==null) {
+			mav.addObject("msg", "[ERROR]삭제된 게시물이거나 비정상적인 접근입니다.");
+			mav.addObject("url", "festival");
+			mav.setViewName("admin/adminMsg");
+			return mav;
+		}
+		mav.addObject("dto", dto);
+		mav.setViewName("festival/festUpdate");
+		return mav;
+	}
+	@PostMapping("/festUpd")
+	public ModelAndView festUpdateSubmit(FestivalDTO dto,
+			@RequestParam(value = "upload", required = false)MultipartFile upload) {
+		ModelAndView mav=new ModelAndView();
+		int result=0;
+		try {
+			if(upload.isEmpty()==false) {
+				File f=new File("c:/student_java/upload/"+dto.getFestimg());
+				if(f.exists()) {
+					f.delete();
+				}
+				copyInto(upload);
+				dto.setFestimg(upload.getOriginalFilename());
+				dto.setFestapi(0);
+			}
+			result=service.festUpd(dto);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		if(result>0) {
+			mav.setViewName("redirect:/festCont?festidx="+dto.getFestidx()+"&type=2");
+		}else {
+			mav.addObject("msg", "[ERROR]수정 실패.");
+			mav.addObject("url", "festival");
+			mav.setViewName("admin/adminMsg");
+		}
+		
+		return mav;
+	}
 	
 	public void copyInto(MultipartFile upload) {
 		File f=new File("c:/student_java/upload/"+upload.getOriginalFilename());
