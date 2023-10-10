@@ -19,4 +19,10 @@ public class CosServiceImple implements CosService {
 		List<CosDTO> lists=mapper.CosList();
 		return lists;
 	}
+	
+	@Override
+	public CosDTO cosContent(int idx) throws Exception {
+		CosDTO dto=mapper.cosContent(idx);
+		return dto;
+	}
 }

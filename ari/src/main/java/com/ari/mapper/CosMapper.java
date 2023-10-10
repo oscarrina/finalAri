@@ -7,4 +7,5 @@ import com.ari.cos.model.CosDTO;
 public interface CosMapper {
 
 	public List<CosDTO> CosList();
+	public CosDTO cosContent(int idx);
 }
