@@ -24,7 +24,7 @@ public class AttDTO {
 	private int parking;
 	private int attPet;
 	private int attBaby;
-	private int attAge;
+	private String attAge;
 	private String attStart;
 	private String attEnd;
 	private int area;
