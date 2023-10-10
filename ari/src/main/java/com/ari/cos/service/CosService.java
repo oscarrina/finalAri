@@ -7,4 +7,5 @@ import com.ari.cos.model.CosDTO;
 public interface CosService {
 
 	public List<CosDTO> cosList()throws Exception;
+	public CosDTO cosContent(int idx) throws Exception;
 }

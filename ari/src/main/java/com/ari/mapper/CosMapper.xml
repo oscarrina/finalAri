@@ -6,4 +6,7 @@
 	<select id="CosList" resultType="com.ari.cos.model.CosDTO">
 		select * from cos
 	</select>
+	<select id="cosContent" resultType="com.ari.cos.model.CosDTO" parameterType="Integer">
+		select * from cos where idx=#{idx}
+	</select>
 </mapper>
