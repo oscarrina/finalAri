@@ -15,19 +15,21 @@ import lombok.ToString;
 public class AttDTO {
 
 	private int idx;
-	private String attAddr;
-	private String attTel;
-	private String attName;
-	private String attInfo;
-	private int attParking;
+	private String userBN;
+	private String userId;
+	private String addr;
+	private String tel;
+	private String infoName;
+	private String info;
+	private int parking;
 	private int attPet;
 	private int attBaby;
 	private int attAge;
 	private String attStart;
 	private String attEnd;
 	private int area;
-	private int attSigungu;
-	private String attImg;
+	private int sigungu;
+	private String infoImg;
 	private String attClose;
 	
 }

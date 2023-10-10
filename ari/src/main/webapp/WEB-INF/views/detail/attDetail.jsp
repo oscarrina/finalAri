@@ -9,44 +9,66 @@
 .content{
   display: block;
   width: 900px; /* 원하는 너비로 조정 */
-  margin-top: 150px; /* 가로 가운데 정렬 */
+  margin-top: 160px; /* 가로 가운데 정렬 */
   margin-left:auto;
   margin-right:auto;
 }
 .mainImg{
-	width:400px;
+	width:450px;
 	height:300px;
-	border-style:solid;
 	border-radius:25px;
-	border-color:skyblue;
-	border-width: medium medium medium medium;
 }
-h2{
-	text-align: center;
+h3{
+  text-align: left;
 }
+.topTh{
+  border-top-left-radius: 25px;
+  
+}
+.bottomTh{
+  border-bottom-left-radius: 25px;
+}
+th{
+  background-color: skyblue;
+}
+h5{
+  text-align: center;
+}
+.mainTable{
+  border: solid 3px #253BFF;
+  border-radius: 25px;
+  border-spacing: 20px;
+}
+.addTable{
+  width:900px;
+  border-collapse: separate;
+  border-spacing: 0 15px;
+}
+
 </style>
 </head>
 <body>
 <%@include file="/WEB-INF/views/header.jsp" %>
 <div class="content">
 <c:forEach items="${att }" var="att">
+<div class="mainTable">
 <table>
 <tr>
 	<td rowspan="4">
 		<img alt="상세 메인이미지" src="/imgs/att.jpeg" class="mainImg">	
 	</td>
 	<td>
-		<h3>${att.attName }</h3>
+		<h3>${att.infoName }</h3>
 	</td>
 </tr>
 <tr>
 	<td>
-		별점<br>주소
+		${att.addr }
 	</td>
 </tr>
 <tr>
 	<td rowspan="2">
-		<h5>${att.attInfo }</h5>
+		<h6>${att.info }</h6>
 	</td>
 </tr>
 <tr>
@@ -55,9 +77,65 @@ h2{
 	</td>
 </tr>
 </table>
+</div>
 <br><br><br>
-<div class="add">
-	<h4><strong>업장설명</strong></h4><hr style="border:solid 5px blue">
+<h6>관광지</h6>
+<div >
+<table class="addTable">
+	<tr>
+		<th class="topTh"><h5>주차시설 유무</h5></th>
+		<td><c:choose>
+  	 	 <c:when test="${att.attParking == 0}">
+    	  <h5>무</h5>
+  		 </c:when>
+   		 <c:otherwise>
+         <h5>유</h5>
+   		 </c:otherwise>
+		</c:choose></td>
+	</tr>
+	<tr>
+		<th><h5>이용시간</h5></th>
+		<td>
+		<h5>${att.attStart }~${att.attEnd }</h5>
+		</td>
+	</tr>
+	<tr>
+		<th><h5>휴무일</h5></th>
+		<td>
+		<h5>${att.attClose }</h5>
+		</td>
+	</tr>
+	<tr>
+		<th><h5>체험가능 연령</h5></th>
+		<td><h5>${att.attAge }</h5></td>
+	</tr>
+	<tr>
+		<th><h5>유모차 대여</h5></th>
+		<td>
+		<c:choose>
+		<c:when test="${att.attBaby==0 }">
+		<h5>불가능</h5>
+		</c:when>
+		<c:otherwise>
+		<h5>가능</h5>
+		</c:otherwise>
+		</c:choose>
+		</td>
+	</tr>
+	<tr>
+		<th class="bottomTh"><h5>반려동물 동반 가능 여부</h5></th>
+		<td>
+		<c:choose>
+		<c:when test="${att.attPet==0 }">
+		<h5>불가능</h5>
+		</c:when>
+		<c:otherwise>
+		<h5>가능</h5>
+		</c:otherwise>
+		</c:choose>
+		</td>
+	</tr>
+</table>
 </div>
 </c:forEach>
 </div>

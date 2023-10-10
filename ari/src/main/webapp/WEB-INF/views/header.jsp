@@ -204,7 +204,7 @@ body{
     	<hr class="sidehr">
     	<li class="sideLi"><a class="sideA">지역축제정보</a></li>
     	<hr class="sidehr">
-    	<li class="sideLi"><a class="sideA">지역추천코스</a></li>
+    	<li class="sideLi"><a class="sideA" href="cosList">지역추천코스</a></li>
     	<hr class="sidehr">
     	<li class="sideLi"><a class="sideA">일정공유게시판</a></li>
     	<hr class="sidehr">

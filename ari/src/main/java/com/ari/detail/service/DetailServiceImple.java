@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.ari.mapper.DetailMapper;
 
 import com.ari.detail.model.AttDTO;
+import com.ari.detail.model.BerthDTO;
 import com.ari.detail.model.BerthInfoDTO;
 import com.ari.detail.model.FoodDTO;
 import com.ari.detail.model.searchVO;
@@ -66,22 +67,27 @@ public class DetailServiceImple implements DetailService {
 	
 	@Override
 	public List<FoodDTO> foodDetail(int idx) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		List<FoodDTO> list=mapper.foodDetail(idx);
+		return list;
 	}
 	@Override
 	public List<BerthInfoDTO> berthInfoDetail(int idx) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		List<BerthInfoDTO> list=mapper.berthInfoDetail(idx);
+		return list;
+	}
+	@Override
+	public List<BerthDTO> berthDetail(int idx) throws Exception {
+		List<BerthDTO> lists=mapper.berthDetail(idx);
+		return lists;
 	}
 	@Override
 	public List<AttDTO> attDetail(int idx) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		List<AttDTO> list=mapper.attDetail(idx);
+		return list;
 	}
 	@Override
 	public List<FestivalDTO> festDetail(int idx) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		List<FestivalDTO> list=mapper.festDetail(idx);
+		return list;
 	}
 }

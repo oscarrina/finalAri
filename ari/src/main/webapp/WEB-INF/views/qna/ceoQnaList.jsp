@@ -55,8 +55,13 @@
   </tbody>
 </table>
 <div align="center" >
-			${pageStr }
-		</div>
+	<c:if test="${empty lists}">
+	
+	</c:if>
+	<c:if test="${!empty lists}">
+		${pageStr }
+	</c:if>
+</div>
 </div>
     </div>
     <%@include file="../ceo/ceoFooter.jsp" %>

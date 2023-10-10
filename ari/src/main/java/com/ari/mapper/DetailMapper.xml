@@ -4,22 +4,22 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="com.ari.mapper.DetailMapper">
   	<select id="foodListIn" parameterType="com.ari.detail.model.searchVO" resultType="com.ari.detail.model.FoodDTO">
-  		select idx,foodInfoName,foodInfo,foodImg
+  		select idx,infoName,info,infoImg
   		from food 
-  		where area=#{area} 
-  		and foodInfoName like '%' || #{search} || '%'
+  		where area=#{area}
+  		and infoName like '%' || #{search} || '%'
   	</select>
   	<select id="berthInfoListIn" parameterType="com.ari.detail.model.searchVO" resultType="com.ari.detail.model.BerthInfoDTO">
-  	    select idx,berthInfoInfo,berthInfoName,berthInfoImg
+  	    select idx,infoName,info,infoImg
   	    from berthInfo 
   	    where area=#{area}
-  	    and berthInfoName like '%' || #{search} || '%'
+  	    and infoName like '%' || #{search} || '%'
   	</select>
   	<select id="attListIn" parameterType="com.ari.detail.model.searchVO" resultType="com.ari.detail.model.AttDTO">
-  		select idx,attInfo,attName,attImg
+  		select idx,addr,infoName,attImg
   		from att 
   		where area=#{area}
-  		and attName like '%' || #{search} || '%'
+  		and infoName like '%' || #{search} || '%'
   	</select>
   	<select id="festivalListIn" parameterType="com.ari.detail.model.searchVO" resultType="com.ari.festival.model.FestivalDTO">
   		select festIdx,festCont,festTitle,festImg
@@ -28,19 +28,19 @@
   		and festTitle like '%' || #{search} || '%'
   	</select>
   	<select id="foodList" parameterType="String" resultType="com.ari.detail.model.FoodDTO">
-  		select idx,foodInfoName,foodInfo,foodImg
-    	from food
-  		where foodInfoName like '%' || #{search} || '%'
+  		select idx,infoName,info,infoImg
+  		from food 
+  		where infoName like '%' || #{search} || '%'
   	</select>
   	<select id="berthInfoList" parameterType="String" resultType="com.ari.detail.model.BerthInfoDTO">
-  	    select idx,berthInfoInfo,berthInfoName,berthInfoImg
+  	    select idx,infoName,info,infoImg
   	    from berthInfo
-  	    where berthInfoName like '%' || #{search} || '%'
+  	    where infoName like '%' || #{search} || '%'
   	</select>
   	<select id="attList" parameterType="String" resultType="com.ari.detail.model.AttDTO">
-  		select idx,attInfo,attName,attImg 
+  		select idx,addr,infoName,attImg
   		from att
-  		where attName like '%' || #{search} || '%'
+  		where infoName like '%' || #{search} || '%'
   	</select>
   	<select id="festivalList" parameterType="String" resultType="com.ari.festival.model.FestivalDTO">
   		select festIdx,festCont,festTitle,festImg
@@ -56,6 +56,11 @@
   		select * 
   		from berthInfo
   		where idx=#{idx}
+    </select>
+    <select id="berthDetail" parameterType="int" resultType="com.ari.detail.model.BerthDTO">
+    	select * 
+    	from berth
+    	where idx=${idx}
     </select>
     <select id="attDetail" parameterType="int" resultType="com.ari.detail.model.AttDTO">
     	select * 
