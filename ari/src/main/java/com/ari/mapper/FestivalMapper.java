@@ -14,5 +14,8 @@ public interface FestivalMapper {
 	public List<FestivalDTO> festListArea(Map map);
 	public List<FestivalDTO> festListAreaTitleDesc(Map map);
 	public FestivalDTO festContent(int festidx);
+	public String getFestImg(int festidx);
 	public int festDel(int festidx);
+	public int festUpd(FestivalDTO dto);
+	
 }

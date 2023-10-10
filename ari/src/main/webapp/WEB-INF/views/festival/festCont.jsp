@@ -15,8 +15,8 @@
 function showDel(idx,type){
 	location.href='festDel?festidx='+idx+'&type='+type;
 }
-function showUpd(){
-	location.href='#';
+function showUpd(idx){
+	location.href='festUpd?festidx='+idx;
 }
 </script>
 <style>
@@ -78,6 +78,7 @@ function showUpd(){
 	margin-right: auto;
 	margin-left: auto;
 	overflow: hidden;
+	object-fit:cover;
 }
 .traligncnt{
 	text-align: center !important;
@@ -125,6 +126,9 @@ function showUpd(){
   color:#8B95A6;
   background-size: 100% 100%;
 }
+.btn2:hover{
+ 	background-color: #686DB9 !important;
+}
 </style>
 </head>
 <body>
@@ -149,7 +153,8 @@ function showUpd(){
 				<td class="td1 title1">${dto.festtitle }</td>
 			</tr>
 			<tr class="tr1">
-				<td class="traligncnt" rowspan="7"><img class="img1" alt="" src="/imgs/${dto.festimg }"></td>
+				<c:if test="${dto.festapi==0 }"><td class="traligncnt" rowspan="7"><img class="img1" alt="" src="/imgs/${dto.festimg }"></td></c:if>
+				<c:if test="${dto.festapi==1 }"><td class="traligncnt" rowspan="7"><img class="img1" alt="" src="${dto.festimg }"></td></c:if>
 				<td class="td1">${dto.festtelname }</td>
 			</tr>
 			<tr class="">
@@ -187,7 +192,7 @@ function showUpd(){
 				<button type="button" class="btn btn-primary btn2" 
 					style="background-color:#666CDE; width:70px; height:40px; font-size:11px; " onclick="showDel(${dto.festidx},${type })">삭제</button>&nbsp;&nbsp;
 				<button type="button" class="btn btn-primary btn2" 
-					style="background-color:#3239AF; width:70px; height:40px; font-size:11px;" onclick="showUpd()">수정</button>
+					style="background-color:#3239AF; width:70px; height:40px; font-size:11px;" onclick="showUpd(${dto.festidx})">수정</button>
 		    </c:if>
 		    <c:if test="${type==3 }">
 		    	<button type="button" class="btn btn-primary btn2" 

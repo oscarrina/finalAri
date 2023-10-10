@@ -14,6 +14,12 @@
 <link rel="stylesheet" type="text/css" href="/css/festivalListLayout.css">
 <script type="text/javascript" src="../../../js/httpRequest.js"></script>
 <script>
+function show1(){
+	var cate=document.all.sbox.value;
+	if(cate==1){
+		sendRequest('getArea', null, showResult, 'GET');
+	}
+}
 function show(){
 	var cate=document.all.sbox.value;
 	if(cate==2){
@@ -31,7 +37,7 @@ function showResult(){
 			
 			var spanTag=document.all.sboxspan;
 			var sbox=document.all.sbox.value;
-			let uarea=<c:out value="${area}" />;
+			var uarea=<c:out value="${area}" />;
 			var str='';
 			str='<select class="border2 border3" aria-label="Default select example" onchange="show2()" id="sbox2">';
 			var areaList=data.getElementsByTagName('item');
@@ -61,7 +67,7 @@ function show2(){
 </script>
 
 </head>
-<body>
+<body onload="show1()">
 <div id="page-wrapper">
 
 <%@ include file="../admin/adminHeader.jsp" %>
@@ -88,19 +94,20 @@ function show2(){
 		    </c:url>
 		  <table class="table">
 			<tr>
-				<td style="width:120px;" rowspan="3"><img class="poster" alt="" src="/imgs/${dto.festimg }"></td>
-				<td>${dto.festtitle }</td>
-				<td rowspan="3"><a href="${conturl }">상세</a></td>
+				<c:if test="${dto.festapi==0 }"><td style="width:120px;" rowspan="3"><img class="poster" alt="" src="/imgs/${dto.festimg }"></td></c:if>
+				<c:if test="${dto.festapi==1 }"><td style="width:120px;" rowspan="3"><img class="poster" alt="" src="${dto.festimg }"></td></c:if>
+				<td class="title1">${dto.festtitle }</td>
+				<td class="cont1" rowspan="3"><input type="button" class="btn2" value="상세" onclick="javascript:location.href='festCont?festidx=${dto.festidx}&type=3';"></td>
 			</tr>
 			<tr>
-				<td>${dto.festtelname }(tel.${dto.festtel })</td>
+				<td class="tel1">${dto.festtelname }(tel.${dto.festtel })</td>
 			</tr>
 			<tr>
-				<td>${dto.festaddr }</td>
+				<td class="addr1">${dto.festaddr }</td>
 			</tr>
 			</table>
 		</c:forEach>
-		<div align="center">${pageStr }</div>
+		<div style="text-align: center;">${pageStr }</div>
 		</div>
 		</div>
 					
