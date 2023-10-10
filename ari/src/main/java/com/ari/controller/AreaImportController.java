@@ -16,5 +16,4 @@ public class AreaImportController {
 	public String areaImportGo() {
 		return "areaImport/areaImport";
 	}
-
 }

@@ -1,0 +1,70 @@
+@charset "UTF-8";
+<style>
+
+.container{
+	flex-direction: column;
+}
+.containerHead {
+    display: flex;
+}
+
+.containerHead div{
+	margin: 20px;
+	cursor: pointer;
+}
+.containerHead div:active{
+	margin: 20px;
+	cursor: pointer;
+}
+
+.containerBody{
+	width: 1000px;
+	display: flex;
+}
+.regcom{
+	background-color: gray;
+	border-radius:25px;
+	width: 500px;
+}
+.regcom div{
+	margin-left:20px;
+}
+.regcom textarea{
+	border: 1px solid #4068A7;
+	border-radius: 15px;
+	resize: none;
+	padding:15px 20px;
+	background:rgba(255,255,255,.1);
+	background-color:white;
+	width: 200px;
+	height: 100px;
+}
+.regcom label{
+	margin-bottom: -20px;
+}
+.regcom input, .typeForm input{
+	border-color:#4068A7;
+	padding:15px;
+	border-radius:15px;
+	background:rgba(255,255,255,.1);
+	background-color:white;
+	margin-bottom:10px;
+	width: 200px;
+	height: 23px;
+}
+.label{
+	width:100px;
+}
+#parkCheck{
+	height: 20px;
+}
+.regType{
+	background-color: #213555;
+	width:500px;
+	border-radius:25px;
+	margin-left: -40px;
+}
+.typeForm{
+	color : white;
+}
+</style>

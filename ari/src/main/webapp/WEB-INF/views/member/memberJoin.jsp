@@ -163,7 +163,7 @@ select{
 				let color = data=="중복된 아이디 입니다."?'red':'green';
 				idcheckMsg.style.color=color;
 			}
-		}	
+		}
 	}
 	//사업자 번호 중복검사 
 	function bnDouble(){
