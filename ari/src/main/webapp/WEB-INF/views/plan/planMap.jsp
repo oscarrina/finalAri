@@ -6,6 +6,9 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
+html{
+	user-select: none;
+}
 .main{
  display:flex;
  margin-top: 150px;
@@ -32,12 +35,13 @@
 .container1 .containerHead{
 	margin-top: 10px;
 	margin-left: 10px;
+	height: 10%
 }	
 .container1 .containerBody{
 	align-items: 5px;
 	height:85%;
 	flex-direction: column;
-	justify-content: space-around; 
+	margin: 0px auto;
 	overflow: scroll;
 }
 .container1 .containerBody img{
@@ -67,6 +71,9 @@
 	font-size: 20px;
 	cursor: pointer;
 }
+.container2 .containerHead div:active{
+	background-color: #38B6FF
+}
 .arrow{
 	width: 80px;
 	height: 30px;
@@ -83,7 +90,7 @@
 	border-top-right-radius: 10px;
 }
 .container2 .containerBody{
-	height:90%;
+	height : 85%;
 	overflow: scroll;
 	border-bottom-right-radius: 10px;
 	border-bottom-left-radius: 10px;
@@ -118,10 +125,15 @@
 }
 </style>
 <script>
-	function categoryButton(category){
-		var categoryId = document.getElementById('category');
-		categoryId.backgroundColor = "#db0d36";
-	}
+function categoryButton(category) {
+    var categoryDivs = document.querySelectorAll('.containerHead div');
+
+    for (var i = 0; i < categoryDivs.length; i++) {
+        categoryDivs[i].style.backgroundColor  = '';
+    }
+    var clickedButton = document.getElementById(category);
+    clickedButton.style.backgroundColor = "#38B6FF";
+}
 </script>
 </head>
 <body>
@@ -143,25 +155,25 @@
 						<option>2일차</option>
 					</select>
 					</div>
-					<div class="containerBody">
-						<img class="img" src="/img/img.jpg" alt="Image">
-						<img class="arrow" src="/img/planArrow.png">
-						<img class="img" src="/img/img.jpg" alt="Image">
-						<img class="arrow" src="/img/planArrow.png">
-						<img class="img" src="/img/img.jpg" alt="Image">
-						<img class="arrow" src="/img/planArrow.png">
-						<img class="img" src="/img/img.jpg" alt="Image">
-						<img class="arrow" src="/img/planArrow.png">
-						<img class="img" src="/img/img.jpg" alt="Image">
-						<img class="arrow" src="/img/planArrow.png">
-						<img class="img" src="/img/img.jpg" alt="Image">
-					</div>
+				<div class="containerBody">
+					<img class="img" src="/img/img.jpg" alt="Image">
+					<img class="arrow" src="/img/planArrow.png">
+					<img class="img" src="/img/img.jpg" alt="Image">
+					<img class="arrow" src="/img/planArrow.png">
+					<img class="img" src="/img/img.jpg" alt="Image">
+					<img class="arrow" src="/img/planArrow.png">
+					<img class="img" src="/img/img.jpg" alt="Image">
+					<img class="arrow" src="/img/planArrow.png">
+					<img class="img" src="/img/img.jpg" alt="Image">
+					<img class="arrow" src="/img/planArrow.png">
+					<img class="img" src="/img/img.jpg" alt="Image">
+				</div>
 			</div>
 			<div class= "container2">
 				<div class="containerHead">
 					<div id = "categoryButton1" onclick="categoryButton('categoryButton1')">관광지</div>
-					<div id = "categoryButton2">음식점</div>
-					<div id = "categoryButton3">숙박</div>
+					<div id = "categoryButton2" onclick="categoryButton('categoryButton2')">음식점</div>
+					<div id = "categoryButton3" onclick="categoryButton('categoryButton3')">숙박</div>
 				</div>
 				<div class="containerBody">
 					<div><img class="img" src="/img/img.jpg" alt="Image"></div>
@@ -199,7 +211,7 @@ var map = new kakao.maps.Map(mapContainer, mapOption);
 var geocoder = new kakao.maps.services.Geocoder();
 
 //주소로 좌표를 검색합니다
-geocoder.addressSearch('제주특별자치도 제주시 첨단로 242', function(result, status) {
+geocoder.addressSearch('강원도 원주시', function(result, status) {
 
 // 정상적으로 검색이 완료됐으면 
  if (status === kakao.maps.services.Status.OK) {
