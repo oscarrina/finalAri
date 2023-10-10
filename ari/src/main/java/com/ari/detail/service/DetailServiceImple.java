@@ -64,5 +64,24 @@ public class DetailServiceImple implements DetailService {
 		return lists;
 	}
 	
-	
+	@Override
+	public List<FoodDTO> foodDetail(int idx) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public List<BerthInfoDTO> berthInfoDetail(int idx) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public List<AttDTO> attDetail(int idx) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public List<FestivalDTO> festDetail(int idx) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
