@@ -21,5 +21,5 @@ public class ReviewDTO {
 	private String reviewContent;
 	private Date reviewDate;
 	private int reviewScore;
-	private String reviewImg;
+	private String img;
 }

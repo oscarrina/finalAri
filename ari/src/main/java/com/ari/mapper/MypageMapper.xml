@@ -15,7 +15,7 @@
 		order by reservisitstart) a) b
 	where rnum<![CDATA[>=]]>#{start} and rnum<![CDATA[<=]]>#{end}
   </select>
-  <select id="reviewWrite" parameterType="String" resultType="com.ari.review.model.ReviewDTO">
+  <select id="reviewWrite" parameterType="String" resultType="com.ari.reser.model.ReserDTO">
   	select * from
 		(select rownum as rnum,a.* from
 		(select r.reseridx,r.idx,r.userid,r.resername,
@@ -27,9 +27,37 @@
 		order by reservisitstart) a) b
 	where rnum<![CDATA[>=]]>#{start} and rnum<![CDATA[<=]]>#{end}
   </select>
-  <select id="reviewTotalCnt" parameterType="String" resultType="Integer">
+  <select id="reviewWriteTotalCnt" parameterType="map" resultType="Integer">
   	select count(*)
   	from reser
-  	where reserReview = 'N' and userid = #{userid}
+  	where reserReview = 'N' and userid = #{userid} and reservisitend <![CDATA[<]]> #{now}
+  </select>
+  <select id="myPageReview" parameterType="map" resultType="com.ari.review.model.ReviewDTO">
+  	select * from
+		(select rownum as rnum,a.* from
+		(select r.reviewidx,r.berthidx,r.userid,r.reviewContent,r.reviewdate,r.reviewscore,i.img
+		from review r,img i
+		where r.reviewidx = i.idx and r.userid = #{userId}
+		order by r.reviewidx) a) b
+	where rnum<![CDATA[>=]]>#{start} and rnum<![CDATA[<=]]>#{end}
+  </select>
+  <select id="reviewTotalCnt" resultType="Integer" parameterType="String">
+  	select count(*)
+  	from review
+  	where userid = #{userid}
+  </select>
+  <select id="myPageLike" parameterType="map" resultType="com.ari.like.model.LikeDTO">
+  	select * from
+		(select rownum as rnum,a.* from
+		(select *
+		from liketable
+		where userid = #{userId}
+		order by idx) a) b
+	where rnum<![CDATA[>=]]>#{start} and rnum<![CDATA[<=]]>#{end}
+  </select>
+  <select id="likeTotalCnt" parameterType="String" resultType="Integer">
+  	select count(*)
+  	from liketable
+  	where userid = #{userId}
   </select>
 </mapper>

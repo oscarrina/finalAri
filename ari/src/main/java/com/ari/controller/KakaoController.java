@@ -48,9 +48,8 @@ public class KakaoController {
         }else if(userInfo == 1) {
         	session.setAttribute("sid", userid);
     		session.setAttribute("sname", dto.getUsername());
-        	mav.addObject("msg", dto.getUsername()+"님 환영합니다.");
         	mav.addObject("url", "/");
-        	mav.setViewName("member/memberMsg");
+        	mav.setViewName("member/memberLoginOk");
         }
         return mav;
     }
@@ -63,7 +62,7 @@ public class KakaoController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-    	String msg = result > 0 ? "회원가입 완료":"회원가입 실패";
+    	String msg = result > 0 ? "회원가입 완료":"다시 시도해주세요";
     	ModelAndView mav = new ModelAndView();
     	mav.addObject("msg", msg);
     	mav.addObject("url", "/");

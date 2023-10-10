@@ -19,8 +19,8 @@ public class ReserDTO {
 	private int idx;
 	private String userId;
 	private String reserName;
-	private String reserVisitStart;
-	private String reserVisitEnd;
+	private Date reserVisitStart;
+	private Date reserVisitEnd;
 	private String reserPriceInfo;
 	private int reserPrice;
 	private Date reserPriceDay;
