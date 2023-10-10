@@ -93,7 +93,7 @@ public class FestivalController {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-		String url="/fest?type="+type;
+		String url="/festival?type="+type;
 		String pageStr=com.ari.page.PageModuleNotice
 				.makeNoticePage(url, totalCnt, listSize, pageSize, cp);
 		if(totalCnt==0) {pageStr="";}

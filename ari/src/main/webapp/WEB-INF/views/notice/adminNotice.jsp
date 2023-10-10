@@ -54,7 +54,12 @@ function show(){
 		  <tfoot>
 		  	<tr>
 				<td colspan="5" align="center">
-					${pageStr }
+					<c:if test="${empty lists }">
+				
+					</c:if>
+					<c:if test="${!empty lists }">
+						${pageStr }
+					</c:if>
 				</td>
 			</tr>
 		  </tfoot>
