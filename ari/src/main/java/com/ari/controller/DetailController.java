@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ari.detail.model.AttDTO;
+import com.ari.detail.model.BerthDTO;
 import com.ari.detail.model.BerthInfoDTO;
 import com.ari.detail.model.FoodDTO;
 import com.ari.detail.model.searchVO;
@@ -31,7 +32,7 @@ public class DetailController {
 		List<BerthInfoDTO> berthInfo=null;
 		List<AttDTO> att=null;
 		List<FestivalDTO> fest=null;
-		
+				
 		ModelAndView mav=new ModelAndView();
 		searchVO params=new searchVO();
 		
@@ -108,6 +109,8 @@ public class DetailController {
 			
 			break;
 		case 4:
+			String str="redirect:/userFest?area="+area;
+			
 			if(area==0) {
 				try {
 					fest=service.festivalList(search);
@@ -126,8 +129,7 @@ public class DetailController {
 			}
 			
 			mav.addObject("fest",fest);
-			mav.setViewName("detail/festList");
-			
+			mav.setViewName(str);
 			break;
 		default:
 			
@@ -153,20 +155,24 @@ public class DetailController {
 	@RequestMapping("berthInfoDetail")
 	public ModelAndView berthInfodetail(@RequestParam("berthInfoIdx") int idx) {
 		List<BerthInfoDTO> berthInfo =null;
+		List<BerthDTO> berth=null;
 		try {
 			berthInfo=service.berthInfoDetail(idx);
+			berth=service.berthDetail(idx);
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("berthInfo",berthInfo);
+		mav.addObject("berth",berth);
 		mav.setViewName("detail/berthInfoDetail");
 		return mav;
 		
 	}
 	@RequestMapping("attDetail")
-	public ModelAndView attdetail(@RequestParam(value="attIdx",required=false) int idx) {
+	public ModelAndView attdetail(@RequestParam("attIdx") int idx) {
 		List<AttDTO> att =null;
 		try {
 			att=service.attDetail(idx);

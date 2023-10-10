@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.ari.detail.model.AttDTO;
+import com.ari.detail.model.BerthDTO;
 import com.ari.detail.model.BerthInfoDTO;
 import com.ari.detail.model.FoodDTO;
 import com.ari.detail.model.searchVO;
@@ -32,6 +33,8 @@ public interface DetailService {
 	public List<FoodDTO> foodDetail(int idx) throws Exception;
 	
 	public List<BerthInfoDTO> berthInfoDetail(int idx) throws Exception;
+	
+	public List<BerthDTO> berthDetail(int idx) throws Exception;
 	
 	public List<AttDTO> attDetail(int idx) throws Exception;
 	

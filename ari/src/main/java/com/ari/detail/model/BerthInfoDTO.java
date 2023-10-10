@@ -15,16 +15,17 @@ import lombok.ToString;
 public class BerthInfoDTO {
 
 	private int idx;
-	private String berthInfoAddr;
-	private String berthInfoTel;
-	private String berthInfoName;
-	private String berthInfoInfo;
-	private int berthInfoparking;
+	private String userBN;
+	private String userId;
+	private String addr;
+	private String tel;
+	private String infoName;
+	private String info;
+	private int parking;
 	private int berthInfoSeat;
-	private int berthInfoScore;
 	private int area;
-	private int berthInfoSigungu;
+	private int sigungu;
 	private String berthInfoStart;
 	private String berthInfoEnd;
-	private String berthInfoImg;
+	private String infoImg;
 }

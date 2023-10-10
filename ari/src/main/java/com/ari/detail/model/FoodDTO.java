@@ -15,16 +15,18 @@ import lombok.ToString;
 public class FoodDTO {
 
 	private int idx;
-	private String foodAddr;
-	private String foodTel;
-	private String foodInfoName;
-	private String foodInfo;
-	private int foodparking;
+	private String userBN;
+	private String userId;
+	private String addr;
+	private String tel;
+	private String infoName;
+	private String info;
+	private int parking;
 	private String foodClose;
 	private int area;
-	private int foodSigungu;
+	private int sigungu;
 	private String foodOpen;
-	private String foodImg;
+	private String infoImg;
 	private String foodMenu;
 	
 }

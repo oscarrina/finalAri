@@ -29,7 +29,10 @@ public interface DetailMapper {
 	
 	public List<BerthInfoDTO> berthInfoDetail(int idx);
 	
+	public List<BerthDTO> berthDetail(int idx);
+	
 	public List<AttDTO> attDetail(int idx);
 	
 	public List<FestivalDTO> festDetail(int idx);
+	
 }
