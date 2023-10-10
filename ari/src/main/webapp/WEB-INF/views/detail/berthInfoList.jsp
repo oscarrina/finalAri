@@ -17,7 +17,7 @@
 <div class="content">
 <c:forEach var="berthInfo" items="${berthInfo}">
 	<article class="postcard dark blue">
-			<a class="postcard__img_link" href="#">
+			<a class="postcard__img_link" href="berthInfoDetail?berthInfoIdx=${idx }">
 				<img class="postcard__img" src="https://picsum.photos/1000/1000" alt="Image Title" />
 			</a>
 			<div class="postcard__text">

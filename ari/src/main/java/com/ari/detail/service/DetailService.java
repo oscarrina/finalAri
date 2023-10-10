@@ -28,4 +28,12 @@ public interface DetailService {
 	public List<AttDTO> attList(String search) throws Exception;
 	
 	public List<FestivalDTO> festivalList(String search) throws Exception;
+	
+	public List<FoodDTO> foodDetail(int idx) throws Exception;
+	
+	public List<BerthInfoDTO> berthInfoDetail(int idx) throws Exception;
+	
+	public List<AttDTO> attDetail(int idx) throws Exception;
+	
+	public List<FestivalDTO> festDetail(int idx) throws Exception;
 }

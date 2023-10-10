@@ -47,4 +47,42 @@
   		from fest 
   		where festTitle like '%' || #{search} || '%'
   	</select>
+  	<select id="foodDetail" parameterType="int" resultType="com.ari.detail.model.FoodDTO">
+  		select *
+  		from food
+  		where idx=#{idx}
+  	</select>
+  	<select id="berthInfoDetail" parameterType="int" resultType="com.ari.detail.model.BerthInfoDTO">
+  		select * 
+  		from berthInfo
+  		where idx=#{idx}
+    </select>
+    <select id="attDetail" parameterType="int" resultType="com.ari.detail.model.AttDTO">
+    	select * 
+    	from att 
+    	where idx=#{idx}
+    </select>
+    <select id="festDetail" parameterType="int" resultType="com.ari.festival.model.FestivalDTO">
+    	select * 
+    	from fest
+    	where festIdx=#{idx}
+    </select>
   </mapper>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,9 +17,10 @@
 <body>
 <%@include file="/WEB-INF/views/header.jsp" %>
 <div class="content">
-<c:forEach var="berthInfo" items="${att}">
+<c:if test="${empty att }"><h2>검색결과가 없습니다!</h2></c:if>
+<c:forEach var="att" items="${att}">
 	<article class="postcard dark blue">
-			<a class="postcard__img_link" href="#">
+			<a class="postcard__img_link" href="attDetail?attIdx=${att.idx }">
 				<img class="postcard__img" src="https://picsum.photos/1000/1000" alt="Image Title" />
 			</a>
 			<div class="postcard__text">

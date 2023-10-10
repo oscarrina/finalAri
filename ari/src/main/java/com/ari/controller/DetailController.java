@@ -136,5 +136,65 @@ public class DetailController {
 		return mav;
 		}
 	
+	@RequestMapping("foodDetail")
+	public ModelAndView fooddetail(@RequestParam("foodIdx") int idx) {
+		List<FoodDTO> food = null;
+		try {
+			food = service.foodDetail(idx);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("food",food);
+		mav.setViewName("detail/foodDetail");
+		return mav;
+	}
+	@RequestMapping("berthInfoDetail")
+	public ModelAndView berthInfodetail(@RequestParam("berthInfoIdx") int idx) {
+		List<BerthInfoDTO> berthInfo =null;
+		try {
+			berthInfo=service.berthInfoDetail(idx);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("berthInfo",berthInfo);
+		mav.setViewName("detail/berthInfoDetail");
+		return mav;
+		
+	}
+	@RequestMapping("attDetail")
+	public ModelAndView attdetail(@RequestParam(value="attIdx",required=false) int idx) {
+		List<AttDTO> att =null;
+		try {
+			att=service.attDetail(idx);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("att",att);
+		mav.setViewName("detail/attDetail");
+		return mav;
+	}
+	@RequestMapping("festDetail")
+	public ModelAndView festdetail(@RequestParam("festIdx")int idx) {
+		
+		List<FestivalDTO> fest=null;
+		
+		try {
+			fest=service.festDetail(idx);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("fest",fest);
+		mav.setViewName("detail/festDetail");
+		return mav;
+	}
+	
 	
 }
