@@ -8,5 +8,6 @@ import com.ari.reser.model.ReserDTO;
 public interface ReserMapper {
 
 	public List<ReserDTO> reserSelect(Map map);
-	public int reserTotalCnt();
+	public int reserTotalCnt(String userId);
+	public int reserCancel(int reserIdx);
 }

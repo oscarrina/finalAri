@@ -17,4 +17,5 @@ public class LikeDTO {
 	private int likeType;
 	private String userId;
 	private String likeYN;
+	private String img;
 }

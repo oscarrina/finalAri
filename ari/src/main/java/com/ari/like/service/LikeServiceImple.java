@@ -22,10 +22,5 @@ public class LikeServiceImple implements LikeService {
 		int result = mapper.like(dto);
 		return result;
 	}
-	@Override
-	public int likeNo(LikeDTO dto) {
-		int result = mapper.likeNo(dto);
-		return result;
-	}
 
 }

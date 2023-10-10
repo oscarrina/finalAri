@@ -6,6 +6,14 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="/css/mypage.css">
+<script>
+function reviewWrite(){
+	
+}
+function reviewSelect(){
+	
+}
+</script>
 <style>
 #myReview{color: #253BFF;}
 </style>
@@ -16,9 +24,9 @@
 <div class="mypageReviewDiv">
 <h3>내 리뷰</h3>
 <button type="button" class="btn btn-primary" 
-style="background-color:#666CDE; width:400px; height:40px; font-size:15px;">작성 가능한 리뷰</button>
+style="background-color:#666CDE; width:400px; height:40px; font-size:15px;" onclick="reviewWrite()">작성 가능한 리뷰</button>
 <button type="button" class="btn btn-primary" 
-style="background-color:#666CDE; width:400px; height:40px; font-size:15px;">작성한 리뷰</button>
+style="background-color:#666CDE; width:400px; height:40px; font-size:15px;" onclick="reviewSelect()">작성한 리뷰</button>
 <div class="mypagePlan">
 <img alt="" src="/img/img.jpg" class="mypageImg">
 <ul class="planInfo">

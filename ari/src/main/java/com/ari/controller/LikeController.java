@@ -17,74 +17,59 @@ public class LikeController {
 
 	@Autowired
 	private LikeService service;
-	
+
 	@GetMapping("/cos")
 	public String cos() {
 		return "cos";
 	}
+
 	@GetMapping("/planShare")
 	public String planShare() {
 		return "planShare";
 	}
+
 	@GetMapping("/cosTest")
-	public ModelAndView cosTest(LikeDTO dto,HttpServletRequest request) {
+	public ModelAndView cosTest(LikeDTO dto, HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		ModelAndView mav = new ModelAndView();
-		String userId = (String)session.getAttribute("sid");
-		if(userId == null || userId.equals("")) {
+		String userId = (String) session.getAttribute("sid");
+		if (userId == null || userId.equals("")) {
 			mav.setViewName("member/memberLogin");
 			return mav;
 		}
 		dto.setUserId(userId);
 		String likeYN = service.likeSelect(dto);
-		if(likeYN == null || likeYN.equals("N")) {
+		if (likeYN == null || likeYN.equals("N")) {
 			mav.addObject("likeYN", "N");
 			mav.addObject("idx", 1);
 			mav.addObject("likeType", 1);
-		}else if(likeYN.equals("Y")){
+		} else if (likeYN.equals("Y")) {
 			mav.addObject("likeYN", "Y");
 			mav.addObject("idx", 1);
 			mav.addObject("likeType", 1);
 		}
 		mav.setViewName("cos1");
-		
+
 		return mav;
 	}
-	
+
 	@GetMapping("/likeOK")
-	public ModelAndView likeOK(@RequestParam("idx")int idx,
-			@RequestParam("likeType")int likeType,HttpServletRequest request) {
+	public ModelAndView likeOK(@RequestParam("idx") int idx, @RequestParam("likeType") int likeType,
+			@RequestParam("likeImg") String img, @RequestParam("likeYN") String likeYN, HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		ModelAndView mav = new ModelAndView();
-		String userid = (String)session.getAttribute("sid");
+		String userid = (String) session.getAttribute("sid");
 		LikeDTO dto = new LikeDTO();
 		dto.setIdx(idx);
 		dto.setLikeType(likeType);
 		dto.setUserId(userid);
+		dto.setLikeYN(likeYN);
+		dto.setImg(img);
 		int result = service.like(dto);
-		if(result == 1) {
+		if (result == 1 && likeYN.equals("Y")) {
 			mav.addObject("msg", "좋아요");
-		}else {
-			mav.addObject("msg", "버그");
-		}
-		mav.setViewName("member/idCheck_ok");
-		return mav;
-		}
-	@GetMapping("/likeCancel")
-	public ModelAndView likeCancel(@RequestParam("idx")int idx,
-			@RequestParam("likeType")int likeType,HttpServletRequest request) {
-		HttpSession session = request.getSession();
-		ModelAndView mav = new ModelAndView();
-		String userid = (String)session.getAttribute("sid");
-		LikeDTO dto = new LikeDTO();
-		dto.setIdx(idx);
-		dto.setLikeType(likeType);
-		dto.setUserId(userid);
-		int result = service.likeNo(dto);
-		if(result == 1) {
+		} else if(result == 1 && likeYN.equals("N")){
 			mav.addObject("msg", "좋아요가 취소되었습니다.");
-		}else {
-			mav.addObject("msg", "버그");
 		}
 		mav.setViewName("member/idCheck_ok");
 		return mav;

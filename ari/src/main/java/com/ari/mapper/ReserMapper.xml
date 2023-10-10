@@ -6,17 +6,26 @@
   <select id="reserSelect" parameterType="map" resultType="com.ari.reser.model.ReserDTO">
   select * from
 		(select rownum as rnum,a.* from
-		(select r.reserIdx,r.idx,r.userid,r.resername,
+		(select r.reseridx,r.idx,r.userid,r.resername,
 		r.reservisitstart,r.reservisitend,r.reserpriceinfo,
 		r.reserprice,r.reserpriceday,r.resertel,r.reserstate,
 		r.reserreview,r.reserper,b.berthinfoimg,b.berthinfoname,c.berthname
 		from reser r,berthinfo b,berth c
-		where r.idx = b.idx and r.idx = c.idx
-		order by reservisitstart desc) a) b
+		where r.idx = b.idx and r.idx = c.berthidx and b.userbn = (select userbn from userinfo where userid = #{userid})
+		order by reservisitstart) a) b
 	where rnum<![CDATA[>=]]>#{start} and rnum<![CDATA[<=]]>#{end}
   </select>
-  <select id="reserTotalCnt" resultType="Integer">
+  <select id="reserTotalCnt" resultType="Integer" parameterType="String">
   select count(*)
   from reser
+  where 1 = 1
+  <if test='userId != null and !"".equals(userId)'>
+  and userId = #{userId}
+  </if>
   </select>
+  <update id="reserCancel" parameterType="Integer">
+  	update reser
+  	set reserstate = 0
+  	where reseridx = #{reserIdx}
+  </update>
   </mapper>

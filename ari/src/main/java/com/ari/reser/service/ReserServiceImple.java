@@ -17,18 +17,24 @@ public class ReserServiceImple implements ReserService {
 	private ReserMapper mapper;
 	
 	@Override
-	public List<ReserDTO> reserSelect(int cp,int listSize) {
+	public List<ReserDTO> reserSelect(int cp,int listSize,String userId) {
 		int start=(cp-1)*listSize+1;
 		int end=cp*listSize;
 		Map map=new HashMap();
 		map.put("start", start);
 		map.put("end", end);
+		map.put("userid", userId);
 		List<ReserDTO> list = mapper.reserSelect(map);
 		return list;
 	}
 	@Override
-	public int reserTotalCnt() {
-		int result = mapper.reserTotalCnt();
+	public int reserTotalCnt(String userId) {
+		int result = mapper.reserTotalCnt(userId);
+		return result;
+	}
+	@Override
+	public int reserCancel(int reserIdx) {
+		int result = mapper.reserCancel(reserIdx);
 		return result;
 	}
 }
