@@ -18,17 +18,35 @@ public class CosController {
 	private CosService service;
 	
 	@RequestMapping("/cosList")
-	public ModelAndView cosList() {
+	public ModelAndView cosList(@RequestParam(value = "cosArea", defaultValue = "0")int cosArea,
+			@RequestParam(value = "cp", defaultValue = "1")int cp) {
 		List<CosDTO> lists=null;
+		ModelAndView mav=new ModelAndView();
+		
+		int totalCnt=0;
+		int listSize=6;
+		int pageSize=5;
 		
 		try {
-			lists=service.cosList();
+			if(cosArea == 0) {
+				totalCnt=service.totalCnt();
+				lists=service.cosList(cp,listSize);
+			}else {
+				totalCnt=service.totalCntArea(cosArea);
+				lists=service.cosListArea(cosArea,cp,listSize);
+			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		ModelAndView mav=new ModelAndView();
+		String url="/cosList?cosArea="+cosArea;
+		String pageStr=com.ari.page.PageModuleNotice
+				.makeNoticePage(url, totalCnt, listSize, pageSize, cp);
+		//if(totalCnt==0) {pageStr="";}
+		System.out.println(totalCnt);
+		mav.addObject("pageStr", pageStr);
 		mav.addObject("lists", lists);
+		mav.addObject("cosArea", cosArea);
 		mav.setViewName("cos/cosList");
 		return mav;
 	}
@@ -46,6 +64,11 @@ public class CosController {
 		mav.addObject("dto",dto);
 		mav.setViewName("cos/cosContent");
 		return mav;
+	}
+	
+	@RequestMapping("/getarea")
+	public String getAreacode() {
+		return "festival/getAreacodeXML";
 	}
 
 }

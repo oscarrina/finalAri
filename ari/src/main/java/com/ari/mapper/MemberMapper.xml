@@ -18,6 +18,11 @@
 		from userinfo
 		where username=#{username} and usertel=#{usertel}
 	</select>
+	<select id="pwdFind" parameterType="com.ari.member.model.MemberDTO">
+		select *
+		from userinfo
+		where userid=#{userid}
+	</select>
 	<select id="idCheck" parameterType="String" resultType="Integer">
 		select count(*)
 		from userinfo

@@ -27,6 +27,19 @@
 .a{
   margin: 100px;
 }
+.btn1{
+  border:none;
+  padding:15px 20px;
+  border-radius:25px;
+  background:#253BFF;
+  margin-top: 40px;
+  width: 350px;
+  color: #fff;
+  cursor: pointer;
+}
+.btn1:hover{
+  background-color: #38B6FF;
+}
 </style>
 </head>
 <body>
@@ -35,7 +48,8 @@
   <img src="img/logo.png" class="mainimg">
 
   <h3 class="a">아이디는 ${dto.userid }입니다.</h3>
-
+	<input type="button" value="로그인 하기" class="btn1" onclick="javascript:location.href='memberLogin'">
+	<input type="button" value="비밀번호 찾기" class="btn1" onclick="javascript:location.href='pwdFind1'">
   </div>
 </div>
 </body>
