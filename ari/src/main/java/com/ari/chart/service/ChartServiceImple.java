@@ -15,9 +15,11 @@ public class ChartServiceImple implements ChartService {
 	private ChartMapper mapper;
 	
 	@Override
-	public List<ChartDTO> chartList() throws Exception {
-		List<ChartDTO> lists=mapper.chartList();
-		System.out.println(lists.get(0).getPlancount());
+	public List<ChartDTO> chartList(String start, String end) throws Exception {
+		Map map=new HashMap();
+		map.put("start", start);
+		map.put("end", end);
+		List<ChartDTO> lists=mapper.chartList(map);
 		return lists;
 	}
 }

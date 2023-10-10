@@ -7,6 +7,6 @@ import com.ari.chart.model.ChartDTO;
 
 public interface ChartService {
 	
-	public List<ChartDTO> chartList()throws Exception;
+	public List<ChartDTO> chartList(String start, String end)throws Exception;
 
 }

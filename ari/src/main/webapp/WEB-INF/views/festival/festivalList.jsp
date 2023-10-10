@@ -25,7 +25,8 @@ function show(){
 	if(cate==2){
 		location.href='fest?area=0';
 	}else{
-		sendRequest('getArea', null, showResult, 'GET');
+		location.href='fest?area=1';
+		//sendRequest('getArea', null, showResult, 'GET');
 	}	
 }
 

@@ -20,8 +20,11 @@ google.load("visualization", "1",{
 
 google.setOnLoadCallback(drawChart);
 function drawChart(){
+	var start=document.all.start.value;
+	var end=document.all.end.value;
+	var param="?start="+start+"&end="+end;
 	var jsonData = $.ajax({
-		url: "getplanjson",
+		url: "getplanjson"+param,
 		dataType:"json",
 		async:false
 	}).responseText;
@@ -44,6 +47,24 @@ function drawChart(){
 	})
 }
 </script>
+<style>
+.border1{
+	border-top:none;
+	border-left:none;
+	border-right:none;
+	border-bottom: 2px solid #4068A7;
+	border-radius: 0;
+	margin-top: 5px;
+	margin-bottom:5px;
+	
+}
+.content2{
+	width:800px !important;
+}
+.btn1{
+	margin-top:6px !important;
+}
+</style>
 </head>
 <body>
 <div id="page-wrapper">
@@ -53,7 +74,18 @@ function drawChart(){
   <!-- 본문 -->
   <div id="page-content-wrapper">
     <div class="container-fluid content1">
+    	<div class="content2">
+    		<form name="chart" action="chart" method="post">
+    		<div class="d-grid gap-2 d-md-flex justify-content-md-end ">
+	    		<input type="date" class="form-control border1 width1" id="start" style="width:180px" name="start" value="${start }" required="required" >
+	    		<input type="date" class="form-control border1 width1" id="end" style="width:180px" name="end" value="${end }" required="required" >
+				<input type="submit" class="btn btn-primary btn1" align="right"
+				style="background-color:#686DB9; width:70px; height:35px; font-size:11px; margin-top:-40px; 
+				margin-bottom:10px;" value="확인">
+			</div>
+    	</form>
       <div id="chart_div"></div>
+    	</div>
     </div>
     <%@include file="/WEB-INF/views/admin/adminFooter.jsp" %>
   </div>
