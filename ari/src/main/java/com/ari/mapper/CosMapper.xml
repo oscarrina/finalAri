@@ -3,8 +3,26 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ari.mapper.CosMapper">
-	<select id="CosList" resultType="com.ari.cos.model.CosDTO">
-		select * from cos
+	<select id="CosList" parameterType="Map" resultType="com.ari.cos.model.CosDTO">
+		select * from 
+			(select rownum as rnum, a.* from 
+			(select * from cos) a) b
+		where rnum<![CDATA[>=]]>#{start} and rnum<![CDATA[<=]]>#{end}
+	</select>
+	<select id="CosListArea" parameterType="Map" resultType="com.ari.cos.model.CosDTO">
+		select * from 
+			(select rownum as rnum, a.* from 
+			(select * from cos where cosArea=#{cosArea}) a) b
+		where rnum<![CDATA[>=]]>#{start} and rnum<![CDATA[<=]]>#{end}
+	</select>
+	<select id="totalCnt">
+		select count(*)
+		from cos
+	</select>
+	<select id="totalCntArea" parameterType="int">
+		select count(*)
+		from cos
+		where cosArea=#{cosArea}
 	</select>
 	<select id="cosContent" resultType="com.ari.cos.model.CosDTO" parameterType="Integer">
 		select * from cos where idx=#{idx}

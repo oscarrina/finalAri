@@ -185,8 +185,7 @@ public class MemberController {
 			
 			e.printStackTrace();
 		}
-		System.out.println(username);
-		System.out.println(usertel);
+		
 		if (dto != null) {
 	        mav.addObject("dto", dto);
 	        mav.setViewName("member/idFindOk");
@@ -198,8 +197,12 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/pwdFind1")
-	public String pwdFind1() {
-		return "member/pwdFind1";
+	public ModelAndView pwdFind1() {
+		ModelAndView mav=new ModelAndView();
+		
+		
+		
+		return mav;
 	}
 	
 	@RequestMapping("/pwdFind2")

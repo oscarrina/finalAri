@@ -7,6 +7,7 @@ public interface MemberMapper {
 	public String memberLogin(String userid);
 	public MemberDTO getUserInfo(String userid);
 	public MemberDTO idFind(String username, String usertel);
+	public int pwdFind1(String userid);
 	public int idCheck(String userid);
 	public int kakaoCheck(String userid);
 	public int kakaoJoin(MemberDTO dto);
