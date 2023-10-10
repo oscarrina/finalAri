@@ -12,5 +12,4 @@ public interface LikeService {
 	
 	public String likeSelect(LikeDTO dto);
 	public int like(LikeDTO dto);
-	public int likeNo(LikeDTO dto);
 }

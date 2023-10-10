@@ -9,6 +9,10 @@ import com.ari.reser.model.ReserDTO;
 @Service
 public interface ReserService {
 
-	public List<ReserDTO> reserSelect(int cp,int listSize);
-	public int reserTotalCnt();
+	static final int reserCancel = 0;
+	static final int reserSign = 1;
+	
+	public List<ReserDTO> reserSelect(int cp,int listSize,String userId);
+	public int reserTotalCnt(String userId);
+	public int reserCancel(int reserIdx);
 }

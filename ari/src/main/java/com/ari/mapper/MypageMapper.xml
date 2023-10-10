@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ari.mapper.MypageMapper">
+  <select id="myReser" resultType="com.ari.reser.model.ReserDTO" parameterType="map">
+  	select * from
+		(select rownum as rnum,a.* from
+		(select r.reseridx,r.idx,r.userid,r.resername,
+		r.reservisitstart,r.reservisitend,r.reserpriceinfo,
+		r.reserprice,r.reserpriceday,r.resertel,r.reserstate,
+		r.reserreview,r.reserper,b.berthinfoimg,b.berthinfoname,c.berthname
+		from reser r,berthinfo b,berth c
+		where r.idx = b.idx and r.idx = c.berthidx and r.userid = #{userId}
+		order by reservisitstart) a) b
+	where rnum<![CDATA[>=]]>#{start} and rnum<![CDATA[<=]]>#{end}
+  </select>
+  <select id="reviewWrite" parameterType="String" resultType="com.ari.review.model.ReviewDTO">
+  	select * from
+		(select rownum as rnum,a.* from
+		(select r.reseridx,r.idx,r.userid,r.resername,
+		r.reservisitstart,r.reservisitend,r.reserpriceinfo,
+		r.reserprice,r.reserpriceday,r.resertel,r.reserstate,
+		r.reserreview,r.reserper,b.berthinfoimg,b.berthinfoname,c.berthname
+		from reser r,berthinfo b,berth c
+		where r.idx = b.idx and r.idx = c.berthidx and r.userid = #{userId} and r.reserReview = 'N'
+		order by reservisitstart) a) b
+	where rnum<![CDATA[>=]]>#{start} and rnum<![CDATA[<=]]>#{end}
+  </select>
+  <select id="reviewTotalCnt" parameterType="String" resultType="Integer">
+  	select count(*)
+  	from reser
+  	where reserReview = 'N' and userid = #{userid}
+  </select>
+</mapper>

@@ -8,12 +8,41 @@
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="/css/adminMainLayout.css">
 <link rel="stylesheet" type="text/css" href="/css/adminNotice.css">
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src = "js/httpRequest.js"></script>
 <script>
-function cancel(){
-	let cancel = window.confirm('예약을 취소하시겠습니까?');
-	if(cancle){
-	let param = "reserCancel?param="+${param};
-	location.href = param;
+function cancel(idx){
+	swal({
+		  title: "아리아리",
+		  text: "예약을 취소하시겠습니까?",
+		  icon: "warning",
+		  buttons: true,
+		  dangerMode: true,
+		})
+		.then((willDelete) => {
+			if (willDelete) {
+	            swal("예약이 취소되었습니다.", {
+	              icon: "success",
+	            }).then((aaa) => {
+	              let userType = document.getElementById("userType").value;
+	                let param = "param="+idx+"&userType="+userType;
+	            	sendRequest('reserCancel',param,showResult,'GET');
+				});
+	          }
+		});
+}
+function showResult(){
+	if(XHR.readyState == 4){
+		if(XHR.status == 200){
+			let data = XHR.responseText;
+			if(data == '성공'){
+				location.href = 'reserManager';
+			}else{
+				swal('아리아리','다시 시도해주세요');
+			}
+		}else{
+			swal('아리아리','관리자에게 문의바랍니다.');
+		}
 	}
 }
 </script>
@@ -40,7 +69,7 @@ function cancel(){
 <ul class="planInfo">
 	<li class="planSi">${dto.berthInfoName }</li>
 	<li class="planSubject">${dto.berthName }</li>
-	<li class="planSubject">${dto.reserPer }</li>
+	<li class="planSubject">${dto.reserPer }명</li>
 	<li class="planDay">${dto.reserVisitStart } ~ ${dto.reserVisitEnd }</li>
 </ul>
 </td>
@@ -54,12 +83,20 @@ function cancel(){
   </ul>
   </td>
   <td>
-  <button type="button" class="btn btn-primary reserCancelBtn" onclick="cancel()">
+  <c:if test="${dto.reserVisitStart > now }">
+  <c:if test="${dto.reserState == 1 }">
+  <button type="button" class="btn btn-primary reserCancelBtn" onclick="cancel(${dto.reserIdx })">
   예약취소
   </button>
+  </c:if>
+  <c:if test="${dto.reserState == 0 }">
+  <span class="planDay">취소완료</span>
+  </c:if>
+  </c:if>
   </td>
   </tr>
   </table>
+  <input type="hidden" id="userType" value="ceo">
   </c:forEach>
   </c:if>
 </div>
