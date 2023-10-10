@@ -27,7 +27,7 @@
 <div class="mypageDiv testDiv">
 <h3><a href="myPage" id="myPlan">내 일정</a></h3>
 <h3><a href="myReser" id="myReser">예약 내역</a></h3>
-<h3><a href="myReview" id="myReview">내 리뷰</a></h3>
+<h3><a href="myReviewWrite" id="myReview">내 리뷰</a></h3>
 <h3><a href="myInfo" id="myInfo">내 정보 관리</a></h3>
 <h3><a href="myLike" id="myLike">좋아요 목록</a></h3>
 <h3><a href="myShare" id="myShare">공유한 일정</a></h3>

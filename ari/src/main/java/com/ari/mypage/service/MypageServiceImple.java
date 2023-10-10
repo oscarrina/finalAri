@@ -1,5 +1,7 @@
 package com.ari.mypage.service;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -7,9 +9,11 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ari.like.model.LikeDTO;
 import com.ari.mapper.MypageMapper;
 import com.ari.mapper.ReserMapper;
 import com.ari.reser.model.ReserDTO;
+import com.ari.review.model.ReviewDTO;
 
 @Service
 public class MypageServiceImple implements MypageService {
@@ -40,12 +44,32 @@ public class MypageServiceImple implements MypageService {
 		return result;
 	}
 	@Override
-	public int reviewTotalCnt(String userId) {
-		int result = mypageMapper.reviewTotalCnt(userId);
+	public Map<String, Object> reserReview(Map<String, Object> param) {
+		int cp = Integer.parseInt(String.valueOf(param.get("cp")));
+		int listSize = Integer.parseInt(String.valueOf(param.get("listSize")));
+		int start=(cp-1)*listSize+1;
+		int end=cp*listSize;
+		LocalDate now_l = LocalDate.now();
+		Date now = java.sql.Date.valueOf(now_l);
+		
+		param.put("start", String.valueOf(start));
+		param.put("end", String.valueOf(end));
+		param.put("now", now);
+		
+		String userid = (String)param.get("userId");
+		param.put("userid", userid);
+		
+		List<ReserDTO> list = mypageMapper.reviewWrite(param);
+		int totalCnt = mypageMapper.reviewWriteTotalCnt(param);
+		
+		HashMap<String, Object> result = new HashMap<String, Object>();
+		result.put("list", list);
+		result.put("totalCnt", totalCnt);
+		
 		return result;
 	}
 	@Override
-	public Map<String, Object> reserReview(Map<String, String> param) {
+	public Map<String, Object> myPageReview(Map<String, String> param) {
 		int cp = Integer.parseInt(param.get("cp"));
 		int listSize = Integer.parseInt(param.get("listSize"));
 		int start=(cp-1)*listSize+1;
@@ -54,12 +78,32 @@ public class MypageServiceImple implements MypageService {
 		param.put("start", String.valueOf(start));
 		param.put("end", String.valueOf(end));
 		
-		List<ReserDTO> list = mypageMapper.reviewWrite(param);
-		int totalCnt = reviewTotalCnt(param.get("userId"));
+		List<ReviewDTO> list = mypageMapper.myPageReview(param);
+		int totalCnt = mypageMapper.reviewTotalCnt(param.get("userId"));
 		
 		HashMap<String, Object> result = new HashMap<String, Object>();
 		result.put("list", list);
 		result.put("totalCnt", totalCnt);
+		
+		return result;
+	}
+	@Override
+	public Map<String, Object> myPageLike(Map<String, String> param) {
+		int cp = Integer.parseInt(param.get("cp"));
+		int listSize = Integer.parseInt(param.get("listSize"));
+		int start=(cp-1)*listSize+1;
+		int end=cp*listSize;
+		
+		param.put("start", String.valueOf(start));
+		param.put("end", String.valueOf(end));
+		
+		List<LikeDTO> list = mypageMapper.myPageLike(param);
+		int totalCnt = mypageMapper.likeTotalCnt(param.get("userId"));
+		
+		HashMap<String, Object> result = new HashMap<String, Object>();
+		result.put("list", list);
+		result.put("totalCnt", totalCnt);
+		
 		return result;
 	}
 }

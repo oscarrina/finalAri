@@ -44,6 +44,9 @@ h3{
 	width: 150px;
 	height: 150px;
 }
+.mypageLikeImg{
+	width: 300px;
+}
 .mypagePlan{
 	margin-top: 50px;
 	position: relative;
@@ -118,4 +121,7 @@ h3{
 }
 .reserTable{
 	width: 1000px;
+}
+.reserLikeClass{
+	width: 25%;
 }
