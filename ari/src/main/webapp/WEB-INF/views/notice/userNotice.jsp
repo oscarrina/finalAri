@@ -96,7 +96,12 @@ table{
 		  </div>
 		</c:forEach>
 		<div align="center" >
-			${pageStr }
+			<c:if test="${empty lists }">
+				
+			</c:if>
+			<c:if test="${!empty lists }">
+				${pageStr }
+			</c:if>
 		</div>
 		    </div>
 		</div>	  

@@ -1,0 +1,20 @@
+package com.ari.chart.model;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+@ToString
+public class ChartDTO {
+	
+	private int planpoint;
+	private int plancount;
+	
+
+}
