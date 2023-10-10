@@ -27,8 +27,7 @@ public class FestivalController {
 	private FestivalService service;
 	
 	@RequestMapping("/fest")
-	public ModelAndView fest(
-			HttpSession session,
+	public ModelAndView fest(HttpSession session,
 			@RequestParam(value = "area", defaultValue = "0")int area,
 			@RequestParam(value = "cp", defaultValue = "1")int cp) {
 		ModelAndView mav=new ModelAndView();
@@ -74,8 +73,7 @@ public class FestivalController {
 			mav.setViewName("member/memberLogin");
 			return mav;
 		}
-//		int area=(int) session.getAttribute("suserArea");
-		int area=6;
+		int area=(int) session.getAttribute("suserArea");
 		int totalCnt=0;
 		int listSize=5;
 		int pageSize=5;
@@ -103,7 +101,40 @@ public class FestivalController {
 		mav.setViewName("festival/ceoFestivalList");
 		return mav;
 	}
-	
+	@RequestMapping("/userfest")
+	public ModelAndView userFestival(HttpSession session,
+			@RequestParam(value = "area", defaultValue = "0")int area,
+			@RequestParam(value = "cp", defaultValue = "1")int cp) {
+		ModelAndView mav=new ModelAndView();
+		int totalCnt=0;
+		int listSize=6;
+		int pageSize=5;
+		
+		List<FestivalDTO> lists=null;
+		try {
+			if(area==0) { //전체
+				totalCnt=service.totalCnt();
+				lists=service.festList(cp, listSize);
+				
+			}else {
+				totalCnt=service.totalCntArea(area);
+				lists=service.festListArea(area, cp, listSize);
+			}
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		String url="/userfest?area="+area;
+		String pageStr=com.ari.page.PageModuleNotice
+				.makeNoticePage(url, totalCnt, listSize, pageSize, cp);
+		if(totalCnt==0) {pageStr="";}
+		mav.addObject("pageStr", pageStr);
+		mav.addObject("lists", lists);
+		mav.addObject("area", area);
+		mav.setViewName("festival/userFestivalList");
+		
+		return mav;
+	}
 	
 	@GetMapping("/festAdd")
 	public ModelAndView festAdd(HttpSession session) {

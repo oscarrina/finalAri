@@ -5,7 +5,10 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ari.chart.model.ChartDTO;
@@ -19,17 +22,31 @@ public class ChartController {
 	@Autowired
 	private ChartService service;
 	
-	@RequestMapping("/chart")
-	public String chartForm() {
-		return "admin/chart/areaChart";
+	@GetMapping("/chart")
+	public ModelAndView chartForm() {
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("start", "2023-10-01");
+		mav.addObject("end", "2023-10-31");
+		mav.setViewName("admin/chart/areaChart");
+		return mav;
+	}
+	@PostMapping("/chart")
+	public ModelAndView chartsubmit(@RequestParam(value = "start", defaultValue = "2023-10-01")String start,
+			@RequestParam(value = "end", defaultValue = "2023-10-31")String end) {
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("start", start);
+		mav.addObject("end", end);
+		mav.setViewName("admin/chart/areaChart");
+		return mav;
 	}
 	
 	@RequestMapping("/getplanjson")
-	public ModelAndView plandata() {
+	public ModelAndView plandata(@RequestParam(value = "start", defaultValue = "2023-10-01")String start,
+			@RequestParam(value = "end", defaultValue = "2023-10-31")String end) {
 		ModelAndView mav=new ModelAndView();
 		List<ChartDTO> lists=null;
 		try {
-			lists=service.chartList();
+			lists=service.chartList(start,end);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
