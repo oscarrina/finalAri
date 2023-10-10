@@ -61,7 +61,7 @@ function show(){
 		  <tbody>
 		    <c:if test="${empty lists }">
 		    	<tr>
-				<td colspan="6" align="center">
+				<td colspan="5" align="center">
 				등록된 공지사항이 없습니다.
 				</td>
 			</tr>

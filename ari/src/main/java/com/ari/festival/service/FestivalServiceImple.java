@@ -70,8 +70,18 @@ public class FestivalServiceImple implements FestivalService {
 		return dto;
 	}
 	@Override
+	public String getFestImg(int festidx) throws Exception {
+		String result=mapper.getFestImg(festidx);
+		return result;
+	}
+	@Override
 	public int festDel(int festidx) throws Exception {
 		int result=mapper.festDel(festidx);
+		return result;
+	}
+	@Override
+	public int festUpd(FestivalDTO dto) throws Exception {
+		int result=mapper.festUpd(dto);
 		return result;
 	}
 }
