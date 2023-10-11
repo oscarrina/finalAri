@@ -70,6 +70,40 @@ h4:visited{
         <div class="col-sm-6 col-md-4 mx-auto">
           <div class="box">
             <div class="img-box">
+              <a href="planDatePicker?area=1"><img src="/img/img.jpg" class="box-img" alt=""></a>
+            </div>
+            <div class="detail-box">
+              <h4><a href="#">서울</a></h4>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6 col-md-4 mx-auto">
+          <div class="box">
+            <div class="img-box">
+              <a href="#"><img src="/img/img.jpg" class="box-img" alt=""></a>
+            </div>
+            <div class="detail-box">
+              <h4><a href="#"> 제주도</a></h4>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6 col-md-4 mx-auto">
+          <div class="box">
+            <div class="img-box">
+              <a href="#"><img src="/img/img.jpg" class="box-img" alt=""></a>
+            </div>
+            <div class="detail-box">
+              <h4><a href="#">부산</a></h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-6 col-md-4 mx-auto">
+          <div class="box">
+            <div class="img-box">
               <a href="#"><img src="/img/img.jpg" class="box-img" alt=""></a>
             </div>
             <div class="detail-box">
@@ -99,7 +133,132 @@ h4:visited{
         </div>
       </div>
     </div>
-    
+	    <div class="container">
+	      <div class="row">
+	        <div class="col-sm-6 col-md-4 mx-auto">
+	          <div class="box">
+	            <div class="img-box">
+	              <a href="#"><img src="/img/img.jpg" class="box-img" alt=""></a>
+	            </div>
+	            <div class="detail-box">
+	              <h4><a href="#">서울</a></h4>
+	            </div>
+	          </div>
+	        </div>
+	        <div class="col-sm-6 col-md-4 mx-auto">
+	          <div class="box">
+	            <div class="img-box">
+	              <a href="#"><img src="/img/img.jpg" class="box-img" alt=""></a>
+	            </div>
+	            <div class="detail-box">
+	              <h4><a href="#"> 제주도</a></h4>
+	            </div>
+	          </div>
+	        </div>
+	        <div class="col-sm-6 col-md-4 mx-auto">
+	          <div class="box">
+	            <div class="img-box">
+	              <a href="#"><img src="/img/img.jpg" class="box-img" alt=""></a>
+	            </div>
+	            <div class="detail-box">
+	              <h4><a href="#">부산</a></h4>
+	            </div>
+	          </div>
+	        </div>
+	      </div>
+	    </div>
+	    <div class="container">
+	      <div class="row">
+	        <div class="col-sm-6 col-md-4 mx-auto">
+	          <div class="box">
+	            <div class="img-box">
+	              <a href="#"><img src="/img/img.jpg" class="box-img" alt=""></a>
+	            </div>
+	            <div class="detail-box">
+	              <h4><a href="#">서울</a></h4>
+	            </div>
+	          </div>
+	        </div>
+	        <div class="col-sm-6 col-md-4 mx-auto">
+	          <div class="box">
+	            <div class="img-box">
+	              <a href="#"><img src="/img/img.jpg" class="box-img" alt=""></a>
+	            </div>
+	            <div class="detail-box">
+	              <h4><a href="#"> 제주도</a></h4>
+	            </div>
+	          </div>
+	        </div>
+	        <div class="col-sm-6 col-md-4 mx-auto">
+	          <div class="box">
+	            <div class="img-box">
+	              <a href="#"><img src="/img/img.jpg" class="box-img" alt=""></a>
+	            </div>
+	            <div class="detail-box">
+	              <h4><a href="#">부산</a></h4>
+	            </div>
+	          </div>
+	        </div>
+	      </div>
+	    </div>
+	    <div class="container">
+	      <div class="row">
+	        <div class="col-sm-6 col-md-4 mx-auto">
+	          <div class="box">
+	            <div class="img-box">
+	              <a href="#"><img src="/img/img.jpg" class="box-img" alt=""></a>
+	            </div>
+	            <div class="detail-box">
+	              <h4><a href="#">서울</a></h4>
+	            </div>
+	          </div>
+	        </div>
+	        <div class="col-sm-6 col-md-4 mx-auto">
+	          <div class="box">
+	            <div class="img-box">
+	              <a href="#"><img src="/img/img.jpg" class="box-img" alt=""></a>
+	            </div>
+	            <div class="detail-box">
+	              <h4><a href="#"> 제주도</a></h4>
+	            </div>
+	          </div>
+	        </div>
+	        <div class="col-sm-6 col-md-4 mx-auto">
+	          <div class="box">
+	            <div class="img-box">
+	              <a href="#"><img src="/img/img.jpg" class="box-img" alt=""></a>
+	            </div>
+	            <div class="detail-box">
+	              <h4><a href="#">부산</a></h4>
+	            </div>
+	          </div>
+	        </div>
+	      </div>
+	    </div>
+	    <div class="container">
+	      <div class="row">
+	        <div class="col-sm-6 col-md-4 mx-auto">
+	          <div class="box">
+	            <div class="img-box">
+	              <a href="#"><img src="/img/img.jpg" class="box-img" alt=""></a>
+	            </div>
+	            <div class="detail-box">
+	              <h4><a href="#">서울</a></h4>
+	            </div>
+	          </div>
+	        </div>
+	        <div class="col-sm-6 col-md-4 mx-auto">
+	          <div class="box">
+	            <div class="img-box">
+	              <a href="#"><img src="/img/img.jpg" class="box-img" alt=""></a>
+	            </div>
+	            <div class="detail-box">
+	              <h4><a href="#"> 제주도</a></h4>
+	            </div>
+	          </div>
+	        </div>
+	      </div>
+	    </div>
 <%@include file="/WEB-INF/views/footer.jsp" %>
 </body>
 </html>
