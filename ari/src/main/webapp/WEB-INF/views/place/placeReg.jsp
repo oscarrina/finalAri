@@ -87,7 +87,7 @@ function showResult(){
 			var data=XHR.responseXML;
 			var spanTag = document.getElementById('sboxspan1');
 			var str='';
-			str='<select class="border" id="userarea" name="area"><option value = "0" selected disabled>사업지역을 선택하세요</option>';
+			str='<select class="border3" id="userarea" name="area"><option value = "0" selected disabled>사업지역을 선택하세요</option>';
 			var areaList=data.getElementsByTagName('item');
 			for(var i=0;i<areaList.length;i++){
 				var area=areaList[i]; //studentList.item(i)
@@ -134,6 +134,7 @@ function formSubmit(){
 	var form = document.getElementById("placeForm");
 	newHidden.setAttribute('type','hidden');
 	newHidden.setAttribute('value',addr);
+	newHidden.setAttribute('name',"addr");
 	document.getElementById("addrForm").innerHTML = '';
 	
 	document.getElementById("addrForm").append(newHidden);
@@ -142,7 +143,7 @@ function formSubmit(){
 	switch(formType.toString()){
 	case '1': form.setAttribute('action','attReg');form.setAttribute('method','post');break;
 	case '2': form.setAttribute('action','foodReg');form.setAttribute('method','post');break;
-	case '3': form.setAttribute('action','berthReg');form.setAttribute('method','post');;break;
+	case '3': form.setAttribute('action','berthInfoReg');form.setAttribute('method','post');;break;
 	}
  	form.submit(); 
 	
@@ -155,7 +156,7 @@ function formSubmit(){
 <div id="page-content-wrapper">
     <div class="container-fluid" id="content1">
      <div class="content">
-     <br><br><br><br>
+     <br>
 <div class = "container">
 	<h1>등록하기</h1>	
 	<div class = "containerHead">
@@ -166,6 +167,7 @@ function formSubmit(){
 	<form name = "fm" id = "placeForm">
 	<div class = "containerBody" >
 		<div class="regcom">
+			<input type = "hidden" value = "${sid}" name = "userId">
 			<div style = "margin-top: 20px;"><label>업장명</label></div><div><input type = "text" placeholder = "업장명" name = "infoName" required="required"></div>
 			<div><label>사업자 등록번호</label></div><div><input type = "text" placeholder = "사업자등록번호" name = "userBN" required="required"></div>
 			<div><label>전화</label></div><div><input type = "text" placeholder = "전화" name = "tel" required="required"></div>
@@ -174,8 +176,8 @@ function formSubmit(){
 			<span id = "addrForm"><div><input type="button" id= "findAddr" value="주소검색" onclick="find()"><input type = "text" id= "addr1" placeholder = "주소" required="required"></div>
 			<div><label>상세주소</label></div><div><input type = "text" id= "addr2" placeholder = "상세주소" required="required"></div></span>
 			<div><label>주차시설</label><input id = "parkCheck" type = "checkbox" name="parking" value = "1" ></div>
-			<div><label>업장소개</label></div><div><textarea></textarea></div>
-			<div ><label>업장이미지</label></div><div><input class="form-control" type="file" name="placeImg" id="placeImg" required="required"></div>
+			<div><label>업장소개</label></div><div><textarea name= "info"></textarea></div>
+			<div ><label>업장이미지</label></div><div><input class="form-control" type="file" name="infoImg" id="placeImg" required="required"></div>
 		</div>
 		<div class = "regType">
 			<div class = "typeForm" id = "typeForm" style = "margin-top: 20px; margin-left: 20px;">

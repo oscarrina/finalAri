@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.ari.mapper.PlaceRegMapper">
+  <insert id = "attInsert" parameterType="com.ari.detail.model.AttDTO">
+  insert into att 
+  values(att_idx.nextval,
+  #{userBN},
+  #{userId},
+  #{addr},
+  #{tel},
+  #{infoName},
+  #{info},
+  #{parking},
+  #{attPet},
+  #{attBaby},
+  #{attAge},
+  #{attStart},
+  #{attEnd},
+  #{area},
+  #{sigungu},
+  #{infoImg},
+  #{attClose}
+  )	
+  </insert>
+  <insert id = "foodInsert" parameterType="com.ari.detail.model.FoodDTO">
+  insert into food 
+  values(food_idx.nextval,
+  #{userBN},
+  #{userId},
+  #{addr},
+  #{tel},
+  #{infoName},
+  #{info},
+  #{parking},
+  #{foodClose},
+  #{area},
+  #{sigungu},
+  #{infoImg},
+  #{foodOpen},
+  #{foodMenu}
+  )	
+  </insert>
+  <insert id = "berthInfoInsert" parameterType="com.ari.detail.model.BerthInfoDTO">
+  insert into berthInfo
+  values(berthInfo_idx.nextval,
+  #{userBN},
+  #{userId},
+  #{addr},
+  #{tel},
+  #{infoName},
+  #{info},
+  #{parking},
+  #{berthInfoSeat},
+  #{area},
+  #{sigungu},
+  #{infoImg},
+  #{berthInfoStart},
+  #{berthInfoEnd}
+  )	
+  </insert>
+  </mapper>
