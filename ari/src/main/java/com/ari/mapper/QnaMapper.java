@@ -1,6 +1,7 @@
 package com.ari.mapper;
 
 import com.ari.qna.model.*;
+
 import java.util.*;
 
 public interface QnaMapper {

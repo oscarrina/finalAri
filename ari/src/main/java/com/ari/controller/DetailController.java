@@ -109,7 +109,6 @@ public class DetailController {
 			
 			break;
 		case 4:
-			String str="redirect:/userFest?area="+area;
 			
 			if(area==0) {
 				try {
@@ -128,8 +127,8 @@ public class DetailController {
 				}
 			}
 			
-			mav.addObject("fest",fest);
-			mav.setViewName(str);
+			mav.addObject("lists",fest);
+			mav.setViewName("detail/festList");
 			break;
 		default:
 			
@@ -197,7 +196,7 @@ public class DetailController {
 			e.printStackTrace();
 		}
 		ModelAndView mav=new ModelAndView();
-		mav.addObject("fest",fest);
+		mav.addObject("",fest);
 		mav.setViewName("detail/festDetail");
 		return mav;
 	}
