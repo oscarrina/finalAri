@@ -113,6 +113,15 @@ h5{
 </table>
 </div>
 </c:forEach>
+<div>
+<c:forEach items="${berth }" var="berth">
+<table>
+	<tr>
+		<td></td>
+	</tr>
+</table>
+</c:forEach>
+</div>
 </div>
 <%@include file="/WEB-INF/views/footer.jsp" %>
 </body>
