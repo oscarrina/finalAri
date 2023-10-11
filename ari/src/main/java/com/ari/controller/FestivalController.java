@@ -135,7 +135,29 @@ public class FestivalController {
 		
 		return mav;
 	}
-	
+	@RequestMapping("/userfestCont")
+	public ModelAndView userFestContent(
+			@RequestParam(value = "festidx", defaultValue = "0")int festidx) {
+		ModelAndView mav=new ModelAndView();
+		FestivalDTO dto=null;
+		try {
+			dto=service.festContent(festidx);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(dto==null) {
+			mav.addObject("msg", "삭제된 게시물이거나 비정상적인 접근입니다.");
+			mav.addObject("url", "userfest");
+			mav.setViewName("admin/adminMsg");
+			return mav;
+		}
+		dto.setFestcont(dto.getFestcont().replaceAll("\n", "<br>"));
+		dto.setFestcontent(dto.getFestcontent().replaceAll("\n", "<br>"));
+		mav.addObject("dto", dto);
+		mav.setViewName("festival/userfestCont");
+		return mav;
+	}
 	@GetMapping("/festAdd")
 	public ModelAndView festAdd(HttpSession session) {
 		ModelAndView mav=new ModelAndView();
@@ -161,7 +183,7 @@ public class FestivalController {
 		if(result>0) {
 			mav.setViewName("redirect:/festival");
 		}else {
-			mav.addObject("msg", "[ERROR]축제 등록 실패. 문의 바랍니다.");
+			mav.addObject("msg", "축제 등록 실패. 문의 바랍니다.");
 			mav.addObject("url", "festival");
 			mav.setViewName("admin/adminMsg");
 		}
@@ -180,7 +202,7 @@ public class FestivalController {
 			e.printStackTrace();
 		}
 		if(dto==null) {
-			mav.addObject("msg", "[ERROR]삭제된 게시물이거나 비정상적인 접근입니다.");
+			mav.addObject("msg", "삭제된 게시물이거나 비정상적인 접근입니다.");
 			mav.addObject("url", "festival");
 			mav.setViewName("admin/adminMsg");
 			return mav;
@@ -215,7 +237,7 @@ public class FestivalController {
 				mav.setViewName("redirect:/fest"); //관리자
 			}
 		}else {
-			mav.addObject("msg", "[ERROR]축제 삭제 실패");
+			mav.addObject("msg", "축제 삭제 실패");
 			if(type==2) {
 				mav.addObject("url", "festival");
 			}else {
@@ -236,7 +258,7 @@ public class FestivalController {
 			e.printStackTrace();
 		}
 		if(dto==null) {
-			mav.addObject("msg", "[ERROR]삭제된 게시물이거나 비정상적인 접근입니다.");
+			mav.addObject("msg", "삭제된 게시물이거나 비정상적인 접근입니다.");
 			mav.addObject("url", "festival");
 			mav.setViewName("admin/adminMsg");
 			return mav;
@@ -267,7 +289,7 @@ public class FestivalController {
 		if(result>0) {
 			mav.setViewName("redirect:/festCont?festidx="+dto.getFestidx()+"&type=2");
 		}else {
-			mav.addObject("msg", "[ERROR]수정 실패.");
+			mav.addObject("msg", "수정 실패.");
 			mav.addObject("url", "festival");
 			mav.setViewName("admin/adminMsg");
 		}

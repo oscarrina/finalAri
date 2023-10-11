@@ -150,19 +150,19 @@ svg{
 		  <div class="mb-3 row">
 		    <label for="festtitle" class="col-sm-2 col-form-label label1">축제명</label>
 		    <div class="col-sm-10">
-		      <input type="text" class="form-control border1 width1" id="festtitle" name="festtitle" style="width:500px;" placeholder="낙동강 캠핑&뮤직 페스타" required="required">
+		      <input type="text" class="form-control border1 width1" maxlength="33" id="festtitle" name="festtitle" style="width:500px;" placeholder="낙동강 캠핑&뮤직 페스타" required="required">
 		    </div>
 		    <label for="festtelname" class="col-sm-2 col-form-label label1">주최자 정보</label>
 		    <div class="col-sm-10">
-		      <input type="text" class="form-control border1 width1" style="width:250px;" id="festtelname" name="festtelname" placeholder="대구광역시 달성군" required="required">
+		      <input type="text" class="form-control border1 width1" maxlength="33" style="width:250px;" id="festtelname" name="festtelname" placeholder="대구광역시 달성군" required="required">
 		    </div>
 		    <label for="festtel" class="col-sm-2 col-form-label label1">주최자 전화번호</label>
 		    <div class="col-sm-10">
-		      <input type="text" class="form-control border1 width1" style="width:250px;" id="festtel" name="festtel" placeholder="053-242-1104" required="required">
+		      <input type="text" class="form-control border1 width1" maxlength="33" style="width:250px;" id="festtel" name="festtel" placeholder="053-242-1104" required="required">
 		    </div>
 		    <label for="festhome" class="col-sm-2 col-form-label label1">홈페이지 주소</label>
 		    <div class="col-sm-10">
-		      <input type="text" class="form-control border1 width1" id="festhome" name="festhome" style="width:500px;" placeholder="http://ncmf.co.kr/main" required="required">
+		      <input type="text" class="form-control border1 width1"  maxlength="180" id="festhome" name="festhome" style="width:500px;" placeholder="http://ncmf.co.kr/main" required="required">
 		    </div>
 		    
 		    <label for="staticEmail" class="col-sm-2 col-form-label label1">지역</label>
@@ -172,7 +172,7 @@ svg{
 		    </div>
 		     <label for="festaddr" class="col-sm-2 col-form-label label1">주소</label>
 		    <div class="col-sm-10">
-		      <input type="text" class="form-control border1 width1" id="festaddr" name="festaddr" placeholder="대구광역시 달성군 구지서로 199 낙동강 레포츠밸리 수상레저센터 " required="required">
+		      <input type="text" class="form-control border1 width1" maxlength="65" id="festaddr" name="festaddr" placeholder="대구광역시 달성군 구지서로 199 낙동강 레포츠밸리 수상레저센터 " required="required">
 		    </div>
 		    <label for="feststart" class="col-sm-2 col-form-label label1">시작날짜</label>
 		    <div class="col-sm-10">
@@ -184,11 +184,11 @@ svg{
 		    </div>
 			<label for="festdate" class="col-sm-2 col-form-label label1">공연시간</label>
 		    <div class="col-sm-10">
-		      <input type="text" class="form-control border1 width1" style="width:250px;" id="festdate" name="festdate" placeholder="9:00 - 21:00" required="required">
+		      <input type="text" class="form-control border1 width1" maxlength="33" style="width:250px;" id="festdate" name="festdate" placeholder="9:00 - 21:00" required="required">
 		    </div>
 		    <label for="festprice" class="col-sm-2 col-form-label label1">이용요금</label>
 		    <div class="col-sm-10">
-		      <input type="text" class="form-control border1 width1" style="width:250px;" id="festprice" name="festprice" placeholder="부분 유료" required="required">
+		      <input type="text" class="form-control border1 width1" maxlength="33" style="width:250px;" id="festprice" name="festprice" placeholder="부분 유료" required="required">
 		    </div>
 		    
 		    <label for="festimg" class="col-sm-2 col-form-label label1">포스터 이미지</label>

@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,21 +8,18 @@
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
 <script src="//code.jquery.com/jquery.min.js"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>
-<link rel="stylesheet" type="text/css" href="/css/adminMainLayout.css">
-<script type="text/javascript" src="../../../js/httpRequest.js"></script>
-<script>
-function showDel(idx,type){
-	location.href='festDel?festidx='+idx+'&type='+type;
-}
-function showUpd(idx){
-	location.href='festUpd?festidx='+idx;
-}
-</script>
 <style>
+.content{
+  display: block;
+  width: 1000px; /* 원하는 너비로 조정 */
+  margin-top: 160px; /* 가로 가운데 정렬 */
+  margin-left:auto;
+  margin-right:auto;
+}
 .table1{
 	border-collapse:separate;
-	border-spacing: 0 15px;
-	width:100%;
+	border-spacing: 0 13px;
+	width:900px;
 	padding-top:100px important;
 	margin-bottom:20px;
 	align:left;
@@ -72,8 +68,8 @@ function showUpd(idx){
 	color: #455671;
 }
 .img1{
-	width:270px !important;
-	height:350px !important;
+	width:250px !important;
+	height:320px !important;
 	padding-right: 30px;
 	margin-right: auto;
 	margin-left: auto;
@@ -82,15 +78,16 @@ function showUpd(idx){
 }
 .traligncnt{
 	text-align: center !important;
+	width:300px;
 }
 .tr1{
-
+	
 }
 .td1{
 	margin-top: 10px !important;
 	padding-bottom: 10px !important;
 	font-weight: bold;
-	font-size: 17px;
+	font-size: 15px;
 	color: #455671;
 }
 .title1{
@@ -129,32 +126,38 @@ function showUpd(idx){
 .btn2:hover{
  	background-color: #686DB9 !important;
 }
+.btn2{
+	margin-top:6px;
+	border:none;
+	border-radius:25px;
+  	background:#686DB9;
+  	width: 70px;
+  	height:35px;
+  	color: #fff;
+  	cursor: pointer;
+  	margin-left: 30px;
+  	font-size: 13px;
+  	
+}
+.tdbtn2{
+	text-align:right;
+	vertical-align: top;
+}
 </style>
 </head>
 <body>
-<div id="page-wrapper">
-<c:if test="${type==2 }">
-<%@ include file="../ceo/ceoHeader.jsp" %>
-</c:if>
+<%@include file="/WEB-INF/views/header.jsp" %>
 
-<c:if test="${type==3 }">
-<%@ include file="../admin/adminHeader.jsp" %>
-</c:if>
+<div class="content">
 
-  <!-- /사이드바 -->
-
-  <!-- 본문 -->
-  <div id="page-content-wrapper">
-    <div class="container-fluid content1" >
-      <div class=" content2">
-      	
-		<table class="table1">
+<table class="table1">	
 			<tr class="tr1">
-				<td class="td1 title1">${dto.festtitle }</td>
+				<td class="td1 title1" colspan="2">${dto.festtitle }</td>
+				<td rowspan="8" class="tdbtn2"><input type="button" class="btn2" value="돌아가기" onclick="javascript:history.go(-1);"></td>
 			</tr>
 			<tr class="tr1">
-				<c:if test="${dto.festapi==0 }"><td class="traligncnt" rowspan="7"><img class="img1" alt="" src="/imgs/${dto.festimg }"></td></c:if>
-				<c:if test="${dto.festapi==1 }"><td class="traligncnt" rowspan="7"><img class="img1" alt="" src="${dto.festimg }"></td></c:if>
+				<c:if test="${dto.festapi==0 }"><td class="traligncnt" rowspan="7"><img class="img1" alt="축제 포스터" src="/imgs/${dto.festimg }"></td></c:if>
+				<c:if test="${dto.festapi==1 }"><td class="traligncnt" rowspan="7"><img class="img1" alt="축제 포스터" src="${dto.festimg }"></td></c:if>
 				<td class="td1">${dto.festtelname }</td>
 			</tr>
 			<tr class="">
@@ -177,42 +180,15 @@ function showUpd(idx){
 				<td class="td1">${dto.festprice }</td>
 			</tr>
 			<tr class="trp">
-				<td colspan="2" class="p1">${dto.festcont }</td>
+				<td colspan="3" class="p1">${dto.festcont }</td>
 
 			</tr>
 			<tr class="trp">
-				<td colspan="2" class="p1">${dto.festcontent }</td>
+				<td colspan="3" class="p1">${dto.festcontent }</td>
 			</tr>
 		</table>
-			<div class="d-grid gap-2 d-md-flex justify-content-center contentwidth">
-			
-			<c:if test="${type==2 }">
-		    	<button type="button" class="btn btn-primary btn2" 
-					style="background-color:#D9D9D9; width:70px; height:40px; font-size:11px; color:black; " onclick="javascript:location.href='festival'">목록</button>&nbsp;&nbsp;
-				<button type="button" class="btn btn-primary btn2" 
-					style="background-color:#666CDE; width:70px; height:40px; font-size:11px; " onclick="showDel(${dto.festidx},${type })">삭제</button>&nbsp;&nbsp;
-				<button type="button" class="btn btn-primary btn2" 
-					style="background-color:#3239AF; width:70px; height:40px; font-size:11px;" onclick="showUpd(${dto.festidx})">수정</button>
-		    </c:if>
-		    <c:if test="${type==3 }">
-		    	<button type="button" class="btn btn-primary btn2" 
-					style="background-color:#D9D9D9; width:70px; height:40px; font-size:11px; color:black; " onclick="javascript:location.href='fest'">목록</button>&nbsp;&nbsp;
-				<button type="button" class="btn btn-primary btn2" 
-					style="background-color:#666CDE; width:70px; height:40px; font-size:11px; " onclick="showDel(${dto.festidx},${type })">삭제</button>&nbsp;&nbsp;
-		    </c:if>
-			</div>
-			</div>
-    </div>
-    <c:if test="${type==2 }">
-    	<%@include file="../ceo/ceoFooter.jsp" %>
-    </c:if>
-    <c:if test="${type==3 }">
-    	<%@include file="../admin/adminFooter.jsp" %>
-    </c:if>
-    
-  </div>
-  <!-- /본문 -->
 </div>
 
+<%@include file="/WEB-INF/views/footer.jsp" %>
 </body>
 </html>

@@ -248,7 +248,7 @@ public class NoticeController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		String msg=result>0?"공지사항이 삭제되었습니다.":"[ERROR] 공지사항 삭제 실패";
+		String msg=result>0?"공지사항이 삭제되었습니다.":"공지사항 삭제 실패";
 		mav.addObject("msg", msg);
 		mav.addObject("url", "/notice");
 		mav.setViewName("admin/adminMsg");
@@ -305,7 +305,7 @@ public class NoticeController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		String msg=result>0?"정상적으로 수정되었습니다.":"[ERROR]수정에 실패하였습니다.";
+		String msg=result>0?"정상적으로 수정되었습니다.":"수정에 실패하였습니다.";
 
 		mav.addObject("msg", msg);
 		mav.addObject("url", "noticeCont?noticeidx="+noticeidx);

@@ -75,7 +75,7 @@ function show(){
 			<tr>
 				<c:choose>
 					<c:when test="${dto.noticetop==1 }">
-						<td><span style="color:#3239AF">공지</span></td>
+						<td><span style="color:#3239AF"><strong>공지</strong></span></td>
 					</c:when>
 					<c:when test="${dto.noticetop==0 }">
 						<td>${dto.noticeidx }</td>

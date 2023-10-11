@@ -63,11 +63,14 @@ function show2(){
 	var area=document.all.sbox2.value;
 	location.href='userfest?area='+area;
 }
+function showcont(idx){
+	location.href='userfestCont?festidx='+idx;
+}
 </script>
 <style>
 .content{
   display: block;
-  width: 1000px; /* 원하는 너비로 조정 */
+  width: 900px; /* 원하는 너비로 조정 */
   margin-top: 160px; /* 가로 가운데 정렬 */
   margin-left:auto;
   margin-right:auto;
@@ -77,10 +80,10 @@ function show2(){
 	margin-left: -26px;
 }
 .title:visited{
-	color: black;
+	color: #455671;
 }
 .title:link{
-	color: black;
+	color: #455671;
 }
 .poster{
 	width: 250px;
@@ -151,8 +154,8 @@ function show2(){
   color:#8B95A6;
   background-size: 100% 100%;
 }
-.width{
-	margin-right: 100px;
+.width1{
+	padding-right: 100px !important;
 }
 </style>
 </head>
@@ -180,8 +183,8 @@ function show2(){
             </c:if>
             <td class="width1">
                 <ul class="ul">
-                	
-                	<a href="javascript:void(0);" onclick="showcont()" class="title">
+ 
+                	<a href="javascript:void(0);" onclick="showcont(${dto.festidx})" class="title">
     					<li>
     						<c:if test="${dto.festapi==0 }"><img class="poster" alt="" src="/imgs/${dto.festimg }"></c:if>
     						<c:if test="${dto.festapi==1 }"><img class="poster" alt="" src="${dto.festimg }"></c:if>
@@ -198,7 +201,7 @@ function show2(){
 </table>
 		
 		 
-		<div style="text-align: center;">
+		<div style="text-align: center; margin-left:100px;">
 			<c:if test="${empty lists }">
 
 			</c:if>

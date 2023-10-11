@@ -96,6 +96,12 @@ svg{
 	margin-top:5px;
 	margin-bottom:5px;	
 }
+.mg1{
+margin-top:7px !important;
+}
+.btn:hover{
+ 	background-color: #686DB9 !important;
+}
 </style>
 </head>
 <body>
@@ -130,7 +136,7 @@ svg{
 			  </select>
 		    </div>
 		    <label for="noticetop" class="col-sm-2 col-form-label">고정여부</label>
-		    <div class="col-sm-10 margint" style="padding-left:35px;">
+		    <div class="col-sm-10 margint mg1" style="padding-left:35px;">
 			  <input class="form-check-input" type="checkbox" name="noticetop" id="noticetop" 
 			  			onclick="checkTop()">
 			  <label class="form-check-label" for="noticetop">

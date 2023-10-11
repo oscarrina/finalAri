@@ -170,19 +170,19 @@ img{
 		  <div class="mb-3 row">
 		    <label for="festtitle" class="col-sm-2 col-form-label label1">축제명</label>
 		    <div class="col-sm-10">
-		      <input type="text" class="form-control border1 width1" id="festtitle" name="festtitle" style="width:500px;" value="${dto.festtitle }" required="required">
+		      <input type="text" class="form-control border1 width1" maxlength="33" id="festtitle" name="festtitle" style="width:500px;" value="${dto.festtitle }" required="required">
 		    </div>
 		    <label for="festtelname" class="col-sm-2 col-form-label label1">주최자 정보</label>
 		    <div class="col-sm-10">
-		      <input type="text" class="form-control border1 width1" style="width:250px;" id="festtelname" name="festtelname" value="${dto.festtelname }" required="required">
+		      <input type="text" class="form-control border1 width1" maxlength="33" style="width:250px;" id="festtelname" name="festtelname" value="${dto.festtelname }" required="required">
 		    </div>
 		    <label for="festtel" class="col-sm-2 col-form-label label1">주최자 전화번호</label>
 		    <div class="col-sm-10">
-		      <input type="text" class="form-control border1 width1" style="width:250px;" id="festtel" name="festtel" value="${dto.festtel }" required="required">
+		      <input type="text" class="form-control border1 width1" maxlength="33" style="width:250px;" id="festtel" name="festtel" value="${dto.festtel }" required="required">
 		    </div>
 		    <label for="festhome" class="col-sm-2 col-form-label label1">홈페이지 주소</label>
 		    <div class="col-sm-10">
-		      <input type="text" class="form-control border1 width1" id="festhome" name="festhome" style="width:500px;" value="${dto.festhome }" required="required">
+		      <input type="text" class="form-control border1 width1" maxlength="180" id="festhome" name="festhome" style="width:500px;" value="${dto.festhome }" required="required">
 		    </div>
 		    
 		    <label for="staticEmail" class="col-sm-2 col-form-label label1">지역</label>
@@ -192,7 +192,7 @@ img{
 		    </div>
 		     <label for="festaddr" class="col-sm-2 col-form-label label1">주소</label>
 		    <div class="col-sm-10">
-		      <input type="text" class="form-control border1 width1" id="festaddr" name="festaddr" value="${dto.festaddr }" required="required">
+		      <input type="text" class="form-control border1 width1" maxlength="65" id="festaddr" name="festaddr" value="${dto.festaddr }" required="required">
 		    </div>
 		    <label for="feststart" class="col-sm-2 col-form-label label1">시작날짜</label>
 		    <div class="col-sm-10">
@@ -204,11 +204,11 @@ img{
 		    </div>
 			<label for="festdate" class="col-sm-2 col-form-label label1">공연시간</label>
 		    <div class="col-sm-10">
-		      <input type="text" class="form-control border1 width1" style="width:250px;" id="festdate" name="festdate" value="${dto.festdate }"  required="required">
+		      <input type="text" class="form-control border1 width1" maxlength="33" style="width:250px;" id="festdate" name="festdate" value="${dto.festdate }"  required="required">
 		    </div>
 		    <label for="festprice" class="col-sm-2 col-form-label label1">이용요금</label>
 		    <div class="col-sm-10">
-		      <input type="text" class="form-control border1 width1" style="width:250px;" id="festprice" name="festprice" value="${dto.festprice }" required="required">
+		      <input type="text" class="form-control border1 width1" maxlength="33" style="width:250px;" id="festprice" name="festprice" value="${dto.festprice }" required="required">
 		    </div>
 		    
 		    <label for="nfestimg" class="col-sm-2 col-form-label label1">포스터 이미지</label>
