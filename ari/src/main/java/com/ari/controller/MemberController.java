@@ -1,11 +1,14 @@
 package com.ari.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -196,23 +199,116 @@ public class MemberController {
 		return mav;
 	}
 	
-	@RequestMapping("/pwdFind1")
-	public ModelAndView pwdFind1() {
+	@GetMapping("/pwdFind1")
+	public ModelAndView pwdFind1Form() {
 		ModelAndView mav=new ModelAndView();
-		
-		
-		
+		mav.setViewName("member/pwdFind1");
 		return mav;
 	}
 	
-	@RequestMapping("/pwdFind2")
-	public String pwdFind2() {
-		return "member/pwdFind2";
+	@PostMapping("/pwdFind1")
+	public ModelAndView pwdFind1(@RequestParam("userid") String userid,HttpSession session) {
+	    ModelAndView mav = new ModelAndView();
+	    
+	    MemberDTO dto=null;
+	    try {
+	        dto = service.pwdFind1(userid);
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	    
+	    if (dto != null) {
+	        mav.addObject("dto", dto);
+	        mav.addObject("userid", userid);
+	        session.setAttribute("userid", userid);
+	        mav.setViewName("redirect:/pwdFind2");
+	    } else {
+	        mav.addObject("msg", "아이디를 다시 확인하세요.");
+	        mav.setViewName("member/memberMsg");
+	    }
+	    return mav;
+	}
+
+	@GetMapping("/pwdFind2")
+	public ModelAndView pwdFind2Form() {
+		ModelAndView mav=new ModelAndView();
+		mav.setViewName("member/pwdFind2");
+		return mav;
 	}
 	
-	@RequestMapping("/pwdFind3")
-	public String pwdFind3() {
-		return "member/pwdFind3";
+	@PostMapping("/pwdFind2")
+	public ModelAndView pwdFind2(@RequestParam(value = "username", required = false) String username,
+	    @RequestParam(value = "usertel", required = false) String usertel,
+	    HttpSession session) {
+	    ModelAndView mav = new ModelAndView();
+
+	    if (username == null || usertel == null) {
+	        mav.addObject("msg", "이름 또는 핸드폰번호를 입력하세요.");
+	        mav.setViewName("member/memberMsg");
+	        return mav;
+	    }
+
+	    MemberDTO dto = null;
+
+	    try {
+	        dto = service.pwdFind2(username, usertel);
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+
+	    if (dto != null) {
+	        mav.addObject("dto", dto);
+	        mav.addObject("username", username);
+	        mav.addObject("usertel", usertel);
+	        session.setAttribute("username", username);
+	        session.setAttribute("usertel", usertel);
+	        mav.setViewName("redirect:/pwdFind3");
+	    } else {
+	        mav.addObject("msg", "일치하는 정보가 없습니다.");
+	        mav.setViewName("member/memberMsg");
+	    }
+	    return mav;
+	}
+	
+	@GetMapping("/pwdFind3")
+	public ModelAndView pwdFind3Form() {
+		ModelAndView mav=new ModelAndView();
+		mav.setViewName("member/pwdFind3");
+		return mav;
+	}
+	
+	@PostMapping("/pwdFind3")
+	public ModelAndView pwdFind3(HttpServletRequest request,
+			HttpSession session,
+			MemberDTO dto) {
+		ModelAndView mav=new ModelAndView();
+		String userid = (String) request.getSession().getAttribute("userid");
+		String username = (String) request.getSession().getAttribute("username");
+		String usertel = (String) request.getSession().getAttribute("usertel");
+		String shapwd = PasswordModule.testSHA256(dto.getUserpwd());
+		dto.setUserid(userid);
+		dto.setUsername(username);
+		dto.setUsertel(usertel);
+		dto.setUserpwd(shapwd);
+		
+		int result=0;
+		try {
+			result=service.pwdFind3(dto);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(result>0) {
+			mav.addObject("msg", "비밀번호가 재설정 되었습니다. 로그인 페이지로 이동합니다.");
+			mav.addObject("userid", userid);
+	        mav.addObject("username", username);
+	        mav.addObject("usertel", usertel);
+	        mav.addObject("url", "/memberLogin");
+		}else {
+			mav.addObject("msg", "비밀번호 재설정에 실패했습니다. 다시 시도해주세요.");
+		}
+		mav.setViewName("member/memberMsg");
+		return mav;
 	}
 	
 	@GetMapping("/idCheck")

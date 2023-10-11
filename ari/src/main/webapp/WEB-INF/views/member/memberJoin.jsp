@@ -339,7 +339,7 @@ select{
 <input type = "hidden" name = "usertype" value="${userType}">
 <div class="login-wrap">
   <div class="login-html">
-  <img src="/img/logo.png" class="mainimg">
+  <a href="/"><img src="img/logo.png" class="mainimg"></a>
   <div class="group">
   	<input type="text" id="name" class="input" name = "username" placeholder="이름">
   </div>

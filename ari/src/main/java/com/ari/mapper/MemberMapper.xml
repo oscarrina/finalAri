@@ -18,11 +18,21 @@
 		from userinfo
 		where username=#{username} and usertel=#{usertel}
 	</select>
-	<select id="pwdFind" parameterType="com.ari.member.model.MemberDTO">
+	<select id="pwdFind1" parameterType="String" resultType="com.ari.member.model.MemberDTO">
 		select *
 		from userinfo
 		where userid=#{userid}
 	</select>
+	<select id="pwdFind2" parameterType="String" resultType="com.ari.member.model.MemberDTO">
+		select *
+		from userinfo
+		where username=#{username} and usertel=#{usertel}
+	</select>
+	<update id="pwdFind3" parameterType="com.ari.member.model.MemberDTO">
+    	update userinfo
+    	set userpwd=#{userpwd}
+   	 	where userid=#{userid} and username=#{username} and usertel=#{usertel}
+	</update>
 	<select id="idCheck" parameterType="String" resultType="Integer">
 		select count(*)
 		from userinfo
