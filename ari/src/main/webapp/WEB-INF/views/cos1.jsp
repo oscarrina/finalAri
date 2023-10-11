@@ -8,6 +8,7 @@
 <title>Insert title here</title>
 <script src = "js/httpRequest.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="https://js.tosspayments.com/v1/payment-widget"></script>
 <style>
 .test{
 	margin-top: 300px;
@@ -22,6 +23,7 @@
 </style>
 <script>
 var liketest='${likeYN}';
+
 function like(likeYN){
 	let idx = document.getElementById("idx").value;
 	let likeType = document.getElementById("likeType").value;
