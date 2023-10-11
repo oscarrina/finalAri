@@ -11,11 +11,11 @@
       <a href="#" id="img1"><img id="logoimg" alt="로고이미지" src="/img/logoX.png"></a>
       </li>      
       <li><a href="adminUser?type=3">유저 관리</a></li>
-      <li><a href="#">지역별 여행 통계</a></li>
+      <li><a href="chart">지역별 여행 통계</a></li>
       <li><a href="#">일정 게시판</a></li>
       <li><a href="#">코스 목록 보기</a></li>
       <li><a href="#">배너 이미지 관리</a></li>
-      <li><a href="fest">축제 등록 및 삭제</a></li>
+      <li><a href="fest">축제 관리</a></li>
       <li><a href="#">전체 문의 내용 보기</a></li>
       <li><a href="notice?type=3">공지사항</a></li>
 	  <li class="admin_login">

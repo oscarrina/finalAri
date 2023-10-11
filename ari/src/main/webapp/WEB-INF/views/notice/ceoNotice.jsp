@@ -17,6 +17,7 @@
 }
 
 .content2{
+	width:800px !important;
 	margin-top: 30px;
 	margin-bottom: 50px;
 }
@@ -51,13 +52,13 @@ h3{
 			<div class="accordion-item">
 		    <h2 class="accordion-header" id="heading${dto.noticeidx}">
 		      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${dto.noticeidx}" aria-expanded="false" aria-controls="collapse${dto.noticeidx}">
-		       <c:if test="${dto.noticetop==1 }">[공지]</c:if>
+		       <c:if test="${dto.noticetop==1 }"><span style="color:#3239AF"><strong>공지&nbsp;&nbsp;</strong></span></c:if>
 					        ${dto.noticetitle}
 		      </button>
 		    </h2>
 		    <div id="collapse${dto.noticeidx}" class="accordion-collapse collapse" aria-labelledby="heading${dto.noticeidx}" data-bs-parent="#accordionExample">
 		      <div class="accordion-body">
-		        <strong>This is the first item's accordion body.</strong> ${dto.noticecontent}
+		         ${dto.noticecontent}
 		      </div>
 		    </div>
 		  </div>

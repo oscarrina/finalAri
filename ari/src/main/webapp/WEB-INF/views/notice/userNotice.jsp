@@ -84,7 +84,7 @@ table{
 			<div class="accordion-item">
 		    <h2 class="accordion-header" id="heading${dto.noticeidx}">
 		      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${dto.noticeidx}" aria-expanded="false" aria-controls="collapse${dto.noticeidx}">
-		       <c:if test="${dto.noticetop==1 }">[공지]</c:if>
+		       <c:if test="${dto.noticetop==1 }"><span style="color:#38B6FF"><strong>공지&nbsp;&nbsp;</strong></span></c:if>
 					        ${dto.noticetitle}
 		      </button>
 		    </h2>
