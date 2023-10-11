@@ -5,6 +5,62 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script>
+function passwordCheck(password) {	
+	let passwordCheckMsg = document.getElementById("passwordCheckMsg");
+    let regexPw = /(?=.*\d)(?=.*[a-zA-ZS]).{8,20}/
+    if(password.value != '') {
+         if(!regexPw.test(pwd.value)||password.length < 8) {
+			passwordCheckMsg.innerHTML = '비밀번호는 공백없이 8~20자리, 대소문자, 숫자, 특수문자로 구성하여야 합니다.';
+			passwordCheckMsg.style.color = 'red';
+		} else {
+			passwordCheckMsg.innerHTML = "사용 가능한 비밀번호입니다.";
+			passwordCheckMsg.style.color = 'green';
+		}
+    }
+    let passwordDoubleMsg = document.getElementById("passwordDoubleMsg");
+    let passwordDoubleCheck = document.getElementById("pwd2")
+    if(document.getElementById("passwordCheckMsg").innerHTML=="사용 가능한 비밀번호입니다."&&passwordDoubleCheck.value!==''){
+		if(document.getElementById("pwd").value != passwordDoubleCheck.value){
+			passwordDoubleMsg.innerHTML = "비밀번호가 일치하지 않습니다.";
+			passwordDoubleMsg.style.color = 'red';
+		}else{
+			passwordDoubleMsg.innerHTML = "비밀번호가 일치합니다.";
+			passwordDoubleMsg.style.color = 'green';
+		}
+	}else{
+		passwordDoubleMsg.innerHTML = "";
+		passwordDoubleMsg.style.color = "";
+	}
+}
+//비밀번호 재확인 검사 
+function passwordDouble(passwordDoubleCheck){
+	let passwordDoubleMsg = document.getElementById("passwordDoubleMsg");
+	if(document.getElementById("passwordCheckMsg").innerHTML=="사용 가능한 비밀번호입니다." && passwordDoubleCheck.value!==''){
+		if(document.getElementById("pwd").value != passwordDoubleCheck.value){
+			passwordDoubleMsg.innerHTML = "비밀번호가 일치하지 않습니다.";
+			passwordDoubleMsg.style.color = 'red';
+		}else{
+			passwordDoubleMsg.innerHTML = "비밀번호가 일치합니다.";
+			passwordDoubleMsg.style.color = 'green';
+		}
+	}else{
+		passwordDoubleMsg.innerHTML = "";
+		passwordDoubleMsg.style.color = "";
+	}
+}
+function formCheck(userType){
+	if(document.getElementById('passwordCheckMsg').style.color !='green'){
+		window.alert('유효한 비밀번호가 아닙니다.');
+		return false;
+	}else if(document.getElementById('passwordDoubleMsg').style.color !='green'){
+		window.alert('비밀번호를 올바르게 입력해주세요.');
+		return false;
+	}else{
+		document.pwdFind3.submit();
+	}
+}
+</script>
 <style>
 .notice1{
   margin-top: 20px;
@@ -55,26 +111,30 @@
   width: 330px;
   height: 130px;
 }
+.whiteSpace{
+ height: 10px;	
+ font-size: 13px;
+ margin-left: 10px;
+}
 </style>
 </head>
 <body>
 <div class="login-wrap">
   <div class="login-html">
-  <img src="img/logo.png" class="mainimg">
+  <a href="/"><img src="img/logo.png" class="mainimg"></a>
+  <form action="/pwdFind3" name="pwdFind3" method="post">
   <div class="group">
-  	<input type="password" id="pwd" class="input" data-type="password" placeholder="새 비밀번호">
+  	<input type="password" required id = "pwd" class="input" data-type="password" name = "userpwd" placeholder="새 비밀번호" oninput = "passwordCheck(this)" maxlength ="20">
   </div>
+  <div class = "whiteSpace" id = "passwordCheckMsg"></div>
   <div class="group">
-  	<input type="password" id="pwd2" class="input" data-type="password" placeholder="비밀번호 확인">
+  	<input type="password" required id = "pwd2" class="input" data-type="password" placeholder="비밀번호 확인" oninput = "passwordDouble(this)" maxlength ="20">
   </div>
+  <div class = "whiteSpace" id = "passwordDoubleMsg"></div>
   <div class="group">
-    <input type="submit" class="btn1" value="로그인">
+    <input type="submit" class="btn1" value="비밀번호 재설정">
   </div>
-  <div class="notice1">8~15자의 영문 대/소문자, 숫자, 특수문자 중 2개 이상 조합</div>
-  <div class="notice">사용가능 특수문자: ! “ $ % & ‘ () * + , - . / : ; < > = ? @ # [] ₩ ^ _`{} ~ |</div>
-  <div class="notice">동일하거나 연속된 4자리 이상의 숫자/영문 반복 사용불가</div>
-  <div class="notice">아이디, 생일, 전화번호 등 개인정보 사용불가</div>
-  <div class="notice">이전 사용 암호 재사용 불가</div>
+  </form>
   </div>
 </div>
 </body>

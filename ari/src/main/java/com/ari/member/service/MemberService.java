@@ -1,5 +1,7 @@
 package com.ari.member.service;
 
+import java.util.List;
+
 import com.ari.member.model.*;
 
 public interface MemberService {
@@ -12,7 +14,9 @@ public interface MemberService {
 	public int memberLogin(String userid,String userpwd) throws Exception;
 	public MemberDTO getUserInfo(String userid)throws Exception;
 	public MemberDTO idFind(String username,String usertel)throws Exception;
-	public int pwdFind1(String userid)throws Exception;
+	public MemberDTO pwdFind1(String userid)throws Exception;
+	public MemberDTO pwdFind2(String username,String usertel)throws Exception;
+	public int pwdFind3(MemberDTO dto)throws Exception;
 	public int idCheck(String userid)throws Exception;
 	public int memberJoin(MemberDTO dto)throws Exception;
 	public int bnCheck(String userbn);

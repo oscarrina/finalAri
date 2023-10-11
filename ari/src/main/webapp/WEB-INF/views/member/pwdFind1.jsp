@@ -48,19 +48,26 @@
   width: 330px;
   height: 130px;
 }
+.whiteSpace{
+ height: 10px;	
+ font-size: 13px;
+ margin-left: 10px;
+}
 </style>
 </head>
 <body>
 <div class="login-wrap">
   <div class="login-html">
-  <img src="img/logo.png" class="mainimg">
+  <a href="/"><img src="img/logo.png" class="mainimg"></a>
+  <form action="/pwdFind1" name="pwdFind1" method="post">
   <div class="notice"><h3>아이디 확인 후 비밀번호를 재설정 할 수 있습니다.</h3></div>
   <div class="group">
-  	<input type="text" id="name" class="input" placeholder="이름">
+  	<input type="text" id="userid" name="userid" class="input" placeholder="아이디">
   </div>
   <div class="group">
-    <input type="submit" class="btn1" value="비밀번호 재설정">
+    <input type="submit" class="btn1" value="아이디 확인">
   </div>
+  </form>
   </div>
 </div>
 </body>

@@ -1,5 +1,7 @@
 package com.ari.member.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -41,9 +43,21 @@ public class MemberServiceImple implements MemberService {
 	}
 	
 	@Override
-	public int pwdFind1(String userid) throws Exception {
-		int result=mapper.pwdFind1(userid);
-		return result;
+	public MemberDTO pwdFind1(String userid) throws Exception {
+		MemberDTO dto=mapper.pwdFind1(userid);
+		return dto;
+	}
+	
+	@Override
+	public MemberDTO pwdFind2(String username, String usertel) throws Exception {
+		MemberDTO dto=mapper.pwdFind2(username, usertel);
+		return dto;
+	}
+	
+	@Override
+	public int pwdFind3(MemberDTO dto) throws Exception {
+	    int result = mapper.pwdFind3(dto);
+	    return result;
 	}
 	
 	@Override
