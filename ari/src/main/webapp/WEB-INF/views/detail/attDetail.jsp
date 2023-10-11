@@ -55,7 +55,7 @@ h5{
 <table>
 <tr>
 	<td rowspan="4">
-		<img alt="상세 메인이미지" src="/imgs/att.jpeg" class="mainImg">	
+		<img alt="상세 메인이미지" src="/imgs/${att.infoImg }" class="mainImg">	
 	</td>
 	<td>
 		<h3>${att.infoName }</h3>

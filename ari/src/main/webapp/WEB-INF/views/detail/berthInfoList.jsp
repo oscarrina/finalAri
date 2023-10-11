@@ -10,6 +10,12 @@
 .content{
 	margin-top:150px;
 }
+img{
+	overflow: hidden;
+   object-fit:cover;
+   wudth:250px;
+   height: 350px;
+}
 </style>
 </head>
 <body>
@@ -18,7 +24,7 @@
 <c:forEach var="berthInfo" items="${berthInfo}">
 	<article class="postcard dark blue">
 			<a class="postcard__img_link" href="berthInfoDetail?berthInfoIdx=${berthInfo.idx }">
-				<img class="postcard__img" src="https://picsum.photos/1000/1000" alt="Image Title" />
+				<img class="postcard__img" src="/imgs/${berthInfo.infoImg }" alt="Image Title" />
 			</a>
 			<div class="postcard__text">
 				<h1 class="postcard__title blue"><a href="#" style="text-decoration-line: none; color:#00008C; ">${berthInfo.infoName }</a></h1>

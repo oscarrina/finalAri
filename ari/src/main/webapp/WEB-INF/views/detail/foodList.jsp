@@ -18,7 +18,7 @@
 <c:forEach var="food" items="${food }">
 	<article class="postcard dark blue">
 			<a class="postcard__img_link" href="foodDetail?foodIdx=${food.idx }">
-				<img class="postcard__img" src="https://picsum.photos/1000/1000" alt="Image Title" />
+				<img class="postcard__img" src="/imgs/${food.infoImg }" alt="Image Title" />
 			</a>
 			<div class="postcard__text">
 				<h1 class="postcard__title blue"><a href="#" style="text-decoration-line: none; color:#00008C; ">${food.infoName }</a></h1>

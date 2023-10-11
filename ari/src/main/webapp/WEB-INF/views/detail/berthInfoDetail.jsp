@@ -29,7 +29,8 @@ h3{
   border-bottom-left-radius: 25px;
 }
 th{
-  background-color: skyblue;
+  background-color: #253BFF;
+  color:white;
 }
 h5{
   text-align: center;
@@ -39,12 +40,29 @@ h5{
   border-radius: 25px;
 }
 .mainTable{
-	border-spacing: 10px;
+  border-spacing: 10px;
 }
 .addTable{
   width:900px;
   border-collapse: separate;
-  border-spacing: 0 15px;
+  
+}
+.berthDiv{
+	width:900px;
+	border: solid 3px #253BFF;
+  border-radius: 25px;
+}
+.berthImg{
+	border-radius: 25px;
+	width:350px;
+}
+.birthTable{
+	width:900px;
+	
+}
+.addDiv{
+	border: solid 3px #253BFF;
+	border-radius: 25px;
 }
 </style>
 </head>
@@ -56,7 +74,7 @@ h5{
 <table class="mainTable">
 <tr>
 	<td rowspan="4" width="450">
-		<img alt="상세 메인이미지" src="/imgs/att.jpeg" class="mainImg">	
+		<img alt="상세 메인이미지" src="/imgs/${berthInfo.infoImg }" class="mainImg">	
 	</td>
 	<td width="450">
 		<h4>&nbsp;&nbsp;${berthInfo.infoName }</h4>
@@ -75,9 +93,9 @@ h5{
 
 </table>
 </div>
-<br><br><br>
+<br><br>
 <h6>${berthInfo.infoName }</h6>
-<div >
+<div class="addDiv">
 <table class="addTable">
 	<tr>
 		<th class="topTh"><h5>전화번호</h5></th>
@@ -112,13 +130,21 @@ h5{
 	</tr>
 </table>
 </div>
-</c:forEach>
-<div>
+</c:forEach><br><br>
+<div class="berthDiv">
 <c:forEach items="${berth }" var="berth">
-<table>
+<table class="berthTable">
 	<tr>
-		<td></td>
+		<td rowspan="7"  width="380"><img src="/imgs/${berth.infoImg }" alt="room" class="berthImg"></td>
+		<td width="300"><h5><Strong>${berth.berthName }</Strong></h5></td>
+		<td><h5>${berth.berthPrice }₩<h5></td>
 	</tr>
+	<tr><td>${berth.berthSize }㎡</td></tr>
+	<tr><td><i class="bi bi-person-fill"></i>최대 ${berth.berthMax }명</td></tr>
+	<tr><td><i class="bi bi-tv"></i> <c:if test="${berth.berthTv==1}">O</c:if><c:if test="${berth.berthTv==0}">X</c:if></td></tr>
+	<tr><td><i class="bi bi-wifi"></i> <c:if test="${berth.berthInternet==1}">O</c:if><c:if test="${berth.berthInternet==0}">X</c:if></td></tr>
+	<tr><td><c:if test="${berth.berthDry==1}">헤어드라이기 비치</c:if><c:if test="${berth.berthDry==0}"></c:if></td></tr>
+	<tr><td><c:if test="${berth.berthRefri==1}">냉장고 있음</c:if><c:if test="${berth.berthRefri==0 }"></c:if></td></tr>
 </table>
 </c:forEach>
 </div>
