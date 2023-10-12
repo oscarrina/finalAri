@@ -17,13 +17,28 @@ img{
    height: 350px;
 }
 </style>
+<script>
+function dateFormat(date){
+	return date.getFullYear().toString()+(date.getMonth()+1).toString()+date.getDate().toString();
+}
+
+function berthDetail(idx){
+	var date = new Date();
+	var tomorrow = new Date();
+	tomorrow.setDate(tomorrow.getDate() + 1)
+	console.log(date);
+	console.log(tomorrow);
+	location.href = 'berthInfoDetail?berthInfoIdx='+idx+'&startDate='+dateFormat(date)
+			+'&endDate='+dateFormat(tomorrow);
+}
+</script>
 </head>
 <body>
 <%@include file="/WEB-INF/views/header.jsp" %>
 <div class="content">
 <c:forEach var="berthInfo" items="${berthInfo}">
 	<article class="postcard dark blue">
-			<a class="postcard__img_link" href="berthInfoDetail?berthInfoIdx=${berthInfo.idx }">
+			<a class="postcard__img_link" onclick="berthDetail(${berthInfo.idx })">
 				<img class="postcard__img" src="/imgs/${berthInfo.infoImg }" alt="Image Title" />
 			</a>
 			<div class="postcard__text">

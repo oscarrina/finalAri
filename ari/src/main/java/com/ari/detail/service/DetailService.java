@@ -34,7 +34,7 @@ public interface DetailService {
 	
 	public List<BerthInfoDTO> berthInfoDetail(int idx) throws Exception;
 	
-	public List<BerthDTO> berthDetail(int idx) throws Exception;
+	public List<BerthDTO> berthDetail(BerthDTO dto) throws Exception;
 	
 	public List<AttDTO> attDetail(int idx) throws Exception;
 	

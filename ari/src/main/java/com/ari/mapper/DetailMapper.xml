@@ -57,10 +57,12 @@
   		from berthInfo
   		where idx=#{idx}
     </select>
-    <select id="berthDetail" parameterType="int" resultType="com.ari.detail.model.BerthDTO">
-    	select * 
-    	from berth
-    	where idx=${idx}
+    <select id="berthDetail" parameterType="com.ari.detail.model.BerthDTO" resultType="com.ari.detail.model.BerthDTO">
+    	SELECT B.*/*NVL(R.reserstate,0)as reserstate*/
+    	FROM BERTH B LEFT OUTER JOIN reser R ON B.idx = R.idx AND B.BERTHIDX = R.BERTHIDX
+    	AND R.reservisitSTART <![CDATA[>=]]> TO_DATE(#{startDate}, 'YYYYMMDD') 
+		AND R.reservisitEND  <![CDATA[<=]]> TO_DATE(#{endDate}, 'YYYYMMDD')
+		WHERE B.idx = #{idx}
     </select>
     <select id="attDetail" parameterType="int" resultType="com.ari.detail.model.AttDTO">
     	select * 

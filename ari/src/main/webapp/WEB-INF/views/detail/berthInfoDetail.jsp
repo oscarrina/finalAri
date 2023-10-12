@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://js.tosspayments.com/v1/payment-widget"></script>
 <style>
 .content{
   display: block;
@@ -65,6 +66,60 @@ h5{
 	border-radius: 25px;
 }
 </style>
+<script>
+function getFormatDate(date){
+    let year = date.getFullYear();          
+    let month = (1 + date.getMonth());        
+    month = month >= 10 ? month : '0' + month; 
+    let day = date.getDate();                  
+    day = day >= 10 ? day : '0' + day;         
+    return  year + '-' + month + '-' + day;     
+}
+
+window.onload = function(){
+   let date = new Date();
+   let tomorrow = new Date();
+   tomorrow.setDate(tomorrow.getDate() + 1)
+   document.getElementById("start").value = getFormatDate(date);
+   document.getElementById("end").value = getFormatDate(tomorrow);
+   document.getElementById("start").setAttribute("min",getFormatDate(date));
+   document.getElementById("end").setAttribute("min",getFormatDate(date));
+}
+
+function endDateCal(start){
+   window.alert('ad');
+   var startValue = start.value;
+   var date = new Date(startValue);
+   var endValue = document.getElementById("end").value;
+   console.log(dateCal(endValue));
+   console.log(dateCal(startValue));
+   
+   if (dateCal(endValue) < dateCal(startValue)){
+      document.getElementById("end").value = startValue;
+   }
+   document.getElementById("end").setAttribute("min",startValue);
+}
+
+function dateCal(date){
+   var ndate = new Date(date);
+    var getTime = ndate.getTime();
+    var result = parseInt(getTime);
+    return result;
+}
+
+function dateminu(date1, date2){
+   var sDate = new Date(date1);
+   var eDate = new Date(date2);
+   var getTime1 = sDate.getTime();
+   var getTime2 = eDate.getTime();
+   
+   var startDate = parseInt(getTime1);
+   var endDate = parseInt(getTime2);
+   var dateP = endDate - startDate;
+    var result = dateP / (1000 * 60 * 60 * 24);
+    return result;
+}
+</script>
 </head>
 <body>
 <%@include file="/WEB-INF/views/header.jsp" %>
@@ -132,6 +187,8 @@ h5{
 </div>
 </c:forEach><br><br>
 <div class="berthDiv">
+<input type = "date" id = "start" oninput= "endDateCal(this)" name = "startDate">
+<input type = "date" id = "end" name = "endDate">
 <c:forEach items="${berth }" var="berth">
 <table class="berthTable">
 	<tr>

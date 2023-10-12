@@ -1,10 +1,12 @@
 package com.ari.controller;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -79,7 +81,7 @@ public class DetailController {
 					e.printStackTrace();
 				}
 			}
-			
+			System.out.println();
 			mav.addObject("berthInfo",berthInfo);
 			mav.setViewName("detail/berthInfoList");
 			
@@ -152,12 +154,17 @@ public class DetailController {
 		return mav;
 	}
 	@RequestMapping("berthInfoDetail")
-	public ModelAndView berthInfodetail(@RequestParam("berthInfoIdx") int idx) {
+	public ModelAndView berthInfodetail(@RequestParam("berthInfoIdx") int idx,
+			@RequestParam("startDate") String startDate,@RequestParam("endDate") String endDate,
+			BerthDTO dto) {
 		List<BerthInfoDTO> berthInfo =null;
 		List<BerthDTO> berth=null;
+		dto.setIdx(idx);
+		dto.setStartDate(startDate);
+		dto.setEndDate(endDate);
 		try {
 			berthInfo=service.berthInfoDetail(idx);
-			berth=service.berthDetail(idx);
+			berth=service.berthDetail(dto);
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
