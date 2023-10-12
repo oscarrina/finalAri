@@ -76,8 +76,8 @@ public class DetailServiceImple implements DetailService {
 		return list;
 	}
 	@Override
-	public List<BerthDTO> berthDetail(int idx) throws Exception {
-		List<BerthDTO> lists=mapper.berthDetail(idx);
+	public List<BerthDTO> berthDetail(BerthDTO dto) throws Exception {
+		List<BerthDTO> lists=mapper.berthDetail(dto);
 		return lists;
 	}
 	@Override

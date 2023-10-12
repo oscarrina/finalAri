@@ -35,7 +35,7 @@
 </body>
 <script>
 const clientKey = "test_ck_Ba5PzR0ArnJpEn1xog1rvmYnNeDM";
-const customerKey = "rJHjmCPeXjGWoTjjpLJfl"; // 내 상점에서 고객을 구분하기 위해 발급한 고객의 고유 ID
+const customerKey = "312sadwae"; // 내 상점에서 고객을 구분하기 위해 발급한 고객의 고유 ID
 const button = document.getElementById("payment-button");
 
 const paymentWidget = PaymentWidget(clientKey, customerKey); // 회원 결제
@@ -43,9 +43,10 @@ const paymentWidget = PaymentWidget(clientKey, customerKey); // 회원 결제
 paymentWidget.renderPaymentMethods("#payment-method", { value: 2350 });
 
 button.addEventListener("click", function () {
+	let uuid = self.crypto.randomUUID();
   paymentWidget.requestPayment({
-    orderId: "uVsxXcDQwwqvZnxW22CbG",            // 주문 ID(직접 만들어주세요)
-    orderName: "우선철 1명",                 // 주문명
+    orderId: uuid,            // 주문 ID(직접 만들어주세요)
+    orderName: "123",                 // 주문명
     successUrl: "http://localhost:9091/pay/success",  // 결제에 성공하면 이동하는 페이지(직접 만들어주세요)
     failUrl: "http://localhost:9091/pay/fail",        // 결제에 실패하면 이동하는 페이지(직접 만들어주세요)
   });
