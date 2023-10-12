@@ -14,12 +14,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ari.detail.model.AttDTO;
-import com.ari.detail.model.BerthDTO;
 import com.ari.detail.model.BerthInfoDTO;
 import com.ari.detail.model.FoodDTO;
 import com.ari.place.service.PlaceService;
-
-import io.netty.handler.codec.http.HttpRequest;
 
 @Controller
 public class placeRegController {
