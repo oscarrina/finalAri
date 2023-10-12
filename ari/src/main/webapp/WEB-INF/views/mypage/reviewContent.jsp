@@ -8,24 +8,26 @@
 <style>
 .review{
 	margin-top: 150px;
-	margin-left: 200px;
-	width: 800px;
+	margin-left:auto;
+  	margin-right:auto;
+	width: 900px;
 }
 #myform fieldset{
-    display: inline-block;
+    margin-right:630px;	/*별점 위치*/
     direction: rtl;
-    border:0;
 }
 #myform fieldset legend{
     text-align: right;
 }
 #myform input[type=radio]{
     display: none;
+    
 }
 #myform label{
     font-size: 3em;
     color: transparent;
     text-shadow: 0 0 0 #f0f0f0;
+    margin-bottom: 20px;
 }
 #myform label:hover{
     text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
@@ -38,29 +40,85 @@
 }
 #reviewContents {
     width: 100%;
-    height: 150px;
+    height: 250px;
     padding: 10px;
     box-sizing: border-box;
-    border: solid 1.5px #D3D3D3;
-    border-radius: 5px;
+    border: solid 1.5px #253BFF;
+    border-radius: 25px;
     font-size: 16px;
     resize: none;
+    box-shadow: none;
+    padding-left: 15px;
+    padding-right: 15px;
 }
-.title{
-	width:400px;
-	height:40px;
-	border-color:blue;
-	border-radius:30px;
+#refile {
+	display: none;
+	margin-left: 10px;
+}
+
+#btn2 {
+  width: 40px;
+  height: 40px;
+  margin-left: 15px;
+  margin-top: 18px;
+  background: #fff;
+  border: 1.5px solid #253BFF;
+  border-radius: 10px;
+  font-size:40px;
+  padding-bottom: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#btn2:hover {
+  border: 1.5px solid #38B6FF;
+  background: #38B6FF;
+  color: #253BFF;
+}
+.btn1{
+  border:none;
+  padding:15px 20px;
+  border-radius:25px;
+  background:#253BFF;
+  margin-top: 40px;
+  margin-left: 800px;
+  width: 100px;
+  color: #fff;
+  cursor: pointer;
+}
+.btn1:hover{
+  background-color: #38B6FF;
+}
+.a {
+    border:1.5px solid;
 	margin-top:20px;
-	text-align: center;
+	border-radius:25px;
+	border-color:#253BFF;
+	width: 900px;
+	display: flex;
+    align-items: center;
+    margin-left: -10px;
+    height: 60px;
+}
+#fileName{
+	margin-left: 15px;
+	margin-top: 15px;
 }
 </style>
+<script>
+function loadFile(input) {
+    var file = input.files[0];
+
+    var name = document.getElementById('fileName');
+    name.textContent = file.name;
+}
+</script>
 </head>
 <body>
 <%@include file="/WEB-INF/views/header.jsp" %>
-
 <div class="review">
-	<input type="text" class="title" value="제목을 입력하세요.">
+	<h3>리뷰 등록</h3>
 	<form class="mb-3" name="myform" id="myform" method="post">
 	<fieldset>
 		<input type="radio" name="reviewStar" value="5" id="rate1"><label
@@ -73,13 +131,21 @@
 			for="rate4">★</label>
 		<input type="radio" name="reviewStar" value="1" id="rate5"><label
 			for="rate5">★</label>
-		<span class="text-bold">별점</span>
-		<hr>
 	</fieldset>
 	<div>
 		<textarea class="col-auto form-control" type="text" id="reviewContents"
 				  placeholder="내용을 입력하세요."></textarea>
 	</div>
+	<div class="container">
+	<div class="a">
+    	<label for="refile" id="btn2">+</label>
+		<input type="file" name="review" id="refile" onchange="loadFile(this)">
+		<span class="fileInput"><p id="fileName"></p></span>
+    </div>
+    </div>
+    <div>
+    	<input type="submit" class="btn1" value="등록">
+    </div>
 </form>		
 </div>
 <%@include file="/WEB-INF/views/footer.jsp" %>
