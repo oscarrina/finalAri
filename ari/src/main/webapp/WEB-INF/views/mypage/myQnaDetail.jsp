@@ -21,7 +21,7 @@
 	height:40px;
 	border-color:blue;
 	border-radius:30px;
-	margin-top:20px;
+	margin-top:15px;
 	text-align: center;
 }
 #qnaCategory{
@@ -29,7 +29,7 @@
 	height:40px;
 	border-color:blue;
 	border-radius:30px;
-	margin-top:20px;
+	margin-top:15px;
 	text-align:center;
 }
 #qnaDate{
@@ -37,13 +37,20 @@
 	height:40px;
 	border-color:blue;
 	border-radius:30px;
-	margin-top:20px;
+	margin-top:15px;
 	text-align:center;
 }
 #exampleTextarea{
-	margin-top:20px;
+	margin-top:15px;
 	border-radius:25px;
 	border-color:blue;
+	border-width: 2px;
+}
+h4{
+	color:#253BFF;
+}
+.qDiv{
+	border:
 }
 </style>
 </head>
@@ -51,8 +58,9 @@
 <%@include file="/WEB-INF/views/header.jsp" %>
 <%@include file="/WEB-INF/views/mypage/mypageSide.jsp" %>
 <div class="maindiv">
-<div>
+<div class="qDiv">
      	<table width="800" align="center">
+     	<tr><td><h4>문의</h4></td></tr>
      	<c:forEach var="dto" items="${lists }" >
      		<tr>
      			<td colspan="2">
@@ -71,6 +79,30 @@
      			<td colspan="2">
      			<textarea class="form-control" id="exampleTextarea" rows="8" 
 				readonly>${dto.qnaContent }</textarea>
+     			</td>
+     		</tr>
+     	</c:forEach>
+     	</table>
+     </div>
+     <hr>
+     <div class="reply">
+     	<table width="800" align="center">
+     	<tr><td><h4>답변</h4></td></tr>
+     	<c:forEach var="reply" items="${reply }" >
+     		<tr>
+     			<td colspan="2">
+     			<input type="text" name="qnaTitle" id="qnaTitle" value="${reply.replyTitle }" readonly>
+     			</td>
+     		</tr>
+     		<tr>
+     			<td>
+     			<input type="text" id="qnaDate" value="${reply.replyDate}" readonly>
+     			</td>
+     		</tr>
+     		<tr>
+     			<td colspan="2">
+     			<textarea class="form-control" id="exampleTextarea" rows="8" 
+				readonly>${reply.replyContent }</textarea>
      			</td>
      		</tr>
      	</c:forEach>

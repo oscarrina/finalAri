@@ -12,11 +12,11 @@ import lombok.Setter;
 @NoArgsConstructor
 public class PlanTableDTO {
 	private int planIdx;
-	private String userId;
-	private Date date;
+	private String userID;
+	private Date planDate;
 	private int planGroup;
 	private String planStart;
 	private String planEnd;
 	private String planBigImg;
-	private String planPoint;
+	private int planPoint;
 }

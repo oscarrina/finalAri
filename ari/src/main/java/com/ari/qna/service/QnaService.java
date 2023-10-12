@@ -15,4 +15,6 @@ public interface QnaService {
 	public List<QnaDTO> QnaDetail(int qnaIdx) throws Exception;
 	
 	public int totalCnt() throws Exception;
+	
+	public List<ReplyDTO> replyList(int idx) throws Exception;
 }

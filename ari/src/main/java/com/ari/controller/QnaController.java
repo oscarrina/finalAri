@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ari.page.PageModuleNotice;
 import com.ari.qna.model.QnaDTO;
+import com.ari.qna.model.ReplyDTO;
 import com.ari.qna.service.QnaService;
 import java.util.*;
 
@@ -125,17 +126,19 @@ public class QnaController {
 	public ModelAndView ceoQnaDetail(@RequestParam("qnaIdx")int qnaIdx) {
 		
 		List<QnaDTO> lists=null;
+		List<ReplyDTO> list=null;
 		
 		try {
 			lists=service.QnaDetail(qnaIdx);
+			list=service.replyList(qnaIdx);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("lists",lists);
+		mav.addObject("reply",list);
 		mav.setViewName("qna/ceoQnaDetail");
 		return mav;
 		
@@ -173,9 +176,11 @@ public class QnaController {
 	public ModelAndView QnaDetail(@RequestParam("qnaIdx")int qnaIdx) {
 		
 		List<QnaDTO> lists=null;
+		List<ReplyDTO> list=null;
 		
 		try {
 			lists=service.QnaDetail(qnaIdx);
+			list=service.replyList(qnaIdx);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -184,6 +189,7 @@ public class QnaController {
 		
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("lists",lists);
+		mav.addObject("reply",list);
 		mav.setViewName("mypage/myQnaDetail");
 		return mav;
 
