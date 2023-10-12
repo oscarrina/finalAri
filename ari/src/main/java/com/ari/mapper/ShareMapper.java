@@ -14,4 +14,12 @@ public interface ShareMapper {
 	public List<ShareDTO> shareDetail(int idx);
 	
 	public int share(ShareDTO dto);
+	
+	public List<PlanTableDTO> plan(int idx);
+	
+	public int readNum(int idx);
+	
+	public int shareDel(int idx);
+	
+	public List<ShareDTO> myShare(String userId);
 }

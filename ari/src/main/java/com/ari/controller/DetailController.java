@@ -160,8 +160,8 @@ public class DetailController {
 		List<BerthInfoDTO> berthInfo =null;
 		List<BerthDTO> berth=null;
 		dto.setIdx(idx);
-		dto.setStartDate(startDate);
-		dto.setEndDate(endDate);
+		dto.setBerthStart(startDate);
+		dto.setBerthEnd(endDate);
 		try {
 			berthInfo=service.berthInfoDetail(idx);
 			berth=service.berthDetail(dto);
