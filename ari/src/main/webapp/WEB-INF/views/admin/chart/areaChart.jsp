@@ -42,7 +42,7 @@ function drawChart(){
 	chart.draw(data,{
 		title:"차트 예제",
 		curveType:"function",
-		width:600,
+		width:1100,
 		height:440
 	})
 }
@@ -59,10 +59,15 @@ function drawChart(){
 	
 }
 .content2{
-	width:800px !important;
+	width:1100px !important;
 }
 .btn1{
 	margin-top:6px !important;
+}
+.mg1{
+	margin-top:90px;
+	margin-right:60px;
+	margin-bottom:50px;
 }
 </style>
 </head>
@@ -76,7 +81,7 @@ function drawChart(){
     <div class="container-fluid content1">
     	<div class="content2">
     		<form name="chart" action="chart" method="post">
-    		<div class="d-grid gap-2 d-md-flex justify-content-md-end ">
+    		<div class="d-grid gap-2 d-md-flex justify-content-end mg1">
 	    		<input type="date" class="form-control border1 width1" id="start" style="width:180px" name="start" value="${start }" required="required" >
 	    		<input type="date" class="form-control border1 width1" id="end" style="width:180px" name="end" value="${end }" required="required" >
 				<input type="submit" class="btn btn-primary btn1" align="right"

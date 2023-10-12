@@ -116,9 +116,11 @@ function showcont(idx){
 	border-top:none !important;
 }
 .border2{
-	margin-left:-50px;
 	font-size: 17px;
 	margin-bottom:15px;
+}
+.border4{
+	margin-left:-50px;
 }
 .title{
 	color: #455671;
@@ -157,6 +159,13 @@ function showcont(idx){
 .width1{
 	padding-right: 100px !important;
 }
+.a1{
+  transition: all 0.2s linear;
+}
+.a1:hover{
+  transform: scale(1.05);
+}
+
 </style>
 </head>
 <body onload="show1()">
@@ -164,7 +173,7 @@ function showcont(idx){
 
 <div class="content">
 <div class="content2">
-		<select class="border2" aria-label="Default select example" onchange="show()" id="sbox">
+		<select class="border2 border4" aria-label="Default select example" onchange="show()" id="sbox">
 		  <option value="2" ${area==0?"selected":"" }>전체</option>
 		  <option value="1" ${area!=0?"selected":"" }>지역별</option>
 		</select>
@@ -181,7 +190,7 @@ function showcont(idx){
             <c:if test="${loop.index % 3 == 0}">
                 <tr>
             </c:if>
-            <td class="width1">
+            <td class="width1 a1">
                 <ul class="ul">
  
                 	<a href="javascript:void(0);" onclick="showcont(${dto.festidx})" class="title">
