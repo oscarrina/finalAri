@@ -80,7 +80,7 @@ html{
 .arrow{
 	width: 80px;
 	height: 30px;
-	border-radius: 10px;
+	border-radius: 10p x;
 	background-color:transparent;
 }
 .container2 .containerHead div:hover{
@@ -97,7 +97,6 @@ html{
 	overflow: scroll;
 	border-bottom-right-radius: 10px;
 	border-bottom-left-radius: 10px;
-	display: flex;
 }
 .container2 .containerBody .img{
 	margin-top: 10px;
@@ -129,8 +128,9 @@ html{
 }
 </style>
 <script>
+var sigungu = '';
+var addr = '';
 window.onload = function() {
-	document.getElementById("categoryButton1").style.backgroundColor = "#38B6FF";
 	var code = ${area};
 	var url='https://apis.data.go.kr/B551011/KorService1/areaCode1?'
 		+ 'serviceKey=9IwUjd%2FogvdB0LCIq4Khs%2FcCfCV%2BIg9rqUf8U5PcrM4lW0lXdpv%2BpQHMKcg7y7klSZJ7SpQcrgs3lAW%2BQA3waQ%3D%3D'
@@ -143,7 +143,7 @@ function showResult(){
 			var data=XHR.responseXML;
 			var spanTag=document.getElementById('sigunguSelect');
 			var str='';
-			str='<select class="border3" aria-label="Default select example" id="sbox2" name="sigungu" onchange = "sigunguChange(this.value)">';
+			str='<select class="border3" aria-label="Default select example" id="sbox2" name="sigungu" onchange = "listSet()">';
 			var areaList=data.getElementsByTagName('item');
 			for(var i=0;i<areaList.length;i++){
 				var area=areaList[i]; //studentList.item(i)
@@ -158,20 +158,54 @@ function showResult(){
 	}
 }
 function sigunguChange(value){
-	var sigungu = value;
-	sendRequest("reloadSigungu", sigungu, sigungu, 'POST')
+	sigungu = value;
+	addr = document.getElementBy
+	var url = 'reloadSigungu?dateRange='+${dateRange}+'&area='+${area}+'&sigungu='+value;
+	sendRequest(url, null, sigunguChangeOk, 'GET');
 }
-
+function sigunguChangeOk(){
+	if(XHR.readyState==4){
+		if(XHR.status==200){
+			var data = XHR.responseText;
+			var container = document.getElementById("containerBody");
+			container.innerHTML = data;
+		}
+	}
+}
 function categoryButton(category) {
     var categoryDivs = document.querySelectorAll('.containerHead div');
-
     for (var i = 0; i < categoryDivs.length; i++) {
         categoryDivs[i].style.backgroundColor  = '';
     }
     var clickedButton = document.getElementById(category);
     clickedButton.style.backgroundColor = "#38B6FF";
+    listSet();
 }
-
+///////////////////////////////////////////////////////////////////////////////////
+function  listSet(){
+	var dateRange = ${dateRange};
+	var area = ${area};
+	var sigungu = document.getElementById("sbox2").value;
+	var category='';
+	var categoryButtons = document.getElementsByClassName("categoryButton");
+	for(var i = 0 ; i<categoryButton.length; i++){
+		if(categoryButton[i].style.backgroundColor == '#38B6FF'){
+			category = categoryButton[i].id;
+		}
+	}
+	
+	var url = 'reloadSigungu?dateRange='+${dateRange}+'&area='+${area}+'&sigungu='+sigungu+'&type='+category;
+	sendRequest(url, null, categoryOk, 'GET');
+}
+function categoryOk(){
+	if(XHR.readyState==4){
+		if(XHR.status==200){
+			var data = XHR.response;
+			var container = document.getElementById("containerBody");
+			container.innerHTML = data;
+		}
+	}
+}
 </script>
 </head>
 <body>
@@ -206,15 +240,11 @@ function categoryButton(category) {
 			</div>
 			<div class= "container2">
 				<div class="containerHead">
-					<div id = "categoryButton1" onclick="categoryButton('categoryButton1')">관광지</div>
-					<div id = "categoryButton2" onclick="categoryButton('categoryButton2')">음식점</div>
-					<div id = "categoryButton3" onclick="categoryButton('categoryButton3')">숙박</div>
+					<div class = "categoryButton" id = "1" onclick="categoryButton(1)">관광지</div>
+					<div class = "categoryButton" id = "2" onclick="categoryButton(2)">음식점</div>
+					<div class = "categoryButton" id = "3" onclick="categoryButton(3)">숙박</div>
 				</div>
-				<div class="containerBody">
-					<c:forEach var = "dto" items="${list}">
-					<div class = palceButton onclick = ><img class="img" src="${dto.infoImg}" alt="Image"></div>
-					<div><h1>${dto.infoName}</h1></div>
-					</c:forEach>
+				<div class="containerBody" id = "containerBody">
 				</div>
 			</div>
 		</div>

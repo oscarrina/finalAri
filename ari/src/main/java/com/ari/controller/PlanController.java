@@ -46,24 +46,33 @@ public class PlanController {
 		mav.setViewName("plan/planMap");
 		return mav;
 	}
-	@PostMapping("/reloadSigungu")
+	@GetMapping("reloadSigungu")
 	public ModelAndView reloadPlanMap(
 			@RequestParam(value = "dateRange",required = false)int dateRange, 
 			@RequestParam(value = "area")int area, 
-			@RequestParam(value = "sigungu", defaultValue = "1")int sigungu,
-			@RequestParam(value = "type", defaultValue = "1")int type) throws Exception {
+			@RequestParam(value = "sigungu", defaultValue = "1")int sigungu
+			) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		
+		List<AttDTO> Attlist = service.getAttList(area, sigungu);
+		
+		mav.addObject("list", Attlist);
+		
+		mav.setViewName("plan/placeSelectList");
+		return mav;
+	}
+	@GetMapping("listSet")
+	public ModelAndView categoryType(@RequestParam(value = "dateRange",required = false)int dateRange, 
+			@RequestParam(value = "area")int area, 
+			@RequestParam(value = "sigungu", defaultValue = "1")int sigungu,
+			@RequestParam(value = "type")int type) throws Exception {
+		ModelAndView mav = new ModelAndView();
 		switch(type) {
 		case 1: List<AttDTO> Attlist = service.getAttList(area, sigungu);mav.addObject("list", Attlist); break;
 		case 2: List<FoodDTO> Foodlist = service.getFoodList(area, sigungu);mav.addObject("list", Foodlist); break;
 		case 3: List<BerthInfoDTO> berthInfolist = service.getBerthInfoList(area, sigungu);mav.addObject("list", berthInfolist); break;
 		}
-		mav.addObject("dateRange",dateRange);
-		mav.addObject("area", area);
-		
-		mav.setViewName("plan/planMap");
+		mav.setViewName("plan/placeSelectList");
 		return mav;
 	}
-	
 }
