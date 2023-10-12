@@ -1,18 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="/css/adminMainLayout.css">
+<link rel="stylesheet" type="text/css" href="/css/adminNotice.css">
 <style>
-.content{
-	display: block;
-  width: 900px; /* 원하는 너비로 조정 */
-  margin-top: 160px; /* 가로 가운데 정렬 */
-  margin-left:auto;
-  margin-right:auto;
-}
 .shares{
 	background-color: #e5e5e5;
 	border-radius: 25px;
@@ -41,13 +37,13 @@ a {
 </style>
 </head>
 <body>
-<%@include file="/WEB-INF/views/header.jsp" %>
-<div class="content">
-<strong style="font-size:25px; color:#253BFF; width:300px; display: inline-block;" >일정공유</strong>
-<strong style="font-size:14px; color:#253BFF; margin-left:330px; margin-top:10px;" >나만의 일정을 공유하세요!</strong><input type="button" value="공유" onclick="location.href='planToShare'" class="shareBtn" >
+<div id="page-wrapper">
+<%@ include file="/WEB-INF/views/admin/adminHeader.jsp" %>
+<div id="page-content-wrapper">
+<div class="container-fluid">
+	<strong style="font-size:25px; color:#253BFF; width:300px; display: inline-block;" >일정공유</strong>
 <br><br>
 <c:forEach items="${lists }" var="share" >
-<a href="shareDetail?idx=${share.idx}&planIdx=${share.planidx}">
 <div class="shares">
 		<table>
 			<tr >
@@ -63,10 +59,11 @@ a {
 				<td>
 				<strong style="color:#213555;">등록일:${share.shareDate }</strong>
 				</td>
+				<td><input type="button" value="삭제" onclick="location.href='shareDel?idx=${share.idx}'"></td>
 			</tr>
 			<tr>
 				<td>
-				<strong style="color:#213555;"><i class="bi bi-eye"></i>:${share.shareRead }</strong>
+				<strong style="color:#213555;">조회수:${share.shareRead }</strong>
 				</td>
 			</tr>
 			<tr>
@@ -75,9 +72,11 @@ a {
 				</td>
 			</tr>
 		</table>
-</div></a><br><br>
+</div><br><br>
 	</c:forEach>
 </div>
-<%@include file="/WEB-INF/views/footer.jsp" %>
+<%@ include file="/WEB-INF/views/admin/adminFooter.jsp" %>
+</div>
+</div>
 </body>
 </html>

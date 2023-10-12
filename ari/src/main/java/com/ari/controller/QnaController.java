@@ -53,8 +53,8 @@ public class QnaController {
 		String msg=result>0?"문의가 등록되었습니다. 문의 내역은 마이페이지에서 확인하여 주세요.":"문의 등록에 실패하였습니다. 자세한 사항은 고객센터로 전화주세요.";
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("msg",msg);
-		mav.addObject("where","/");
-		mav.setViewName("qna/qnaMsg");
+		mav.addObject("url","myQna");
+		mav.setViewName("member/memberMsg");
 		return mav;
 		
 	}
@@ -74,8 +74,7 @@ public class QnaController {
 	
 	@RequestMapping("/ceoWriteQ")
 	public ModelAndView ceoWriteQ(QnaDTO dto,HttpSession session) {
-	dto.setUserId((String) session.getAttribute("sid"));
-		
+		dto.setUserId((String) session.getAttribute("sid"));
 		int result=0;
 		
 		try {
@@ -88,8 +87,8 @@ public class QnaController {
 		String msg=result>0?"문의가 등록되었습니다. 문의 내역은 '나의문의'에서 확인하여 주세요.":"문의 등록에 실패하였습니다. 자세한 사항은 고객센터로 전화주세요.";
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("msg",msg);
-		mav.addObject("where","ceo");
-		mav.setViewName("qna/qnaMsg");
+		mav.addObject("url","ceo");
+		mav.setViewName("member/memberMsg");
 		return mav;
 	}
 	
@@ -128,6 +127,11 @@ public class QnaController {
 		List<QnaDTO> lists=null;
 		List<ReplyDTO> list=null;
 		
+		HashMap<Integer,String> map=new HashMap<Integer,String>();
+		map.put(1, "이용문의");
+		map.put(2, "제휴관련");
+		map.put(3, "사업자정보");
+		map.put(4, "기타");
 		try {
 			lists=service.QnaDetail(qnaIdx);
 			list=service.replyList(qnaIdx);
@@ -139,6 +143,7 @@ public class QnaController {
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("lists",lists);
 		mav.addObject("reply",list);
+		mav.addObject("cate",map);
 		mav.setViewName("qna/ceoQnaDetail");
 		return mav;
 		
@@ -146,7 +151,7 @@ public class QnaController {
 	
 	@RequestMapping("/myQna")
 	public ModelAndView QnaList(HttpSession session,
-			@RequestParam(value = "cp", defaultValue = "1")int cp) {
+		@RequestParam(value = "cp", defaultValue = "1")int cp) {
 		String sid=(String) session.getAttribute("sid");
 		
 		ModelAndView mav=new ModelAndView();
@@ -186,10 +191,18 @@ public class QnaController {
 			e.printStackTrace();
 		}
 		
+		HashMap<Integer,String> map=new HashMap<Integer,String>();
+		map.put(1, "예약/결제");
+		map.put(2, "취소/환불");
+		map.put(3, "이용문의");
+		map.put(4, "회원정보");
+		map.put(5, "기타");
+		
 		
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("lists",lists);
 		mav.addObject("reply",list);
+		mav.addObject("cate",map);
 		mav.setViewName("mypage/myQnaDetail");
 		return mav;
 

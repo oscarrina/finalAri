@@ -150,11 +150,6 @@ public class MypageController {
 		
 	}
 	
-	@GetMapping("/myShare")
-	public String myShare() {
-		return "mypage/myShare";
-	}
-	
 	@RequestMapping("/reviewContent")
 	public ModelAndView reviewContent() {
 		ModelAndView mav=new ModelAndView();

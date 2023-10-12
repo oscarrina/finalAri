@@ -52,6 +52,20 @@ h4{
 .qDiv{
 	border:
 }
+.btn2{
+   margin-top:6px;
+   border:none;
+   border-radius:25px;
+     background:#686DB9;
+     width: 80px;
+     height:45px;
+     color: #fff;
+     cursor: pointer;
+     margin-left: 30px;
+     font-size: 16px;
+     margin-left:50px;
+     
+}
 </style>
 </head>
 <body>
@@ -69,7 +83,7 @@ h4{
      		</tr>
      		<tr>
      			<td>
-     			<input type="text" id="qnaCategory" value="${dto.qnaCategory}" readonly>
+     			<input type="text" id="qnaCategory" value="${cate[dto.qnaCategory] }" readonly>
      			</td>
      			<td>
      			<input type="text" id="qnaDate" value="${dto.qnaDate}" readonly>
@@ -106,7 +120,8 @@ h4{
      			</td>
      		</tr>
      	</c:forEach>
-     	</table>
+     	</table><br>
+     	<input type="button" class="btn2" value="돌아가기" onclick="location.href='myQna'">
      </div>
 </div>
 <%@include file="/WEB-INF/views/footer.jsp" %>
