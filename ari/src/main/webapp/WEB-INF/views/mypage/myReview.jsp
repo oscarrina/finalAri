@@ -8,12 +8,23 @@
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="/css/adminMainLayout.css">
 <link rel="stylesheet" type="text/css" href="/css/adminNotice.css">
+<script src="//code.jquery.com/jquery.min.js"></script>
 <script>
 function reviewWrite(){
 	location = 'myReviewWrite';
 }
 function reviewSelect(){
 	location = 'myReview';
+}
+function reviewDel(reviewIdx) {
+	if (confirm("리뷰를 삭제하시겠습니까?")) {
+        $.ajax({
+            type: "POST",
+            url: "/reviewDel",
+            data: { reviewIdx: reviewIdx }
+        });
+    }
+    location.reload();
 }
 </script>
 <style>
@@ -43,7 +54,7 @@ style="background-color:#666CDE; width:400px; height:40px; font-size:15px;" oncl
   </tfoot>
       <c:forEach var="dto" items="${list }">
 <tr>
-<td class="reserClass"><img alt="숙박업체이미지" src="/img/${dto.img }" class="mypageImg"></td>
+<td class="reserClass"><img alt="숙박업체이미지" src="/img/${dto.reviewImg }" class="mypageImg"></td>
 <td class="reserInfo">
 <ul class="planInfo">
 	<li class="planSi">${dto.reviewContent }</li>
@@ -51,7 +62,7 @@ style="background-color:#666CDE; width:400px; height:40px; font-size:15px;" oncl
 </td>
 <td class="planPrice"><label>${dto.reviewDate }</label></td>
   <td>
-  <button type="button" class="btn btn-primary reserCancelBtn" onclick="cancel(${dto.reviewIdx })">
+  <button type="button" class="btn btn-primary reserCancelBtn" onclick="reviewDel(${dto.reviewIdx })">
   리뷰삭제
   </button>
   </td>
