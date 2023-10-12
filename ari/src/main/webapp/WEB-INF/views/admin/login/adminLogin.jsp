@@ -71,7 +71,7 @@
   </div>
   <div class="group" id="idsearch" >
      <input id="check" type="checkbox" class="check" name="autologin">
-    <label for="check"><span class="icon"></span>중복로그인</label>
+    <label for="check"><span class="icon"></span>자동로그인</label>
   </div>
   <div class="group">
     <input type="submit" class="btn1" value="로그인">

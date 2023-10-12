@@ -11,9 +11,24 @@
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css" href="/css/adminMainLayout.css">
 <script type="text/javascript" src="../../../js/httpRequest.js"></script>
-<script>
+<script type="text/javascript">
 function showDel(idx,type){
-	location.href='festDel?festidx='+idx+'&type='+type;
+	
+	var param='festidx='+idx+'&type='+type;
+	if (confirm("공지사항을 삭제하시겠습니까?")) {
+        $.ajax({
+            type: "POST",
+            url: "/festDel",
+            data: param
+        });
+        if(type==2){
+        	location.href='festival';
+        }else{
+        	location.href='fest';
+        }
+    }else{
+    	location.reload();
+    }
 }
 function showUpd(idx){
 	location.href='festUpd?festidx='+idx;
@@ -22,7 +37,7 @@ function showUpd(idx){
 <style>
 .table1{
 	border-collapse:separate;
-	border-spacing: 0 15px;
+	border-spacing: 0 10px;
 	width:100%;
 	padding-top:100px important;
 	margin-bottom:20px;
@@ -58,6 +73,9 @@ function showUpd(idx){
 	border-bottom: none !important;
 	border-left: none !important;
 	border-right: none !important;
+}
+.btn2:hover{
+ 	background-color: #686DB9 !important;
 }
 .p1{
 	width:600px !important;
@@ -126,8 +144,14 @@ function showUpd(idx){
   color:#8B95A6;
   background-size: 100% 100%;
 }
-.btn2:hover{
- 	background-color: #686DB9 !important;
+.btn3{
+	border-top: none !important;
+	border-bottom: none !important;
+	border-left: none !important;
+	border-right: none !important;
+}
+.btn3:hover{
+ 	background-color: #9F9F9F !important;
 }
 </style>
 </head>
@@ -150,11 +174,11 @@ function showUpd(idx){
       	
 		<table class="table1">
 			<tr class="tr1">
-				<td class="td1 title1">${dto.festtitle }</td>
+				<td class="td1 title1" colspan="2">${dto.festtitle }</td>
 			</tr>
 			<tr class="tr1">
-				<c:if test="${dto.festapi==0 }"><td class="traligncnt" rowspan="7"><img class="img1" alt="" src="/imgs/${dto.festimg }"></td></c:if>
-				<c:if test="${dto.festapi==1 }"><td class="traligncnt" rowspan="7"><img class="img1" alt="" src="${dto.festimg }"></td></c:if>
+				<c:if test="${dto.festapi==0 }"><td class="traligncnt" rowspan="8"><img class="img1" alt="" src="/imgs/${dto.festimg }"></td></c:if>
+				<c:if test="${dto.festapi==1 }"><td class="traligncnt" rowspan="8"><img class="img1" alt="" src="${dto.festimg }"></td></c:if>
 				<td class="td1">${dto.festtelname }</td>
 			</tr>
 			<tr class="">
@@ -176,9 +200,12 @@ function showUpd(idx){
 			<tr class="">
 				<td class="td1">${dto.festprice }</td>
 			</tr>
+			<tr class="">
+				<td class="td1"><i class="bi bi-eye-fill"></i>&nbsp;&nbsp;${dto.festread}</td>
+			</tr>
+			
 			<tr class="trp">
 				<td colspan="2" class="p1">${dto.festcont }</td>
-
 			</tr>
 			<tr class="trp">
 				<td colspan="2" class="p1">${dto.festcontent }</td>
@@ -187,7 +214,7 @@ function showUpd(idx){
 			<div class="d-grid gap-2 d-md-flex justify-content-center contentwidth">
 			
 			<c:if test="${type==2 }">
-		    	<button type="button" class="btn btn-primary btn2" 
+		    	<button type="button" class="btn btn-primary btn3" 
 					style="background-color:#D9D9D9; width:70px; height:40px; font-size:11px; color:black; " onclick="javascript:location.href='festival'">목록</button>&nbsp;&nbsp;
 				<button type="button" class="btn btn-primary btn2" 
 					style="background-color:#666CDE; width:70px; height:40px; font-size:11px; " onclick="showDel(${dto.festidx},${type })">삭제</button>&nbsp;&nbsp;
@@ -195,7 +222,7 @@ function showUpd(idx){
 					style="background-color:#3239AF; width:70px; height:40px; font-size:11px;" onclick="showUpd(${dto.festidx})">수정</button>
 		    </c:if>
 		    <c:if test="${type==3 }">
-		    	<button type="button" class="btn btn-primary btn2" 
+		    	<button type="button" class="btn btn-primary btn3" 
 					style="background-color:#D9D9D9; width:70px; height:40px; font-size:11px; color:black; " onclick="javascript:location.href='fest'">목록</button>&nbsp;&nbsp;
 				<button type="button" class="btn btn-primary btn2" 
 					style="background-color:#666CDE; width:70px; height:40px; font-size:11px; " onclick="showDel(${dto.festidx},${type })">삭제</button>&nbsp;&nbsp;
