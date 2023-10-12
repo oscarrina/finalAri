@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.ari.mapper.QnaMapper;
 import com.ari.qna.model.QnaDTO;
+import com.ari.qna.model.ReplyDTO;
 
 @Service
 public class QnaServiceImple implements QnaService {
@@ -43,6 +44,12 @@ public class QnaServiceImple implements QnaService {
 	public int totalCnt() throws Exception {
 		int result=mapper.totalCnt();
 		return result;
+	}
+	
+	@Override
+	public List<ReplyDTO> replyList(int idx) throws Exception {
+		List<ReplyDTO> list=mapper.replyList(idx);
+		return list;
 	}
 	
 }

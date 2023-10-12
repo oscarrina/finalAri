@@ -17,10 +17,10 @@ import lombok.ToString;
 public class ShareDTO {
 
 	private int idx;
-	private String userid;
-	private int palnidx;
+	private String userId;
+	private int planidx;
 	private String shareTitle;
-	private String sharecontent;
+	private String shareContent;
 	private Date shareDate;
 	private int shareRead;
 	private int shareLike;

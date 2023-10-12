@@ -21,7 +21,7 @@
 				<img class="postcard__img" src="/imgs/${food.infoImg }" alt="Image Title" />
 			</a>
 			<div class="postcard__text">
-				<h1 class="postcard__title blue"><a href="#" style="text-decoration-line: none; color:#00008C; ">${food.infoName }</a></h1>
+				<h1 class="postcard__title blue"><a href="foodDetail?foodIdx=${food.idx }" style="text-decoration-line: none; color:#00008C; ">${food.infoName }</a></h1>
 				<div class="postcard__bar"></div>
 				<div class="postcard__preview-txt">${food.info }</div>
 				<ul class="postcard__tagbox" style="list-style: none">

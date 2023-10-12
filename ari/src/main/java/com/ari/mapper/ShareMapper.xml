@@ -3,5 +3,17 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ari.mapper.ShareMapper">
-
+	<select id="planList" parameterType="String" resultType="com.ari.plan.model.PlanTableDTO">
+		select * from planTable where userId=#{userId}
+	</select>
+	<select id="shareList" resultType="com.ari.share.model.ShareDTO">
+		select * from sharetable
+	</select>
+	<select id="shareDetail" resultType="com.ari.share.model.ShareDTO" parameterType="Integer">
+		select * from sharetable where idx=#{idx}
+	</select>
+	<insert id="share" parameterType="com.ari.share.model.ShareDTO"> 
+		insert into sharetable values(share_Idx.nextval,#{userId},#{planidx},#{shareTitle},#{shareContent},sysdate,
+		0,0)
+	</insert>
 </mapper>

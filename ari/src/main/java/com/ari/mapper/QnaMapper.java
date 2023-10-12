@@ -15,4 +15,6 @@ public interface QnaMapper {
 	public List<QnaDTO> QnaDetail(int qnaidx);
 	
 	public int totalCnt();
+	
+	public List<ReplyDTO> replyList(int idx);
 }
