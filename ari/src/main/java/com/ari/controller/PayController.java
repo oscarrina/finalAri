@@ -89,4 +89,8 @@ public class PayController {
 
         return "fail";
     }
+	@GetMapping("/test")
+	public String test1() {
+		return "test";
+	}
 }

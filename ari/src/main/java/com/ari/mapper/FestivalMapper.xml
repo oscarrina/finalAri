@@ -87,6 +87,10 @@
 			festapi=#{festapi}
 		where festidx=#{festidx}
 	</update>
-	
+	<update id="readCount" parameterType="int">
+		update fest
+		set festread=festread+1
+		where festidx=#{festidx}
+	</update>
 
 </mapper>

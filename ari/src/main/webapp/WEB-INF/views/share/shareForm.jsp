@@ -44,13 +44,13 @@ h4{
 <div class="content">
 <form name="shareForm" action="share">
 <table class="share">
-<tr><td><h4><strong>선택하신 일정에 대한 후기를 작성해주세요!</strong></h4><input type="hidden" value="${planIdx }"></td></tr>
+<tr><td><h4><strong>선택하신 일정에 대한 글을 작성해주세요!</strong></h4><input type="hidden" value="${planIdx }" name="planIdx"></td></tr>
 <tr>
 <td>
-	<input type="text" name="shareTitle" class="title">
+	<input type="text" name="shareTitle" class="title" placeholder="제목">
 	</td>
 	</tr><tr><td>
-	<textarea rows="8" name="shareContent" class="shareContent"></textarea></td></tr>
+	<textarea rows="8" name="shareContent" class="shareContent" placeholder="만드신 일정에 대한 자세한 내용을 적어주세요:) 글에 개인정보나 욕설이 포함되어 있을 시 예고 없이 삭제조치됩니다."></textarea></td></tr>
 	<tr><td align="right"><input type="submit" value="작성" style="background-color:#253BFF; 
 	width:70px; height:40px; font-size:13px; color:white; border-radius: 15px; margin-top:15px;" ></td></tr>
 </table>

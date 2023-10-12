@@ -136,13 +136,17 @@ public class MemberController {
 		}
 		
 		ModelAndView mav=new ModelAndView();
-		mav.addObject("msg",dto.getUsername()+"님 환영합니다!");
-		mav.setViewName("member/memberLoginOk");
+		mav.setViewName("member/memberMsg");
 		if(dto.getUsertype()==2) {
 			session.setAttribute("suserArea", dto.getUserarea());
+			//mav.setViewName("ceo/ceoIndex");
+			mav.addObject("url", "ceo");
+		}else {
+			mav.addObject("url", "/");
 		}
 		session.setAttribute("sid", userid);
 		session.setAttribute("sname", dto.getUsername());
+		mav.addObject("msg", "자동로그인 되었습니다.");
 			
 		return mav;
 	}
@@ -325,11 +329,12 @@ public class MemberController {
 	}
 	
 	@PostMapping("/sendNum")
-	public ModelAndView sendNum(@RequestParam(value = "tel", required = false)String tel){
+	public ModelAndView sendNum(@RequestParam(value = "tel", required = false)String tel,
+			@RequestParam("type")int type,@RequestParam(value = "berthName", required = false)String berthName){
 		ModelAndView mav = new ModelAndView();
 		System.out.println(tel);
-		String ranNum = "111111";
-		//String ranNum = smsservice.sendRandomMessage(tel);
+		//String ranNum = "111111";
+		String ranNum = smsservice.sendRandomMessage(tel,type,berthName);
 		mav.addObject("msg",ranNum);
 		mav.setViewName("member/idCheck_ok");
 		return mav;

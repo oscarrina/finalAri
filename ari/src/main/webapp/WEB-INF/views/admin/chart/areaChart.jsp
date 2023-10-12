@@ -40,7 +40,7 @@ function drawChart(){
 	//1) + 2) => 차트 출력! 차트객체.draw(데이터테이블, 옵션)
 	//curveType : "function" => 곡선
 	chart.draw(data,{
-		title:"차트 예제",
+		title:"아리아리 지역별 일정 개수",
 		curveType:"function",
 		width:1100,
 		height:440

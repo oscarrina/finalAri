@@ -40,6 +40,23 @@
 	border-radius:25px;
 	border-color:blue;
 }
+h4{
+	color:#253BFF;
+}
+.btn2{
+   margin-top:6px;
+   border:none;
+   border-radius:25px;
+     background:#686DB9;
+     width: 80px;
+     height:45px;
+     color: #fff;
+     cursor: pointer;
+     margin-left: 30px;
+     font-size: 16px;
+     margin-left:75px;
+     
+}
 </style>
 </head>
 <body>
@@ -49,6 +66,7 @@
     <div class="container-fluid" id="content1">
      <div class="content">
      <div>
+     <h4 style="color:#253BFF; margin-left:80px;">문의</h4>
      	<table width="800" align="center">
      	<c:forEach var="dto" items="${lists }" >
      		<tr>
@@ -58,7 +76,7 @@
      		</tr>
      		<tr>
      			<td>
-     			<input type="text" id="qnaCategory" value="${dto.qnaCategory}" readonly>
+     			<input type="text" id="qnaCategory" value="${cate[dto.qnaCategory]}" readonly>
      			</td>
      			<td>
      			<input type="text" id="qnaDate" value="${dto.qnaDate}" readonly>
@@ -72,6 +90,30 @@
      		</tr>
      	</c:forEach>
      	</table>
+     </div><hr>
+	 <div class="reply">
+     	<table width="800" align="center">
+     	<tr><td><h4>답변</h4></td></tr>
+     	<c:forEach var="reply" items="${reply }" >
+     		<tr>
+     			<td colspan="2">
+     			<input type="text" name="qnaTitle" id="qnaTitle" value="${reply.replyTitle }" readonly>
+     			</td>
+     		</tr>
+     		<tr>
+     			<td>
+     			<input type="text" id="qnaDate" value="${reply.replyDate}" readonly>
+     			</td>
+     		</tr>
+     		<tr>
+     			<td colspan="2">
+     			<textarea class="form-control" id="exampleTextarea" rows="8" 
+				readonly>${reply.replyContent }</textarea>
+     			</td>
+     		</tr>
+     	</c:forEach>
+     	</table><br>
+     	<input type="button" class="btn2" value="돌아가기" onclick="location.href='ceoQnaList'">
      </div>
 </div>
     </div>

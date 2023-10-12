@@ -17,5 +17,6 @@ public interface FestivalMapper {
 	public String getFestImg(int festidx);
 	public int festDel(int festidx);
 	public int festUpd(FestivalDTO dto);
+	public int readCount(int festidx);
 	
 }

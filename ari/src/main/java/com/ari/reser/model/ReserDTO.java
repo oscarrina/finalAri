@@ -19,8 +19,6 @@ public class ReserDTO {
 	private int berthidx;
 	private String userId;
 	private String reserName;
-	private Date reserVisitStart;
-	private Date reserVisitEnd;
 	private String reserPriceInfo;
 	private int reserPrice;
 	private Date reserPriceDay;
@@ -28,7 +26,7 @@ public class ReserDTO {
 	private int reserState;
 	private String reserReview;
 	private int reserPer;
-	private String reserPaymentKey;
+	private String reserPaymentKey; //결제 키
 	private String berthInfoImg; //숙박 타이틀 이미지
 	private String berthInfoName; //숙박 업체 이름
 	private String berthName; //객실 명

@@ -70,14 +70,14 @@ function showResult(){
 .border1{
 	border: 1px solid #4068A7 !important;
 	border-radius: 15px !important;
-	width:600px !important;
+	width:750px !important;
 }
 svg{
 	width:20px;
 	height:25px;
 }
 .content3{
-	width:600px !important; 
+	width:750px !important; 
 	height:300px !important;
     resize:none;
 }
@@ -149,7 +149,7 @@ margin-top:7px !important;
 			  </div>
 			  <label for="noticecontent" class="col-sm-2 col-form-label">내용</label>
 			  <div class="marginl margint">
-			  	<textarea class="form-control border1 content3" maxlength="1000" name="noticecontent" id="noticecontent" ></textarea>
+			  	<textarea class="form-control border1 content3" maxlength="1000" name="noticecontent" id="noticecontent" placeholder="공지사항 내용" ></textarea>
 			  	
 			  </div>
 		  </div>

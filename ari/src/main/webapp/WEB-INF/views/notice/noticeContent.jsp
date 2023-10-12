@@ -9,12 +9,24 @@
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
 <script src="//code.jquery.com/jquery.min.js"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery.min.js"></script>
 <link rel="stylesheet" type="text/css" href="/css/adminMainLayout.css">
 <script type="text/javascript" src="../../../js/httpRequest.js"></script>
-<script>
+<script type="text/javascript">
 function showDel(idx, type){
-	location.href='noticeDel?noticeidx='+idx+'&noticetype='+type;
+	var param='noticeidx='+idx;
+	if (confirm("공지사항을 삭제하시겠습니까?")) {
+        $.ajax({
+            type: "POST",
+            url: "/noticeDel",
+            data: param
+        });
+        location.href='notice?type='+type;
+    }else{
+    	location.reload();
+    }
 }
+
 function showUpd(idx){
 	location.href='noticeUpd?noticeidx='+idx;
 }
@@ -72,12 +84,24 @@ svg{
 	border-left: none !important;
 	border-right: none !important;
 }
+.btn2:hover{
+ 	background-color: #686DB9 !important;
+}
 .p1{
 	padding-left:10px;
 	padding-top:10px;
 	padding-bottom:10px;
 	background-color: #D9D9D9;
 	border-radius: 10px;
+}
+.btn3{
+	border-top: none !important;
+	border-bottom: none !important;
+	border-left: none !important;
+	border-right: none !important;
+}
+.btn3:hover{
+ 	background-color: #9F9F9F !important;
 }
 </style>
 </head>
@@ -138,7 +162,7 @@ svg{
 			</tr>
 		</table>
 			<div class="d-grid gap-2 d-md-flex justify-content-center contentwidth">
-			<button type="button" class="btn btn-primary btn2" 
+			<button type="button" class="btn btn-primary btn3" 
 				style="background-color:#D9D9D9; width:70px; height:40px; font-size:11px; color:black; " onclick="javascript:location.href='/notice'">목록</button>&nbsp;&nbsp;
 				<button type="button" class="btn btn-primary btn2" 
 				style="background-color:#666CDE; width:70px; height:40px; font-size:11px; " onclick="showDel(${dto.noticeidx},${dto.noticetype})">삭제</button>&nbsp;&nbsp;

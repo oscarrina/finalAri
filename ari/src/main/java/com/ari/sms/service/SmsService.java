@@ -60,7 +60,7 @@ public class SmsService {
 
 	  return encodeBase64String;
 	}
-	public void sendSMS(String tel,String ranNum) {
+	public void sendSMS(String tel,String msg,String berthName) {
 		String hostNameUrl = "https://sens.apigw.ntruss.com";     		// 호스트 URL
 		String requestUrl= "/sms/v2/services/";                   		// 요청 URL
 		String requestUrlType = "/messages";                      		// 요청 URL
@@ -87,7 +87,7 @@ public class SmsService {
 	    //bodyJson.put("countryCode","82");					// Optional, 국가 전화번호, (default: 82)
 	    bodyJson.put("from","01020082439");					// Mandatory, 발신번호, 사전 등록된 발신번호만 사용 가능		
 	    //bodyJson.put("subject","");						// Optional, 기본 메시지 제목, LMS, MMS에서만 사용 가능
-	    bodyJson.put("content","회원님의 인증번호는 ["+ranNum+"]입니다.");	// Mandatory(필수), 기본 메시지 내용, SMS: 최대 80byte, LMS, MMS: 최대 2000byte
+	    bodyJson.put("content",msg);	// Mandatory(필수), 기본 메시지 내용, SMS: 최대 80byte, LMS, MMS: 최대 2000byte
 	    bodyJson.put("messages", toArr);					// Mandatory(필수), 아래 항목들 참조 (messages.XXX), 최대 1,000개
 	    
 	    //String body = bodyJson.toJSONString();
@@ -137,15 +137,20 @@ public class SmsService {
         }
 	}
     
-    public String sendRandomMessage(String tel) {
+    public String sendRandomMessage(String tel,int type,String berthName) {
+    	String numStr = "";
+    	if(type == 1) {
         Random rand = new Random();
-        String numStr = "";
         for (int i = 0; i < 6; i++) {
             String ran = Integer.toString(rand.nextInt(10));
             numStr += ran;
         }
-        System.out.println("회원가입 문자 인증 => " + numStr);
-        sendSMS(tel, numStr);
+        String msg = "회원님의 인증번호는 ["+numStr+"]입니다.";
+        sendSMS(tel,msg,berthName);
+    	}else if(type == 2){
+    		String msg = berthName+"의 예약이 확정되었습니다.";
+    		sendSMS(tel,msg,berthName);
+    	}
         return numStr;
     }
 }

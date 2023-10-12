@@ -42,4 +42,28 @@ public class ShareServiceImple implements ShareService {
 		List<ShareDTO> list=mapper.shareDetail(idx);
 		return list;
 	}
+	
+    @Override
+	public List<PlanTableDTO> plan(int planIdx) throws Exception {
+		List<PlanTableDTO> list=mapper.plan(planIdx);
+		return list;
+	}
+    
+    @Override
+    public int readNum(int idx) throws Exception{
+    	int result=mapper.readNum(idx);
+    	return result;
+    }
+    
+    @Override
+    public int shareDel(int idx) throws Exception {
+    	int result=mapper.shareDel(idx);
+    	return result;
+    }
+    
+    @Override
+    public List<ShareDTO> myShare(String userId) throws Exception {
+    	List<ShareDTO> list=mapper.myShare(userId);
+    	return list;
+    }
 }

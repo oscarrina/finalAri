@@ -84,4 +84,9 @@ public class FestivalServiceImple implements FestivalService {
 		int result=mapper.festUpd(dto);
 		return result;
 	}
+	@Override
+	public int readCount(int festidx) throws Exception {
+		int result=mapper.readCount(festidx);
+		return result;
+	}
 }
