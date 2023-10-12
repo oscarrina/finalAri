@@ -10,5 +10,6 @@
    			BETWEEN TO_DATE(#{start}, 'YYYY-MM-DD') 
    				and TO_DATE(#{end}, 'YYYY-MM-DD')+0.99999
 		group by planPoint
+		order by planpoint asc
 	</select>
 </mapper>  
