@@ -16,7 +16,7 @@ import lombok.ToString;
 public class ReserDTO {
 
 	private int reserIdx;
-	private int idx;
+	private int berthidx;
 	private String userId;
 	private String reserName;
 	private String reserPriceInfo;

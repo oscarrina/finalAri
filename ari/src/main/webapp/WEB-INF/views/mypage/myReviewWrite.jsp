@@ -15,6 +15,9 @@ function reviewWrite(){
 function reviewSelect(){
 	location = 'myReview';
 }
+function cancel(reserIdx) {
+	location = 'reviewContent?reseridx='+reserIdx;
+}
 </script>
 <style>
 #myReview{color: #253BFF;}

@@ -119,22 +119,23 @@ function loadFile(input) {
 <%@include file="/WEB-INF/views/header.jsp" %>
 <div class="review">
 	<h3>리뷰 등록</h3>
-	<form class="mb-3" name="myform" id="myform" method="post">
+	<form class="mb-3" action="reviewContent" name="myform" id="myform" method="post" enctype="multipart/form-data">
+	<input type="hidden" value="${berthidx }" name="berthidx">
 	<fieldset>
-		<input type="radio" name="reviewStar" value="5" id="rate1"><label
+		<input type="radio" name="reviewScore" value="5" id="rate1"><label
 			for="rate1">★</label>
-		<input type="radio" name="reviewStar" value="4" id="rate2"><label
+		<input type="radio" name="reviewScore" value="4" id="rate2"><label
 			for="rate2">★</label>
-		<input type="radio" name="reviewStar" value="3" id="rate3"><label
+		<input type="radio" name="reviewScore" value="3" id="rate3"><label
 			for="rate3">★</label>
-		<input type="radio" name="reviewStar" value="2" id="rate4"><label
+		<input type="radio" name="reviewScore" value="2" id="rate4"><label
 			for="rate4">★</label>
-		<input type="radio" name="reviewStar" value="1" id="rate5"><label
+		<input type="radio" name="reviewScore" value="1" id="rate5"><label
 			for="rate5">★</label>
 	</fieldset>
 	<div>
 		<textarea class="col-auto form-control" type="text" id="reviewContents"
-				  placeholder="내용을 입력하세요."></textarea>
+				name="reviewContent"  placeholder="내용을 입력하세요."></textarea>
 	</div>
 	<div class="container">
 	<div class="a">
