@@ -325,11 +325,12 @@ public class MemberController {
 	}
 	
 	@PostMapping("/sendNum")
-	public ModelAndView sendNum(@RequestParam(value = "tel", required = false)String tel){
+	public ModelAndView sendNum(@RequestParam(value = "tel", required = false)String tel,
+			@RequestParam("type")int type,@RequestParam(value = "berthName", required = false)String berthName){
 		ModelAndView mav = new ModelAndView();
 		System.out.println(tel);
-		String ranNum = "111111";
-		//String ranNum = smsservice.sendRandomMessage(tel);
+		//String ranNum = "111111";
+		String ranNum = smsservice.sendRandomMessage(tel,type,berthName);
 		mav.addObject("msg",ranNum);
 		mav.setViewName("member/idCheck_ok");
 		return mav;

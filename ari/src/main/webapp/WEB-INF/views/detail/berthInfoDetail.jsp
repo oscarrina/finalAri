@@ -189,6 +189,7 @@ function dateminu(date1, date2){
 <div class="berthDiv">
 <input type = "date" id = "start" oninput= "endDateCal(this)" name = "startDate">
 <input type = "date" id = "end" name = "endDate">
+<button type="button" onclick="dateShow()">선택</button>
 <c:forEach items="${berth }" var="berth">
 <table class="berthTable">
 	<tr>

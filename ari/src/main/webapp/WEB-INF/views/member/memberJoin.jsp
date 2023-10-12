@@ -275,7 +275,7 @@ select{
 			telCheck.style.color = 'red';
 			return false;
 		}else{
-			var param = 'tel='+tel.value;
+			var param = 'tel='+tel.value+'&type=1';
 			sendRequest('sendNum',param,sendMsg2,'POST');
 		}
 	}
