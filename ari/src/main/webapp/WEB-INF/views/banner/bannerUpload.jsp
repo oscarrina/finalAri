@@ -10,6 +10,12 @@
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css" href="/css/adminMainLayout.css">
 <script>
+function loadFile(input) {
+    var file = input.files[0];
+
+    var name = document.getElementById('fileName');
+    name.textContent = file.name;
+}
 </script>
 <style>
 .b{
@@ -38,15 +44,16 @@
 	border-radius:25px;
 	border-color:#253BFF;
 	width: 800px;
-	
+	display: flex;
+    align-items: center;
 }
-.btn2 {
+#btn2 {
   width: 40px;
   height: 40px;
   margin-left: 30px;
   margin-top: 7px;
   background: #fff;
-  border: 1px solid rgb(77,77,77);
+  border: 1px solid #3239AF;
   border-radius: 10px;
   font-size:40px;
   padding-bottom: 10px;
@@ -55,8 +62,9 @@
   align-items: center;
   justify-content: center;
 }
-.btn2:hover {
-  background: #4d4d4d;
+#btn2:hover {
+  border: 1px solid #686DB9;
+  background: #686DB9;
   color: #fff;
 }
 #banner {
@@ -88,6 +96,10 @@
 	margin-left: 30px;
 	margin-top:  50px;
 }
+#fileName{
+	margin-left: 10px;
+	margin-top: 15px;
+}
 </style>
 </head>
 <body>
@@ -102,8 +114,9 @@
     </div>
     
     <div class="a">
-    	<label for="banner" class="btn2">+</label>
-		<input type="file" name="banner" id="banner">
+    	<label for="banner" id="btn2">+</label>
+		<input type="file" name="banner" id="banner" onchange="loadFile(this)">
+		<span class="fileInput"><p id="fileName"></p></span>
     </div>
     <div>
     	<input type="submit" class="btn1" value="등록">

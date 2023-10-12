@@ -155,10 +155,10 @@ public class MypageController {
 		return "mypage/myShare";
 	}
 	
-	@RequestMapping("/reviewWrite")
-	public ModelAndView reviewWrite() {
+	@RequestMapping("/reviewContent")
+	public ModelAndView reviewContent() {
 		ModelAndView mav=new ModelAndView();
-		mav.setViewName("mypage/reviewWrite");
+		mav.setViewName("mypage/reviewContent");
 		return mav;
 	}
 }
