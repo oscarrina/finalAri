@@ -1,10 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src ="/js/httpRequest.js"></script>
 <style>
 html{
 	user-select: none;
@@ -94,6 +97,7 @@ html{
 	overflow: scroll;
 	border-bottom-right-radius: 10px;
 	border-bottom-left-radius: 10px;
+	display: flex;
 }
 .container2 .containerBody .img{
 	margin-top: 10px;
@@ -121,10 +125,43 @@ html{
   cursor: pointer;
 }
 .btn1:hover{
-  background-color: #38B6FF;
+ 	background-color: #38B6FF;
 }
 </style>
 <script>
+window.onload = function() {
+	document.getElementById("categoryButton1").style.backgroundColor = "#38B6FF";
+	var code = ${area};
+	var url='https://apis.data.go.kr/B551011/KorService1/areaCode1?'
+		+ 'serviceKey=9IwUjd%2FogvdB0LCIq4Khs%2FcCfCV%2BIg9rqUf8U5PcrM4lW0lXdpv%2BpQHMKcg7y7klSZJ7SpQcrgs3lAW%2BQA3waQ%3D%3D'
+		+ '&areaCode='+code+'&numOfRows=20&pageNo=1&MobileOS=ETC&MobileApp=AppTest';
+	sendRequest(url, null, showResult, 'GET');
+}
+function showResult(){
+	if(XHR.readyState==4){
+		if(XHR.status==200){
+			var data=XHR.responseXML;
+			var spanTag=document.getElementById('sigunguSelect');
+			var str='';
+			str='<select class="border3" aria-label="Default select example" id="sbox2" name="sigungu" onchange = "sigunguChange(this.value)">';
+			var areaList=data.getElementsByTagName('item');
+			for(var i=0;i<areaList.length;i++){
+				var area=areaList[i]; //studentList.item(i)
+				var code=area.getElementsByTagName('code').item(0).firstChild.nodeValue;
+				var name=area.getElementsByTagName('name').item(0).firstChild.nodeValue;
+
+				str+='<option value="'+code+'">'+name+'</option>';
+			}
+			str+='</select>';
+			spanTag.innerHTML=str;
+		}
+	}
+}
+function sigunguChange(value){
+	var sigungu = value;
+	sendRequest("reloadSigungu", sigungu, sigungu, 'POST')
+}
+
 function categoryButton(category) {
     var categoryDivs = document.querySelectorAll('.containerHead div');
 
@@ -134,6 +171,7 @@ function categoryButton(category) {
     var clickedButton = document.getElementById(category);
     clickedButton.style.backgroundColor = "#38B6FF";
 }
+
 </script>
 </head>
 <body>
@@ -141,20 +179,17 @@ function categoryButton(category) {
 <main class = "main">
 	<section class= "section">
 		<div id = "sectionHead">
-			<label>동네 고르기</label>
-			<select>
-				<option>1일차</option>
-				<option>2일차</option>
-			</select>
+			<label>동네 고르기</label><span id = "sigunguSelect"></span>
 		</div>
 		<div id="sectionBody">
 			<div class = "container1">
 				<div class= "containerHead">
-					<select>
-						<option>1일차</option>
-						<option>2일차</option>
-					</select>
-					</div>
+				<select>
+					<c:forEach begin="1" end="${dateRange}" step="1" var="i" >
+						<option>${i}일차</option>
+					</c:forEach>
+				</select>
+				</div>
 				<div class="containerBody">
 					<img class="img" src="/img/img.jpg" alt="Image">
 					<img class="arrow" src="/img/planArrow.png">
@@ -176,15 +211,10 @@ function categoryButton(category) {
 					<div id = "categoryButton3" onclick="categoryButton('categoryButton3')">숙박</div>
 				</div>
 				<div class="containerBody">
-					<div><img class="img" src="/img/img.jpg" alt="Image"></div>
-					<div><img class="img" src="/img/img.jpg" alt="Image"></div>
-					<div><img class="img" src="/img/img.jpg" alt="Image"></div>
-					<div><img class="img" src="/img/img.jpg" alt="Image"></div>
-					<div><img class="img" src="/img/img.jpg" alt="Image"></div>
-					<div><img class="img" src="/img/img.jpg" alt="Image"></div>
-					<div><img class="img" src="/img/img.jpg" alt="Image"></div>
-					<div><img class="img" src="/img/img.jpg" alt="Image"></div>
-					<div><img class="img" src="/img/img.jpg" alt="Image"></div>
+					<c:forEach var = "dto" items="${list}">
+					<div class = palceButton onclick = ><img class="img" src="${dto.infoImg}" alt="Image"></div>
+					<div><h1>${dto.infoName}</h1></div>
+					</c:forEach>
 				</div>
 			</div>
 		</div>
@@ -211,7 +241,7 @@ var map = new kakao.maps.Map(mapContainer, mapOption);
 var geocoder = new kakao.maps.services.Geocoder();
 
 //주소로 좌표를 검색합니다
-geocoder.addressSearch('강원도 원주시', function(result, status) {
+geocoder.addressSearch('대한민국', function(result, status) {
 
 // 정상적으로 검색이 완료됐으면 
  if (status === kakao.maps.services.Status.OK) {

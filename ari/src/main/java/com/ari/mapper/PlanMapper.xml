@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ari.mapper.PlanMapper">
+	<select id="getAttList" parameterType="int" resultType="com.ari.detail.model.AttDTO">
+		select *
+		from att
+		where area=#{area} and sigungu = #{sigungu}		
+	</select>
+	<select id="getFoodList" parameterType="int" resultType="com.ari.detail.model.FoodDTO">
+		select *
+		from food
+		where area=#{area} and sigungu = #{sigungu}		
+	</select>
+	<select id="getBerthInfoList" parameterType="int" resultType="com.ari.detail.model.BerthDTO">
+		select *
+		from berthInfo
+		where area=#{area} and sigungu = #{sigungu}		
+	</select>
+</mapper>
