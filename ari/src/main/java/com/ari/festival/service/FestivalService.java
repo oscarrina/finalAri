@@ -17,4 +17,5 @@ public interface FestivalService {
 	public String getFestImg(int festidx)throws Exception;
 	public int festDel(int festidx)throws Exception;
 	public int festUpd(FestivalDTO dto)throws Exception;
+	public int readCount(int festidx)throws Exception;
 }

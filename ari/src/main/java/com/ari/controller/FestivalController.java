@@ -142,15 +142,16 @@ public class FestivalController {
 		FestivalDTO dto=null;
 		try {
 			dto=service.festContent(festidx);
+			if(dto==null) {
+				mav.addObject("msg", "삭제된 게시물이거나 비정상적인 접근입니다.");
+				mav.addObject("url", "userfest");
+				mav.setViewName("admin/adminMsg");
+				return mav;
+			}
+			service.readCount(festidx);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		if(dto==null) {
-			mav.addObject("msg", "삭제된 게시물이거나 비정상적인 접근입니다.");
-			mav.addObject("url", "userfest");
-			mav.setViewName("admin/adminMsg");
-			return mav;
 		}
 		dto.setFestcont(dto.getFestcont().replaceAll("\n", "<br>"));
 		dto.setFestcontent(dto.getFestcontent().replaceAll("\n", "<br>"));

@@ -124,7 +124,7 @@
   background-size: 100% 100%;
 }
 .btn2:hover{
- 	background-color: #686DB9 !important;
+ 	background-color: #A4A7CE !important;
 }
 .btn2{
 	margin-top:6px;

@@ -26,13 +26,13 @@ public class ChartController {
 	public ModelAndView chartForm() {
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("start", "2023-10-01");
-		mav.addObject("end", "2023-10-31");
+		mav.addObject("end", "2023-10-07");
 		mav.setViewName("admin/chart/areaChart");
 		return mav;
 	}
 	@PostMapping("/chart")
 	public ModelAndView chartsubmit(@RequestParam(value = "start", defaultValue = "2023-10-01")String start,
-			@RequestParam(value = "end", defaultValue = "2023-10-31")String end) {
+			@RequestParam(value = "end", defaultValue = "2023-10-07")String end) {
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("start", start);
 		mav.addObject("end", end);
