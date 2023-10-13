@@ -101,8 +101,9 @@ h4{
      <hr>
      <div class="reply">
      	<table width="800" align="center">
-     	<tr><td><h4>답변</h4></td></tr>
      	<c:forEach var="reply" items="${reply }" >
+     	<c:if test="${!empty reply }"><tr><td><h4>답변</h4></td></tr></c:if>
+     	
      		<tr>
      			<td colspan="2">
      			<input type="text" name="qnaTitle" id="qnaTitle" value="${reply.replyTitle }" readonly>

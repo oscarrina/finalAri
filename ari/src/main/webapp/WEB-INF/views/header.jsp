@@ -183,7 +183,6 @@ body{
     <c:if test="${empty sid }"><a class="dropdown-item" href="/memberLogin">로그인</a></c:if>
     <c:if test="${!empty sid }"><a class="dropdown-item" href="/memberLogout">로그아웃</a></c:if>
     </li>
-    <li><a class="dropdown-item" href="#">고객센터</a></li>
   </ul>
 </div>
       <button class="btn btn-primary sideBtn" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i style="font-size: 40px;" class="bi bi-justify justify"></i></button>
