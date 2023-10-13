@@ -29,7 +29,6 @@
 <h1 class="test">코스 좋아요 테스트 페이지</h1>
 <span>총 주문금액</span>
     <span>100 원</span>
-    <button id="payment-button">100원 결제하기</button>
 <h1 id="idx"><a href="${contentUrl}">1</a></h1>
 <%@include file="/WEB-INF/views/footer.jsp" %>
 </body>
@@ -40,7 +39,7 @@ const button = document.getElementById("payment-button");
 
 const paymentWidget = PaymentWidget(clientKey, customerKey); // 회원 결제
 
-paymentWidget.renderPaymentMethods("#payment-method", { value: 2350 });
+paymentWidget.renderPaymentMethods("#payment-method", { value:  });
 
 button.addEventListener("click", function () {
 	let uuid = self.crypto.randomUUID();

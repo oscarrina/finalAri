@@ -8,6 +8,7 @@
 <title>Insert title here</title>
 <script src ="/js/httpRequest.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <style>
 html{
 	user-select: none;
@@ -293,7 +294,7 @@ select{
 		let anum = document.getElementById("anum");
 		let anumCheck = document.getElementById("anumCheck");
 		if(anum.value==sendMsg2()){	
-			window.alert('인증 되었습니다.');
+			swal('아리아리','인증 되었습니다.');
 			anumCheck.innerHTML = "인증되었습니다.";
 			anumCheck.style.color = 'green';
 		}else{
