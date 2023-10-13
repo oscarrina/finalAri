@@ -64,7 +64,7 @@ public class PlanController {
 	@GetMapping("listSet")
 	public ModelAndView categoryType(@RequestParam(value = "dateRange",required = false)int dateRange, 
 			@RequestParam(value = "area")int area, 
-			@RequestParam(value = "sigungu", defaultValue = "1")int sigungu,
+			@RequestParam(value = "sigungu")int sigungu,
 			@RequestParam(value = "type")int type) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		switch(type) {
