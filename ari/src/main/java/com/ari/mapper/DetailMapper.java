@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.ari.detail.model.*;
 import com.ari.festival.model.*;
+import com.ari.review.model.*;
 
 public interface DetailMapper {
 
@@ -35,4 +36,5 @@ public interface DetailMapper {
 	
 	public List<FestivalDTO> festDetail(int idx);
 	
+	public List<ReviewDTO> reviewList(int berthIdx);
 }

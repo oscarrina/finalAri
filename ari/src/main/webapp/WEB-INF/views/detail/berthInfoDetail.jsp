@@ -228,6 +228,17 @@ function reser(idx,berthIdx){
 	<tr><td><c:if test="${berth.berthRefri==1}">냉장고 있음</c:if><c:if test="${berth.berthRefri==0 }"></c:if></td></tr>
 </table>
 </c:forEach>
+
+</div>
+<div>
+<c:if test="${empty review }">
+	<h5>리뷰가 없습니다</h5>
+</c:if>
+<c:if test="${not empty review }">
+	<ul>
+		<li>{review.
+	</ul>
+</c:if>
 </div>
 </div>
 <%@include file="/WEB-INF/views/footer.jsp" %>

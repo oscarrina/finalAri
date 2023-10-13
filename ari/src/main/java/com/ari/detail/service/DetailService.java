@@ -11,6 +11,7 @@ import com.ari.detail.model.BerthInfoDTO;
 import com.ari.detail.model.FoodDTO;
 import com.ari.detail.model.searchVO;
 import com.ari.festival.model.FestivalDTO;
+import com.ari.review.model.ReviewDTO;
 
 public interface DetailService {
 
@@ -39,4 +40,6 @@ public interface DetailService {
 	public List<AttDTO> attDetail(int idx) throws Exception;
 	
 	public List<FestivalDTO> festDetail(int idx) throws Exception;
+	
+	public List<ReviewDTO> reviewList(int berthIdx)throws Exception;
 }

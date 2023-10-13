@@ -96,6 +96,9 @@
     	from fest
     	where festIdx=#{idx}
     </select>
+    <select id="reviewList" parameterType="int" resultType="com.ari.review.model.ReviewDTO">
+		select * from review where berthIdx=#{berthIdx}
+	</select>
   </mapper>
   
   

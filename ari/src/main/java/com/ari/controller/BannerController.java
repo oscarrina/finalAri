@@ -29,7 +29,7 @@ public class BannerController {
 	
 	
 	@RequestMapping("/bannerList")
-	public ModelAndView empList() {
+	public ModelAndView bannerList() {
 		ModelAndView mav=new ModelAndView();
 		File f=new File("c:/student_java/upload/");
 		File files[]=f.listFiles();

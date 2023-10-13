@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ari.mapper.DetailMapper;
-
+import com.ari.review.model.ReviewDTO;
 import com.ari.detail.model.AttDTO;
 import com.ari.detail.model.BerthDTO;
 import com.ari.detail.model.BerthInfoDTO;
@@ -89,5 +89,12 @@ public class DetailServiceImple implements DetailService {
 	public List<FestivalDTO> festDetail(int idx) throws Exception {
 		List<FestivalDTO> list=mapper.festDetail(idx);
 		return list;
+	}
+	
+	@Override
+	public List<ReviewDTO> reviewList(int berthIdx) throws Exception {
+		List<ReviewDTO> lists=mapper.reviewList(berthIdx);
+		
+		return lists;
 	}
 }
