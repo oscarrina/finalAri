@@ -58,11 +58,33 @@
   		where idx=#{idx}
     </select>
     <select id="berthDetail" parameterType="com.ari.detail.model.BerthDTO" resultType="com.ari.detail.model.BerthDTO">
-    	SELECT B.*/*NVL(R.reserstate,0)as reserstate*/
-    	FROM BERTH B LEFT OUTER JOIN reser R ON B.idx = R.idx AND B.BERTHIDX = R.BERTHIDX
-    	AND R.reservisitSTART <![CDATA[>=]]> TO_DATE(#{startDate}, 'YYYYMMDD') 
-		AND R.reservisitEND  <![CDATA[<=]]> TO_DATE(#{endDate}, 'YYYYMMDD')
-		WHERE B.idx = #{idx}
+	SELECT
+	    B.berthidx,
+	    B.idx,
+	    B.berthname,
+	    B.berthsize,
+	    B.berthmax,
+	    B.berthprice,
+	    B.berthtv,
+	    B.berthdry,
+	    B.berthrefri,
+	    B.berthinternet,
+	    CASE WHEN RD.reservisit IS NOT NULL THEN 1 ELSE 0 END AS reserState
+	FROM berth B
+	LEFT JOIN reservisit RD ON B.berthidx = RD.berthidx
+	AND RD.reservisit BETWEEN TO_DATE(#{startDate}, 'YYYY-MM-DD')
+	AND TO_DATE(#{endDate}, 'YYYY-MM-DD')
+	group by B.berthidx,
+	    B.idx,
+	    B.berthname,
+	    B.berthsize,
+	    B.berthmax,
+	    B.berthprice,
+	    B.berthtv,
+	    B.berthdry,
+	    B.berthrefri,
+	    B.berthinternet,
+	    CASE WHEN RD.reservisit IS NOT NULL THEN 1 ELSE 0 END
     </select>
     <select id="attDetail" parameterType="int" resultType="com.ari.detail.model.AttDTO">
     	select * 

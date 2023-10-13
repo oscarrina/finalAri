@@ -139,6 +139,7 @@ public class SmsService {
     
     public String sendRandomMessage(String tel,int type,String berthName) {
     	String numStr = "";
+    	berthName = "";
     	if(type == 1) {
         Random rand = new Random();
         for (int i = 0; i < 6; i++) {

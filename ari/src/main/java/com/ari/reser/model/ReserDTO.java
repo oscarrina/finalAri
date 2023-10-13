@@ -16,9 +16,11 @@ import lombok.ToString;
 public class ReserDTO {
 
 	private int reserIdx;
-	private int berthidx;
+	private int berthIdx;
 	private String userId;
 	private String reserName;
+	private String reserVisitStart;
+	private String reserVisitEnd;
 	private String reserPriceInfo;
 	private int reserPrice;
 	private Date reserPriceDay;
@@ -30,5 +32,6 @@ public class ReserDTO {
 	private String berthInfoImg; //숙박 타이틀 이미지
 	private String berthInfoName; //숙박 업체 이름
 	private String berthName; //객실 명
-	
+	private String berthInfoStart; //입실 시간
+	private String berthInfoEnd; //퇴실 시간
 }

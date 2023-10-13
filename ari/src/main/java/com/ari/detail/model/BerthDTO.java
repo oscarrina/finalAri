@@ -17,13 +17,14 @@ public class BerthDTO {
 	private String berthName;
 	private int berthSize;
 	private int berthMax;
-	private int berthPlace;
-	private int berthTV;
+	private int berthPrice;
+	private int berthTv;
 	private int berthDry;
-	private int Refri;
+	private int berthRefri;
 	private int berthInternet;
+	private int reserState;
 	private String berthImg;
-	private String berthStart;
-	private String berthEnd;
+	private String startDate;
+	private String endDate;
 	
 }

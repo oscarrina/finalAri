@@ -65,6 +65,14 @@ h5{
 	border: solid 3px #253BFF;
 	border-radius: 25px;
 }
+.reserBtn{
+	border: none;
+ 	background-color: #253BFF;
+ 	color: white;
+ 	width: 350px;
+ 	height: 60px;
+ 	font-size: 20px;
+}
 </style>
 <script>
 function getFormatDate(date){
@@ -87,13 +95,9 @@ window.onload = function(){
 }
 
 function endDateCal(start){
-   window.alert('ad');
    var startValue = start.value;
    var date = new Date(startValue);
    var endValue = document.getElementById("end").value;
-   console.log(dateCal(endValue));
-   console.log(dateCal(startValue));
-   
    if (dateCal(endValue) < dateCal(startValue)){
       document.getElementById("end").value = startValue;
    }
@@ -118,6 +122,18 @@ function dateminu(date1, date2){
    var dateP = endDate - startDate;
     var result = dateP / (1000 * 60 * 60 * 24);
     return result;
+}
+function dateShow(idx){
+	let startDate = document.getElementById("start").value;
+	let endDate = document.getElementById("end").value;
+	location.href = 'berthInfoDetail?berthInfoIdx='+idx+'&startDate='+startDate
+	+'&endDate='+endDate;
+}
+function reser(idx){
+	let startDate = document.getElementById("start").value;
+	let endDate = document.getElementById("end").value;
+	location.href = 'reserForm?berthIdx='+idx+'&startDate='+startDate
+	+'&endDate='+endDate;
 }
 </script>
 </head>
@@ -189,17 +205,20 @@ function dateminu(date1, date2){
 <div class="berthDiv">
 <input type = "date" id = "start" oninput= "endDateCal(this)" name = "startDate">
 <input type = "date" id = "end" name = "endDate">
-<button type="button" onclick="dateShow()">선택</button>
+<button type="button" onclick="dateShow(${berthInfo[0].idx })">선택</button>
 <c:forEach items="${berth }" var="berth">
 <table class="berthTable">
 	<tr>
-		<td rowspan="7"  width="380"><img src="/imgs/${berth.infoImg }" alt="room" class="berthImg"></td>
+		<td rowspan="7"  width="380"><img src="/imgs/${berth.berthImg }" alt="room" class="berthImg"></td>
 		<td width="300"><h5><Strong>${berth.berthName }</Strong></h5></td>
-		<td><h5>${berth.berthPrice }₩<h5></td>
+		<td><h5>${berth.berthPrice }원<h5></td>
 	</tr>
 	<tr><td>${berth.berthSize }㎡</td></tr>
 	<tr><td><i class="bi bi-person-fill"></i>최대 ${berth.berthMax }명</td></tr>
-	<tr><td><i class="bi bi-tv"></i> <c:if test="${berth.berthTv==1}">O</c:if><c:if test="${berth.berthTv==0}">X</c:if></td></tr>
+	<tr><td><i class="bi bi-tv"></i> <c:if test="${berth.berthTv==1}">O</c:if><c:if test="${berth.berthTv==0}">X</c:if></td>
+	<td><c:if test="${berth.reserState==1}"><span>판매완료</span></c:if>
+	<c:if test="${berth.reserState==0}"><button type="button" onclick="reser(${berthInfo[0].idx })" class="reserBtn">예약하기</button></c:if>
+	</td></tr>
 	<tr><td><i class="bi bi-wifi"></i> <c:if test="${berth.berthInternet==1}">O</c:if><c:if test="${berth.berthInternet==0}">X</c:if></td></tr>
 	<tr><td><c:if test="${berth.berthDry==1}">헤어드라이기 비치</c:if><c:if test="${berth.berthDry==0}"></c:if></td></tr>
 	<tr><td><c:if test="${berth.berthRefri==1}">냉장고 있음</c:if><c:if test="${berth.berthRefri==0 }"></c:if></td></tr>

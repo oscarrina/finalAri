@@ -28,4 +28,10 @@
   	set reserstate = 0
   	where reseridx = #{reserIdx}
   </update>
+  <select id="reserForm" parameterType="Integer" resultType="com.ari.reser.model.TestDTO">
+  	select b.berthName,b.berthPrice,bi.berthInfoStart,
+  	bi.berthInfoEnd,bi.infoname as berthInfoName
+	from berth b,berthinfo bi
+	where b.berthidx = #{berthIdx}
+  </select>
   </mapper>

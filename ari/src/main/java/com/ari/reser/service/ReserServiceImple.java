@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.ari.mapper.ReserMapper;
 import com.ari.reser.model.ReserDTO;
+import com.ari.reser.model.TestDTO;
 
 @Service
 public class ReserServiceImple implements ReserService {
@@ -36,5 +37,10 @@ public class ReserServiceImple implements ReserService {
 	public int reserCancel(int reserIdx) {
 		int result = mapper.reserCancel(reserIdx);
 		return result;
+	}
+	@Override
+	public TestDTO reserForm(int berthIdx) {
+		TestDTO dto = mapper.reserForm(berthIdx);
+		return dto;
 	}
 }

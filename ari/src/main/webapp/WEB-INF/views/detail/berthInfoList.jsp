@@ -19,15 +19,17 @@ img{
 </style>
 <script>
 function dateFormat(date){
-	return date.getFullYear().toString()+(date.getMonth()+1).toString()+date.getDate().toString();
+	const year = date.getFullYear().toString();
+	const month = (date.getMonth()+1).toString().padStart(2, '0');
+	const day = date.getDate().toString().padStart(2, '0');;
+	const dateString = year + '-' + month + '-' + day;
+	return dateString;
 }
 
 function berthDetail(idx){
 	var date = new Date();
 	var tomorrow = new Date();
 	tomorrow.setDate(tomorrow.getDate() + 1)
-	console.log(date);
-	console.log(tomorrow);
 	location.href = 'berthInfoDetail?berthInfoIdx='+idx+'&startDate='+dateFormat(date)
 			+'&endDate='+dateFormat(tomorrow);
 }
@@ -42,7 +44,7 @@ function berthDetail(idx){
 				<img class="postcard__img" src="/imgs/${berthInfo.infoImg }" alt="Image Title" />
 			</a>
 			<div class="postcard__text">
-				<h1 class="postcard__title blue"><a href="berthInfoDetail?berthInfoIdx=${berthInfo.idx }" style="text-decoration-line: none; color:#00008C; ">${berthInfo.infoName }</a></h1>
+				<h1 class="postcard__title blue"><a onclick="berthDetail(${berthInfo.idx })" style="text-decoration-line: none; color:#00008C; ">${berthInfo.infoName }</a></h1>
 				<div class="postcard__bar"></div>
 				<div class="postcard__preview-txt">${berthInfo.info}</div>
 				<ul class="postcard__tagbox" style="list-style: none">

@@ -160,8 +160,8 @@ public class DetailController {
 		List<BerthInfoDTO> berthInfo =null;
 		List<BerthDTO> berth=null;
 		dto.setIdx(idx);
-		dto.setBerthStart(startDate);
-		dto.setBerthEnd(endDate);
+		dto.setStartDate(startDate);
+		dto.setEndDate(endDate);
 		try {
 			berthInfo=service.berthInfoDetail(idx);
 			berth=service.berthDetail(dto);
@@ -173,6 +173,7 @@ public class DetailController {
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("berthInfo",berthInfo);
 		mav.addObject("berth",berth);
+		mav.addObject("dto", dto);
 		mav.setViewName("detail/berthInfoDetail");
 		return mav;
 		
