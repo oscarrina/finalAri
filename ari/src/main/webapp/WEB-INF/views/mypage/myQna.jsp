@@ -58,7 +58,8 @@
   </tbody>
 </table>
 <div align="center" >
-			${pageStr }
+			<c:if test="${empty lists }">${str }</c:if>
+			
 		</div>
 </div>
 <%@include file="/WEB-INF/views/footer.jsp" %>
