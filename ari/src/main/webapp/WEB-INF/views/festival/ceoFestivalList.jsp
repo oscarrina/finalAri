@@ -32,8 +32,8 @@ function showType(){
       <h3>축제 목록</h3>
 		<div class="content2">
 		<select class="border2" style="width:120px;" aria-label="Default select example" name="type" onchange="showType()" id="sbox2">
-			<option value="1" selected>최근 등록순</option>
-			<option value="2">제목순</option>
+			<option value="1" ${type==1?"selected":"" }>최근 등록순</option>
+			<option value="2" ${type==2?"selected":"" }>제목순</option>
 		</select>
 			<div class="d-grid gap-2 d-md-flex justify-content-md-end ">
 				<button type="button" class="btn btn-primary" align="right"
