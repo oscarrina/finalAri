@@ -27,6 +27,7 @@
 <c:param name="likeType" value="1"></c:param>
 </c:url>
 <h1 class="test">코스 좋아요 테스트 페이지</h1>
+
 <span>총 주문금액</span>
     <span>100 원</span>
 <h1 id="idx"><a href="${contentUrl}">1</a></h1>

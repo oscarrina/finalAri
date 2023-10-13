@@ -92,25 +92,25 @@
           <li class="list-group-item d-flex justify-content-between lh-sm">
             <div>
               <h4 class="berthH4">숙소 이름</h4>
-              <h4>${dto[0].berthInfoName }</h4>
+              <h4>${dto.berthInfoName }</h4>
             </div>
           </li>
           <li class="list-group-item d-flex justify-content-between lh-sm">
             <div>
               <h4 class="berthH4">객실 유형</h4>
-              <h4>${dto[0].berthName }</h4>
+              <h4>${dto.berthName }</h4>
             </div>
           </li>
           <li class="list-group-item d-flex justify-content-between lh-sm">
             <div>
               <h4 class="berthH4">입실 시간</h4>
-              <h4>${dto[0].ReserVisitStart } ${dto[0].berthInfoStart}</h4>
+              <h4>${dto.reserVisitStart } ${dto.berthInfoStart}</h4>
             </div>
           </li>
           <li class="list-group-item d-flex justify-content-between bg-light">
             <div>
               <h4 class="berthH4">퇴실 시간</h4>
-              <h4>${dto[0].ReserVisitEnd } ${dto[0].berthInfoEnd}</h4>
+              <h4>${dto.reserVisitEnd } ${dto.berthInfoEnd}</h4>
             </div>
           </li>
         </ul>
@@ -119,7 +119,7 @@
             <h4 style="font-weight: bold;">총 결제 금액</h4>
           </div>
           <div>
-          	<span class="paymentPrice">${dto[0].berthPrice}원</span>
+          	<span class="paymentPrice">${dto.reserPrice}원</span>
           </div>
           <ul>
           	<li>결제완료 후 <span style="color: red;">예약자</span> 이름으로 바로 <span style="color: red;">입실</span> 하시면 됩니다</li>
@@ -156,20 +156,20 @@
 </body>
 <script>
 const clientKey = "test_ck_Ba5PzR0ArnJpEn1xog1rvmYnNeDM";
-const customerKey = "dool12"; // 내 상점에서 고객을 구분하기 위해 발급한 고객의 고유 ID
+const customerKey = "${userid}"; // 내 상점에서 고객을 구분하기 위해 발급한 고객의 고유 ID
 const button = document.getElementById("payment-button");
 
 const paymentWidget = PaymentWidget(clientKey, customerKey); // 회원 결제
 
-paymentWidget.renderPaymentMethods("#payment-method", { value: 50000 });
+	paymentWidget.renderPaymentMethods("#payment-method", { value: 50000});
 
 button.addEventListener("click", function () {
-	let uuid = self.crypto.randomUUID();
+	//let uuid = self.crypto.randomUUID();
   paymentWidget.requestPayment({
-    orderId: uuid,            // 주문 ID(직접 만들어주세요)
-    orderName: "12345",                 // 주문명
-    successUrl: "http://localhost:9091/pay/success",  // 결제에 성공하면 이동하는 페이지(직접 만들어주세요)
-    failUrl: "http://localhost:9091/pay/fail",        // 결제에 실패하면 이동하는 페이지(직접 만들어주세요)
+    orderId: "1232131",            // 주문 ID(직접 만들어주세요)
+    orderName: "${dto.berthInfoName}",                 // 주문명
+    successUrl: "http://192.168.0.31:9000/pay/success",  // 결제에 성공하면 이동하는 페이지(직접 만들어주세요)
+    failUrl: "http://192.168.0.31:9000/pay/fail",       // 결제에 실패하면 이동하는 페이지(직접 만들어주세요)
   });
 });
 </script>

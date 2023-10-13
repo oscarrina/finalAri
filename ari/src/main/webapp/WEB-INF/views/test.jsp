@@ -156,20 +156,20 @@
 </body>
 <script>
 const clientKey = "test_ck_Ba5PzR0ArnJpEn1xog1rvmYnNeDM";
-const customerKey = "dool12"; // 내 상점에서 고객을 구분하기 위해 발급한 고객의 고유 ID
+const customerKey = "dool1234"; // 내 상점에서 고객을 구분하기 위해 발급한 고객의 고유 ID
 const button = document.getElementById("payment-button");
 
 const paymentWidget = PaymentWidget(clientKey, customerKey); // 회원 결제
 
-paymentWidget.renderPaymentMethods("#payment-method", { value: 50000 });
+	paymentWidget.renderPaymentMethods("#payment-method", { value: 50000});
 
 button.addEventListener("click", function () {
-	let uuid = self.crypto.randomUUID();
+	//let uuid = self.crypto.randomUUID();
   paymentWidget.requestPayment({
-    orderId: uuid,            // 주문 ID(직접 만들어주세요)
+    orderId: "weqw213x213",            // 주문 ID(직접 만들어주세요)
     orderName: "12345",                 // 주문명
-    successUrl: "http://localhost:9091/pay/success",  // 결제에 성공하면 이동하는 페이지(직접 만들어주세요)
-    failUrl: "http://localhost:9091/pay/fail",        // 결제에 실패하면 이동하는 페이지(직접 만들어주세요)
+    successUrl: "http://192.168.0.31:9000/pay/success",  // 결제에 성공하면 이동하는 페이지(직접 만들어주세요)
+    failUrl: "http://192.168.0.31:9000/pay/fail",        // 결제에 실패하면 이동하는 페이지(직접 만들어주세요)
   });
 });
 </script>
