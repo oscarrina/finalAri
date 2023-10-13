@@ -38,7 +38,7 @@
 	<select id="festList" parameterType="Map" resultType="com.ari.festival.model.FestivalDTO">
 		select * from 
 			(select rownum as rnum, a.* from 
-			(select * from fest order by festidx desc) a) b
+			(select * from fest order by festread desc) a) b
 		where rnum<![CDATA[>=]]>#{start} and rnum<![CDATA[<=]]>#{end}
 	</select>
 	<select id="festListArea" parameterType="Map" resultType="com.ari.festival.model.FestivalDTO">

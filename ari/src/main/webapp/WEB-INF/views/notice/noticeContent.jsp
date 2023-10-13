@@ -74,7 +74,7 @@ svg{
 
 
 .content3{
-	width:500px;
+	width:600px;
 	height:auto;
 
 }

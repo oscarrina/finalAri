@@ -97,7 +97,7 @@ public class FestivalController {
 		if(totalCnt==0) {pageStr="";}
 		mav.addObject("pageStr", pageStr);
 		mav.addObject("lists", lists);
-		
+		mav.addObject("type", type);
 		mav.setViewName("festival/ceoFestivalList");
 		return mav;
 	}
