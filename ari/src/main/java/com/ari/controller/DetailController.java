@@ -17,7 +17,7 @@ import com.ari.detail.model.BerthInfoDTO;
 import com.ari.detail.model.FoodDTO;
 import com.ari.detail.model.searchVO;
 import com.ari.festival.model.FestivalDTO;
-
+import com.ari.review.model.ReviewDTO;
 import com.ari.detail.service.*;
 
 @Controller
@@ -159,12 +159,15 @@ public class DetailController {
 			BerthDTO dto) {
 		List<BerthInfoDTO> berthInfo =null;
 		List<BerthDTO> berth=null;
+		List<ReviewDTO> review=null;
 		dto.setIdx(idx);
 		dto.setStartDate(startDate);
 		dto.setEndDate(endDate);
+		
 		try {
 			berthInfo=service.berthInfoDetail(idx);
 			berth=service.berthDetail(dto);
+			review=service.reviewList(idx);
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -174,6 +177,7 @@ public class DetailController {
 		mav.addObject("berthInfo",berthInfo);
 		mav.addObject("berth",berth);
 		mav.addObject("dto", dto);
+		mav.addObject("review", review);
 		mav.setViewName("detail/berthInfoDetail");
 		return mav;
 		

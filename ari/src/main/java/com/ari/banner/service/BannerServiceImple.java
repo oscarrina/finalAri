@@ -28,6 +28,6 @@ public class BannerServiceImple implements BannerService {
 	@Override
 	public int bannerDel(BannerDTO dto) throws Exception {
 		int result=mapper.bannerDel(dto);
-		return 0;
+		return result;
 	}
 }
