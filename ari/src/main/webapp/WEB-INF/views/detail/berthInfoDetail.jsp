@@ -73,6 +73,9 @@ h5{
  	height: 60px;
  	font-size: 20px;
 }
+.reserSpan{
+	font-size: 20px;
+}
 </style>
 <script>
 function getFormatDate(date){
@@ -129,10 +132,11 @@ function dateShow(idx){
 	location.href = 'berthInfoDetail?berthInfoIdx='+idx+'&startDate='+startDate
 	+'&endDate='+endDate;
 }
-function reser(idx){
+function reser(idx,berthIdx){
 	let startDate = document.getElementById("start").value;
 	let endDate = document.getElementById("end").value;
-	location.href = 'reserForm?berthIdx='+idx+'&startDate='+startDate
+	window.alert(berthIdx);
+	location.href = 'reserForm?idx='+idx+'&berthIdx='+berthIdx+'&startDate='+startDate
 	+'&endDate='+endDate;
 }
 </script>
@@ -216,8 +220,8 @@ function reser(idx){
 	<tr><td>${berth.berthSize }㎡</td></tr>
 	<tr><td><i class="bi bi-person-fill"></i>최대 ${berth.berthMax }명</td></tr>
 	<tr><td><i class="bi bi-tv"></i> <c:if test="${berth.berthTv==1}">O</c:if><c:if test="${berth.berthTv==0}">X</c:if></td>
-	<td><c:if test="${berth.reserState==1}"><span>판매완료</span></c:if>
-	<c:if test="${berth.reserState==0}"><button type="button" onclick="reser(${berthInfo[0].idx })" class="reserBtn">예약하기</button></c:if>
+	<td><c:if test="${berth.reserState==1}"><span class="reserSpan">판매완료</span></c:if>
+	<c:if test="${berth.reserState==0}"><button type="button" onclick="reser(${berthInfo[0].idx },${berth.berthIdx })" class="reserBtn">예약하기</button></c:if>
 	</td></tr>
 	<tr><td><i class="bi bi-wifi"></i> <c:if test="${berth.berthInternet==1}">O</c:if><c:if test="${berth.berthInternet==0}">X</c:if></td></tr>
 	<tr><td><c:if test="${berth.berthDry==1}">헤어드라이기 비치</c:if><c:if test="${berth.berthDry==0}"></c:if></td></tr>

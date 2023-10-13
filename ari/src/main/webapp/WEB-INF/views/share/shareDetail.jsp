@@ -5,6 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
 <style>
 .content{
 	display: block;
@@ -34,6 +36,10 @@
      font-size: 16px;
      
 }
+.likeBtn{
+	border: none;
+	background: none;
+}
 </style>
 </head>
 <body>
@@ -55,6 +61,16 @@
 	</tr>
 	<tr>
 		<td colspan="2">작성일:${share.shareDate }</td>
+	</tr>
+	<tr>
+		<td><button type="button" onclick="like(liketest)" class="likeBtn" id="likeBtn123">
+		<c:if test="${likeYN == 'N' }">
+		<i class="bi bi-heart like" id="likeBtn"></i>
+		</c:if>
+		<c:if test="${likeYN == 'Y' }">
+		<i class="bi bi-heart-fill like" id="likeBtn"></i>
+		</c:if>
+		</button></td>
 	</tr>
 </table>
 </div><br><br>

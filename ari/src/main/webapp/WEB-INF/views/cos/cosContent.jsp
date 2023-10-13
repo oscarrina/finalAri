@@ -6,7 +6,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+<script src = "js/httpRequest.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
     var idx = ${param.idx};
 
@@ -57,6 +60,42 @@
             console.error('API 호출 중 오류 발생:', error);
         }
     });
+    var liketest='${likeYN}';
+
+    function like(likeYN){
+    	let likeType = document.getElementById("likeType").value;
+    	let img = document.getElementById("likeImg").src;
+    	let likeBtn = document.getElementById("likeBtn");
+    	if(likeYN == 'N'){ //좋아요 안 누른 상태
+    		//클릭 시 좋아요 버튼 상태 바뀜
+    		likeBtn.setAttribute('class','bi bi-heart-fill like');
+    		likeYN = 'Y';
+    	}else{ //좋아요 누른 상태
+    		//클릭 시 좋아요 버튼 상태 바뀜
+    		likeBtn.setAttribute('class','bi bi-heart like');
+    		likeYN = 'N';
+    	}
+    	let param = 'idx='+idx+'&likeType='+likeType+'&likeImg='+img+'&likeYN='+likeYN;
+    	sendRequest('likeOK',param,likeYN == "Y" ? likeOK:likeCancel,'GET');
+    }
+    function likeOK(){
+    	if(XHR.readyState == 4){
+    		if(XHR.status == 200){
+    			let data = XHR.responseText;
+    			swal('아리아리',data);
+    			liketest='Y';
+    		}
+    	}
+    }
+    function likeCancel(){
+    	if(XHR.readyState == 4){
+    		if(XHR.status == 200){
+    			let data = XHR.responseText;
+    			swal('아리아리',data);
+    			liketest='N';
+    		}
+    	}
+    }
 </script>
 <style>
 .a {
@@ -94,9 +133,18 @@
 <div class="a">
 	<div class="c">
 		<p class="p">${dto.cosTitle }</p>
+		<button type="button" onclick="like(liketest)" class="likeBtn" id="likeBtn123">
+		<c:if test="${likeYN == 'N' }">
+		<i class="bi bi-heart like" id="likeBtn"></i>
+		</c:if>
+		<c:if test="${likeYN == 'Y' }">
+		<i class="bi bi-heart-fill like" id="likeBtn"></i>
+		</c:if>
+		</button>
 		<hr>
 	</div>
 	<div id="apiData"></div>
+	<input type="hidden" value="${likeType }" id="likeType">
 </div>
 <%@include file="/WEB-INF/views/footer.jsp" %>
 </body>

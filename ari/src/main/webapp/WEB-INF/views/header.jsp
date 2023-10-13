@@ -124,8 +124,6 @@ body{
 </style>
 </head>
 <div class="navbar navbar-expand-sm bg-light header bg-white">
-<a href="cos">코스 테스트</a>
-<a href="planShare">일정 테스트</a>
   <div class="container-fluid">
     <a class="navbar-brand" href="/">
       	<img class="logoImg" alt="아리아리로고이미지" src="/img/logo.png"></a>
