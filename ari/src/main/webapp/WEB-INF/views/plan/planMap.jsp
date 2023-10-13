@@ -8,6 +8,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src ="/js/httpRequest.js"></script>
+<link rel="stylesheet" type="text/css" href="/css/planMainLayout.css">
 <style>
 html{
 	user-select: none;
@@ -42,6 +43,7 @@ html{
 }	
 .container1 .containerBody{
 	align-items: 5px;
+	width:
 	height:85%;
 	flex-direction: column;
 	margin: 0px auto;
@@ -157,21 +159,6 @@ function showResult(){
 		}
 	}
 }
-function sigunguChange(value){
-	sigungu = value;
-	addr = document.getElementBy
-	var url = 'reloadSigungu?dateRange='+${dateRange}+'&area='+${area}+'&sigungu='+value;
-	sendRequest(url, null, sigunguChangeOk, 'GET');
-}
-function sigunguChangeOk(){
-	if(XHR.readyState==4){
-		if(XHR.status==200){
-			var data = XHR.responseText;
-			var container = document.getElementById("containerBody");
-			container.innerHTML = data;
-		}
-	}
-}
 function categoryButton(category) {
     var categoryDivs = document.querySelectorAll('.containerHead div');
     for (var i = 0; i < categoryDivs.length; i++) {
@@ -181,29 +168,42 @@ function categoryButton(category) {
     clickedButton.style.backgroundColor = "#38B6FF";
     listSet();
 }
-///////////////////////////////////////////////////////////////////////////////////
+/**장소 리스트 출력해주는 함수*/
 function  listSet(){
 	var dateRange = ${dateRange};
 	var area = ${area};
-	var sigungu = document.getElementById("sbox2").value;
+	var sigungu = document.getElementById('sbox2').value;
 	var category='';
 	var categoryButtons = document.getElementsByClassName("categoryButton");
-	for(var i = 0 ; i<categoryButton.length; i++){
-		if(categoryButton[i].style.backgroundColor == '#38B6FF'){
-			category = categoryButton[i].id;
+	console.log(categoryButtons[0].id);
+	console.log(categoryButtons[0].style.backgroundColor);
+	for(var i = 0 ; i < categoryButtons.length; i++){
+		if(categoryButtons[i].style.backgroundColor == 'rgb(56, 182, 255)'){
+			category = categoryButtons[i].id;
+			console.log(category);
 		}
 	}
-	
-	var url = 'reloadSigungu?dateRange='+${dateRange}+'&area='+${area}+'&sigungu='+sigungu+'&type='+category;
+	console.log(category);
+	var url = 'listSet?dateRange='+${dateRange}+'&area='+${area}+'&sigungu='+sigungu+'&type='+category;
 	sendRequest(url, null, categoryOk, 'GET');
 }
 function categoryOk(){
 	if(XHR.readyState==4){
 		if(XHR.status==200){
 			var data = XHR.response;
-			var container = document.getElementById("containerBody");
+			var container = document.getElementById("containerBody2");
+			container.innerHTML = '';
 			container.innerHTML = data;
 		}
+	}
+}
+function insertPlanner(img){
+	var str = '<img class="img" src='+img+' alt="Image">';
+	var arrow = '<img class="arrow" src="/img/planArrow.png">';
+	if(document.getElementById("containerBody").Child == null){
+		document.getElementById("containerBody").appendChild(str);
+	}else{
+		document.getElementById("containerBody").appendChild(arrow+str);
 	}
 }
 </script>
@@ -224,18 +224,8 @@ function categoryOk(){
 					</c:forEach>
 				</select>
 				</div>
-				<div class="containerBody">
-					<img class="img" src="/img/img.jpg" alt="Image">
-					<img class="arrow" src="/img/planArrow.png">
-					<img class="img" src="/img/img.jpg" alt="Image">
-					<img class="arrow" src="/img/planArrow.png">
-					<img class="img" src="/img/img.jpg" alt="Image">
-					<img class="arrow" src="/img/planArrow.png">
-					<img class="img" src="/img/img.jpg" alt="Image">
-					<img class="arrow" src="/img/planArrow.png">
-					<img class="img" src="/img/img.jpg" alt="Image">
-					<img class="arrow" src="/img/planArrow.png">
-					<img class="img" src="/img/img.jpg" alt="Image">
+				<div class="containerBody" id = "containerBody">
+					
 				</div>
 			</div>
 			<div class= "container2">
@@ -244,7 +234,7 @@ function categoryOk(){
 					<div class = "categoryButton" id = "2" onclick="categoryButton(2)">음식점</div>
 					<div class = "categoryButton" id = "3" onclick="categoryButton(3)">숙박</div>
 				</div>
-				<div class="containerBody" id = "containerBody">
+				<div class="containerBody" id = "containerBody2">
 				</div>
 			</div>
 		</div>
