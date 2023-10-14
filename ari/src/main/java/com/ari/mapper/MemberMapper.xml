@@ -86,4 +86,21 @@
 		sysdate
 		)
 	</insert>
+	<update id="userUpdate" parameterType="com.ari.member.model.MemberDTO">
+	 update userinfo
+	 set username=#{username},
+	 	useraddr1=#{useraddr1},
+	 	useraddr2=#{useraddr2},
+	 	useraddr3=#{useraddr3}
+	 where userid=#{userid}
+	</update>
+	<update id="ceoUpdate" parameterType="com.ari.member.model.MemberDTO">
+	 update userinfo
+	 set username=#{username},
+		 userarea=#{userarea},
+	 	useraddr1=#{useraddr1},
+	 	useraddr2=#{useraddr2},
+	 	useraddr3=#{useraddr3}
+	 where userid=#{userid}
+	</update>
 </mapper>

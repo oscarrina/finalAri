@@ -75,4 +75,14 @@ public class MemberServiceImple implements MemberService {
 		int result = mapper.idCheck(userbn);
 		return result;
 	}
+	@Override
+	public int userUpdate(MemberDTO dto) throws Exception {
+		int result=mapper.userUpdate(dto);
+		return result;
+	}
+	@Override
+	public int ceoUpdate(MemberDTO dto) throws Exception {
+		int result=mapper.ceoUpdate(dto);
+		return result;
+	}
 }

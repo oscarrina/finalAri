@@ -4,7 +4,11 @@
     
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
-    
+ <style>
+ .ceo_login{
+	margin-top: 50px;
+}
+ </style>   
 <header>
   <!-- 사이드바 -->
   <div id="sidebar-wrapper">
@@ -20,8 +24,9 @@
       <li><a href="ceoQnaList">나의 문의</a></li>
       <li><a href="ceoWriteQForm">관리자에게 문의하기</a></li>
       <li><a href="not?type=2">공지사항</a></li>
-	  <li class="admin_login">
+	  <li class="ceo_login">
 	  	<img id="alogin" alt="프로필이미지" src="/img/alogin.png">
+	  	<a href="/ceoUpdForm" >내 정보 수정</a> 
 	  	<a href="/ceoLogout" >사업자 로그아웃</a> 
 	  </li>
     </ul>
