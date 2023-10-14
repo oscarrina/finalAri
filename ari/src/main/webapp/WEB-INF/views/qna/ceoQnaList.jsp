@@ -55,12 +55,7 @@
   </tbody>
 </table>
 <div align="center" >
-	<c:if test="${empty lists}">
-	
-	</c:if>
-	<c:if test="${!empty lists}">
-		${pageStr }
-	</c:if>
+	<c:if test="${empty lists }">${pageStr }</c:if>
 </div>
 </div>
     </div>
