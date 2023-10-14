@@ -369,4 +369,113 @@ public class MemberController {
     	return mav;
     	
     }
+	@PostMapping("userUpdForm")
+	public ModelAndView userUpdate(HttpSession session,
+			@RequestParam(value = "userpwd",defaultValue = "nopwd")String userpwd) {
+		ModelAndView mav=new ModelAndView();
+		String userid=(String) session.getAttribute("sid");
+		MemberDTO dto=null;
+		try {
+			dto=service.getUserInfo(userid);
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		if(dto==null ) {
+			mav.addObject("msg", "로그인 페이지로 이동합니다");
+			mav.addObject("url", "/memberLogin");
+			mav.setViewName("msg");
+			
+		}else {
+			String shapwd = PasswordModule.testSHA256(userpwd);
+			if(shapwd.equals(dto.getUserpwd())) {
+				mav.addObject("dto", dto);
+				mav.setViewName("mypage/myInfoUpd");
+			}else {
+				mav.addObject("msg", "비밀번호가 일치하지 않습니다");
+				mav.addObject("url", "myInfo");
+				mav.setViewName("msg");
+			}
+		}
+		
+		return mav;
+	}
+	@PostMapping("userUpd")
+	public ModelAndView userUpdateSubmit(MemberDTO dto,HttpSession session) {
+		ModelAndView mav=new ModelAndView();
+		int result=0;
+		try {
+			result=service.userUpdate(dto);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		String msg = result > 0 ? "회원정보 수정 완료":"회원정보 수정 실패";
+	    mav.addObject("msg", msg);
+	    mav.addObject("url", "/myInfo");
+	    mav.setViewName("msg");
+	    
+	    session.setAttribute("sname", dto.getUsername());
+		
+		return mav;
+	}
+	@GetMapping("ceoUpdForm")
+	public String ceoUpdateGetForm() {
+		return "ceo/ceoMyInfo";
+	}
+	@PostMapping("ceoUpdForm")
+	public ModelAndView ceoUpdatePostForm(HttpSession session,
+			@RequestParam(value = "userpwd",defaultValue = "nopwd")String userpwd) {
+		ModelAndView mav=new ModelAndView();
+		String userid=(String) session.getAttribute("sid");
+		MemberDTO dto=null;
+		try {
+			dto=service.getUserInfo(userid);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		if(dto==null ) {
+			mav.addObject("msg", "로그인 페이지로 이동합니다.");
+			mav.addObject("url", "/memberLogin");
+			mav.setViewName("msg");
+			
+		}else {
+			String shapwd = PasswordModule.testSHA256(userpwd);
+			if(shapwd.equals(dto.getUserpwd())) {
+				mav.addObject("dto", dto);
+				mav.setViewName("ceo/ceoMyInfoUpd");
+			}else {
+				mav.addObject("msg", "비밀번호가 일치하지 않습니다");
+				mav.addObject("url", "ceoUpdForm");
+				mav.setViewName("msg");
+			}
+		}
+		return mav;
+	}
+	@PostMapping("ceoUpd")
+	public ModelAndView ceoUpdateSubmit(MemberDTO dto,HttpSession session) {
+		ModelAndView mav=new ModelAndView();
+		int result=0;
+		try {
+			result=service.ceoUpdate(dto);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		String msg = result > 0 ? "회원정보 수정 완료":"회원정보 수정 실패";
+	    mav.addObject("msg", msg);
+	    mav.addObject("url", "/ceoUpdForm");
+	    mav.setViewName("msg");
+	    
+	    session.setAttribute("sname", dto.getUsername());
+	    session.setAttribute("suserArea", dto.getUserarea());
+		
+		return mav;
+	}
+	
 }

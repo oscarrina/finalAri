@@ -20,5 +20,7 @@ public interface MemberService {
 	public int idCheck(String userid)throws Exception;
 	public int memberJoin(MemberDTO dto)throws Exception;
 	public int bnCheck(String userbn);
+	public int userUpdate(MemberDTO dto)throws Exception;
+	public int ceoUpdate(MemberDTO dto)throws Exception;
 
 }
