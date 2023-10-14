@@ -53,25 +53,5 @@ public class LikeController {
 		return mav;
 	}
 
-	@GetMapping("/likeOK")
-	public ModelAndView likeOK(@RequestParam("idx") int idx, @RequestParam("likeType") int likeType,
-			@RequestParam("likeImg") String img, @RequestParam("likeYN") String likeYN, HttpServletRequest request) {
-		HttpSession session = request.getSession();
-		ModelAndView mav = new ModelAndView();
-		String userid = (String) session.getAttribute("sid");
-		LikeDTO dto = new LikeDTO();
-		dto.setIdx(idx);
-		dto.setLikeType(likeType);
-		dto.setUserId(userid);
-		dto.setLikeYN(likeYN);
-		dto.setImg(img);
-		int result = service.like(dto);
-		if (result == 1 && likeYN.equals("Y")) {
-			mav.addObject("msg", "좋아요");
-		} else if(result == 1 && likeYN.equals("N")){
-			mav.addObject("msg", "좋아요가 취소되었습니다.");
-		}
-		mav.setViewName("member/idCheck_ok");
-		return mav;
-	}
+	
 }

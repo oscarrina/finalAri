@@ -33,8 +33,9 @@
   <c:set var="j" value="3"></c:set>
       <c:forEach var="dto" items="${list }">
       <c:if test="${i%j == 0 }"><tr></c:if>
-<td class="reserLikeClass"><a href="myLikeLink"><img alt="숙박업체이미지" src="/img/${dto.img }" class="mypageLikeImg"></a></td>
-<td><input type="hidden" id="type" value="${dto.likeType }"></td>
+<td class="reserLikeClass"><a href="myLikeLink?idx=${dto.idx }&likeType=${dto.likeType}">
+<c:if test="${dto.likeType == 1 }"><img alt="숙박업체이미지" src="${dto.img }" class="mypageLikeImg"></c:if>
+<c:if test="${dto.likeType == 2 }"><img alt="숙박업체이미지" src="/img/${dto.img }" class="mypageLikeImg"></c:if></a></td>
 	  <c:if test="${i%j == j-1 }"></tr></c:if>
 	  <c:set var="i" value="${i+1 }" />
   </c:forEach>

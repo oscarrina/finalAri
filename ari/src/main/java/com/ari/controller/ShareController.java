@@ -3,15 +3,19 @@ package com.ari.controller;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ari.like.model.LikeDTO;
+import com.ari.like.service.LikeService;
 import com.ari.plan.model.PlanTableDTO;
 import com.ari.share.model.ShareDTO;
 import com.ari.share.service.ShareService;
@@ -21,6 +25,8 @@ public class ShareController {
 
 	@Autowired
 	private ShareService service;
+	@Autowired
+	private LikeService likeService;
 	
 	@RequestMapping("/shareList")
 	public ModelAndView shareList() {
@@ -39,8 +45,8 @@ public class ShareController {
 	}
 	
 	@RequestMapping("/shareDetail")
-	public ModelAndView shareDetail(@RequestParam("idx")int idx,@RequestParam("planIdx")int planIdx) {
-		
+	public ModelAndView shareDetail(@RequestParam("idx")int idx,
+			LikeDTO dto, HttpServletRequest request) {
 		try {
 			service.readNum(idx);
 		} catch (Exception e1) {
@@ -48,10 +54,12 @@ public class ShareController {
 			e1.printStackTrace();
 		}
 		
-		List<ShareDTO> share=null;
-		List<PlanTableDTO> plan=null;
+		ShareDTO share=new ShareDTO();
+		PlanTableDTO plan=new PlanTableDTO();
+		
 		try {
 			share=service.shareDetail(idx);
+			int planIdx = share.getPlanidx();
 			plan=service.plan(planIdx);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -77,12 +85,48 @@ public class ShareController {
 	      areamap.put(39, "제주도");
 		
 		ModelAndView mav=new ModelAndView();
+		HttpSession session = request.getSession();
+		String userId = (String) session.getAttribute("sid");
+		dto.setUserId(userId);
+		dto.setIdx(idx);
+		dto.setLikeType(2);
+		String likeYN = likeService.likeSelect(dto);
+		if (likeYN == null || likeYN.equals("N")) {
+			mav.addObject("likeYN", "N");
+			mav.addObject("userId", userId);
+			mav.addObject("likeType", 2);
+		} else if (likeYN.equals("Y")) {
+			mav.addObject("likeYN", "Y");
+			mav.addObject("userId", userId);
+			mav.addObject("likeType", 2);
+		}
 		mav.addObject("share",share);
 		mav.addObject("plan",plan);
 		mav.addObject("area",areamap);
 		mav.setViewName("share/shareDetail");
 		return mav;
-		
+	}
+	@GetMapping("/likeOK")
+	public ModelAndView likeOK(@RequestParam("idx") int idx, @RequestParam("likeType") int likeType,
+			@RequestParam("likeImg") String img, @RequestParam("likeYN") String likeYN, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		ModelAndView mav = new ModelAndView();
+		String userid = (String) session.getAttribute("sid");
+		LikeDTO dto = new LikeDTO();
+		dto.setIdx(idx);
+		dto.setLikeType(likeType);
+		dto.setUserId(userid);
+		dto.setLikeYN(likeYN);
+		dto.setImg(img);
+		int result = likeService.like(dto);
+		service.shareLike(dto);
+		if (result == 1 && likeYN.equals("Y")) {
+			mav.addObject("msg", "좋아요");
+		} else if(result == 1 && likeYN.equals("N")){
+			mav.addObject("msg", "좋아요가 취소되었습니다.");
+		}
+		mav.setViewName("member/idCheck_ok");
+		return mav;
 	}
 	
 	@RequestMapping("/planToShare")

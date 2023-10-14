@@ -1,6 +1,9 @@
 package com.ari.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -156,7 +159,7 @@ public class DetailController {
 	@RequestMapping("berthInfoDetail")
 	public ModelAndView berthInfodetail(@RequestParam("berthInfoIdx") int idx,
 			@RequestParam("startDate") String startDate,@RequestParam("endDate") String endDate,
-			BerthDTO dto) {
+			BerthDTO dto) throws ParseException {
 		List<BerthInfoDTO> berthInfo =null;
 		List<BerthDTO> berth=null;
 		List<ReviewDTO> review=null;
@@ -177,6 +180,8 @@ public class DetailController {
 		mav.addObject("berthInfo",berthInfo);
 		mav.addObject("berth",berth);
 		mav.addObject("dto", dto);
+		mav.addObject("startDate", startDate);
+		mav.addObject("endDate", endDate);
 		mav.addObject("review", review);
 		mav.setViewName("detail/berthInfoDetail");
 		return mav;

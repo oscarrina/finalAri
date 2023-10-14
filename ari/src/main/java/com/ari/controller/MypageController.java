@@ -139,12 +139,12 @@ public class MypageController {
 	}
 	
 	@GetMapping("/myLikeLink")
-	public String myLikeLink(@RequestParam("idx")int idx,@RequestParam("type")int type) {
+	public String myLikeLink(@RequestParam("idx")int idx,@RequestParam("likeType")int type) {
 		String url = "";
 		if(type == 1) {
-			url = "redirect://berthInfoDetail?berthInfoIdx="+idx;
+			url = "redirect:cosContent?idx="+idx;
 		}else {
-			url = "redirect://cos?cosIdx="+idx;
+			url = "redirect:shareDetail?idx="+idx;
 		}
 		return url;
 		

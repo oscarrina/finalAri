@@ -88,23 +88,31 @@ function getFormatDate(date){
 }
 
 window.onload = function(){
-   let date = new Date();
-   let tomorrow = new Date();
-   tomorrow.setDate(tomorrow.getDate() + 1)
-   document.getElementById("start").value = getFormatDate(date);
-   document.getElementById("end").value = getFormatDate(tomorrow);
-   document.getElementById("start").setAttribute("min",getFormatDate(date));
-   document.getElementById("end").setAttribute("min",getFormatDate(date));
+	let startDate = getFormatDate(new Date('${startDate}'));
+	let endDate = getFormatDate(new Date('${endDate}'));
+   document.getElementById("start").value = startDate;
+   document.getElementById("end").value = endDate;
+   document.getElementById("start").setAttribute("min",getFormatDate(new Date()));
+   document.getElementById("end").setAttribute("min",endDate);
 }
 
 function endDateCal(start){
    var startValue = start.value;
-   var date = new Date(startValue);
+   let startDate = getFormatEndDate(new Date(startValue));
    var endValue = document.getElementById("end").value;
-   if (dateCal(endValue) < dateCal(startValue)){
-      document.getElementById("end").value = startValue;
+   if (dateCal(endValue) <= dateCal(startValue)){
+      document.getElementById("end").value = startDate
    }
    document.getElementById("end").setAttribute("min",startValue);
+}
+//입실 날짜가 퇴실 날짜보다 클 경우 입실 날짜 기준 퇴실 날짜 +1
+function getFormatEndDate(date){
+    let year = date.getFullYear();          
+    let month = (1 + date.getMonth());        
+    month = month >= 10 ? month : '0' + month; 
+    let day = date.getDate()+1;                  
+    day = day >= 10 ? day : '0' + day;         
+    return  year + '-' + month + '-' + day;     
 }
 
 function dateCal(date){
@@ -132,12 +140,9 @@ function dateShow(idx){
 	location.href = 'berthInfoDetail?berthInfoIdx='+idx+'&startDate='+startDate
 	+'&endDate='+endDate;
 }
-function reser(idx,berthIdx){
-	let startDate = document.getElementById("start").value;
-	let endDate = document.getElementById("end").value;
-	window.alert(berthIdx);
-	location.href = 'reserForm?idx='+idx+'&berthIdx='+berthIdx+'&startDate='+startDate
-	+'&endDate='+endDate;
+function reser(berthIdx,idx){
+	location.href = 'reserForm?berthIdx='+berthIdx+'&idx='+idx+'&startDate=${startDate}'
+	+'&endDate=${endDate}';
 }
 </script>
 </head>
@@ -210,6 +215,7 @@ function reser(idx,berthIdx){
 <input type = "date" id = "start" oninput= "endDateCal(this)" name = "startDate">
 <input type = "date" id = "end" name = "endDate">
 <button type="button" onclick="dateShow(${berthInfo[0].idx })">선택</button>
+<span></span>
 <c:forEach items="${berth }" var="berth">
 <table class="berthTable">
 	<tr>
@@ -221,7 +227,7 @@ function reser(idx,berthIdx){
 	<tr><td><i class="bi bi-person-fill"></i>최대 ${berth.berthMax }명</td></tr>
 	<tr><td><i class="bi bi-tv"></i> <c:if test="${berth.berthTv==1}">O</c:if><c:if test="${berth.berthTv==0}">X</c:if></td>
 	<td><c:if test="${berth.reserState==1}"><span class="reserSpan">판매완료</span></c:if>
-	<c:if test="${berth.reserState==0}"><button type="button" onclick="reser(${berthInfo[0].idx },${berth.berthIdx })" class="reserBtn">예약하기</button></c:if>
+	<c:if test="${berth.reserState==0}"><button type="button" onclick="reser(${berth.berthIdx },${berthInfo[0].idx })" class="reserBtn">예약하기</button></c:if>
 	</td></tr>
 	<tr><td><i class="bi bi-wifi"></i> <c:if test="${berth.berthInternet==1}">O</c:if><c:if test="${berth.berthInternet==0}">X</c:if></td></tr>
 	<tr><td><c:if test="${berth.berthDry==1}">헤어드라이기 비치</c:if><c:if test="${berth.berthDry==0}"></c:if></td></tr>

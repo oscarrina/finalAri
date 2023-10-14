@@ -13,8 +13,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
+<title>아리아리 로그인</title>
 <style>
 .login-wrap{
   width:100%;
@@ -65,17 +64,6 @@
 }
 .kakaoImg{
 	width: 340px;
-}
-.naverBtn{
-	border: none;
-	background: none;
-	width: 340px;
-	height: 50px;
-	cursor: pointer;
-}
-.naverImg{
-	width: 340px;
-	height: 50px;
 }
 .b{
   margin-right: 150px;
