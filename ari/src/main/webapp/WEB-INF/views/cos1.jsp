@@ -65,7 +65,14 @@ function likeCancel(){
 <%@include file="/WEB-INF/views/header.jsp" %>
 <h1 class="test">코스 좋아요 테스트 페이지</h1>
 <img alt="" src="/img/hotel.jpg" id="likeImg">
-
+<button type="button" onclick="like(liketest)" class="likeBtn" id="likeBtn123">
+		<c:if test="${likeYN == 'N' }">
+		<i class="bi bi-heart like" id="likeBtn"></i>
+		</c:if>
+		<c:if test="${likeYN == 'Y' }">
+		<i class="bi bi-heart-fill like" id="likeBtn"></i>
+		</c:if>
+		</button>
 <input type="hidden" value="${idx }" id="idx">
 <input type="hidden" value="${likeType }" id="likeType">
 <%@include file="/WEB-INF/views/footer.jsp" %>

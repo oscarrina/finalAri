@@ -11,4 +11,6 @@ public interface ReserMapper {
 	public int reserTotalCnt(String userId);
 	public int reserCancel(int reserIdx);
 	public ReserDTO reserForm(Map map);
+	public int reserInsert(ReserDTO dto);
+	public int reserVisitInsert(List<ReserDTO> list);
 }

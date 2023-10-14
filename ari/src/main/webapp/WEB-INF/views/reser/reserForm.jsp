@@ -6,6 +6,8 @@
 <meta charset="UTF-8">
 <title>아리아리 예약</title>
 <script src="https://js.tosspayments.com/v1/payment-widget"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/uuid@8.3.2/dist/umd/uuidv4.min.js"></script>
 <style>
  .bd-placeholder-img {
    font-size: 1.125rem;
@@ -77,6 +79,15 @@
  	font-size: 20px;
  }
 </style>
+<script>
+function numberCheck(){
+	var number = document.getElementById('reserTel');
+	const inputValue = number.value;
+	
+	const sanitizedValue = inputValue.replace(/[^0-9]/g, '');
+	number.value = sanitizedValue;
+}
+</script>
 </head>
 <body>
 <%@include file="/WEB-INF/views/header.jsp" %>
@@ -133,7 +144,7 @@
           <div class="row g-3">
             <div class="col-sm-6">
               <label for="firstName" class="form-label">예약자 이름</label>
-              <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
+              <input type="text" class="form-control" id="reserName" placeholder="예약자 성함">
               <div class="invalid-feedback">
                 이름을 입력해주세요.
               </div>
@@ -141,11 +152,14 @@
             <div class="col-12">
               <label for="username" class="form-label">전화번호</label>
               <div class="input-group has-validation">
-                <input type="text" class="form-control" id="username" placeholder="숫자만 입력하세요" required maxlength="11">
+                <input type="text" class="form-control" id="reserTel" oninput="numberCheck()" placeholder="예약자 전화번호를 입력해주세요" maxlength="11">
               <div class="invalid-feedback">
                   전화번호를 입력해주세요.
                 </div>
               </div>
+            </div>
+            <div>
+            <img alt="숙박이미지" src="/img/${dto.berthInfoImg }">
             </div>
           </div>
       </div>
@@ -161,15 +175,26 @@ const button = document.getElementById("payment-button");
 
 const paymentWidget = PaymentWidget(clientKey, customerKey); // 회원 결제
 
-	paymentWidget.renderPaymentMethods("#payment-method", { value: 50000});
+	paymentWidget.renderPaymentMethods("#payment-method", { value: ${dto.reserPrice}});
 
 button.addEventListener("click", function () {
-	//let uuid = self.crypto.randomUUID();
+	const uuid = uuidv4();
+	const reserName = document.getElementById('reserName').value;
+	const reserTel = document.getElementById('reserTel').value;
+	if(reserName == ""){
+		swal('아리아리','예약자 성함을 입력해주세요.');
+		return false;
+	}else if(reserTel == "" || reserTel.length < 11){
+		swal('아리아리','예약자 전화번호 11글자를 입력해주세요.')
+		return false;
+	}
   paymentWidget.requestPayment({
-    orderId: "1232131",            // 주문 ID(직접 만들어주세요)
+    orderId: uuid,            // 주문 ID(직접 만들어주세요)
     orderName: "${dto.berthInfoName}",                 // 주문명
-    successUrl: "http://192.168.0.31:9000/pay/success",  // 결제에 성공하면 이동하는 페이지(직접 만들어주세요)
-    failUrl: "http://192.168.0.31:9000/pay/fail",       // 결제에 실패하면 이동하는 페이지(직접 만들어주세요)
+    successUrl: "http://192.168.219.102:9000/pay/success?berthIdx="+${dto.berthIdx}+
+    		"&reserVisitStart="+"${dto.reserVisitStart}"+"&reserVisitEnd="+"${dto.reserVisitEnd}"+
+    		"&reserTel="+reserTel+"&reserName="+reserName,  // 결제에 성공하면 이동하는 페이지(직접 만들어주세요)
+    failUrl: "http://192.168.219.102:9000/pay/fail",       // 결제에 실패하면 이동하는 페이지(직접 만들어주세요)    
   });
 });
 </script>

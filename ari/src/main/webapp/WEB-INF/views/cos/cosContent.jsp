@@ -6,12 +6,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src = "js/httpRequest.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
-    var idx = ${param.idx};
+    const idx = ${param.idx};
+    var shareLike='${likeYN}';
+    const userId = '${userId}';
 
     var key = "9IwUjd%2FogvdB0LCIq4Khs%2FcCfCV%2BIg9rqUf8U5PcrM4lW0lXdpv%2BpQHMKcg7y7klSZJ7SpQcrgs3lAW%2BQA3waQ%3D%3D";
     var apiUrl = "http://apis.data.go.kr/B551011/KorService1/detailInfo1";
@@ -60,11 +61,13 @@
             console.error('API 호출 중 오류 발생:', error);
         }
     });
-    var liketest='${likeYN}';
-
+    
     function like(likeYN){
-    	let likeType = document.getElementById("likeType").value;
-    	let img = document.getElementById("likeImg").src;
+    		if(userId == null || userId == ""){
+    		swal('아리아리','로그인 후 이용해주세요.');
+    		return false;
+    	}
+    	
     	let likeBtn = document.getElementById("likeBtn");
     	if(likeYN == 'N'){ //좋아요 안 누른 상태
     		//클릭 시 좋아요 버튼 상태 바뀜
@@ -75,7 +78,7 @@
     		likeBtn.setAttribute('class','bi bi-heart like');
     		likeYN = 'N';
     	}
-    	let param = 'idx='+idx+'&likeType='+likeType+'&likeImg='+img+'&likeYN='+likeYN;
+    	let param = 'idx='+idx+'&likeType='+${likeType}+'&likeImg=${dto.cosImg }'+'&likeYN='+likeYN;
     	sendRequest('likeOK',param,likeYN == "Y" ? likeOK:likeCancel,'GET');
     }
     function likeOK(){
@@ -83,7 +86,7 @@
     		if(XHR.status == 200){
     			let data = XHR.responseText;
     			swal('아리아리',data);
-    			liketest='Y';
+    			shareLike='Y';
     		}
     	}
     }
@@ -92,7 +95,7 @@
     		if(XHR.status == 200){
     			let data = XHR.responseText;
     			swal('아리아리',data);
-    			liketest='N';
+    			shareLike='N';
     		}
     	}
     }
@@ -125,6 +128,13 @@
 	font-size: 20px;
 	font-weight: bold;
 }
+.like{
+	font-size: 25px;
+}
+.likeBtn{
+	border: none;
+	background: none;
+}
 </style>
 
 </head>
@@ -133,7 +143,7 @@
 <div class="a">
 	<div class="c">
 		<p class="p">${dto.cosTitle }</p>
-		<button type="button" onclick="like(liketest)" class="likeBtn" id="likeBtn123">
+		<button type="button" onclick="like(shareLike)" class="likeBtn" id="likeBtn123">
 		<c:if test="${likeYN == 'N' }">
 		<i class="bi bi-heart like" id="likeBtn"></i>
 		</c:if>
@@ -144,7 +154,6 @@
 		<hr>
 	</div>
 	<div id="apiData"></div>
-	<input type="hidden" value="${likeType }" id="likeType">
 </div>
 <%@include file="/WEB-INF/views/footer.jsp" %>
 </body>

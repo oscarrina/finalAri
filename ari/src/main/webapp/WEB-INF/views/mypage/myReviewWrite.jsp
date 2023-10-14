@@ -53,7 +53,6 @@ style="background-color:#666CDE; width:400px; height:40px; font-size:15px;" oncl
 <ul class="planInfo">
 	<li class="planSi">${dto.berthInfoName }</li>
 	<li class="planSubject">${dto.berthName }</li>
-	<li class="planSubject">${dto.reserPer }명</li>
 	<li class="planDay">${dto.reserVisitStart } ~ ${dto.reserVisitEnd }</li>
 </ul>
 </td>

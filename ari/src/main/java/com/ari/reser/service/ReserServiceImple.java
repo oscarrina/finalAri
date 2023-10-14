@@ -45,4 +45,14 @@ public class ReserServiceImple implements ReserService {
 		ReserDTO dto = mapper.reserForm(map);
 		return dto;
 	}
+	@Override
+	public int reserInsert(ReserDTO dto) {
+		int result = mapper.reserInsert(dto);
+		return result;
+	}
+	@Override
+	public int reserVisitInsert(List<ReserDTO> list) {
+		int result = mapper.reserVisitInsert(list);
+		return result;
+	}
 }

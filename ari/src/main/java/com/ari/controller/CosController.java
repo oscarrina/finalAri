@@ -2,6 +2,9 @@ package com.ari.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,12 +13,16 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ari.cos.model.CosDTO;
 import com.ari.cos.service.CosService;
+import com.ari.like.model.LikeDTO;
+import com.ari.like.service.LikeService;
 
 @Controller
 public class CosController {
 
 	@Autowired
 	private CosService service;
+	@Autowired
+	private LikeService likeService;
 	
 	@RequestMapping("/cosList")
 	public ModelAndView cosList(@RequestParam(value = "cosArea", defaultValue = "0")int cosArea,
@@ -43,7 +50,6 @@ public class CosController {
 		String pageStr=com.ari.page.PageModuleNotice
 				.makeNoticePage(url, totalCnt, listSize, pageSize, cp);
 		//if(totalCnt==0) {pageStr="";}
-		System.out.println(totalCnt);
 		mav.addObject("pageStr", pageStr);
 		mav.addObject("lists", lists);
 		mav.addObject("cosArea", cosArea);
@@ -52,7 +58,8 @@ public class CosController {
 	}
 	
 	@RequestMapping("/cosContent")
-	public ModelAndView cosContent(@RequestParam("idx")int idx) {
+	public ModelAndView cosContent(@RequestParam("idx")int idx,
+			LikeDTO likeDto, HttpServletRequest request) {
 		ModelAndView mav=new ModelAndView();
 		CosDTO dto=null;
 		try {
@@ -60,6 +67,21 @@ public class CosController {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+		HttpSession session = request.getSession();
+		String userId = (String) session.getAttribute("sid");
+		likeDto.setUserId(userId);
+		likeDto.setIdx(idx);
+		likeDto.setLikeType(2);
+		String likeYN = likeService.likeSelect(likeDto);
+		if (likeYN == null || likeYN.equals("N")) {
+			mav.addObject("likeYN", "N");
+			mav.addObject("userId", userId);
+			mav.addObject("likeType", 1);
+		} else if (likeYN.equals("Y")) {
+			mav.addObject("likeYN", "Y");
+			mav.addObject("userId", userId);
+			mav.addObject("likeType", 1);
 		}
 		mav.addObject("dto",dto);
 		mav.setViewName("cos/cosContent");

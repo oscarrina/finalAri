@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ari.like.model.LikeDTO;
 import com.ari.mapper.ShareMapper;
 import com.ari.plan.model.PlanTableDTO;
 import com.ari.share.model.ShareDTO;
@@ -38,15 +39,15 @@ public class ShareServiceImple implements ShareService {
 	}
 	
 	@Override
-	public List<ShareDTO> shareDetail(int idx) throws Exception {
-		List<ShareDTO> list=mapper.shareDetail(idx);
-		return list;
+	public ShareDTO shareDetail(int idx) throws Exception {
+		ShareDTO dto=mapper.shareDetail(idx);
+		return dto;
 	}
 	
     @Override
-	public List<PlanTableDTO> plan(int planIdx) throws Exception {
-		List<PlanTableDTO> list=mapper.plan(planIdx);
-		return list;
+	public PlanTableDTO plan(int planIdx) throws Exception {
+		PlanTableDTO dto=mapper.plan(planIdx);
+		return dto;
 	}
     
     @Override
@@ -65,5 +66,10 @@ public class ShareServiceImple implements ShareService {
     public List<ShareDTO> myShare(String userId) throws Exception {
     	List<ShareDTO> list=mapper.myShare(userId);
     	return list;
+    }
+    @Override
+    public int shareLike(LikeDTO dto) {
+    	int result = mapper.shareLike(dto);
+    	return result;
     }
 }

@@ -47,7 +47,7 @@ a {
 <strong style="font-size:14px; color:#253BFF; margin-left:330px; margin-top:10px;" >나만의 일정을 공유하세요!</strong><input type="button" value="공유" onclick="location.href='planToShare'" class="shareBtn" >
 <br><br>
 <c:forEach items="${lists }" var="share" >
-<a href="shareDetail?idx=${share.idx}&planIdx=${share.planidx}">
+<a href="shareDetail?idx=${share.idx}">
 <div class="shares">
 		<table>
 			<tr >

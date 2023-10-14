@@ -28,4 +28,15 @@
 	<select id="myShare" parameterType="String" resultType="com.ari.share.model.ShareDTO">
 		select * from sharetable where userId=#{userId}
 	</select>
+	<update id="shareLike" parameterType="com.ari.like.model.LikeDTO">
+		update <if test="likeType == 1">cos
+		set coslike = <if test='likeYN != null and likeYN.equals("Y")'>coslike+1</if>
+		<if test='likeYN != null and likeYN.equals("N")'>coslike-1</if>
+		</if>
+		<if test="likeType == 2">sharetable
+		set sharelike = <if test='likeYN != null and likeYN.equals("Y")'>sharelike+1</if>
+		<if test='likeYN != null and likeYN.equals("N")'>sharelike-1</if>
+		</if>
+		where idx = #{idx}
+	</update>
 </mapper>

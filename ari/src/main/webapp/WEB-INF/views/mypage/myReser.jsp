@@ -77,7 +77,6 @@ function showResult(){
 <ul class="planInfo">
 	<li class="planSi">${dto.berthInfoName }</li>
 	<li class="planSubject">${dto.berthName }</li>
-	<li class="planSubject">${dto.reserPer }명</li>
 	<li class="planDay">${dto.reserVisitStart } ~ ${dto.reserVisitEnd }</li>
 </ul>
 </td>

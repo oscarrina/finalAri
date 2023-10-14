@@ -7,9 +7,9 @@
   	select * from
 		(select rownum as rnum,a.* from
 		(select r.reseridx,r.berthidx,r.userid,r.resername,
-		r.reservisitstart,r.reservisitend,r.reserpriceinfo,
+		r.reservisitstart,r.reservisitend,
 		r.reserprice,r.reserpriceday,r.resertel,r.reserstate,
-		r.reserreview,r.reserper,b.infoimg,b.infoname,c.berthname
+		r.reserreview,b.infoimg,b.infoname,c.berthname
 		from reser r,berthinfo b,berth c
 		where r.berthidx = b.idx and r.berthidx = c.berthidx and r.userid = #{userId}
 		order by reservisitstart) a) b
@@ -19,11 +19,12 @@
   	select * from
 		(select rownum as rnum,a.* from
 		(select r.reseridx,r.berthidx,r.userid,r.resername,
-		r.reservisitstart,r.reservisitend,r.reserpriceinfo,
+		r.reservisitstart,r.reservisitend,
 		r.reserprice,r.reserpriceday,r.resertel,r.reserstate,
-		r.reserreview,r.reserper,b.infoimg,b.infoname,c.berthname
+		r.reserreview,b.infoimg,b.infoname,c.berthname
 		from reser r,berthinfo b,berth c
-		where r.berthidx = b.idx and r.berthidx = c.berthidx and r.userid = #{userId} and r.reserReview = 'N'
+		where r.berthidx = b.idx and r.berthidx = c.berthidx and r.userid = #{userId} 
+		and r.reserReview = 'N' and reservisitend <![CDATA[<]]> sysdate
 		order by reservisitstart) a) b
 	where rnum<![CDATA[>=]]>#{start} and rnum<![CDATA[<=]]>#{end}
   </select>
