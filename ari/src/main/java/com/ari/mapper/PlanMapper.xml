@@ -32,8 +32,24 @@
 	)
 	</insert>
 		<select id="planList" resultType="com.ari.plan.model.PlanTableDTO">
-		select *
-		from planTable
-		where planIdx=planTable_planIdx.currval
+		select * from(
+    	select *  from planTable order by rownum desc
+    	)
+		where rownum = 1
 	</select>
+	<insert id = "plannerInsert" parameterType="com.ari.plan.model.PlannerTableDTO">
+	insert into plannerTable
+	values(
+		plannerTable_plannerIdx.nextval,
+		#{userID},
+		#{plannerName},
+		#{plannerType},
+		#{plannerDay},
+		#{plannerStep},
+		#{Idx},
+		#{plannerGroup},
+		#{plannerImg},
+		0
+	)
+	</insert>
 </mapper>

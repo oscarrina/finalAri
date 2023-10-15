@@ -1,6 +1,7 @@
 package com.ari.controller;
 
 import java.sql.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,6 +20,7 @@ import com.ari.detail.model.AttDTO;
 import com.ari.detail.model.BerthInfoDTO;
 import com.ari.detail.model.FoodDTO;
 import com.ari.plan.model.PlanTableDTO;
+import com.ari.plan.model.PlannerTableDTO;
 import com.ari.plan.service.PlanService;
 
 @Controller
@@ -104,16 +106,19 @@ public class PlanController {
 	@PostMapping("createPlan")
 	public ModelAndView createPlan(@RequestParam(value = "infoNameInput")List<String> infoNameInputs,
 			@RequestParam(value = "infoImg")List<String> infoImgs,
-			@RequestParam(value = "type")List<Integer> types,
+			@RequestParam(value = "type")List<String> types,
 			@RequestParam(value = "planDayInput")List<String> planDayInputs,
+			@RequestParam(value = "idx")List<String> idxs,
 			@RequestParam(value = "area")int area,
 			@RequestParam(value = "dateRange")int dateRange,
 			@RequestParam(value = "start")String start,
 			@RequestParam(value = "end")String end,
 			HttpSession session,
-			PlanTableDTO dto
+			PlanTableDTO dto,
+			PlannerTableDTO pdto
 			) {
 		ModelAndView mav = new ModelAndView();
+		int j=0;
 		String userID = (String)session.getAttribute("sid");
 		dto.setUserID(userID);
 		dto.setPlanPoint(area);
@@ -121,11 +126,35 @@ public class PlanController {
 		dto.setPlanEnd(end);
 		dto.setPlanBigImg(area+".jpg");
 		
-		int result = service.planInsert(dto);
-		System.out.println(result);
-		mav.setViewName("plan/placeSelectList");
+		service.planInsert(dto);
+		int lastPlnaDay = Integer.parseInt(planDayInputs.get(planDayInputs.size()-1));
+		System.out.println(lastPlnaDay);
+		
+		Iterator<String> iterator = planDayInputs.iterator();
+		for (int i = 0; i < lastPlnaDay+1; i++) {
+		    int x = 0;
+		    while (iterator.hasNext()) {
+		        String element = iterator.next();
+		        if (element.equals(Integer.toString(i))) {
+		            dto = service.planList(dto);
+		            pdto.setPlannerDay(i);
+		            pdto.setPlannerGroup(dto.getPlanGroup());
+		            pdto.setUserID(userID);
+		            pdto.setPlannerImg(infoImgs.get(j));
+		            pdto.setIdx(Integer.parseInt(idxs.get(j)));
+		            pdto.setPlannerName(infoNameInputs.get(j));
+		            pdto.setPlannerType(Integer.parseInt(types.get(j)));
+		            pdto.setPlannerStep(x);
+		            service.plannerInsert(pdto);
+		            j++;
+		            x++;
+		        }
+		    }
+		    iterator = planDayInputs.iterator();
+		}
+		mav.addObject("msg", "일정을 만들었습니다!");
+		mav.addObject("url", "/myPage");
+		mav.setViewName("/msg");
 		return mav;
-		
-		
 	}
 }

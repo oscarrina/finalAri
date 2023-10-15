@@ -229,6 +229,7 @@ function replace(select){
 function insertPlanner(div){
 	var imgContent = div.firstChild.src;
 	var addr = div.lastChild.id;
+	var idx = div.firstChild.nextSibling.id
 	var infoNameInput = div.lastChild.innerHTML;
 	var contentList = document.getElementById(planDay);
 	var contentListHTML = document.getElementById(planDay).innerHTML;
@@ -237,6 +238,7 @@ function insertPlanner(div){
 	var str = '<div><img class="img" src='+imgContent+' alt="Image"></div>';
 	var planDayInput = '<input type= "hidden" value = "'+planDay+'" name = "planDayInput" >';
 	var infoName = '<input type= "hidden" value = "'+infoNameInput+'" name = "infoNameInput" >';
+	var idxNode = '<input type= "hidden" value = "'+idx+'" name = "idx">'
 	var arrow = '<div><img class="arrow" src="/img/planArrow.png"</div>';
 	var img = '<input type= "hidden" value = "'+imgContent+'" name = "infoImg" >';
 		if(category == 'att'){
@@ -247,9 +249,9 @@ function insertPlanner(div){
 			var type = '<input type= "hidden" value = "3" name = "type" >';
 		}
 	if(contentListHTML == ''){
-		contentList.innerHTML = contentListHTML+planDayInput+str+type+img+infoName;
+		contentList.innerHTML = contentListHTML+planDayInput+str+type+img+infoName+idxNode;
 	}else{
-		contentList.innerHTML = contentListHTML+planDayInput+arrow+str+type+img+infoName;
+		contentList.innerHTML = contentListHTML+planDayInput+arrow+str+type+img+infoName+idxNode;
 	}
 	var url = 'replaceMap?addr='+addr;
 	sendRequest(url, null, replaceMap, 'GET');
