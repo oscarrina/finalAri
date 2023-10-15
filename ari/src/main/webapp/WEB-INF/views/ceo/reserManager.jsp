@@ -42,7 +42,8 @@ function showResult(){
 		if(XHR.status == 200){
 			let data = XHR.responseText;
 			if(data == '성공'){
-				location.href = 'myReser';
+				swal('아리아리','예약이 취소되었습니다.')
+				location.href = 'reserManager';
 			}else{
 				swal('아리아리','다시 시도해주세요');
 			}
@@ -92,9 +93,9 @@ function showResult(){
   <button type="button" class="btn btn-primary reserCancelBtn" onclick="cancel(${dto.reserIdx },${dto.berthIdx },${dto.reserPrice },'${dto.reserPaymentKey }')">
   예약취소
   </button>
+  </c:if>
   <c:if test="${dto.reserState == 0 }">
   <span class="planDay">취소완료</span>
-  </c:if>
   </c:if>
   </td>
   </tr>

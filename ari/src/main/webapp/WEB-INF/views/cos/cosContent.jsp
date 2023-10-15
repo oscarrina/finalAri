@@ -144,10 +144,10 @@
 	<div class="c">
 		<p class="p">${dto.cosTitle }</p>
 		<button type="button" onclick="like(shareLike)" class="likeBtn" id="likeBtn123">
-		<c:if test="${likeYN == 'N' }">
+		<c:if test="${likeYN eq 'N' }">
 		<i class="bi bi-heart like" id="likeBtn"></i>
 		</c:if>
-		<c:if test="${likeYN == 'Y' }">
+		<c:if test="${likeYN eq 'Y' }">
 		<i class="bi bi-heart-fill like" id="likeBtn"></i>
 		</c:if>
 		</button>

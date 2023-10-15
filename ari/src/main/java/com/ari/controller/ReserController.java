@@ -193,9 +193,6 @@ public class ReserController {
 			) {
 		ModelAndView mav = new ModelAndView();
 		dto = service.ceoCancelSMS(idx);
-		String reserTel = dto.getReserTel();
-		String reserName = dto.getReserName();
-		String berthInfoName = dto.getBerthInfoName();
 		int cancelResult = service.reserCancel(idx);
 		int delResult = service.reserVisitDel(berthIdx);
 		if(cancelResult == 1 && delResult > 0) {
@@ -203,9 +200,7 @@ public class ReserController {
 		}else {
 			mav.addObject("msg", "실패");
 		}
-		if(userType.equals("user")) {
-			mav.setViewName("member/idCheck_ok");			
-		}
+		mav.setViewName("member/idCheck_ok");
 
 		String apiUrl = "https://api.tosspayments.com/v1/payments/"+reserPaymentKey+"/cancel";
         String apiToken = "dGVzdF9za19wUDJZeEo0Szg3UHlFYUFRbFd2M1JHWndYTE9iOg==";
@@ -228,12 +223,6 @@ public class ReserController {
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<String> response = restTemplate.exchange(apiUrl, HttpMethod.POST, entity, String.class);
 
-        String url = "";
-        if(userType.equals("ceo")) {
-        	mav.setViewName("/reserManager");
-        	url = "redirect:/sendnum?tel="+reserTel+"&reserName="+reserName+"&type=3"+"&berthName="+berthInfoName;
-        }
-        
         service.reserPayState(idx);
 		return mav;
 	}
