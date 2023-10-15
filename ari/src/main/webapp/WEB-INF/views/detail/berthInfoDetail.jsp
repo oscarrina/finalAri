@@ -76,6 +76,11 @@ h5{
 .reserSpan{
 	font-size: 20px;
 }
+.r1{
+	margin-top:30px;
+	border: 3px solid #253BFF;
+	border-radius: 25px;
+}
 </style>
 <script>
 function getFormatDate(date){

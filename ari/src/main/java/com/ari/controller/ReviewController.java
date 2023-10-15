@@ -11,12 +11,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ari.banner.model.BannerDTO;
+import com.ari.reser.model.ReserDTO;
 import com.ari.review.model.ReviewDTO;
 import com.ari.review.service.ReviewService;
 
@@ -39,7 +41,8 @@ public class ReviewController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	
+		System.out.println("aaa:"+reseridx);
+		mav.addObject("reseridx", reseridx);
 		mav.addObject("berthidx", berthidx);
 		System.out.println(berthidx);
 		mav.setViewName("mypage/reviewContent");
@@ -50,7 +53,8 @@ public class ReviewController {
 	public ModelAndView reviewContent(ReviewDTO dto,
 			@RequestParam(value = "review",	required = false)MultipartFile review,
 			HttpSession session,HttpServletRequest req,
-			@RequestParam("berthidx")int berthidx
+			@RequestParam("berthidx")int berthidx,
+			@RequestParam("reseridx")int reseridx
 			) {
 		ModelAndView mav=new ModelAndView();
 		copyInto(review);

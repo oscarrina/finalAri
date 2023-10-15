@@ -18,8 +18,8 @@ public class ReviewServiceImple implements ReviewService {
 		return result;
 	}
 	@Override
-	public int getBerthidx(int reseridx) throws Exception {
-		int result=mapper.getBerthidx(reseridx);
+	public int getBerthidx(int reserIdx) throws Exception {
+		int result=mapper.getBerthidx(reserIdx);
 		return result;
 	}
 	@Override
