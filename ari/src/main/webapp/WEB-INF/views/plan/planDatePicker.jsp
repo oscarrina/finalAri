@@ -9,40 +9,42 @@
 <script src ="/js/httpRequest.js"></script>
 </head>
 <style>
+html{
+	user-select: none;
+}
 .main{
 	margin-top: 150px;
 }
-.head, .body{
+.divHead, .divBody{
 	display:flex;
 }
-.head #area{
+.divHead #area{
 	width: 150px;
 	margin-left: -75px;
 	margin-right: -75px;
 	font-weight: bold; 
 }
-.head div, .body div{
+.divHead div, .divBody div{
 	margin:0px auto;
 	width:30%;
 	padding:30px;
 	text-align : center;
 	border-style: groove;
 }
-
-.body{
-	height: 500px;
+.divBody{
+	height: 150px;
 }
-input{
+#start, #end{
 	width :200px;
 	height:50px;
 	border-radius: 15px;
 	text-align:center;
 	padding-right: 10px;
 }
-input:hover{
+#start:hover, #end:hover{
  	background-color: #CCCCFF;
 }
-#submitButton{  
+.submitButton{  
 	border:none;
  	padding:15px 20px;
  	border-radius:25px;
@@ -51,7 +53,7 @@ input:hover{
 	color: #fff;
  	cursor: pointer;
 }
-.foot{
+.divFoot{
 	margin: 0px auto;
 	margin-top:10px;
 	width: 60%;
@@ -90,8 +92,6 @@ function showArea(){
 					document.getElementById("area").innerHTML = name;
 				}
 			}
-			
-			
 		}
 	}
 }
@@ -140,24 +140,24 @@ function goPlanMap(){
 	var startDate = document.getElementById("start").value;
 	var endDate = document.getElementById("end").value;
 	var result = dateminu(startDate, endDate)+1;
-	location.href = "planMap?dateRange="+result+"&area="+${area};
+	location.href = "planMap?dateRange="+result+"&area="+${area}+"&start="+startDate+"&end="+endDate;
 }
 </script>
 <body>
 <%@include file="/WEB-INF/views/header.jsp"%>
 <form name = fm action = "planMap">
 <main class = "main">
-	<div class ="head">
+	<div class ="divHead">
 		<div>출발하는 날</div>
 		<div id = "area"></div>
 		<div>돌아오는 날</div>
 	</div>
-	<div class = "body">
+	<div class = "divBody">
 		<div class = "date"><input type = "date" id = "start" oninput= "endDateCal(this)" name = "startDate"></div>
 		<div class = "date"><input type = "date" id = "end" name = "endDate"></div>
 	</div>
-	<div class = "foot">
-	<input type = "button" id = "submitButton" value = "일정 선택 완료" onclick = "goPlanMap()">
+	<div class = "divFoot">
+	<input type = "button" class = "submitButton" value = "일정 선택 완료" onclick = "goPlanMap()">
 	</div>
 </main>
 <%@include file="/WEB-INF/views/footer.jsp" %>

@@ -9,6 +9,7 @@ import com.ari.detail.model.AttDTO;
 import com.ari.detail.model.BerthInfoDTO;
 import com.ari.detail.model.FoodDTO;
 import com.ari.mapper.PlanMapper;
+import com.ari.plan.model.PlanTableDTO;
 @Service
 public class PlanServiceImple implements PlanService {
 	@Autowired
@@ -28,6 +29,11 @@ public class PlanServiceImple implements PlanService {
 	public List<BerthInfoDTO> getBerthInfoList(int area, int sigungu) throws Exception {
 		List<BerthInfoDTO> List= mapper.getBerthInfoList(area, sigungu);
 		return List;
+	}
+	@Override
+	public int planInsert(PlanTableDTO dto) {
+		int result = mapper.planInsert(dto);
+		return result;
 	}
 
 }

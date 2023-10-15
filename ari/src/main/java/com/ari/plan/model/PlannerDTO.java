@@ -12,6 +12,7 @@ import lombok.Setter;
 public class PlannerDTO {
 	private int plannerIdx;
 	private String userID;
+	private String plannerName;
 	private int plannerType;
 	private int plannerDay;
 	private int plannerStep;
@@ -19,5 +20,4 @@ public class PlannerDTO {
 	private int plannerGroup;
 	private int plannerImg;
 	private int plannerReser;
-
 }
