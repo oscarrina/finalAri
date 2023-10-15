@@ -12,10 +12,10 @@
 		0,#{qnaTitle},#{qnaContent},sysdate)
 	</insert>
 	<select id="QnaList" resultType="com.ari.qna.model.QnaDTO" parameterType="String">
-		select qnaIdx,qnaOk,qnaTitle,qnaContent,qnaDate from qna where userid=#{sid}
+		select qnaIdx,qnaOk,qnaTitle,qnaContent,qnaDate from qna where userid=#{sid}  order by qnaDate desc
 	</select>
 	<select id="QnaDetail" resultType="com.ari.qna.model.QnaDTO" parameterType="int">
-		select qnaCategory,qnaOk,qnaTitle,qnaContent,qnaDate from qna where qnaIdx=#{qnaIdx}
+		select * from qna where qnaIdx=#{qnaIdx}
 	</select>
 	<select id="totalCnt" resultType="int">
 		select count(*) from qna
@@ -23,4 +23,14 @@
 	<select id="replyList" parameterType="int" resultType="com.ari.qna.model.ReplyDTO">
 		select * from reply where qnaIdx=#{idx}
 	</select>
+	<select id="adminQnaList" resultType="com.ari.qna.model.QnaDTO">
+		select * from qna order by qnaDate desc
+	</select>
+	<insert id="adminReply" parameterType="com.ari.qna.model.ReplyDTO">
+		insert into reply values(reply_replyidx.nextval,#{adminId},#{qnaIdx},
+		#{replyTitle},#{replyContent},sysdate)
+	</insert>
+	<update id="qnaOk" parameterType="int">
+		update qna set qnaOk=1 where qnaIdx=#{qnaIdx}
+	</update>
 </mapper>

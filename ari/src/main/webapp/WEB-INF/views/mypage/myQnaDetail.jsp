@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -73,37 +72,33 @@ h4{
 <%@include file="/WEB-INF/views/mypage/mypageSide.jsp" %>
 <div class="maindiv">
 <div class="qDiv">
-     	<table width="800" align="center">
+		
+		<table width="800" align="center">
      	<tr><td><h4>문의</h4></td></tr>
-     	<c:forEach var="dto" items="${lists }" >
-     		<tr>
-     			<td colspan="2">
-     			<input type="text" name="qnaTitle" id="qnaTitle" value="${dto.qnaTitle }" readonly>
-     			</td>
-     		</tr>
-     		<tr>
-     			<td>
-     			<input type="text" id="qnaCategory" value="${cate[dto.qnaCategory] }" readonly>
-     			</td>
-     			<td>
-     			<input type="text" id="qnaDate" value="${dto.qnaDate}" readonly>
-     			</td>
-     		</tr>
-     		<tr>
-     			<td colspan="2">
-     			<textarea class="form-control" id="exampleTextarea" rows="8" 
-				readonly>${dto.qnaContent }</textarea>
-     			</td>
-     		</tr>
-     	</c:forEach>
+    <tr>
+        <td colspan="2">
+            <input type="text" name="qnaTitle" id="qnaTitle" value="${qna.qnaTitle}" readonly>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <input type="text" id="qnaCategory" value="${cate[qna.qnaCategory]}" readonly>
+        </td>
+        <td>
+            <input type="text" id="qnaDate" value="${qna.qnaDate}" readonly>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <textarea class="form-control" id="exampleTextarea" rows="8" readonly>${qna.qnaContent}</textarea>
+        </td>
+    </tr>
      	</table>
      </div>
      <hr>
      <div class="reply">
      	<table width="800" align="center">
-     	<c:forEach var="reply" items="${reply }" >
-     	<c:if test="${!empty reply }"><tr><td><h4>답변</h4></td></tr></c:if>
-     	
+     	<c:if test="${!empty reply }"><tr><td><h4>답변</h4></td></tr>
      		<tr>
      			<td colspan="2">
      			<input type="text" name="qnaTitle" id="qnaTitle" value="${reply.replyTitle }" readonly>
@@ -120,8 +115,8 @@ h4{
 				readonly>${reply.replyContent }</textarea>
      			</td>
      		</tr>
-     	</c:forEach>
      	</table><br>
+     	</c:if>
      	<input type="button" class="btn2" value="돌아가기" onclick="location.href='myQna'">
      </div>
 </div>

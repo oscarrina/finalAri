@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,13 +9,23 @@
 <script src="//code.jquery.com/jquery.min.js"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/latest/js/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css" href="/css/adminMainLayout.css">
+<link rel="stylesheet" type="text/css" href="/css/adminNotice.css">
+<script type="text/javascript" src="../../../js/httpRequest.js"></script>
 <style>
+#myQna{color: #253BFF;}
+.maindiv{
+	margin-top:150px;
+	display: inline-block;
+	width: 75%;
+	height: 100vh;
+	float: right;
+}
 #qnaTitle{
 	width:400px;
 	height:40px;
 	border-color:blue;
 	border-radius:30px;
-	margin-top:20px;
+	margin-top:15px;
 	text-align: center;
 }
 #qnaCategory{
@@ -24,7 +33,7 @@
 	height:40px;
 	border-color:blue;
 	border-radius:30px;
-	margin-top:20px;
+	margin-top:15px;
 	text-align:center;
 }
 #qnaDate{
@@ -32,16 +41,20 @@
 	height:40px;
 	border-color:blue;
 	border-radius:30px;
-	margin-top:20px;
+	margin-top:15px;
 	text-align:center;
 }
 #exampleTextarea{
-	margin-top:20px;
+	margin-top:15px;
 	border-radius:25px;
 	border-color:blue;
+	border-width: 2px;
 }
 h4{
 	color:#253BFF;
+}
+.qDiv{
+	border:
 }
 .btn2{
    margin-top:6px;
@@ -54,20 +67,22 @@ h4{
      cursor: pointer;
      margin-left: 30px;
      font-size: 16px;
-     margin-left:75px;
+     margin-left:50px;
      
 }
 </style>
 </head>
 <body>
 <div id="page-wrapper">
-<%@ include file="../ceo/ceoHeader.jsp" %>
-<div id="page-content-wrapper">
-    <div class="container-fluid" id="content1">
-     <div class="content">
-     <div>
-     <h4 style="color:#253BFF; margin-left:80px;">문의</h4>
+<%@ include file="../admin/adminHeader.jsp" %>
+  <!-- /사이드바 -->
+  <!-- 본문 -->
+  <div id="page-content-wrapper">
+    <div class="container-fluid">
+      	<div class="content2">
+      	<div class="qDiv">
      	<table width="800" align="center">
+     	<tr><td><h4>문의</h4></td></tr>
      		<tr>
      			<td colspan="2">
      			<input type="text" name="qnaTitle" id="qnaTitle" value="${qna.qnaTitle }" readonly>
@@ -75,7 +90,7 @@ h4{
      		</tr>
      		<tr>
      			<td>
-     			<input type="text" id="qnaCategory" value="${cate[qna.qnaCategory]}" readonly>
+     			<input type="text" id="qnaCategory" value="${cate[qna.qnaCategory] }" readonly>
      			</td>
      			<td>
      			<input type="text" id="qnaDate" value="${qna.qnaDate}" readonly>
@@ -88,35 +103,46 @@ h4{
      			</td>
      		</tr>
      	</table>
-     </div><hr>
-     <c:if test="${!empty reply }">
-	 <div class="reply">
+     
+     </div>
+     <hr>
+     <div>
+     <form action="adminReply">
      	<table width="800" align="center">
+     	<c:if test="${!empty reply }">
      	<tr><td><h4>답변</h4></td></tr>
+     	
      		<tr>
      			<td colspan="2">
-     			<input type="text" name="qnaTitle" id="qnaTitle" value="${reply.replyTitle }" readonly>
+     			<input type="hidden" name="qnaIdx" value="${qna.qnaIdx }">
+     			<input type="text" name="replyTitle" id="qnaTitle" value="${reply.replyTitle }">
      			</td>
      		</tr>
      		<tr>
      			<td>
-     			<input type="text" id="qnaDate" value="${reply.replyDate}" readonly>
+     			<input type="text" id="qnaDate" value="${reply.replyDate}" placeholder="답변 날짜" readonly>
      			</td>
      		</tr>
      		<tr>
      			<td colspan="2">
-     			<textarea class="form-control" id="exampleTextarea" rows="8" 
-				readonly>${reply.replyContent }</textarea>
+     			<textarea class="form-control" name="replyContent" id="exampleTextarea" rows="8" 
+				>${reply.replyContent }</textarea>
      			</td>
      		</tr>
-     	</table><br></c:if>
-     	<input type="button" class="btn2" value="돌아가기" onclick="location.href='ceoQnaList'">
+     	</table><br>
+     	</c:if>
+     	<input type="button" class="btn2" value="돌아가기" style="margin-right:580px; margin-left:75px;"onclick="location.href='adminQnaList'">
+     	<input type="submit" value="답변 작성" class="btn2">
+     	</form>
      </div>
-</div>
-    </div>
-    <%@include file="../ceo/ceoFooter.jsp" %>
+      	</div>	
+       </div>
+    <%@include file="../admin/adminFooter.jsp" %>
   </div>
   <!-- /본문 -->
+  
 </div>
+
+
 </body>
 </html>

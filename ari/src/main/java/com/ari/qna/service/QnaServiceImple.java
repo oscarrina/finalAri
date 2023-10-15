@@ -35,9 +35,9 @@ public class QnaServiceImple implements QnaService {
 	}
 	
 	@Override
-	public List<QnaDTO> QnaDetail(int qnaIdx) throws Exception {
-		List<QnaDTO> lists=mapper.QnaDetail(qnaIdx);
-		return lists;
+	public QnaDTO QnaDetail(int qnaIdx) throws Exception {
+		QnaDTO list=mapper.QnaDetail(qnaIdx);
+		return list;
 	}
 	
 	@Override
@@ -47,9 +47,25 @@ public class QnaServiceImple implements QnaService {
 	}
 	
 	@Override
-	public List<ReplyDTO> replyList(int idx) throws Exception {
-		List<ReplyDTO> list=mapper.replyList(idx);
+	public ReplyDTO replyList(int qnaIdx) throws Exception {
+		ReplyDTO list=mapper.replyList(qnaIdx);
 		return list;
 	}
 	
+	@Override
+	public List<QnaDTO> adminQnaList() throws Exception {
+		List<QnaDTO> lists=mapper.adminQnaList();
+		return lists;
+	}
+	
+	@Override
+	public int adminReply(ReplyDTO dto) throws Exception {
+		int result=mapper.adminReply(dto);
+		return result;
+	}
+	@Override
+	public int qnaOk(int qnaIdx) throws Exception {
+		int result=mapper.qnaOk(qnaIdx);
+		return result;
+	}
 }
