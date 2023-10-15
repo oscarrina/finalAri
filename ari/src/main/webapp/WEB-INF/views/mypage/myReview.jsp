@@ -16,12 +16,12 @@ function reviewWrite(){
 function reviewSelect(){
 	location = 'myReview';
 }
-function reviewDel(reviewIdx) {
+function reviewDel(reseridx) {
 	if (confirm("리뷰를 삭제하시겠습니까?")) {
         $.ajax({
             type: "POST",
             url: "/reviewDel",
-            data: { reviewIdx: reviewIdx }
+            data: { reseridx: reseridx }
         });
     }
     location.reload();

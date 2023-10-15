@@ -5,7 +5,8 @@
 <mapper namespace="com.ari.mapper.ReviewMapper">
 	<insert id="reviewContent" parameterType="com.ari.review.model.ReviewDTO">
 		insert into review
-			values(review_reviewidx.nextval,
+			values(review_reviewIdx.nextval,
+				#{reserIdx},
 				#{userId},
 				#{berthIdx},
 				#{reviewContent},
