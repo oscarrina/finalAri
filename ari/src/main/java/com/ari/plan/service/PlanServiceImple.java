@@ -10,6 +10,7 @@ import com.ari.detail.model.BerthInfoDTO;
 import com.ari.detail.model.FoodDTO;
 import com.ari.mapper.PlanMapper;
 import com.ari.plan.model.PlanTableDTO;
+import com.ari.plan.model.PlannerTableDTO;
 @Service
 public class PlanServiceImple implements PlanService {
 	@Autowired
@@ -33,6 +34,16 @@ public class PlanServiceImple implements PlanService {
 	@Override
 	public int planInsert(PlanTableDTO dto) {
 		int result = mapper.planInsert(dto);
+		return result;
+	}
+	@Override
+	public PlanTableDTO planList(PlanTableDTO dto) {
+		dto = mapper.planList(dto);
+		return dto;
+	}
+	@Override
+	public int plannerInsert(PlannerTableDTO dto) {
+		int result = mapper.plannerInsert(dto);
 		return result;
 	}
 

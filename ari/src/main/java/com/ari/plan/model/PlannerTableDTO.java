@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class PlannerDTO {
+public class PlannerTableDTO {
 	private int plannerIdx;
 	private String userID;
 	private String plannerName;
@@ -18,6 +18,6 @@ public class PlannerDTO {
 	private int plannerStep;
 	private int Idx;
 	private int plannerGroup;
-	private int plannerImg;
+	private String plannerImg;
 	private int plannerReser;
 }
