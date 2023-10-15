@@ -192,7 +192,8 @@ button.addEventListener("click", function () {
     orderId: uuid,            // 주문 ID(직접 만들어주세요)
     orderName: "${dto.berthInfoName}",                 // 주문명
     successUrl: "http://192.168.219.102:9000/pay/success?berthIdx="+${dto.berthIdx}+
-    		"&reserVisitStart="+"${dto.reserVisitStart}"+"&reserVisitEnd="+"${dto.reserVisitEnd}"+
+    		"&idx="+${dto.idx}+
+    		"&reserVisitStart=${dto.reserVisitStart}"+"&reserVisitEnd=${dto.reserVisitEnd}"+
     		"&reserTel="+reserTel+"&reserName="+reserName,  // 결제에 성공하면 이동하는 페이지(직접 만들어주세요)
     failUrl: "http://192.168.219.102:9000/pay/fail",       // 결제에 실패하면 이동하는 페이지(직접 만들어주세요)    
   });

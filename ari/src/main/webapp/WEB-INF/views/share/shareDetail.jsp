@@ -51,7 +51,7 @@ const idx = ${share.idx};
 
 function like(likeYN){
 		if(userId == null || userId == ""){
-		swal('아리아리','좋아요는 로그인이 필요합니다.');
+		swal('아리아리','로그인 후 이용해주세요.');
 		return false;
 	}
 	

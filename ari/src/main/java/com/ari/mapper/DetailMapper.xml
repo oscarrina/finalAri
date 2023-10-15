@@ -74,6 +74,7 @@
 	LEFT JOIN reservisit RD ON B.berthidx = RD.berthidx
 	AND RD.reservisit BETWEEN TO_DATE(#{startDate}, 'YYYY-MM-DD')
 	AND TO_DATE(#{endDate}, 'YYYY-MM-DD')
+	where B.idx = #{idx}
 	group by B.berthidx,
 	    B.idx,
 	    B.berthname,

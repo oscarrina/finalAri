@@ -87,9 +87,13 @@ public class ShareController {
 		ModelAndView mav=new ModelAndView();
 		HttpSession session = request.getSession();
 		String userId = (String) session.getAttribute("sid");
+		if(userId == null || userId.equals("")) {
+			userId = "";
+		}
 		dto.setUserId(userId);
 		dto.setIdx(idx);
 		dto.setLikeType(2);
+		
 		String likeYN = likeService.likeSelect(dto);
 		if (likeYN == null || likeYN.equals("N")) {
 			mav.addObject("likeYN", "N");

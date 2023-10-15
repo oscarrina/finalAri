@@ -122,7 +122,7 @@
 			telCheck.style.color = 'red';
 			return false;
 		}else{
-			var param = 'tel='+tel.value;
+			var param = 'tel='+tel.value+'&type=1';
 			sendRequest('/sendNum',param,sendMsg2,'POST');
 		}
 	}
@@ -153,7 +153,7 @@
 <form name="kakaoJoin" action="kakaoJoin" method="post">
 <div class="login-wrap">
   <div class="login-html">
-  <img src="/img/logo.png" class="mainimg">
+  <a href="/"><img src="/img/logo.png" class="mainimg"></a>
   <div class="group">
   	<input type="text" name="username" class="input" placeholder="이름">
   </div>

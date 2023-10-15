@@ -103,7 +103,7 @@ a:hover{
     <input type="submit" class="btn1" value="로그인">
   </div>
   <div class="kakaoDiv">
-  	<a href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=3623a44fed0e1055e089acc18ec7aacf&redirect_uri=http://localhost:9091/oauth/kakao&response_type=code"><button type="button" class="kakaoBtn"><img src="/img/kakao_login_medium_wide.png" alt="카카오로그인" class="kakaoImg"></button>
+  	<a href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=3623a44fed0e1055e089acc18ec7aacf&redirect_uri=http://192.168.219.102:9000/oauth/kakao&response_type=code"><button type="button" class="kakaoBtn"><img src="/img/kakao_login_medium_wide.png" alt="카카오로그인" class="kakaoImg"></button>
   	</a>
   <div class="group">
     <a href="idFind" class="b">아이디 찾기</a>

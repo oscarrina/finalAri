@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ari.like.model.LikeDTO;
+import com.ari.mapper.LikeMapper;
 import com.ari.mapper.MypageMapper;
 import com.ari.mapper.ReserMapper;
 import com.ari.reser.model.ReserDTO;
@@ -22,6 +23,8 @@ public class MypageServiceImple implements MypageService {
 	private MypageMapper mypageMapper;
 	@Autowired
 	private ReserMapper reserMapper;
+	@Autowired
+	private LikeMapper likeMapper;
 	
 	@Override
 	public Map<String, Object> myReser(Map<String, String> param) {
@@ -105,5 +108,10 @@ public class MypageServiceImple implements MypageService {
 		result.put("totalCnt", totalCnt);
 		
 		return result;
+	}
+	@Override
+	public String likeSelect(LikeDTO dto) {
+		String likeYN = likeMapper.likeSelect(dto);
+		return likeYN;
 	}
 }

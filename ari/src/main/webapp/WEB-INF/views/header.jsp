@@ -12,7 +12,7 @@ body{
 	margin: 0px auto;
 }
 .header{
-	width:1200px;
+	width:1300px;
 	height: 150px;
 	position: fixed;
 	top: 0;

@@ -38,6 +38,11 @@ public class ReserServiceImple implements ReserService {
 		return result;
 	}
 	@Override
+	public int reserVisitDel(int idx) {
+		int result = mapper.reserVisitDel(idx);
+		return result;
+	}
+	@Override
 	public ReserDTO reserForm(int berthIdx,int idx) {
 		Map map = new HashMap();
 		map.put("berthIdx", berthIdx);
@@ -53,6 +58,21 @@ public class ReserServiceImple implements ReserService {
 	@Override
 	public int reserVisitInsert(List<ReserDTO> list) {
 		int result = mapper.reserVisitInsert(list);
+		return result;
+	}
+	@Override
+	public String berthInfoName(int idx) {
+		String berthInfoName = mapper.berthInfoName(idx);
+		return berthInfoName;
+	}
+	@Override
+	public ReserDTO ceoCancelSMS(int berthIdx) {
+		ReserDTO dto = mapper.ceoCancelSMS(berthIdx);
+		return dto;
+	}
+	@Override
+	public int reserPayState(int reserIdx) {
+		int result = mapper.reserPayState(reserIdx);
 		return result;
 	}
 }

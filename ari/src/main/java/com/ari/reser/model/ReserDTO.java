@@ -24,6 +24,7 @@ public class ReserDTO {
 	private String reserVisitEnd;
 	private int reserPrice;
 	private Date reserPriceDay;
+	private int reserPayState;
 	private String reserTel;
 	private int reserState;
 	private String reserReview;

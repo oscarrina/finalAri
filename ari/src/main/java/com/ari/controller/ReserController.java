@@ -3,12 +3,15 @@ package com.ari.controller;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.io.Reader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Date;
@@ -20,17 +23,20 @@ import javax.servlet.http.HttpSession;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.ari.detail.model.BerthDTO;
 import com.ari.reser.model.ReserDTO;
 import com.ari.reser.service.ReserService;
+
+import org.springframework.http.*;
+import org.springframework.web.client.RestTemplate;
 
 @Controller
 @RequestMapping("/")
@@ -57,6 +63,7 @@ public class ReserController {
 		dto.setReserVisitStart(startDate);
 		dto.setReserVisitEnd(endDate);
 		dto.setBerthIdx(berthIdx);
+		dto.setIdx(idx);
 		Date format1 = new SimpleDateFormat("yyyy-MM-dd").parse(endDate);
         Date format2 = new SimpleDateFormat("yyyy-MM-dd").parse(startDate);
         long diffSec = (format1.getTime() - format2.getTime()) / 1000; //초 차이
@@ -79,7 +86,9 @@ public class ReserController {
 		ReserDTO dto = new ReserDTO();
 		HttpSession session = req.getSession();
 		int berthIdx = (Integer.parseInt(req.getParameter("berthIdx")));
+		int idx = (Integer.parseInt(req.getParameter("idx")));
 		dto.setBerthIdx(berthIdx);
+		dto.setIdx(idx);
 		dto.setReserVisitStart(req.getParameter("reserVisitStart"));
 		dto.setReserVisitEnd(req.getParameter("reserVisitEnd"));
 		dto.setReserTel(req.getParameter("reserTel"));
@@ -87,22 +96,28 @@ public class ReserController {
 		dto.setUserId((String) session.getAttribute("sid"));
 		dto.setReserPaymentKey(paymentKey);
 		dto.setReserPrice(amount);
+		dto.setBerthInfoName(service.berthInfoName(idx));
+		service.reserInsert(dto);
+		
+		model.addAttribute("berthInfoName", dto.getBerthInfoName());
+		model.addAttribute("reserName", dto.getReserName());
+		model.addAttribute("reserTel", dto.getReserTel());
 		
 		String visitStart = req.getParameter("reserVisitStart");
-		int reserVisitStart = Integer.parseInt(visitStart.replace("-", ""));
 		String visitEnd = req.getParameter("reserVisitEnd");
-		int reserVisitEnd = Integer.parseInt(visitEnd.replace("-", ""));
-		String test = "";
-		int result = service.reserInsert(dto);
+		LocalDate startDate = LocalDate.parse(visitStart);
+        LocalDate endDate = LocalDate.parse(visitEnd);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		
-		for(int i=reserVisitStart; i<reserVisitEnd; i++) {
-			ReserDTO dto2 = new ReserDTO();
-			test = toString().valueOf(i);
-			dto2.setBerthIdx(berthIdx);
-			dto2.setReserVisit(test);
-			list.add(dto2);
-		}
-		int result2 = service.reserVisitInsert(list);
+        while (!startDate.isAfter(endDate)) {
+        	ReserDTO dto2 = new ReserDTO();
+        	String visitStartDate = startDate.format(formatter);
+            dto2.setBerthIdx(berthIdx);
+			dto2.setReserVisit(visitStartDate);
+            list.add(dto2);
+            startDate = startDate.plusDays(1);
+        }
+		service.reserVisitInsert(list);
 		
         String secretKey = "test_sk_pP2YxJ4K87PyEaAQlWv3RGZwXLOb:";
 
@@ -169,8 +184,57 @@ public class ReserController {
 
         return "fail";
     }
-	@GetMapping("/success")
-	public String success() {
-		return "success";
+	
+	@PostMapping("/reserCancel")
+	public ModelAndView reserCancel(@RequestParam("idx")int idx,
+			@RequestParam("userType")String userType,@RequestParam("berthIdx")int berthIdx,
+			@RequestParam("reserPaymentKey") String reserPaymentKey,
+			@RequestParam("reserPrice")int reserPrice,ReserDTO dto
+			) {
+		ModelAndView mav = new ModelAndView();
+		dto = service.ceoCancelSMS(idx);
+		String reserTel = dto.getReserTel();
+		String reserName = dto.getReserName();
+		String berthInfoName = dto.getBerthInfoName();
+		int cancelResult = service.reserCancel(idx);
+		int delResult = service.reserVisitDel(berthIdx);
+		if(cancelResult == 1 && delResult > 0) {
+			mav.addObject("msg", "성공");
+		}else {
+			mav.addObject("msg", "실패");
+		}
+		if(userType.equals("user")) {
+			mav.setViewName("member/idCheck_ok");			
+		}
+
+		String apiUrl = "https://api.tosspayments.com/v1/payments/"+reserPaymentKey+"/cancel";
+        String apiToken = "dGVzdF9za19wUDJZeEo0Szg3UHlFYUFRbFd2M1JHWndYTE9iOg==";
+        String idempotencyKey = "e9b779ed-3541-4b6e-aa95-88f710689a68";
+        String cancelReason = "고객 변심";
+
+        // HTTP 요청 헤더 설정
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization", "Basic " + apiToken);
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.set("Idempotency-Key", idempotencyKey);
+
+        // JSON 형식의 요청 본문 생성
+        String requestBody = "{\"cancelReason\":\"" + cancelReason + "\"}";
+
+        // HTTP 요청 엔티티 설정
+        HttpEntity<String> entity = new HttpEntity<>(requestBody, headers);
+
+        // RestTemplate을 사용하여 API 호출 (결제 취소)
+        RestTemplate restTemplate = new RestTemplate();
+        ResponseEntity<String> response = restTemplate.exchange(apiUrl, HttpMethod.POST, entity, String.class);
+
+        String url = "";
+        if(userType.equals("ceo")) {
+        	mav.setViewName("/reserManager");
+        	url = "redirect:/sendnum?tel="+reserTel+"&reserName="+reserName+"&type=3"+"&berthName="+berthInfoName;
+        }
+        
+        service.reserPayState(idx);
+		return mav;
 	}
 }
