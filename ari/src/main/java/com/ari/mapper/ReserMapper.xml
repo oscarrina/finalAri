@@ -12,7 +12,7 @@
 		r.reserreview,r.reserpaymentkey,b.infoimg,b.infoname,c.berthname
 		from reser r,berthinfo b,berth c
 		where c.idx = b.idx and r.berthidx = c.berthidx and b.userbn = (select userbn from userinfo where userid = #{userid})
-		order by reservisitstart) a) b
+		order by reserstate desc) a) b
 	where rnum<![CDATA[>=]]>#{start} and rnum<![CDATA[<=]]>#{end}
   </select>
   <select id="reserTotalCnt" resultType="Integer" parameterType="String">

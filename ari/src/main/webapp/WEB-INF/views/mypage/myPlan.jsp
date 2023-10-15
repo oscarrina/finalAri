@@ -19,7 +19,7 @@
 <h3>내 일정</h3>
 <form>
 <div class="mypagePlan">
-<img alt="" src="/img/img.jpg" class="mypageImg">
+<img alt="" src="/img/hotel.jpg" class="mypageImg">
 <ul class="planInfo">
 	<li class="planSi">서울</li>
 	<li class="planSubject">남산여행</li>

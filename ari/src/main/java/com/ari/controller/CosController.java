@@ -75,7 +75,7 @@ public class CosController {
 		}
 		likeDto.setUserId(userId);
 		likeDto.setIdx(idx);
-		likeDto.setLikeType(2);
+		likeDto.setLikeType(1);
 		String likeYN = likeService.likeSelect(likeDto);
 		if (likeYN == null || likeYN.equals("N")) {
 			mav.addObject("likeYN", "N");
