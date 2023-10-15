@@ -157,4 +157,17 @@ public class PlanController {
 		mav.setViewName("/msg");
 		return mav;
 	}
+	@PostMapping("/planDel")
+	public ModelAndView planDel(@RequestParam("planGroup")int planGroup) {
+		ModelAndView mav = new ModelAndView();
+		int planResult = service.planDelete(planGroup);
+		int plannerResult = service.plannerDelete(planGroup);
+		if(planResult == 1 && plannerResult > 0) {
+			mav.addObject("msg", "성공");
+		}else {
+			mav.addObject("msg", "실패");
+		}
+		mav.setViewName("member/idCheck_ok");
+		return mav;
+	}
 }

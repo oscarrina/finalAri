@@ -37,7 +37,6 @@ function showResult(){
 		if(XHR.status == 200){
 			let data = XHR.responseText;
 			if(data == '성공'){
-				swal('아리아리','예약이 취소되었습니다.')
 				location.href = 'myReser';
 			}else{
 				swal('아리아리','다시 시도해주세요');
