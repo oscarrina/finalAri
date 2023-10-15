@@ -6,16 +6,34 @@
 	<select id="getAttList" parameterType="int" resultType="com.ari.detail.model.AttDTO">
 		select *
 		from att
-		where area=#{area} and sigungu = #{sigungu}		
+		where area=#{area} and sigungu = #{sigungu}
 	</select>
 	<select id="getFoodList" parameterType="int" resultType="com.ari.detail.model.FoodDTO">
 		select *
 		from food
-		where area=#{area} and sigungu = #{sigungu}		
+		where area=#{area} and sigungu = #{sigungu}	
 	</select>
-	<select id="getBerthInfoList" parameterType="int" resultType="com.ari.detail.model.BerthDTO">
+	<select id="getBerthInfoList" parameterType="int" resultType="com.ari.detail.model.BerthInfoDTO">
 		select *
 		from berthInfo
 		where area=#{area} and sigungu = #{sigungu}		
+	</select>
+	<insert id = "planInsert" parameterType="com.ari.plan.model.PlanTableDTO">
+	insert into planTable
+	values(
+		planTable_planIdx.nextval,
+		#{userID},
+		sysdate,
+		planTable_planIdx.nextval,
+		#{planStart},
+		#{planEnd},
+		#{planBigImg},
+		#{planPoint}
+	)
+	</insert>
+		<select id="planList" resultType="com.ari.plan.model.PlanTableDTO">
+		select *
+		from planTable
+		where planIdx=planTable_planIdx.currval
 	</select>
 </mapper>

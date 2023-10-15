@@ -70,7 +70,7 @@ h4:visited{
         <div class="col-sm-6 col-md-4 mx-auto">
           <div class="box">
             <div class="img-box">
-              <a href="planDatePicker?area=1"><img src="/img/img.jpg" class="box-img" alt=""></a>
+              <a href="planDatePicker?area=1"><img src="/img/1.jpg" class="box-img" alt=""></a>
             </div>
             <div class="detail-box">
               <h4><a href="planDatePicker?area=1">서울</a></h4>
@@ -80,7 +80,7 @@ h4:visited{
         <div class="col-sm-6 col-md-4 mx-auto">
           <div class="box">
             <div class="img-box">
-              <a href="planDatePicker?area=39"><img src="/img/img.jpg" class="box-img" alt=""></a>
+              <a href="planDatePicker?area=39"><img src="/img/39.jpg" class="box-img" alt=""></a>
             </div>
             <div class="detail-box">
               <h4><a href="planDatePicker?area=39"> 제주도</a></h4>
@@ -90,7 +90,7 @@ h4:visited{
         <div class="col-sm-6 col-md-4 mx-auto">
           <div class="box">
             <div class="img-box">
-              <a href="planDatePicker?area=6"><img src="/img/img.jpg" class="box-img" alt=""></a>
+              <a href="planDatePicker?area=6"><img src="/img/6.jpg" class="box-img" alt=""></a>
             </div>
             <div class="detail-box">
               <h4><a href="planDatePicker?area=6">부산</a></h4>
@@ -104,7 +104,7 @@ h4:visited{
         <div class="col-sm-6 col-md-4 mx-auto">
           <div class="box">
             <div class="img-box">
-              <a href="planDatePicker?area=2"><img src="/img/img.jpg" class="box-img" alt=""></a>
+              <a href="planDatePicker?area=2"><img src="/img/2.jpg" class="box-img" alt=""></a>
             </div>
             <div class="detail-box">
               <h4><a href="planDatePicker?area=2">인천</a></h4>
@@ -114,7 +114,7 @@ h4:visited{
         <div class="col-sm-6 col-md-4 mx-auto">
           <div class="box">
             <div class="img-box">
-              <a href="planDatePicker?area=3"><img src="/img/img.jpg" class="box-img" alt=""></a>
+              <a href="planDatePicker?area=3"><img src="/img/3.jpg" class="box-img" alt=""></a>
             </div>
             <div class="detail-box">
               <h4><a href="planDatePicker?area=3">대전</a></h4>
@@ -124,7 +124,7 @@ h4:visited{
         <div class="col-sm-6 col-md-4 mx-auto">
           <div class="box">
             <div class="img-box">
-              <a href="planDatePicker?area=4"><img src="/img/img.jpg" class="box-img" alt=""></a>
+              <a href="planDatePicker?area=4"><img src="/img/4.jpg" class="box-img" alt=""></a>
             </div>
             <div class="detail-box">
               <h4><a href="planDatePicker?area=4">대구</a></h4>
@@ -138,7 +138,7 @@ h4:visited{
 	        <div class="col-sm-6 col-md-4 mx-auto">
 	          <div class="box">
 	            <div class="img-box">
-	              <a href="planDatePicker?area=5"><img src="/img/img.jpg" class="box-img" alt=""></a>
+	              <a href="planDatePicker?area=5"><img src="/img/5.jpg" class="box-img" alt=""></a>
 	            </div>
 	            <div class="detail-box">
 	              <h4><a href="planDatePicker?area=5">광주</a></h4>
@@ -148,7 +148,7 @@ h4:visited{
 	        <div class="col-sm-6 col-md-4 mx-auto">
 	          <div class="box">
 	            <div class="img-box">
-	              <a href="planDatePicker?area=7"><img src="/img/img.jpg" class="box-img" alt=""></a>
+	              <a href="planDatePicker?area=7"><img src="/img/6.jpg" class="box-img" alt=""></a>
 	            </div>
 	            <div class="detail-box">
 	              <h4><a href="planDatePicker?area=7"> 울산</a></h4>
@@ -158,7 +158,7 @@ h4:visited{
 	        <div class="col-sm-6 col-md-4 mx-auto">
 	          <div class="box">
 	            <div class="img-box">
-	              <a href="planDatePicker?area=8"><img src="/img/img.jpg" class="box-img" alt=""></a>
+	              <a href="planDatePicker?area=8"><img src="/img/8.jpg" class="box-img" alt=""></a>
 	            </div>
 	            <div class="detail-box">
 	              <h4><a href="planDatePicker?area=8">세종특별자치시</a></h4>
@@ -172,7 +172,7 @@ h4:visited{
 	        <div class="col-sm-6 col-md-4 mx-auto">
 	          <div class="box">
 	            <div class="img-box">
-	              <a href="planDatePicker?area=31"><img src="/img/img.jpg" class="box-img" alt=""></a>
+	              <a href="planDatePicker?area=31"><img src="/img/9.jpg" class="box-img" alt=""></a>
 	            </div>
 	            <div class="detail-box">
 	              <h4><a href="planDatePicker?area=31">경기도</a></h4>
@@ -182,7 +182,7 @@ h4:visited{
 	        <div class="col-sm-6 col-md-4 mx-auto">
 	          <div class="box">
 	            <div class="img-box">
-	              <a href="planDatePicker?area=32"><img src="/img/img.jpg" class="box-img" alt=""></a>
+	              <a href="planDatePicker?area=32"><img src="/img/10.jpg" class="box-img" alt=""></a>
 	            </div>
 	            <div class="detail-box">
 	              <h4><a href="planDatePicker?area=32"> 강원특별자치도</a></h4>
@@ -192,7 +192,7 @@ h4:visited{
 	        <div class="col-sm-6 col-md-4 mx-auto">
 	          <div class="box">
 	            <div class="img-box">
-	              <a href="planDatePicker?area=33"><img src="/img/img.jpg" class="box-img" alt=""></a>
+	              <a href="planDatePicker?area=33"><img src="/img/33.jpg" class="box-img" alt=""></a>
 	            </div>
 	            <div class="detail-box">
 	              <h4><a href="planDatePicker?area=33">충청북도</a></h4>
@@ -206,7 +206,7 @@ h4:visited{
 	        <div class="col-sm-6 col-md-4 mx-auto">
 	          <div class="box">
 	            <div class="img-box">
-	              <a href="planDatePicker?area=34"><img src="/img/img.jpg" class="box-img" alt=""></a>
+	              <a href="planDatePicker?area=34"><img src="/img/34.jpg" class="box-img" alt=""></a>
 	            </div>
 	            <div class="detail-box">
 	              <h4><a href="planDatePicker?area=34">충청남도</a></h4>
@@ -216,7 +216,7 @@ h4:visited{
 	        <div class="col-sm-6 col-md-4 mx-auto">
 	          <div class="box">
 	            <div class="img-box">
-	              <a href="planDatePicker?area=35"><img src="/img/img.jpg" class="box-img" alt=""></a>
+	              <a href="planDatePicker?area=35"><img src="/img/35.jpg" class="box-img" alt=""></a>
 	            </div>
 	            <div class="detail-box">
 	              <h4><a href="planDatePicker?area=35"> 경상북도</a></h4>
@@ -226,7 +226,7 @@ h4:visited{
 	        <div class="col-sm-6 col-md-4 mx-auto">
 	          <div class="box">
 	            <div class="img-box">
-	              <a href="planDatePicker?area=36"><img src="/img/img.jpg" class="box-img" alt=""></a>
+	              <a href="planDatePicker?area=36"><img src="/img/36.jpg" class="box-img" alt=""></a>
 	            </div>
 	            <div class="detail-box">
 	              <h4><a href="planDatePicker?area=36">경상남도</a></h4>
@@ -240,7 +240,7 @@ h4:visited{
 	        <div class="col-sm-6 col-md-4 mx-auto">
 	          <div class="box">
 	            <div class="img-box">
-	              <a href="planDatePicker?area=37"><img src="/img/img.jpg" class="box-img" alt=""></a>
+	              <a href="planDatePicker?area=37"><img src="/img/37.jpg" class="box-img" alt=""></a>
 	            </div>
 	            <div class="detail-box">
 	              <h4><a href="planDatePicker?area=37">전라북도</a></h4>
@@ -250,7 +250,7 @@ h4:visited{
 	        <div class="col-sm-6 col-md-4 mx-auto">
 	          <div class="box">
 	            <div class="img-box">
-	              <a href="planDatePicker?area=38"><img src="/img/img.jpg" class="box-img" alt=""></a>
+	              <a href="planDatePicker?area=38"><img src="/img/38.jpg" class="box-img" alt=""></a>
 	            </div>
 	            <div class="detail-box">
 	              <h4><a href="planDatePicker?area=38"> 전라남도</a></h4>

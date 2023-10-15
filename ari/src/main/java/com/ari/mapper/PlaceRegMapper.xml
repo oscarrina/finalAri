@@ -60,4 +60,19 @@
   #{berthInfoEnd}
   )	
   </insert>
+  <select id="attSelect" parameterType="String" resultType="com.ari.detail.model.AttDTO">
+ 	select *
+	from att
+	where userid=#{userId}
+  </select>
+  <select id="foodSelect" parameterType="String" resultType="com.ari.detail.model.FoodDTO">
+ 	select *
+	from food
+	where userid=#{userId}
+  </select>
+  <select id="berthInfoSelect" parameterType="String" resultType="com.ari.detail.model.BerthInfoDTO">
+ 	select *
+	from berthInfo
+	where userid=#{userId}
+  </select>
   </mapper>
