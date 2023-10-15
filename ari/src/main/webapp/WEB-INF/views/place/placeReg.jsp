@@ -132,6 +132,7 @@ function formSubmit(){
 	var addr = document.getElementById('addr1').value+' '+document.getElementById('addr2').value;
 	var newHidden = document.createElement('input');
 	var form = document.getElementById("placeForm");
+	
 	newHidden.setAttribute('type','hidden');
 	newHidden.setAttribute('value',addr);
 	newHidden.setAttribute('name',"addr");
@@ -141,7 +142,8 @@ function formSubmit(){
 	console.log('formType='+formType);
 	
 	switch(formType.toString()){
-	case '1': form.setAttribute('action','attReg');form.setAttribute('method','post');break;
+	case '1': window.alert('test');form.setAttribute('action','attReg');form.setAttribute('method','post');break;
+	
 	case '2': form.setAttribute('action','foodReg');form.setAttribute('method','post');break;
 	case '3': form.setAttribute('action','berthInfoReg');form.setAttribute('method','post');;break;
 	}
@@ -164,7 +166,7 @@ function formSubmit(){
 		<div id="2" onclick = "clickCategory(this)">음식점</div>
 		<div id="3" onclick = "clickCategory(this)">숙박</div>
 	</div>
-	<form name = "fm" id = "placeForm" >
+	<form name = "fm" enctype="multipart/form-data" id = "placeForm" >
 	<div class = "containerBody" >
 		<div class="regcom">
 			<input type = "hidden" value = "${sid}" name = "userId">
@@ -177,7 +179,7 @@ function formSubmit(){
 			<div><label>상세주소</label></div><div><input type = "text" id= "addr2" placeholder = "상세주소" required="required"></div></span>
 			<div><label>주차시설</label><input id = "parkCheck" type = "checkbox" name="parking" value = "1" ></div>
 			<div><label>업장소개</label></div><div><textarea name= "info"></textarea></div>
-			<div ><label>업장이미지</label></div><div><input class="form-control" type="file" name="infoImg" id="placeImg" required="required"></div>
+			<div ><label>업장이미지</label></div><div><input class="form-control" type="file" name="placeImg" id="placeImg" required="required"></div>
 		</div>
 		<div class = "regType">
 			<div class = "typeForm" id = "typeForm" style = "margin-top: 20px; margin-left: 20px;">

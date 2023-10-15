@@ -12,7 +12,10 @@ public interface PlaceService {
 	public int attInsert(AttDTO dto);
 	public int foodInsert(FoodDTO dto);
 	public int berthInfoInsert(BerthInfoDTO dto);
-	public List<AttDTO> attSelect(String userId);
-	public List<FoodDTO> foodSelect(String userId);
-	public List<BerthInfoDTO> berthInfoSelect(String userId);
+	public List<AttDTO> attSelect(String userID);
+	public List<FoodDTO> foodSelect(String userID);
+	public List<BerthInfoDTO> berthInfoSelect(String userID);
+	public List<AttDTO> attDelSelect(int idx);
+	public List<FoodDTO> foodDelSelect(int idx);
+	public List<BerthInfoDTO> berthInfoDelSelect(int idx);
 }
