@@ -54,8 +54,11 @@ public class placeRegController {
 	}
    
 	@PostMapping("attReg")
-	public ModelAndView attReg(AttDTO dto) {
+	public ModelAndView attReg(AttDTO dto,
+			@RequestParam(value = "placeImg", required=false)MultipartFile placeImg) {
 		ModelAndView mav = new ModelAndView();
+		copyInto(placeImg);
+		dto.setInfoImg(placeImg.getOriginalFilename());
 		int result = service.attInsert(dto);
 		String msg = result==1?"등록성공":"등록실패";
 		mav.addObject("msg",msg);
@@ -64,8 +67,11 @@ public class placeRegController {
 		return mav;
 	}
 	@PostMapping("foodReg")
-	public ModelAndView foodReg(FoodDTO dto) {
+	public ModelAndView foodReg(FoodDTO dto,
+			@RequestParam(value = "placeImg", required=false)MultipartFile placeImg) {
 		ModelAndView mav = new ModelAndView();
+		copyInto(placeImg);
+		dto.setInfoImg(placeImg.getOriginalFilename());
 		int result = service.foodInsert(dto);
 		String msg = result==1?"등록성공":"등록실패";
 		mav.addObject("msg",msg);
@@ -74,8 +80,11 @@ public class placeRegController {
 		return mav;
 	}
 	@PostMapping("berthInfoReg")
-	public ModelAndView berthInfoReg(BerthInfoDTO dto) {
+	public ModelAndView berthInfoReg(BerthInfoDTO dto,
+			@RequestParam(value = "placeImg", required=false)MultipartFile placeImg) {
 		ModelAndView mav = new ModelAndView();
+		copyInto(placeImg);
+		dto.setInfoImg(placeImg.getOriginalFilename());
 		int result = service.berthInfoInsert(dto);
 		String msg = result==1?"등록성공":"등록실패";
 		mav.addObject("msg",msg);
@@ -84,18 +93,33 @@ public class placeRegController {
 		return mav;
 	}
 	@RequestMapping("placeList")
-	public ModelAndView attSelect(HttpSession session,
+	public ModelAndView Select(HttpSession session,
 			@RequestParam(value = "type", defaultValue = "1")int type){
 		ModelAndView mav = new ModelAndView();
-		String userId = (String)session.getAttribute("sid");
+		String userID = (String)session.getAttribute("sid");
 		switch(type) {
-		case 1 : List<AttDTO> arr1 = service.attSelect(userId);mav.addObject("list", arr1);break;
-		case 2 : List<FoodDTO> arr2 = service.foodSelect(userId);mav.addObject("list", arr2);break;
-		case 3 : List<BerthInfoDTO> arr3 = service.berthInfoSelect(userId);mav.addObject("list", arr3);break;
+		case 1 : List<AttDTO> arr1 = service.attSelect(userID);mav.addObject("list", arr1);break;
+		case 2 : List<FoodDTO> arr2 = service.foodSelect(userID);mav.addObject("list", arr2);break;
+		case 3 : List<BerthInfoDTO> arr3 = service.berthInfoSelect(userID);mav.addObject("list", arr3);break;
 		}
 		mav.setViewName("place/myPlaceReg");
 		return mav;
 	}
+	@PostMapping("placeList")
+	public ModelAndView replaceSelect(HttpSession session,
+			@RequestParam(value = "type", defaultValue = "1")int type){
+		ModelAndView mav = new ModelAndView();
+		String userID = (String)session.getAttribute("sid");
+		switch(type) {
+		case 1 : List<AttDTO> arr1 = service.attSelect(userID);mav.addObject("list", arr1);break;
+		case 2 : List<FoodDTO> arr2 = service.foodSelect(userID);mav.addObject("list", arr2);break;
+		case 3 : List<BerthInfoDTO> arr3 = service.berthInfoSelect(userID);mav.addObject("list", arr3);break;
+		}
+		mav.addObject("type", type);
+		mav.setViewName("place/myPlaceReg");
+		return mav;
+	}
+	
 	public void copyInto(MultipartFile infoImg) {
 		File f=new File("c:/student_java/upload/"+infoImg.getOriginalFilename());
 		

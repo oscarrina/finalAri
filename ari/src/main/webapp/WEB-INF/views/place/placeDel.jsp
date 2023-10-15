@@ -12,38 +12,9 @@
 <link rel="stylesheet" type="text/css" href="/css/adminMainLayout.css">
 <script src ="/js/httpRequest.js"></script>
 <style>
-.container{
-	display: flex;
-	padding-bottom: 100px;
-}
-#type{
-	margin-bottom: 30px;
-}
-.img{
-	width: 100px;
-	height: 100px;
-}
-.infoContainer{
-	width : 500px; 
-}
-.button{
-	width:	100px;
-}
-.link{
-	text-decoration: none;
-	color: black;
-}
-.link:hover {
-	text-decoration: none;
-}
+
 </style>
-<script>
-var type = "1";
-function typeChange(sel){
-	type = sel.value
-	location.href = 'placeList?type='+type;
-}
-</script>
+
 </head>
 <body>
 <div id="page-wrapper">
@@ -52,7 +23,7 @@ function typeChange(sel){
 	    <div class="container-fluid" id="content1">
 		    <div class="content">
 		    <br><br><br>
-		    <h2>사업체 관리</h2>
+		    <h2>사업체 삭제</h2>
 		    <br><br>
 		    <select id = "type" onchange="typeChange(this)">
 		    	<option value ="1" ${type==1?"selected":""}>관광지</option>

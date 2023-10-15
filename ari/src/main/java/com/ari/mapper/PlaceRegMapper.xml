@@ -63,16 +63,32 @@
   <select id="attSelect" parameterType="String" resultType="com.ari.detail.model.AttDTO">
  	select *
 	from att
-	where userid=#{userId}
+	where userid=#{userID}
   </select>
   <select id="foodSelect" parameterType="String" resultType="com.ari.detail.model.FoodDTO">
  	select *
 	from food
-	where userid=#{userId}
+	where userid=#{userID}
   </select>
   <select id="berthInfoSelect" parameterType="String" resultType="com.ari.detail.model.BerthInfoDTO">
  	select *
 	from berthInfo
-	where userid=#{userId}
+	where userid=#{userID}
   </select>
+  <select id="attDelSelect" parameterType="Integer" resultType="com.ari.detail.model.AttDTO">
+ 	select *
+	from att
+	where idx=#{idx}
+  </select>
+  <select id="foodDelSelect" parameterType="Integer" resultType="com.ari.detail.model.FoodDTO">
+ 	select *
+	from food
+	where idx=#{idx}
+  </select>
+  <select id="berthInfoDelSelect" parameterType="Integer" resultType="com.ari.detail.model.BerthInfoDTO">
+ 	select *
+	from berthInfo
+	where idx=#{idx}
+  </select>
+  
   </mapper>
