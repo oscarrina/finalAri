@@ -148,7 +148,7 @@ h4:visited{
 	        <div class="col-sm-6 col-md-4 mx-auto">
 	          <div class="box">
 	            <div class="img-box">
-	              <a href="planDatePicker?area=7"><img src="/img/6.jpg" class="box-img" alt=""></a>
+	              <a href="planDatePicker?area=7"><img src="/img/7.jpg" class="box-img" alt=""></a>
 	            </div>
 	            <div class="detail-box">
 	              <h4><a href="planDatePicker?area=7"> 울산</a></h4>
