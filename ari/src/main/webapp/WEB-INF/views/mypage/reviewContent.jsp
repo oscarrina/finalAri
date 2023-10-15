@@ -121,7 +121,6 @@ function loadFile(input) {
 	<h3>리뷰 등록</h3>
 	<form class="mb-3" action="reviewContent" name="myform" id="myform" method="post" enctype="multipart/form-data">
 	<input type="hidden" value="${berthidx }" name="berthidx">
-	<input type="hidden" value="${reseridx }" name="reseridx">
 	<fieldset>
 		<input type="radio" name="reviewScore" value="5" id="rate1"><label
 			for="rate1">★</label>

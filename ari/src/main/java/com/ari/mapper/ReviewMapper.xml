@@ -5,8 +5,7 @@
 <mapper namespace="com.ari.mapper.ReviewMapper">
 	<insert id="reviewContent" parameterType="com.ari.review.model.ReviewDTO">
 		insert into review
-			values(review_reviewIdx.nextval,
-				#{reserIdx},
+			values(review_reviewidx.nextval,
 				#{userId},
 				#{berthIdx},
 				#{reviewContent},
@@ -14,23 +13,13 @@
 				#{reviewScore},
 				#{reviewImg})
 	</insert>
-	<update id="reserReviewUpdate" parameterType="com.ari.reser.model.ReserDTO">
-		update reser
-        set reserReview = 'Y' 
-        where userId = #{userId} and berthIdx = #{berthIdx} and reserIdx=#{reserIdx}
-	</update>
 	<select id="getBerthidx" parameterType="int" resultType="int">
 		select berthidx
 		from reser
 		where reseridx=#{idx}
 	</select>
-	<delete id="reviewDel" parameterType="com.ari.review.model.ReviewDTO">
+	<delete id="reviewDel">
 		delete from review
-		where reserIdx=#{reserIdx}
+		where reviewIdx=#{reviewIdx}
 	</delete>
-	<update id="reserReviewDel" parameterType="com.ari.reser.model.ReserDTO">
-		update reser
-        set reserReview = 'N' 
-        where reserIdx=#{reserIdx}
-	</update>
 </mapper>

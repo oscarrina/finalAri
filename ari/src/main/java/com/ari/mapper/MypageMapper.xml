@@ -36,10 +36,10 @@
   <select id="myPageReview" parameterType="map" resultType="com.ari.review.model.ReviewDTO">
   	select * from
 		(select rownum as rnum,a.* from
-		(select r.reviewidx,r.reseridx,r.berthidx,r.userid,r.reviewContent,r.reviewdate,r.reviewscore,r.reviewimg,re.reserreview
-		from review r, reser re
-		where r.userid = re.userid and r.berthidx=re.berthidx and re.reserreview='Y'
-		order by r.reviewidx) a) 
+		(select r.reviewidx,r.berthidx,r.userid,r.reviewContent,r.reviewdate,r.reviewscore,i.img
+		from review r,img i
+		where r.reviewidx = i.idx and r.userid = #{userId}
+		order by r.reviewidx) a) b
 	where rnum<![CDATA[>=]]>#{start} and rnum<![CDATA[<=]]>#{end}
   </select>
   <select id="reviewTotalCnt" resultType="Integer" parameterType="String">
