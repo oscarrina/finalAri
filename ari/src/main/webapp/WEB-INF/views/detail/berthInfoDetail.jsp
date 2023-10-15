@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -81,6 +82,67 @@ h5{
 	border: 3px solid #253BFF;
 	border-radius: 25px;
 }
+ul{
+	vertical-align: top;
+	list-style:none;
+	display: inline-block;
+}
+.review{
+	margin-top:30px;
+}
+.img{
+	width: 150px;
+    height: 150px;
+    object-fit: cover;
+    cursor: pointer;
+}
+.star{
+	color: transparent;
+	text-shadow: 0 0 0 #f0f0f0;
+}
+.rcontent{
+	overflow: visible;
+	width: 500px;
+	height: 150px;
+	padding: 15px;
+	overflow-y: auto;
+}
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.9);
+}
+.modal-content {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+}
+.close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+}
+li{
+	margin-top: 15px;
+}
+.a{
+	background-color: #CDDEFF;
+	border-radius: 25px; 
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
 </style>
 <script>
 function getFormatDate(date){
@@ -148,6 +210,22 @@ function dateShow(idx){
 function reser(berthIdx,idx){
 	location.href = 'reserForm?berthIdx='+berthIdx+'&idx='+idx+'&startDate=${startDate}'
 	+'&endDate=${endDate}';
+}
+function openModal(imgSrc) {
+    var modal = document.getElementById('myModal');
+    var modalImg = document.getElementById('modalImg');
+    modal.style.display = 'block';
+    modalImg.src = imgSrc;
+}
+function closeModal() {
+    var modal = document.getElementById('myModal');
+    modal.style.display = 'none';
+}
+window.onclick = function (event) {
+    var modal = document.getElementById('myModal');
+    if (event.target == modal) {
+        modal.style.display = 'none';
+    }
 }
 </script>
 </head>
@@ -239,17 +317,49 @@ function reser(berthIdx,idx){
 	<tr><td><c:if test="${berth.berthRefri==1}">냉장고 있음</c:if><c:if test="${berth.berthRefri==0 }"></c:if></td></tr>
 </table>
 </c:forEach>
-
 </div>
-<div>
+<div class="review">
 <c:if test="${empty review }">
 	<h5>리뷰가 없습니다</h5>
 </c:if>
 <c:if test="${not empty review }">
-	<ul>
-		<li>{review.
-	</ul>
+	<c:forEach items="${review }" var="review">
+	<div class="a">
+		<ul>  
+			<li><c:out value="${fn:substring(review.userId, 0, 3)}" />****</li>
+			
+			<li>${review.reviewDate }</li>
+			<c:if test="${review.reviewScore == 1 }">
+				⭐<span class="star">⭐⭐⭐⭐</span>
+			</c:if>
+			<c:if test="${review.reviewScore == 2 }">
+				⭐⭐<span class="star">⭐⭐⭐</span>
+			</c:if>
+			<c:if test="${review.reviewScore == 3 }">
+				⭐⭐⭐<span class="star">⭐⭐</span>
+			</c:if>
+			<c:if test="${review.reviewScore == 4 }">
+				⭐⭐⭐⭐<span class="star">⭐</span>
+			</c:if>
+			<c:if test="${review.reviewScore == 5 }">
+				<li>⭐⭐⭐⭐⭐</li>
+			</c:if>
+		</ul>
+		<ul>
+			<li class="rcontent">${review.reviewContent }</li>
+		</ul>
+		<ul>
+			<c:if test="${not empty review.reviewImg }">
+				<li><img src=" /imgs/${review.reviewImg}" class="img" onclick="openModal('/imgs/${review.reviewImg}')"></li>
+			</c:if>
+		</ul>
+	</div>
+	</c:forEach>
 </c:if>
+</div>
+<div id="myModal" class="modal">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <img class="modal-content" id="modalImg">
 </div>
 </div>
 <%@include file="/WEB-INF/views/footer.jsp" %>

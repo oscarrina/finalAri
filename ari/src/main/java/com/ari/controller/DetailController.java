@@ -172,6 +172,9 @@ public class DetailController {
 			berth=service.berthDetail(dto);
 			review=service.reviewList(idx);
 			
+			for(int i=0;i<review.size();i++) {
+				review.get(i).setReviewContent(review.get(i).getReviewContent().replaceAll("\n", "<br>"));
+			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -184,9 +187,11 @@ public class DetailController {
 		mav.addObject("endDate", endDate);
 		mav.addObject("review", review);
 		mav.setViewName("detail/berthInfoDetail");
+		System.out.println(review);
 		return mav;
 		
 	}
+	
 	@RequestMapping("attDetail")
 	public ModelAndView attdetail(@RequestParam("attIdx") int idx) {
 		List<AttDTO> att =null;
