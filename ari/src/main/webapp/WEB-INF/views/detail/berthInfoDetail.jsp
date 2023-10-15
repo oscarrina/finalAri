@@ -76,6 +76,11 @@ h5{
 .reserSpan{
 	font-size: 20px;
 }
+.r1{
+	margin-top:30px;
+	border: 3px solid #253BFF;
+	border-radius: 25px;
+}
 </style>
 <script>
 function getFormatDate(date){
@@ -238,11 +243,14 @@ function reser(berthIdx,idx){
 </div>
 <div>
 <c:if test="${empty review }">
+	<div class="r1">
 	<h5>리뷰가 없습니다</h5>
+	</div>
 </c:if>
 <c:if test="${not empty review }">
 	<ul>
-		<li>{review.
+		<li>${review.userId}</li>
+		<li>${review.reviewContent }</li>
 	</ul>
 </c:if>
 </div>

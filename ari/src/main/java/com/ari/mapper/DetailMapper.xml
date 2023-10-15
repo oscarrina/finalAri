@@ -97,7 +97,11 @@
     	where festIdx=#{idx}
     </select>
     <select id="reviewList" parameterType="int" resultType="com.ari.review.model.ReviewDTO">
-		select * from review where berthIdx=#{berthIdx}
+		select * from
+    		(select r.userId,r.berthIdx, r.reviewContent, r.reviewDate,r.reviewScore,r.reviewImg
+    		from review r, berthinfo b
+    		where r.berthidx = b.idx
+    		order by r.reviewidx)a
 	</select>
   </mapper>
   

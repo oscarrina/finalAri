@@ -16,12 +16,12 @@ function reviewWrite(){
 function reviewSelect(){
 	location = 'myReview';
 }
-function reviewDel(reviewIdx) {
+function reviewDel(reseridx) {
 	if (confirm("리뷰를 삭제하시겠습니까?")) {
         $.ajax({
             type: "POST",
             url: "/reviewDel",
-            data: { reviewIdx: reviewIdx }
+            data: { reseridx: reseridx }
         });
     }
     location.reload();
@@ -62,7 +62,7 @@ style="background-color:#666CDE; width:400px; height:40px; font-size:15px;" oncl
 </td>
 <td class="planPrice"><label>${dto.reviewDate }</label></td>
   <td>
-  <button type="button" class="btn btn-primary reserCancelBtn" onclick="reviewDel(${dto.reviewIdx })">
+  <button type="button" class="btn btn-primary reserCancelBtn" onclick="reviewDel(${dto.reserIdx })">
   리뷰삭제
   </button>
   </td>
