@@ -13,6 +13,7 @@ import com.ari.like.model.LikeDTO;
 import com.ari.mapper.LikeMapper;
 import com.ari.mapper.MypageMapper;
 import com.ari.mapper.ReserMapper;
+import com.ari.plan.model.PlanTableDTO;
 import com.ari.reser.model.ReserDTO;
 import com.ari.review.model.ReviewDTO;
 
@@ -113,5 +114,23 @@ public class MypageServiceImple implements MypageService {
 	public String likeSelect(LikeDTO dto) {
 		String likeYN = likeMapper.likeSelect(dto);
 		return likeYN;
+	}
+	@Override
+	public Map<String, Object> myPlanSelect(Map<String, String> param) {
+		int cp = Integer.parseInt(param.get("cp"));
+		int listSize = Integer.parseInt(param.get("listSize"));
+		int start=(cp-1)*listSize+1;
+		int end=cp*listSize;
+		
+		param.put("start", String.valueOf(start));
+		param.put("end", String.valueOf(end));
+		
+		List<PlanTableDTO> list = mypageMapper.myPlanSelect(param);
+		int totalCnt = mypageMapper.planTotalCnt(param.get("userID"));
+		
+		HashMap<String, Object> result = new HashMap<String, Object>();
+		result.put("list", list);
+		result.put("totalCnt", totalCnt);
+		return result;
 	}
 }

@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ari.like.model.LikeDTO;
+import com.ari.plan.model.PlanTableDTO;
 import com.ari.reser.model.ReserDTO;
 import com.ari.review.model.ReviewDTO;
 
@@ -19,4 +20,6 @@ public interface MypageMapper {
 	public int reviewTotalCnt(String userId);
 	public List<LikeDTO> myPageLike(Map map);
 	public int likeTotalCnt(String userId);
+	public List<PlanTableDTO> myPlanSelect(Map map);
+	public int planTotalCnt(String userID);
 }
