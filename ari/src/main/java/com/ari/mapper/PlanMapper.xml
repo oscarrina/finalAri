@@ -52,4 +52,10 @@
 		0
 	)
 	</insert>
+	<delete id="planDelete" parameterType="Integer">
+		delete from plantable where planGroup = ${planGroup}
+	</delete>
+	<delete id="plannerDelete" parameterType="Integer">
+		delete from plannertable where plannerGroup = ${plannerGroup}
+	</delete>
 </mapper>

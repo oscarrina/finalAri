@@ -159,7 +159,7 @@ function numberCheck(){
               </div>
             </div>
             <div>
-            <img alt="숙박이미지" src="/img/${dto.berthInfoImg }">
+            <img alt="숙박이미지" src="/imgs/${dto.berthInfoImg }">
             </div>
           </div>
       </div>

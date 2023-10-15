@@ -46,5 +46,15 @@ public class PlanServiceImple implements PlanService {
 		int result = mapper.plannerInsert(dto);
 		return result;
 	}
+	@Override
+	public int planDelete(int planGroup) {
+		int result = mapper.planDelete(planGroup);
+		return result;
+	}
+	@Override
+	public int plannerDelete(int plannerGroup) {
+		int result = mapper.plannerDelete(plannerGroup);
+		return result;
+	}
 
 }

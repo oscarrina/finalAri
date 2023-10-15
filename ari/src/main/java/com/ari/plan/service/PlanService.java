@@ -15,4 +15,6 @@ public interface PlanService {
 	public int planInsert(PlanTableDTO dto);
 	public PlanTableDTO planList (PlanTableDTO dto);
 	public int plannerInsert(PlannerTableDTO dto);
+	public int planDelete(int planGroup);
+	public int plannerDelete(int plannerGroup);
 }

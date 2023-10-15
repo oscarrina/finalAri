@@ -20,6 +20,10 @@
 img{
 	border-radius: 25px;
 }
+.planShareImg{
+	width: 300px;
+	height: 150px;
+}
 
 </style>
 </head>
@@ -30,7 +34,7 @@ img{
 	<c:forEach items="${plan }" var="plan">
 		<table >
 			<tr>
-				<td width="300px" rowspan="3"><img alt="지역대표사진" src="/imgs/hotel.jpg"></td>
+				<td width="300px" rowspan="3"><img alt="지역대표사진" src="/img/${plan.planBigImg}" class="planShareImg"></td>
 				<td><h4 style="color:#253BFF;"><strong>${area[plan.planPoint]}</strong></h4></td>
 				<td><input type="button" onclick="location.href='shareForm?planIdx=${plan.planIdx}'" 
 				value="이 일정 공유하기" style="background-color:#253BFF; 
