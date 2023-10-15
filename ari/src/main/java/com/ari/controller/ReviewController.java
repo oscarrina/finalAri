@@ -63,24 +63,31 @@ public class ReviewController {
 		String userid=(String)session.getAttribute("sid");
 		dto.setUserId(userid);
 		dto.setBerthIdx(berthidx);
+		dto.setReserIdx(reseridx);
+		
 		
 		int result=0;
 		try {
 			result=service.reviewContent(dto);
+			ReserDTO reserDTO = new ReserDTO();
+            reserDTO.setUserId(userid);
+            reserDTO.setBerthIdx(berthidx);
+            reserDTO.setReserIdx(reseridx);
+            service.reserReviewUpdate(reserDTO);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		if(result>0) {
 			mav.addObject("userid", userid);
-			mav.setViewName("redirect:myReviewWrite");
+			mav.setViewName("redirect:myReview");
 		}else {
 			mav.addObject("msg", "리뷰 등록 실패");
 			mav.addObject("url", "myReviewWrite");
 			mav.setViewName("msg");
 		}
+		System.out.println("bbb:"+reseridx);
 		System.out.println("아이디"+userid);
-		
 		return mav;
 	}
 	
@@ -101,13 +108,19 @@ public class ReviewController {
 	}
 	@PostMapping("/reviewDel")
 	@ResponseBody
-	public ModelAndView reviewDel(@RequestParam("reviewIdx") int reviewIdx) {
+	public ModelAndView reviewDel(@RequestParam("reseridx")int reseridx) {
 		ModelAndView mav=new ModelAndView();
+		ReviewDTO dto = new ReviewDTO();
+		dto.setReserIdx(reseridx);
+		System.out.println("ccc"+reseridx);
+		
 		int result=0;
 		try {
-			ReviewDTO dto = new ReviewDTO();
-		    dto.setReviewIdx(reviewIdx);
+		    dto.setReserIdx(reseridx);
 			result=service.reviewDel(dto);
+			ReserDTO reserDTO = new ReserDTO();
+			reserDTO.setReserIdx(reseridx);
+            service.reserReviewDel(reserDTO);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
