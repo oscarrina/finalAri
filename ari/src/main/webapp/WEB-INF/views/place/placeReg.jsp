@@ -164,7 +164,7 @@ function formSubmit(){
 		<div id="2" onclick = "clickCategory(this)">음식점</div>
 		<div id="3" onclick = "clickCategory(this)">숙박</div>
 	</div>
-	<form name = "fm" enctype="multipart/form-data" id = "placeForm" >
+	<form name = "fm" id = "placeForm" >
 	<div class = "containerBody" >
 		<div class="regcom">
 			<input type = "hidden" value = "${sid}" name = "userId">

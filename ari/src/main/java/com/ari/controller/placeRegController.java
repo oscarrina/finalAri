@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -53,11 +54,8 @@ public class placeRegController {
 	}
    
 	@PostMapping("attReg")
-	public ModelAndView attReg(AttDTO dto,
-			@RequestParam("infoImg")MultipartFile infoImg) {
+	public ModelAndView attReg(AttDTO dto) {
 		ModelAndView mav = new ModelAndView();
-		copyInto(infoImg);
-		dto.setInfoImg(infoImg.getOriginalFilename());
 		int result = service.attInsert(dto);
 		String msg = result==1?"등록성공":"등록실패";
 		mav.addObject("msg",msg);
