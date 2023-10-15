@@ -56,7 +56,7 @@ public class CeoController {
 		}else {
 			List<ReserDTO> list = service.reserSelect(cp, listSize,userId);
 			String url = "/reserManager";
-			String pageStr = com.ari.page.PageModuleNotice.makeNoticePage(url, totalCnt, listSize, pageSize, cp);
+			String pageStr = com.ari.page.PageModule.makePage(url, totalCnt, listSize, pageSize, cp);
 			if(list == null) {pageStr = "";}
 			mav.addObject("pageStr", pageStr);
 			mav.addObject("list", list);
@@ -65,17 +65,4 @@ public class CeoController {
 		}
 		return mav;
 	}
-	@GetMapping("/reserCancel")
-	@ResponseBody
-	public String reserCancel(@RequestParam("param")int reserIdx) {
-		int result = service.reserCancel(reserIdx);
-		String rtn = "";
-		if(result == 1) {
-			rtn = "성공";
-		}else{
-			rtn = "실패";
-		}
-		return rtn;
-	}
-
 }

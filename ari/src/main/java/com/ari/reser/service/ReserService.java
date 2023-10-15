@@ -15,7 +15,11 @@ public interface ReserService {
 	public List<ReserDTO> reserSelect(int cp,int listSize,String userId);
 	public int reserTotalCnt(String userId);
 	public int reserCancel(int reserIdx);
+	public int reserVisitDel(int idx);
 	public ReserDTO reserForm(int berthIdx,int idx);
 	public int reserInsert(ReserDTO dto);
 	public int reserVisitInsert(List<ReserDTO> list);
+	public String berthInfoName(int idx);
+	public ReserDTO ceoCancelSMS(int berthIdx);
+	public int reserPayState(int reserIdx);
 }

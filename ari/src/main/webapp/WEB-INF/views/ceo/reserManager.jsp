@@ -8,10 +8,15 @@
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="/css/adminMainLayout.css">
 <link rel="stylesheet" type="text/css" href="/css/adminNotice.css">
+<style>
+.reserManagerPage{
+	margin-left: 350px;
+}
+</style>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src = "js/httpRequest.js"></script>
 <script>
-function cancel(idx){
+function cancel(idx,berthIdx,reserPrice,reserPaymentKey){
 	swal({
 		  title: "아리아리",
 		  text: "예약을 취소하시겠습니까?",
@@ -25,8 +30,9 @@ function cancel(idx){
 	              icon: "success",
 	            }).then((aaa) => {
 	              let userType = document.getElementById("userType").value;
-	                let param = "param="+idx+"&userType="+userType;
-	            	sendRequest('reserCancel',param,showResult,'GET');
+	                let param = "idx="+idx+"&berthIdx="+berthIdx+"&userType="+userType+
+	                "&reserPrice="+reserPrice+"&reserPaymentKey="+reserPaymentKey;
+	            	sendRequest('reserCancel',param,showResult,'POST');
 				});
 	          }
 		});
@@ -36,7 +42,7 @@ function showResult(){
 		if(XHR.status == 200){
 			let data = XHR.responseText;
 			if(data == '성공'){
-				location.href = 'reserManager';
+				location.href = 'myReser';
 			}else{
 				swal('아리아리','다시 시도해주세요');
 			}
@@ -69,7 +75,6 @@ function showResult(){
 <ul class="planInfo">
 	<li class="planSi">${dto.berthInfoName }</li>
 	<li class="planSubject">${dto.berthName }</li>
-	<li class="planSubject">${dto.reserPer }명</li>
 	<li class="planDay">${dto.reserVisitStart } ~ ${dto.reserVisitEnd }</li>
 </ul>
 </td>
@@ -83,12 +88,10 @@ function showResult(){
   </ul>
   </td>
   <td>
-  <c:if test="${dto.reserVisitStart > now }">
-  <c:if test="${dto.reserState == 1 }">
-  <button type="button" class="btn btn-primary reserCancelBtn" onclick="cancel(${dto.reserIdx })">
+  <c:if test="${dto.reserState == 1}">
+  <button type="button" class="btn btn-primary reserCancelBtn" onclick="cancel(${dto.reserIdx },${dto.berthIdx },${dto.reserPrice },'${dto.reserPaymentKey }')">
   예약취소
   </button>
-  </c:if>
   <c:if test="${dto.reserState == 0 }">
   <span class="planDay">취소완료</span>
   </c:if>
@@ -99,6 +102,7 @@ function showResult(){
   <input type="hidden" id="userType" value="ceo">
   </c:forEach>
   </c:if>
+  <div class="reserManagerPage">${pageStr }</div>
 </div>
     </div>
     <%@include file="ceoFooter.jsp" %>

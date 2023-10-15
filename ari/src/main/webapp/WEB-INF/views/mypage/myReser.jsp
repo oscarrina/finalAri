@@ -11,7 +11,7 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src = "js/httpRequest.js"></script>
 <script>
-function cancel(idx){
+function cancel(idx,berthIdx,reserPrice,reserPaymentKey){
 	swal({
 		  title: "아리아리",
 		  text: "예약을 취소하시겠습니까?",
@@ -25,8 +25,9 @@ function cancel(idx){
 	              icon: "success",
 	            }).then((aaa) => {
 	              let userType = document.getElementById("userType").value;
-	                let param = "param="+idx+"&userType="+userType;
-	            	sendRequest('reserCancel',param,showResult,'GET');
+	                let param = "idx="+idx+"&berthIdx="+berthIdx+"&userType="+userType+
+	                "&reserPrice="+reserPrice+"&reserPaymentKey="+reserPaymentKey;
+	            	sendRequest('reserCancel',param,showResult,'POST');
 				});
 	          }
 		});
@@ -85,13 +86,18 @@ function showResult(){
   <c:if test="${dto.reserVisitStart < now }">
   
   </c:if>
+  <c:if test="${dto.reserPayState == 1 }">
   <c:if test="${dto.reserState == 1 }">
-  <button type="button" class="btn btn-primary reserCancelBtn" onclick="cancel(${dto.reserIdx })">
+  <button type="button" class="btn btn-primary reserCancelBtn" onclick="cancel(${dto.reserIdx },${dto.berthIdx },${dto.reserPrice },'${dto.reserPaymentKey }')">
   예약취소
   </button>
   </c:if>
   <c:if test="${dto.reserState == 0 }">
   <span class="planDay">취소완료</span>
+  </c:if>
+  </c:if>
+  <c:if test="${dto.reserPayState == 0 }">
+  <span class="planDay">환불완료</span>
   </c:if>
   </td>
   </tr>

@@ -6,12 +6,12 @@
   <select id="reserSelect" parameterType="map" resultType="com.ari.reser.model.ReserDTO">
   select * from
 		(select rownum as rnum,a.* from
-		(select r.reseridx,r.idx,r.userid,r.resername,
+		(select r.reseridx,r.berthidx,r.userid,r.resername,
 		r.reservisitstart,r.reservisitend,
-		r.reserprice,r.reserpriceday,r.resertel,r.reserstate,
-		r.reserreview,r.reserper,b.berthinfoimg,b.berthinfoname,c.berthname
+		r.reserprice,r.reserpriceday,r.reserpaystate,r.resertel,r.reserstate,
+		r.reserreview,r.reserpaymentkey,b.infoimg,b.infoname,c.berthname
 		from reser r,berthinfo b,berth c
-		where r.idx = b.idx and r.idx = c.berthidx and b.userbn = (select userbn from userinfo where userid = #{userid})
+		where c.idx = b.idx and r.berthidx = c.berthidx and b.userbn = (select userbn from userinfo where userid = #{userid})
 		order by reservisitstart) a) b
 	where rnum<![CDATA[>=]]>#{start} and rnum<![CDATA[<=]]>#{end}
   </select>
@@ -28,6 +28,11 @@
   	set reserstate = 0
   	where reseridx = #{reserIdx}
   </update>
+  <delete id="reserVisitDel" parameterType="Integer">
+  	delete 
+  	from reservisit
+  	where berthidx = #{idx}
+  </delete>
   <select id="reserForm" parameterType="map" resultType="com.ari.reser.model.ReserDTO">
   	select b.berthName,b.berthPrice as reserPrice,bi.berthInfoStart,
   	bi.berthInfoEnd,bi.infoImg as berthInfoImg,bi.infoname as berthInfoName
@@ -37,7 +42,7 @@
   <insert id="reserInsert" parameterType="com.ari.reser.model.ReserDTO">
   	insert into reser
   	values(reseridx.nextval,#{berthIdx},#{userId},#{reserName},#{reserVisitStart},#{reserVisitEnd},
-  	#{reserPrice},sysdate,#{reserTel},1,'N',#{reserPaymentKey})
+  	#{reserPrice},sysdate,1,#{reserTel},1,'N',#{reserPaymentKey})
   </insert>
   <update id="reserVisitInsert" parameterType="java.util.List">
   INSERT ALL
@@ -45,5 +50,20 @@
   		 INTO reservisit (berthIdx, reserVisit) VALUES (#{item.berthIdx}, #{item.reserVisit})
   	</foreach>
   SELECT * FROM DUAL
-</update>
+  </update>
+  <select id="berthInfoName" resultType="String" parameterType="Integer">
+  	select infoname as berthInfoName
+  	from berthinfo
+  	where idx = #{idx}
+  </select>
+  <select id="ceoCancelSMS" resultType="com.ari.reser.model.ReserDTO" parameterType="Integer">
+  	select r.resertel,r.resername,b.infoname as berthInfoName
+	from reser r,berthinfo b
+	where r.reseridx = ${reserIdx} and r.berthidx = b.idx and reserstate = 1
+  </select>
+  <update id="reserPayState" parameterType="Integer">
+  	update reser
+  	set reserpaystate = 0
+  	where reseridx = #{reserIdx}
+  </update>
   </mapper>

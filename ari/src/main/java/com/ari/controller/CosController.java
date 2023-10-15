@@ -70,6 +70,9 @@ public class CosController {
 		}
 		HttpSession session = request.getSession();
 		String userId = (String) session.getAttribute("sid");
+		if(userId == null || userId.equals("")) {
+			userId = "";
+		}
 		likeDto.setUserId(userId);
 		likeDto.setIdx(idx);
 		likeDto.setLikeType(2);

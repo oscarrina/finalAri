@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ari.like.model.LikeDTO;
 import com.ari.mypage.service.MypageService;
 import com.ari.reser.model.ReserDTO;
 
@@ -117,7 +118,7 @@ public class MypageController {
 	
 	@GetMapping("/myLike")
 	public ModelAndView myLike(@RequestParam(value = "cp", defaultValue = "1")int cp,
-			HttpServletRequest req) {
+			HttpServletRequest req,LikeDTO dto) {
 		ModelAndView mav = new ModelAndView();
 		HashMap<String, String> param = new HashMap<String, String>();
 		int listSize=6;

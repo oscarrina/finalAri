@@ -7,6 +7,8 @@
 <title>아리아리 예약 확인</title>
 <link rel="stylesheet" href="./bootstrap.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+<script src ="/js/httpRequest.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <style>
 .login-wrap{
   width:100%;
@@ -39,7 +41,18 @@ function back(){
 	location.href = '/';
 }
 function myReser(){
-	location.href = 'myPage';
+	location.href = '/myReser';
+}
+window.onload = function(){
+		var param = 'tel=${reserTel}'+'&reserName=${reserName}'+'&type=2'+'&berthName=${berthInfoName}';
+		sendRequest('/sendNum',param,sendMsg2,'POST');
+}
+function sendMsg2(){
+	if(XHR.readyState==4){
+		if(XHR.status==200){
+			var data = XHR.responseText;
+		}
+	}
 }
 </script>
 </head>

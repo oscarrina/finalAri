@@ -60,7 +60,7 @@ public class SmsService {
 
 	  return encodeBase64String;
 	}
-	public void sendSMS(String tel,String msg,String berthName) {
+	public void sendSMS(String tel,String msg,String reserName,String berthName) {
 		String hostNameUrl = "https://sens.apigw.ntruss.com";     		// 호스트 URL
 		String requestUrl= "/sms/v2/services/";                   		// 요청 URL
 		String requestUrlType = "/messages";                      		// 요청 URL
@@ -137,9 +137,8 @@ public class SmsService {
         }
 	}
     
-    public String sendRandomMessage(String tel,int type,String berthName) {
+    public String sendRandomMessage(String tel,int type,String reserName,String berthInfoName) {
     	String numStr = "";
-    	berthName = "";
     	if(type == 1) {
         Random rand = new Random();
         for (int i = 0; i < 6; i++) {
@@ -147,10 +146,13 @@ public class SmsService {
             numStr += ran;
         }
         String msg = "회원님의 인증번호는 ["+numStr+"]입니다.";
-        sendSMS(tel,msg,berthName);
+        sendSMS(tel,msg,reserName,berthInfoName);
     	}else if(type == 2){
-    		String msg = berthName+"의 예약이 확정되었습니다.";
-    		sendSMS(tel,msg,berthName);
+    		String msg = "[아리아리 예약내역]\n"+reserName+"님 성함으로 "+berthInfoName+"에 예약되셨습니다.";
+    		sendSMS(tel,msg,reserName,berthInfoName);
+    	}else if(type == 3) {
+    		String msg = "[아리아리 예약취소내역]\n"+reserName+"님 성함으로 예약된 "+berthInfoName+"이 취소되었습니다.";
+    		sendSMS(tel,msg,reserName,berthInfoName);
     	}
         return numStr;
     }

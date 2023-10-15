@@ -94,7 +94,7 @@ public class KakaoServiceImple implements KakaoService {
             StringBuilder sb = new StringBuilder();
             sb.append("grant_type=authorization_code");
             sb.append("&client_id=3623a44fed0e1055e089acc18ec7aacf");
-            sb.append("&redirect_uri=http://localhost:9091/oauth/kakao");
+            sb.append("&redirect_uri=http://192.168.219.102:9000/oauth/kakao");
             sb.append("&code=" + authorize_code);
             bw.write(sb.toString());
             bw.flush();
