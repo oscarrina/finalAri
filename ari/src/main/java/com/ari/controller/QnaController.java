@@ -21,6 +21,8 @@ public class QnaController {
 	@Autowired
 	private QnaService service;
 	
+	
+	
 	@RequestMapping("/writeQForm")
 	public ModelAndView writeQForm(HttpSession session) {
 		
@@ -124,8 +126,8 @@ public class QnaController {
 	@RequestMapping("/ceoQnaDetail")
 	public ModelAndView ceoQnaDetail(@RequestParam("qnaIdx")int qnaIdx) {
 		
-		List<QnaDTO> lists=null;
-		List<ReplyDTO> list=null;
+		QnaDTO qna=null;
+		ReplyDTO reply=null;
 		
 		HashMap<Integer,String> map=new HashMap<Integer,String>();
 		map.put(1, "이용문의");
@@ -133,16 +135,16 @@ public class QnaController {
 		map.put(3, "사업자정보");
 		map.put(4, "기타");
 		try {
-			lists=service.QnaDetail(qnaIdx);
-			list=service.replyList(qnaIdx);
+			qna=service.QnaDetail(qnaIdx);
+			reply=service.replyList(qnaIdx);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 		ModelAndView mav=new ModelAndView();
-		mav.addObject("lists",lists);
-		mav.addObject("reply",list);
+		mav.addObject("qna",qna);
+		mav.addObject("reply",reply);
 		mav.addObject("cate",map);
 		mav.setViewName("qna/ceoQnaDetail");
 		return mav;
@@ -177,19 +179,20 @@ public class QnaController {
 		return mav;
 	}
 	
-	@RequestMapping("myQnaDetail")
+	@RequestMapping("/myQnaDetail")
 	public ModelAndView QnaDetail(@RequestParam("qnaIdx")int qnaIdx) {
 		
-		List<QnaDTO> lists=null;
-		List<ReplyDTO> list=null;
+		QnaDTO qna=null;
+		ReplyDTO reply=null;
 		
 		try {
-			lists=service.QnaDetail(qnaIdx);
-			list=service.replyList(qnaIdx);
+			qna=service.QnaDetail(qnaIdx);
+			reply=service.replyList(qnaIdx);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		
 		HashMap<Integer,String> map=new HashMap<Integer,String>();
 		map.put(1, "예약/결제");
@@ -200,11 +203,86 @@ public class QnaController {
 		
 		
 		ModelAndView mav=new ModelAndView();
-		mav.addObject("lists",lists);
-		mav.addObject("reply",list);
+		mav.addObject("qna",qna);
+		mav.addObject("reply",reply);
 		mav.addObject("cate",map);
 		mav.setViewName("mypage/myQnaDetail");
 		return mav;
 
 	}
+	
+	@RequestMapping("/adminQnaList")
+	public ModelAndView adminQnaList() {
+		
+		List<QnaDTO> lists=null;
+		try {
+			lists=service.adminQnaList();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		ModelAndView mav=new ModelAndView();
+		mav.setViewName("qna/adminQnaList");
+		mav.addObject("lists",lists);
+		return mav;
+	}
+	
+	@RequestMapping("/adminQnaDetail")
+	public ModelAndView adminQnaDetail(@RequestParam("qnaIdx")int qnaIdx) {
+		
+		QnaDTO qna=null;
+		ReplyDTO reply=null;
+		
+		
+		HashMap<Integer,String> map=new HashMap<Integer,String>();
+		map.put(1, "예약/결제");
+		map.put(2, "취소/환불");
+		map.put(3, "이용문의");
+		map.put(4, "회원정보");
+		map.put(5, "기타");
+		
+		
+		try {
+			qna=service.QnaDetail(qnaIdx);
+			reply=service.replyList(qnaIdx);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("qna",qna);
+		mav.addObject("reply",reply);
+		mav.addObject("cate",map);
+
+		mav.setViewName("qna/adminQnaReply");
+		return mav;
+	}
+	
+	@RequestMapping("/adminReply")
+	public ModelAndView adminReply(ReplyDTO dto,@RequestParam("qnaIdx")int qnaIdx){
+		
+		dto.setAdminId("admin");
+		dto.setQnaIdx(qnaIdx);
+		
+		int result1=0;
+		int result2=0;
+		
+		try {
+			result1=service.adminReply(dto);
+			result2=service.qnaOk(qnaIdx);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		String msg=result1>0&&result2>0?"답변 완료!":"답변 등록에 실패하였습니다. 잠시후 다시 시도해주세요.";
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("msg",msg);
+		mav.addObject("url","adminQnaList");
+		mav.setViewName("member/memberMsg");
+		return mav;
+	}
+
 }

@@ -12,9 +12,15 @@ public interface QnaService {
 	
 	public List<QnaDTO> QnaList(String sid) throws Exception;
 	
-	public List<QnaDTO> QnaDetail(int qnaIdx) throws Exception;
+	public QnaDTO QnaDetail(int qnaIdx) throws Exception;
 	
 	public int totalCnt() throws Exception;
 	
-	public List<ReplyDTO> replyList(int idx) throws Exception;
+	public ReplyDTO replyList(int qnaIdx) throws Exception;
+	
+	public List<QnaDTO> adminQnaList() throws Exception;
+	
+	public int adminReply(ReplyDTO dto) throws Exception;
+	
+	public int qnaOk(int qnaIdx) throws Exception;
 }

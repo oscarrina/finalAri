@@ -12,9 +12,15 @@ public interface QnaMapper {
 	
 	public List<QnaDTO> QnaList(String sid);
 	
-	public List<QnaDTO> QnaDetail(int qnaidx);
+	public QnaDTO QnaDetail(int qnaIdx);
 	
 	public int totalCnt();
 	
-	public List<ReplyDTO> replyList(int idx);
+	public ReplyDTO replyList(int qnaIdx);
+	
+	public List<QnaDTO> adminQnaList();
+	
+	public int adminReply(ReplyDTO dto);
+	
+	public int qnaOk(int qnaIdx);
 }
