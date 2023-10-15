@@ -1,0 +1,28 @@
+diff a/ari/src/main/java/com/ari/mapper/ReviewMapper.xml b/ari/src/main/java/com/ari/mapper/ReviewMapper.xml	(rejected hunks)
+@@ -14,13 +14,23 @@
+ 				#{reviewScore},
+ 				#{reviewImg})
+ 	</insert>
++	<update id="reserReviewUpdate" parameterType="com.ari.reser.model.ReserDTO">
++		update reser
++        set reserReview = 'Y' 
++        where userId = #{userId} and berthIdx = #{berthIdx} and reserIdx=#{reserIdx}
++	</update>
+ 	<select id="getBerthidx" parameterType="int" resultType="int">
+ 		select berthidx
+ 		from reser
+ 		where reseridx=#{idx}
+ 	</select>
+-	<delete id="reviewDel">
++	<delete id="reviewDel" parameterType="com.ari.review.model.ReviewDTO">
+ 		delete from review
+-		where reviewIdx=#{reviewIdx}
++		where reserIdx=#{reserIdx}
+ 	</delete>
++	<update id="reserReviewDel" parameterType="com.ari.reser.model.ReserDTO">
++		update reser
++        set reserReview = 'N' 
++        where reserIdx=#{reserIdx}
++	</update>
+ </mapper>
+\ No newline at end of file

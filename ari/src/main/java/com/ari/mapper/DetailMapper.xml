@@ -99,10 +99,10 @@
     </select>
     <select id="reviewList" parameterType="int" resultType="com.ari.review.model.ReviewDTO">
 		select * from
-    		(select r.userId,r.berthIdx, r.reviewContent, r.reviewDate,r.reviewScore,r.reviewImg
+    		(select r.reviewIdx,r.reserIdx, r.userId,r.berthIdx, r.reviewContent, r.reviewDate,r.reviewScore,r.reviewImg
     		from review r, berthinfo b
     		where r.berthidx = b.idx
-    		order by r.reviewidx)a
+    		order by r.reviewDate)a
 	</select>
   </mapper>
   

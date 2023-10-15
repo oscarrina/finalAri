@@ -62,7 +62,7 @@ style="background-color:#666CDE; width:400px; height:40px; font-size:15px;" oncl
 </td>
 <td class="planPrice"><label>${dto.reviewDate }</label></td>
   <td>
-  <button type="button" class="btn btn-primary reserCancelBtn" onclick="reviewDel(${dto.reviewIdx })">
+  <button type="button" class="btn btn-primary reserCancelBtn" onclick="reviewDel(${dto.reserIdx })">
   리뷰삭제
   </button>
   </td>
