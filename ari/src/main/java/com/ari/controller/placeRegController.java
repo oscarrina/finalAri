@@ -119,6 +119,18 @@ public class placeRegController {
 		mav.setViewName("place/myPlaceReg");
 		return mav;
 	}
+	@GetMapping("placeDel")
+	public ModelAndView replaceSelect(@RequestParam(value = "type", defaultValue = "1")int type,
+			@RequestParam(value = "idx")int idx){
+		ModelAndView mav = new ModelAndView();
+		switch(type) {
+		case 1 : AttDTO dto1 = service.attDelSelect(idx);mav.addObject("dto", dto1);break;
+		case 2 : FoodDTO dto2 = service.foodDelSelect(idx);mav.addObject("dto", dto2);break;
+		case 3 : BerthInfoDTO dto3 = service.berthInfoDelSelect(idx);mav.addObject("dto", dto3);break;
+		}
+		mav.setViewName("place/placeDel");
+		return mav;
+	}
 	
 	public void copyInto(MultipartFile infoImg) {
 		File f=new File("c:/student_java/upload/"+infoImg.getOriginalFilename());

@@ -15,7 +15,7 @@ public interface PlaceService {
 	public List<AttDTO> attSelect(String userID);
 	public List<FoodDTO> foodSelect(String userID);
 	public List<BerthInfoDTO> berthInfoSelect(String userID);
-	public List<AttDTO> attDelSelect(int idx);
-	public List<FoodDTO> foodDelSelect(int idx);
-	public List<BerthInfoDTO> berthInfoDelSelect(int idx);
+	public AttDTO attDelSelect(int idx);
+	public FoodDTO foodDelSelect(int idx);
+	public BerthInfoDTO berthInfoDelSelect(int idx);
 }

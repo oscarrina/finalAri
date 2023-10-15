@@ -14,20 +14,27 @@
 <style>
 .container{
 	display: flex;
-	padding-bottom: 100px;
+	padding-bottom: 50px;
+	padding-top: 50px;
+	border-bottom: 1px solid skyblue;
 }
 #type{
 	margin-bottom: 30px;
 }
-.img{
-	width: 100px;
-	height: 100px;
+.img, img{
+	width: 150px;
+	height: 150px;
+}
+.title{
+	font-size: 40px;	
+	padding-bottom: 10px;
 }
 .infoContainer{
 	width : 500px; 
+	margin-left: 50px;
 }
 .button{
-	width:	100px;
+	width: 100px;
 }
 .link{
 	text-decoration: none;
@@ -40,7 +47,7 @@
 <script>
 var type = "1";
 function typeChange(sel){
-	type = sel.value
+	type = sel.value;
 	location.href = 'placeList?type='+type;
 }
 </script>
@@ -61,7 +68,7 @@ function typeChange(sel){
 		    </select>
 			<c:forEach var = "dto" items="${list}">
 				<div class = container> 
-			    <div class = img><img src = "${dto.infoImg}"></div>
+			    <div class = img><img src = "/imgs/${dto.infoImg}"></div>
 			    	<div class = infoContainer>
 			    		<div class = "title">${dto.infoName}</div>
 			    		<c:if test="${type ==1}">
@@ -82,7 +89,6 @@ function typeChange(sel){
 			    	</div>
 			   	</div>
 			    </c:forEach>
-				<div class = "container"></div>
 			</div>
 		</div>
 	</div>

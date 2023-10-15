@@ -46,17 +46,17 @@ public class PlaceServiceImple implements PlaceService {
 		return arr;
 	}
 	@Override
-	public List<AttDTO> attDelSelect(int idx){
-		List<AttDTO> arr = mapper.attDelSelect(idx);
+	public AttDTO attDelSelect(int idx){
+		AttDTO arr = mapper.attDelSelect(idx);
 		return arr;
 	}
 	@Override
-	public List<BerthInfoDTO> berthInfoDelSelect(int idx) {
-		List<BerthInfoDTO> arr = mapper.berthInfoDelSelect(idx);
+	public BerthInfoDTO berthInfoDelSelect(int idx) {
+		BerthInfoDTO arr = mapper.berthInfoDelSelect(idx);
 		return arr;
 	}@Override
-	public List<FoodDTO> foodDelSelect(int idx) {
-		List<FoodDTO> arr = mapper.foodDelSelect(idx);
+	public FoodDTO foodDelSelect(int idx) {
+		FoodDTO arr = mapper.foodDelSelect(idx);
 		return arr;
 	}
 
