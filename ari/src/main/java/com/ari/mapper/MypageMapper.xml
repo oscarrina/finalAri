@@ -61,4 +61,18 @@
   	from liketable
   	where userid = #{userId}
   </select>
+  <select id="myPlanSelect" parameterType="map" resultType="com.ari.plan.model.PlanTableDTO">
+  	select * from
+		(select rownum as rnum,a.* from
+		(select *
+		from plantable
+		where userid = #{userID}
+		order by planidx desc) a) b
+	where rnum<![CDATA[>=]]>#{start} and rnum<![CDATA[<=]]>#{end}
+  </select>
+  <select id="planTotalCnt" parameterType="String" resultType="Integer">
+  	select count(*)
+  	from plantable
+  	where userid = #{userID}
+  </select>
 </mapper>

@@ -29,13 +29,52 @@ public class MypageController {
 	private MypageService service;
 	
 	@GetMapping("/myPage")
-	public String myPage(HttpServletRequest req) {
+	public ModelAndView myPage(@RequestParam(value = "cp", defaultValue = "1")int cp,
+			HttpServletRequest req) {
 		HttpSession session = req.getSession();
+		ModelAndView mav = new ModelAndView();
 		String userId = (String)session.getAttribute("sid");
-				if(userId == null || userId.equals("")) {
-					return "member/memberLogin";
-				}
-		return "mypage/myPlan";
+			if(userId == null || userId.equals("")) {
+				mav.addObject("msg", "로그인 후 이용바랍니다.");
+				mav.addObject("url", "/memberLogin");
+				mav.setViewName("msg");
+				return mav;
+			}
+			HashMap<String, String> param = new HashMap<String, String>();
+			int listSize=5;
+			int pageSize=5;
+			
+			param.put("listSize", String.valueOf(listSize));
+			param.put("cp", String.valueOf(cp));
+			param.put("userID", userId);
+			
+			HashMap<Integer, String> areamap=new HashMap<Integer, String>();
+			areamap.put(1, "서울");
+			areamap.put(2, "인천");
+			areamap.put(3, "대전");
+			areamap.put(4, "대구");
+			areamap.put(5, "광주");
+			areamap.put(6, "부산");
+			areamap.put(7, "울산");
+			areamap.put(8, "세종특별자치시");
+			areamap.put(31, "경기도");
+			areamap.put(32, "강원특별자치도");
+			areamap.put(33, "충청북도");
+			areamap.put(34, "충청남도");
+			areamap.put(35, "경상북도");
+			areamap.put(36, "경상남도");
+			areamap.put(37, "전라북도");
+			areamap.put(38, "전라남도");
+			areamap.put(39, "제주도");
+			
+			Map<String, Object> list = service.myPlanSelect(param);
+			String url = "/myPlan";
+			String pageStr = com.ari.page.PageModule.makePage(url, (int)list.get("totalCnt"), listSize, pageSize, cp);
+			mav.addObject("list", list.get("list"));
+			mav.addObject("pageStr", pageStr);
+			mav.addObject("areamap", areamap);
+			mav.setViewName("mypage/myPlan");
+		return mav;
 	}
 	
 	@GetMapping("/myReser")
