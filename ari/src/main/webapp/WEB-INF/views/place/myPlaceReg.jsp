@@ -19,9 +19,9 @@
 #type{
 	margin-bottom: 30px;
 }
-.img{
-	width: 100px;
-	height: 100px;
+.img, img{
+	width: 200px;
+	height: 150px;
 }
 .infoContainer{
 	width : 500px; 
@@ -60,8 +60,8 @@ function typeChange(sel){
 		    	<option value ="3" ${type==3?"selected":""}>숙소</option>
 		    </select>
 			<c:forEach var = "dto" items="${list}">
-				<div class = container> 
-			    <div class = img><img src = "${dto.infoImg}"></div>
+				<div class = "container"> 
+			    <div class = "img"><img src = "/imgs/${dto.infoImg}"></div>
 			    	<div class = infoContainer>
 			    		<div class = "title">${dto.infoName}</div>
 			    		<c:if test="${type ==1}">
