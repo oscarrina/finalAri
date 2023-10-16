@@ -82,6 +82,19 @@ h5{
 	border: 3px solid #253BFF;
 	border-radius: 25px;
 }
+.border1{
+	border-top:none;
+	border-left:none;
+	border-right:none;
+	border-bottom: 2px solid #4068A7;
+	border-radius: 0;
+	margin-top: 5px;
+	margin-bottom:5px;
+	
+}
+.width1{
+	width:500px;
+}
 ul{
 	vertical-align: top;
 	list-style:none;
