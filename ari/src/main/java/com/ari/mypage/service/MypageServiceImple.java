@@ -83,7 +83,9 @@ public class MypageServiceImple implements MypageService {
 		param.put("end", String.valueOf(end));
 		
 		List<ReviewDTO> list = mypageMapper.myPageReview(param);
+		System.out.println(param.get("userId"));
 		int totalCnt = mypageMapper.reviewTotalCnt(param.get("userId"));
+		if(totalCnt == 0) {totalCnt = 1;}
 		
 		HashMap<String, Object> result = new HashMap<String, Object>();
 		result.put("list", list);

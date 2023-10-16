@@ -166,6 +166,7 @@ public class DetailController {
 		dto.setIdx(idx);
 		dto.setStartDate(startDate);
 		dto.setEndDate(endDate);
+		double score = 0;
 		
 		try {
 			berthInfo=service.berthInfoDetail(idx);
@@ -175,6 +176,9 @@ public class DetailController {
 			for(int i=0;i<review.size();i++) {
 				review.get(i).setReviewContent(review.get(i).getReviewContent().replaceAll("\n", "<br>"));
 			}
+			for(int i=0; i<berthInfo.size(); i++) {
+				score = (Math.ceil(berthInfo.get(i).getReviewScore()*100)/100.0);
+			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -183,6 +187,7 @@ public class DetailController {
 		mav.addObject("berthInfo",berthInfo);
 		mav.addObject("berth",berth);
 		mav.addObject("dto", dto);
+		mav.addObject("score", score);
 		mav.addObject("startDate", startDate);
 		mav.addObject("endDate", endDate);
 		mav.addObject("review", review);

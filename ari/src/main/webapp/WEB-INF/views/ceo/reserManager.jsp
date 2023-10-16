@@ -71,7 +71,7 @@ function showResult(){
       <c:forEach var="dto" items="${list }">
 <table class="reserTable">
 <tr>
-<td class="reserClass"><img alt="숙박업체이미지" src="/img/${dto.berthInfoImg }" class="mypageImg"></td>
+<td class="reserClass"><img alt="숙박업체이미지" src="/img/hotel.jpg" class="mypageImg"></td>
 <td class="reserInfo">
 <ul class="planInfo">
 	<li class="planSi">${dto.berthInfoName }</li>

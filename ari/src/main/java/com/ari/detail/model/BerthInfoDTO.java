@@ -28,4 +28,5 @@ public class BerthInfoDTO {
 	private String berthInfoStart;
 	private String berthInfoEnd;
 	private String infoImg;
+	private Double reviewScore;
 }

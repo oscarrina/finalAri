@@ -143,6 +143,14 @@ li{
 	margin-top: 5px;
 	margin-bottom: 5px;
 }
+.reviewScore{
+	color: yellow;
+	font-size: 30px;
+}
+.reviewSpan{
+	font-size: 25px;
+	font-weight: bold;
+}
 </style>
 <script>
 function getFormatDate(date){
@@ -245,7 +253,8 @@ window.onclick = function (event) {
 </tr>
 <tr>
 	<td width="450">
-		<strong>&nbsp;&nbsp;${berthInfo.addr }</strong><br>별점넣을곳
+		<strong>&nbsp;&nbsp;${berthInfo.addr }</strong><br>
+		<i class="bi bi-star-fill reviewScore "></i><span class="reviewSpan">${score }</span>
 	</td>
 </tr>
 <tr>
