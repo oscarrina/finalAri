@@ -82,6 +82,19 @@ h5{
 	border: 3px solid #253BFF;
 	border-radius: 25px;
 }
+.border1{
+	border-top:none;
+	border-left:none;
+	border-right:none;
+	border-bottom: 2px solid #4068A7;
+	border-radius: 0;
+	margin-top: 5px;
+	margin-bottom:5px;
+	
+}
+.width1{
+	width:500px;
+}
 ul{
 	vertical-align: top;
 	list-style:none;
@@ -142,6 +155,14 @@ li{
 	border-radius: 25px; 
 	margin-top: 5px;
 	margin-bottom: 5px;
+}
+.reviewScore{
+	color: yellow;
+	font-size: 30px;
+}
+.reviewSpan{
+	font-size: 25px;
+	font-weight: bold;
 }
 </style>
 <script>
@@ -245,7 +266,8 @@ window.onclick = function (event) {
 </tr>
 <tr>
 	<td width="450">
-		<strong>&nbsp;&nbsp;${berthInfo.addr }</strong><br>별점넣을곳
+		<strong>&nbsp;&nbsp;${berthInfo.addr }</strong><br>
+		<i class="bi bi-star-fill reviewScore "></i><span class="reviewSpan">${score }</span>
 	</td>
 </tr>
 <tr>

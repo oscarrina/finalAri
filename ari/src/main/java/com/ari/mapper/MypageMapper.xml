@@ -31,7 +31,7 @@
   <select id="reviewWriteTotalCnt" parameterType="map" resultType="Integer">
   	select count(*)
   	from reser
-  	where reserReview = 'N' and userid = #{userid} and reservisitend <![CDATA[<]]> #{now}
+  	where reserReview = 'N' and userid = #{userid} and reservisitend <![CDATA[<]]> sysdate
   </select>
   <select id="myPageReview" parameterType="map" resultType="com.ari.review.model.ReviewDTO">
   	select * from

@@ -52,10 +52,13 @@
   		from food
   		where idx=#{idx}
   	</select>
-  	<select id="berthInfoDetail" parameterType="int" resultType="com.ari.detail.model.BerthInfoDTO">
-  		select * 
-  		from berthInfo
-  		where idx=#{idx}
+  	<select id="berthInfoDetail" parameterType="Double" resultType="com.ari.detail.model.BerthInfoDTO">
+  		select b.idx,b.userbn,b.userid,b.addr,b.tel,b.infoname,b.info,b.parking,b.berthinfoseat,
+  		b.area,b.sigungu,b.infoimg,b.berthinfostart,b.berthinfoend,avg(r.reviewscore) as reviewScore
+  		from berthInfo b,review r
+  		where b.idx = r.berthidx and b.idx=${idx}
+  		group by b.idx,b.userbn,b.userid,b.addr,b.tel,b.infoname,b.info,b.parking,b.berthinfoseat,
+  		b.area,b.sigungu,b.infoimg,b.berthinfostart,b.berthinfoend
     </select>
     <select id="berthDetail" parameterType="com.ari.detail.model.BerthDTO" resultType="com.ari.detail.model.BerthDTO">
 	SELECT

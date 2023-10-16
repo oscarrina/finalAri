@@ -57,7 +57,7 @@ function showResult(){
 <%@include file="/WEB-INF/views/header.jsp" %>
 <%@include file="/WEB-INF/views/mypage/mypageSide.jsp" %>
 <div class="mypageReserDiv">
-<h3>예약 내역</h3>
+<h3>내 일정</h3>
 <div class="mypagePlan">
       <c:if test="${empty list }">
       <h1>일정이 없습니다.</h1>
