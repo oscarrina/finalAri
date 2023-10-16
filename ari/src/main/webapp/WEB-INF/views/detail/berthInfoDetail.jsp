@@ -52,6 +52,8 @@ h5{
 	width:900px;
 	border: solid 3px #253BFF;
   border-radius: 25px;
+ 	padding-top:15px;
+ 	padding-left:10px;
 }
 .berthImg{
 	border-radius: 25px;
@@ -80,6 +82,20 @@ h5{
 	margin-top:30px;
 	border: 3px solid #253BFF;
 	border-radius: 25px;
+}
+.border1{
+	border-top:none;
+	border-left:none;
+	border-right:none;
+	border-bottom: 2px solid #4068A7;
+	border-radius: 0;
+	margin-top: 5px;
+	margin-bottom:5px;
+	
+}
+
+.width1{
+	width:500px;
 }
 </style>
 <script>
@@ -217,8 +233,8 @@ function reser(berthIdx,idx){
 </div>
 </c:forEach><br><br>
 <div class="berthDiv">
-<input type = "date" id = "start" oninput= "endDateCal(this)" name = "startDate">
-<input type = "date" id = "end" name = "endDate">
+<input type = "date" id = "start" oninput= "endDateCal(this)" name = "startDate" class="form-control border1 width1" style="width:200px  !important; display:inline-block; ">
+<input type = "date" id = "end" name = "endDate" class="form-control border1 width1" style="width:200px !important; display:inline-block; ">
 <button type="button" onclick="dateShow(${berthInfo[0].idx })">선택</button>
 <span></span>
 <c:forEach items="${berth }" var="berth">
@@ -238,6 +254,7 @@ function reser(berthIdx,idx){
 	<tr><td><c:if test="${berth.berthDry==1}">헤어드라이기 비치</c:if><c:if test="${berth.berthDry==0}"></c:if></td></tr>
 	<tr><td><c:if test="${berth.berthRefri==1}">냉장고 있음</c:if><c:if test="${berth.berthRefri==0 }"></c:if></td></tr>
 </table>
+<hr style="border: none; background-color:#253BFF; height: 3px;">
 </c:forEach>
 
 </div>
