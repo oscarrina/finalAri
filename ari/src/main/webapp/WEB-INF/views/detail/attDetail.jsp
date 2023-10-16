@@ -85,7 +85,7 @@ h5{
 	<tr>
 		<th class="topTh"><h5>주차시설 유무</h5></th>
 		<td><c:choose>
-  	 	 <c:when test="${att.attParking == 0}">
+  	 	 <c:when test="${att.parking == 0}">
     	  <h5>무</h5>
   		 </c:when>
    		 <c:otherwise>
