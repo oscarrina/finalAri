@@ -153,7 +153,7 @@ window.onload = function() {
 	document.getElementById(planDay).style.display="block";
 	var url='https://apis.data.go.kr/B551011/KorService1/areaCode1?'
 		+ 'serviceKey=9IwUjd%2FogvdB0LCIq4Khs%2FcCfCV%2BIg9rqUf8U5PcrM4lW0lXdpv%2BpQHMKcg7y7klSZJ7SpQcrgs3lAW%2BQA3waQ%3D%3D'
-		+ '&areaCode='+code+'&numOfRows=20&pageNo=1&MobileOS=ETC&MobileApp=AppTest';
+		+ '&areaCode='+code+'&numOfRows=30&pageNo=1&MobileOS=ETC&MobileApp=AppTest';
 	sendRequest(url, null, showResult, 'GET');
 }
 function showResult(){
