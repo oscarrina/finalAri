@@ -16,7 +16,7 @@
   	    and infoName like '%' || #{search} || '%'
   	</select>
   	<select id="attListIn" parameterType="com.ari.detail.model.searchVO" resultType="com.ari.detail.model.AttDTO">
-  		select idx,addr,infoName,attImg
+  		select idx,addr,infoName,infoImg
   		from att 
   		where area=#{area}
   		and infoName like '%' || #{search} || '%'
@@ -38,7 +38,7 @@
   	    where infoName like '%' || #{search} || '%'
   	</select>
   	<select id="attList" parameterType="String" resultType="com.ari.detail.model.AttDTO">
-  		select idx,addr,infoName,attImg
+  		select idx,addr,infoName,infoImg
   		from att
   		where infoName like '%' || #{search} || '%'
   	</select>
